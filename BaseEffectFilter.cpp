@@ -4,9 +4,8 @@
 //
 //  Created by sz17112850M01 on 2018/8/15.
 //
-
+#include "stdafx.h"
 #include "BaseEffectFilter.h"
-
 
 
 static inline bool validateProgram(GLint prog) {
@@ -64,13 +63,13 @@ static inline GLuint compileShader(GLenum type, string shaderString) {
     return shader;
 }
 
-static inline void mat4_LoadOrtho(float left, float right, float bottom, float top, float near, float far, float* mout) {
+static inline void mat4_LoadOrtho(float left, float right, float bottom, float top, float near1, float far1, float* mout) {
     float r_l = right - left;
     float t_b = top - bottom;
-    float f_n = far - near;
+    float f_n = far1 - near1;
     float tx = - (right + left) / (right - left);
     float ty = - (top + bottom) / (top - bottom);
-    float tz = - (far + near) / (far - near);
+    float tz = - (far1 + near1) / (far1 - near1);
     
     mout[0] = 2.0f / r_l;
     mout[1] = 0.0f;

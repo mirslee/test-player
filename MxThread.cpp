@@ -4,11 +4,11 @@
 //
 //  Created by sz17112850M01 on 2018/8/16.
 //
-
+#include "stdafx.h"
 #include "MxThread.h"
 
 MxThread::MxThread() {
-    thread = nullptr;
+	INIT_PTHREAD(thread);
 }
 
 void MxThread::start() {
@@ -17,6 +17,7 @@ void MxThread::start() {
 
 void* MxThread::_run(void* pThis) {
     ((MxThread*)pThis)->run();
+	return nullptr;
 }
 
 void MxThread::run() {
@@ -29,6 +30,8 @@ void MxThread::join(MxThread* thread) {
 }
 
 void MxThread::exit() {
-    if (thread)
-        pthread_exit(nullptr);
+	if (PTHREAD_IS_VALID(thread)) {
+		pthread_exit(nullptr);
+		INIT_PTHREAD(thread);
+	} 
 }

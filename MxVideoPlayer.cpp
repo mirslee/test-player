@@ -4,7 +4,7 @@
 //
 //  Created by sz17112850M01 on 2018/8/16.
 //
-
+#include "stdafx.h"
 #include "MxVideoPlayer.h"
 
 MxVideoPlayer::MxVideoPlayer()
@@ -25,4 +25,6 @@ bool MxVideoPlayer::open(string filepath)
         decodeFinshed.start(dec,&decodeSendQueue,&decodeFinshedQueue);
         outThread.start(&decodeFinshedQueue);
     }
+
+	return true;
 }

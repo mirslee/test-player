@@ -4,7 +4,7 @@
 //
 //  Created by sz17112850M01 on 2018/8/15.
 //
-
+#include "stdafx.h"
 #include "DirectPassRenderer.h"
 
 #define SHADER_STRING(text) #text
