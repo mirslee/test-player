@@ -7,6 +7,14 @@
 #include "stdafx.h"
 #include "MxThread.h"
 
+#ifdef WIN32
+#define INIT_PTHREAD(t) memset(&t,0,sizeof(t))
+#define PTHREAD_IS_VALID(t) (t.p!=nullptr)
+#else
+#define INIT_PTHREAD(t) t = nullptr;
+#define PTHREAD_IS_VALID(t) (t!=nullptr)
+#endif
+
 MxThread::MxThread() {
 	INIT_PTHREAD(thread);
 }
@@ -25,7 +33,7 @@ void MxThread::run() {
 }
 
 void MxThread::join(MxThread* thread) {
-    if (thread)
+    if (thread && PTHREAD_IS_VALID(thread->thread))
         pthread_join(thread->thread, nullptr);
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "dllexport.h"
 #ifdef _WIN32
 	
 #define WIN32_LEAN_AND_MEAN
@@ -9,7 +10,7 @@
 
 	//#define HAVE_STRUCT_TIMESPEC
 	//#include "win/pthread.h"
-
+#eldefine __APPLE
 #endif
 
 

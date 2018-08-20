@@ -8,8 +8,9 @@
 #ifndef MxQueue_h
 #define MxQueue_h
 
+
 template <class T>
-class MxQueue  {
+class MXCORE_API MxQueue  {
     
 public:
     MxQueue() {
