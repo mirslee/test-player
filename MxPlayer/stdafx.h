@@ -60,11 +60,6 @@
 #include <iostream>
 using namespace std;
 
-//Qt
-#include <QtCore/QtCore>
-#include <QtGui/QtGui>
-#include <QtWidgets/QtWidgets>
-#include <QtWidgets/QMacCocoaViewContainer>
 
 
 #include "mxConfig.h"

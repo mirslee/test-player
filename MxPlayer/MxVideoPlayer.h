@@ -8,8 +8,8 @@
 #ifndef MxVideoPlayer_h
 #define MxVideoPlayer_h
 
-#include "MxQueue.h"
-#include "MxThread.h"
+#include "../MxCore/MxQueue.h"
+#include "../MxCore/MxThread.h"
 #include "MxDemuxer.h"
 #include "MxVideoDecoder.h"
 

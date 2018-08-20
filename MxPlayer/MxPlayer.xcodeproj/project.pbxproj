@@ -1,0 +1,366 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		54C3C62B212AF230009736A1 /* BaseEffectFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C61C212AF22F009736A1 /* BaseEffectFilter.h */; };
+		54C3C62C212AF230009736A1 /* VideoOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C61D212AF22F009736A1 /* VideoOutput.h */; };
+		54C3C62D212AF230009736A1 /* BaseEffectFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C61E212AF22F009736A1 /* BaseEffectFilter.cpp */; };
+		54C3C62E212AF230009736A1 /* MxPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C61F212AF22F009736A1 /* MxPlayer.h */; };
+		54C3C62F212AF230009736A1 /* MxVideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C620212AF22F009736A1 /* MxVideoPlayer.cpp */; };
+		54C3C630212AF230009736A1 /* VideoDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C621212AF22F009736A1 /* VideoDecoder.h */; };
+		54C3C631212AF230009736A1 /* VideoOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C622212AF22F009736A1 /* VideoOutput.m */; };
+		54C3C632212AF230009736A1 /* MxVideoPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C623212AF230009736A1 /* MxVideoPlayer.h */; };
+		54C3C633212AF230009736A1 /* DirectPassRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C624212AF230009736A1 /* DirectPassRenderer.h */; };
+		54C3C634212AF230009736A1 /* MxVideoDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C625212AF230009736A1 /* MxVideoDecoder.h */; };
+		54C3C635212AF230009736A1 /* DirectPassRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C626212AF230009736A1 /* DirectPassRenderer.cpp */; };
+		54C3C636212AF230009736A1 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C627212AF230009736A1 /* stdafx.cpp */; };
+		54C3C637212AF230009736A1 /* stdafx.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C628212AF230009736A1 /* stdafx.h */; };
+		54C3C638212AF230009736A1 /* VideoDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C629212AF230009736A1 /* VideoDecoder.cpp */; };
+		54C3C639212AF230009736A1 /* MxVideoDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C62A212AF230009736A1 /* MxVideoDecoder.cpp */; };
+		54C3C63C212AF309009736A1 /* MxDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C63A212AF308009736A1 /* MxDemuxer.h */; };
+		54C3C63D212AF309009736A1 /* MxDemuxer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C63B212AF309009736A1 /* MxDemuxer.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		54C3C608212AF075009736A1 /* libMxPlayerD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxPlayerD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		54C3C61C212AF22F009736A1 /* BaseEffectFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEffectFilter.h; sourceTree = "<group>"; };
+		54C3C61D212AF22F009736A1 /* VideoOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoOutput.h; sourceTree = "<group>"; };
+		54C3C61E212AF22F009736A1 /* BaseEffectFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseEffectFilter.cpp; sourceTree = "<group>"; };
+		54C3C61F212AF22F009736A1 /* MxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxPlayer.h; sourceTree = "<group>"; };
+		54C3C620212AF22F009736A1 /* MxVideoPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxVideoPlayer.cpp; sourceTree = "<group>"; };
+		54C3C621212AF22F009736A1 /* VideoDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDecoder.h; sourceTree = "<group>"; };
+		54C3C622212AF22F009736A1 /* VideoOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoOutput.m; sourceTree = "<group>"; };
+		54C3C623212AF230009736A1 /* MxVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxVideoPlayer.h; sourceTree = "<group>"; };
+		54C3C624212AF230009736A1 /* DirectPassRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectPassRenderer.h; sourceTree = "<group>"; };
+		54C3C625212AF230009736A1 /* MxVideoDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxVideoDecoder.h; sourceTree = "<group>"; };
+		54C3C626212AF230009736A1 /* DirectPassRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectPassRenderer.cpp; sourceTree = "<group>"; };
+		54C3C627212AF230009736A1 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		54C3C628212AF230009736A1 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		54C3C629212AF230009736A1 /* VideoDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoDecoder.cpp; sourceTree = "<group>"; };
+		54C3C62A212AF230009736A1 /* MxVideoDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxVideoDecoder.cpp; sourceTree = "<group>"; };
+		54C3C63A212AF308009736A1 /* MxDemuxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxDemuxer.h; sourceTree = "<group>"; };
+		54C3C63B212AF309009736A1 /* MxDemuxer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxDemuxer.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		54C3C605212AF075009736A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		54C3C5FF212AF075009736A1 = {
+			isa = PBXGroup;
+			children = (
+				54C3C63B212AF309009736A1 /* MxDemuxer.cpp */,
+				54C3C63A212AF308009736A1 /* MxDemuxer.h */,
+				54C3C61E212AF22F009736A1 /* BaseEffectFilter.cpp */,
+				54C3C61C212AF22F009736A1 /* BaseEffectFilter.h */,
+				54C3C626212AF230009736A1 /* DirectPassRenderer.cpp */,
+				54C3C624212AF230009736A1 /* DirectPassRenderer.h */,
+				54C3C61F212AF22F009736A1 /* MxPlayer.h */,
+				54C3C62A212AF230009736A1 /* MxVideoDecoder.cpp */,
+				54C3C625212AF230009736A1 /* MxVideoDecoder.h */,
+				54C3C620212AF22F009736A1 /* MxVideoPlayer.cpp */,
+				54C3C623212AF230009736A1 /* MxVideoPlayer.h */,
+				54C3C627212AF230009736A1 /* stdafx.cpp */,
+				54C3C628212AF230009736A1 /* stdafx.h */,
+				54C3C629212AF230009736A1 /* VideoDecoder.cpp */,
+				54C3C621212AF22F009736A1 /* VideoDecoder.h */,
+				54C3C61D212AF22F009736A1 /* VideoOutput.h */,
+				54C3C622212AF22F009736A1 /* VideoOutput.m */,
+				54C3C609212AF075009736A1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		54C3C609212AF075009736A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54C3C608212AF075009736A1 /* libMxPlayerD.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		54C3C606212AF075009736A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54C3C637212AF230009736A1 /* stdafx.h in Headers */,
+				54C3C62B212AF230009736A1 /* BaseEffectFilter.h in Headers */,
+				54C3C63C212AF309009736A1 /* MxDemuxer.h in Headers */,
+				54C3C630212AF230009736A1 /* VideoDecoder.h in Headers */,
+				54C3C632212AF230009736A1 /* MxVideoPlayer.h in Headers */,
+				54C3C62E212AF230009736A1 /* MxPlayer.h in Headers */,
+				54C3C62C212AF230009736A1 /* VideoOutput.h in Headers */,
+				54C3C634212AF230009736A1 /* MxVideoDecoder.h in Headers */,
+				54C3C633212AF230009736A1 /* DirectPassRenderer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		54C3C607212AF075009736A1 /* MxPlayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54C3C613212AF075009736A1 /* Build configuration list for PBXNativeTarget "MxPlayer" */;
+			buildPhases = (
+				54C3C604212AF075009736A1 /* Sources */,
+				54C3C605212AF075009736A1 /* Frameworks */,
+				54C3C606212AF075009736A1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MxPlayer;
+			productName = MxPlayer;
+			productReference = 54C3C608212AF075009736A1 /* libMxPlayerD.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		54C3C600212AF075009736A1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = lixiaopeng;
+				TargetAttributes = {
+					54C3C607212AF075009736A1 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 54C3C603212AF075009736A1 /* Build configuration list for PBXProject "MxPlayer" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 54C3C5FF212AF075009736A1;
+			productRefGroup = 54C3C609212AF075009736A1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				54C3C607212AF075009736A1 /* MxPlayer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		54C3C604212AF075009736A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54C3C635212AF230009736A1 /* DirectPassRenderer.cpp in Sources */,
+				54C3C631212AF230009736A1 /* VideoOutput.m in Sources */,
+				54C3C638212AF230009736A1 /* VideoDecoder.cpp in Sources */,
+				54C3C639212AF230009736A1 /* MxVideoDecoder.cpp in Sources */,
+				54C3C62D212AF230009736A1 /* BaseEffectFilter.cpp in Sources */,
+				54C3C63D212AF309009736A1 /* MxDemuxer.cpp in Sources */,
+				54C3C62F212AF230009736A1 /* MxVideoPlayer.cpp in Sources */,
+				54C3C636212AF230009736A1 /* stdafx.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		54C3C611212AF075009736A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		54C3C612212AF075009736A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		54C3C614212AF075009736A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = stdafx.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../include/ffmpeg/include,
+				);
+				INSTALL_PATH = "@rpath";
+				LIBRARY_SEARCH_PATHS = (
+					../dylib,
+					bin/mac/$CONFIGURATION,
+				);
+				OBJROOT = build;
+				PRODUCT_NAME = "$(TARGET_NAME)D";
+				SYMROOT = ../bin/mac/$CONFIGURATION;
+			};
+			name = Debug;
+		};
+		54C3C615212AF075009736A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = stdafx.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../include/ffmpeg/include,
+				);
+				INSTALL_PATH = "@rpath";
+				LIBRARY_SEARCH_PATHS = (
+					../dylib,
+					bin/mac/$CONFIGURATION,
+				);
+				OBJROOT = build;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ../bin/mac/$CONFIGURATION;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		54C3C603212AF075009736A1 /* Build configuration list for PBXProject "MxPlayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54C3C611212AF075009736A1 /* Debug */,
+				54C3C612212AF075009736A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		54C3C613212AF075009736A1 /* Build configuration list for PBXNativeTarget "MxPlayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54C3C614212AF075009736A1 /* Debug */,
+				54C3C615212AF075009736A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 54C3C600212AF075009736A1 /* Project object */;
+}

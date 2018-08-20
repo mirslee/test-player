@@ -31,13 +31,6 @@
 		5469509F2122E2150055ED67 /* libpostproc.55.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950972122E2150055ED67 /* libpostproc.55.dylib */; };
 		546950A02122E2150055ED67 /* libswresample.3.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950982122E2150055ED67 /* libswresample.3.dylib */; };
 		546950A12122E2150055ED67 /* libswscale.5.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950992122E2150055ED67 /* libswscale.5.dylib */; };
-		546950A42122E2B10055ED67 /* VideoDecoder.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 546950A22122E2B10055ED67 /* VideoDecoder.cpp */; };
-		546950A72122F6380055ED67 /* oc.m in Compile Sources */ = {isa = PBXBuildFile; fileRef = 546950A62122F6380055ED67 /* oc.m */; };
-		546950AB212406510055ED67 /* BaseEffectFilter.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 546950A9212406510055ED67 /* BaseEffectFilter.cpp */; };
-		546950AE212410EC0055ED67 /* DirectPassRenderer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 546950AC212410EC0055ED67 /* DirectPassRenderer.cpp */; };
-		546950B7212454A70055ED67 /* MxDemuxer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 546950B5212454A70055ED67 /* MxDemuxer.cpp */; };
-		546950BB212459990055ED67 /* MxVideoDecoder.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 546950B9212459990055ED67 /* MxVideoDecoder.cpp */; };
-		546950C1212507DD0055ED67 /* MxVideoPlayer.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 546950BF212507DD0055ED67 /* MxVideoPlayer.cpp */; };
 		54C3C54821259F4F009736A1 /* MxGLView.m in Compile Sources */ = {isa = PBXBuildFile; fileRef = 54C3C54721259F4F009736A1 /* MxGLView.m */; };
 		54C3C54A2125A0C9009736A1 /* Cocoa.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 54C3C5492125A0C9009736A1 /* Cocoa.framework */; };
 		54C3C5FD212ACB58009736A1 /* libMxCore.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 54C3C5B4212A5C64009736A1 /* libMxCore.dylib */; };
@@ -74,6 +67,13 @@
 			remoteGlobalIDString = 54C3C5BE212A5D72009736A1;
 			remoteInfo = MxGLTool;
 		};
+		54C3C61A212AF077009736A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54C3C616212AF075009736A1 /* MxPlayer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54C3C608212AF075009736A1;
+			remoteInfo = MxPlayer;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -103,29 +103,14 @@
 		546950972122E2150055ED67 /* libpostproc.55.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.55.dylib; path = ffmpeg/lib/libpostproc.55.dylib; sourceTree = "<group>"; };
 		546950982122E2150055ED67 /* libswresample.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswresample.3.dylib; path = ffmpeg/lib/libswresample.3.dylib; sourceTree = "<group>"; };
 		546950992122E2150055ED67 /* libswscale.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.5.dylib; path = ffmpeg/lib/libswscale.5.dylib; sourceTree = "<group>"; };
-		546950A22122E2B10055ED67 /* VideoDecoder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VideoDecoder.cpp; sourceTree = "<group>"; };
-		546950A32122E2B10055ED67 /* VideoDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoDecoder.h; sourceTree = "<group>"; };
 		546950A52122F35D0055ED67 /* stdafx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
-		546950A62122F6380055ED67 /* oc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = oc.m; sourceTree = "<group>"; };
-		546950A82122F6510055ED67 /* oc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = oc.h; sourceTree = "<group>"; };
-		546950A9212406510055ED67 /* BaseEffectFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseEffectFilter.cpp; sourceTree = "<group>"; };
-		546950AA212406510055ED67 /* BaseEffectFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseEffectFilter.h; sourceTree = "<group>"; };
-		546950AC212410EC0055ED67 /* DirectPassRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DirectPassRenderer.cpp; sourceTree = "<group>"; };
-		546950AD212410EC0055ED67 /* DirectPassRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectPassRenderer.h; sourceTree = "<group>"; };
-		546950B5212454A70055ED67 /* MxDemuxer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxDemuxer.cpp; sourceTree = "<group>"; };
-		546950B6212454A70055ED67 /* MxDemuxer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MxDemuxer.h; sourceTree = "<group>"; };
 		546950B82124556F0055ED67 /* Template.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Template.h; sourceTree = "<group>"; };
-		546950B9212459990055ED67 /* MxVideoDecoder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxVideoDecoder.cpp; sourceTree = "<group>"; };
-		546950BA212459990055ED67 /* MxVideoDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MxVideoDecoder.h; sourceTree = "<group>"; };
-		546950BD212507CA0055ED67 /* MxPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MxPlayer.h; sourceTree = "<group>"; };
-		546950BF212507DD0055ED67 /* MxVideoPlayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxVideoPlayer.cpp; sourceTree = "<group>"; };
-		546950C0212507DD0055ED67 /* MxVideoPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MxVideoPlayer.h; sourceTree = "<group>"; };
 		54C3C54621259F4F009736A1 /* MxGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MxGLView.h; sourceTree = "<group>"; };
 		54C3C54721259F4F009736A1 /* MxGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MxGLView.m; sourceTree = "<group>"; };
 		54C3C5492125A0C9009736A1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		54C3C5AF212A5C62009736A1 /* MxCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxCore.xcodeproj; path = MxCore/MxCore.xcodeproj; sourceTree = "<group>"; };
 		54C3C5CC212A5D72009736A1 /* MxGLTool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxGLTool.xcodeproj; path = MxGLTool/MxGLTool.xcodeproj; sourceTree = "<group>"; };
-		54C3C5EA212A6EC4009736A1 /* dllexport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dllexport.h; path = include/dllexport.h; sourceTree = "<group>"; };
+		54C3C616212AF075009736A1 /* MxPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxPlayer.xcodeproj; path = MxPlayer/MxPlayer.xcodeproj; sourceTree = "<group>"; };
 		57B3D1BC3E5FB290CF44E967 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = /Users/ws/work/MyPlayer/main.cpp; sourceTree = "<absolute>"; };
 		8D9815BDB5BD9F90D2BC05C5 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		A1A67BEAA744704B29168D39 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
@@ -169,8 +154,6 @@
 			isa = PBXGroup;
 			children = (
 				57B3D1BC3E5FB290CF44E967 /* main.cpp */,
-				546950A82122F6510055ED67 /* oc.h */,
-				546950A62122F6380055ED67 /* oc.m */,
 				54C3C54621259F4F009736A1 /* MxGLView.h */,
 				54C3C54721259F4F009736A1 /* MxGLView.m */,
 			);
@@ -189,6 +172,14 @@
 			isa = PBXGroup;
 			children = (
 				54C3C5D1212A5D74009736A1 /* libMxGLToolD.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		54C3C617212AF075009736A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54C3C61B212AF077009736A1 /* libMxPlayer.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -236,24 +227,11 @@
 		E8C543AB96796ECAA2E65C57 /* MyPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				54C3C5EA212A6EC4009736A1 /* dllexport.h */,
+				54C3C616212AF075009736A1 /* MxPlayer.xcodeproj */,
 				54C3C5CC212A5D72009736A1 /* MxGLTool.xcodeproj */,
 				54C3C5AF212A5C62009736A1 /* MxCore.xcodeproj */,
-				546950BF212507DD0055ED67 /* MxVideoPlayer.cpp */,
-				546950C0212507DD0055ED67 /* MxVideoPlayer.h */,
-				546950B9212459990055ED67 /* MxVideoDecoder.cpp */,
-				546950BA212459990055ED67 /* MxVideoDecoder.h */,
-				546950B5212454A70055ED67 /* MxDemuxer.cpp */,
-				546950B6212454A70055ED67 /* MxDemuxer.h */,
-				546950BD212507CA0055ED67 /* MxPlayer.h */,
 				546950B82124556F0055ED67 /* Template.h */,
-				546950AC212410EC0055ED67 /* DirectPassRenderer.cpp */,
-				546950AD212410EC0055ED67 /* DirectPassRenderer.h */,
-				546950A9212406510055ED67 /* BaseEffectFilter.cpp */,
-				546950AA212406510055ED67 /* BaseEffectFilter.h */,
 				546950A52122F35D0055ED67 /* stdafx.h */,
-				546950A22122E2B10055ED67 /* VideoDecoder.cpp */,
-				546950A32122E2B10055ED67 /* VideoDecoder.h */,
 				2EB56BE3C2D93CDAB0C52E67 /* Sources */,
 				B8254625CFD509ED2A24A166 /* Sources [moc_predefs] */,
 				74B182DB50CB5611B5C1C297 /* Supporting Files */,
@@ -319,6 +297,10 @@
 					ProductGroup = 54C3C5CD212A5D72009736A1 /* Products */;
 					ProjectRef = 54C3C5CC212A5D72009736A1 /* MxGLTool.xcodeproj */;
 				},
+				{
+					ProductGroup = 54C3C617212AF075009736A1 /* Products */;
+					ProjectRef = 54C3C616212AF075009736A1 /* MxPlayer.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -341,6 +323,13 @@
 			fileType = "compiled.mach-o.dylib";
 			path = libMxGLToolD.dylib;
 			remoteRef = 54C3C5D0212A5D74009736A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		54C3C61B212AF077009736A1 /* libMxPlayer.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libMxPlayer.dylib;
+			remoteRef = 54C3C61A212AF077009736A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -387,15 +376,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3C85625D0947E6DB14E892D /* main.cpp in Compile Sources */,
-				546950AB212406510055ED67 /* BaseEffectFilter.cpp in Compile Sources */,
-				546950A72122F6380055ED67 /* oc.m in Compile Sources */,
-				546950B7212454A70055ED67 /* MxDemuxer.cpp in Compile Sources */,
 				54C3C54821259F4F009736A1 /* MxGLView.m in Compile Sources */,
-				546950C1212507DD0055ED67 /* MxVideoPlayer.cpp in Compile Sources */,
 				B07889C7F41764965C901BA2 /* dummy.cpp in Compile Sources */,
-				546950BB212459990055ED67 /* MxVideoDecoder.cpp in Compile Sources */,
-				546950AE212410EC0055ED67 /* DirectPassRenderer.cpp in Compile Sources */,
-				546950A42122E2B10055ED67 /* VideoDecoder.cpp in Compile Sources */,
 			);
 			name = "Compile Sources";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -577,7 +559,8 @@
 					/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers,
 					/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers,
 					"/usr/local/Cellar/qt/5.11.1/mkspecs/macx-clang",
-					"$(PROJECT_DIR)/ffmpeg/include",
+					./include/ffmpeg/include,
+					./include,
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path @loader_path";
 				LIBRARY_SEARCH_PATHS = (
@@ -612,7 +595,8 @@
 					/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers,
 					/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers,
 					"/usr/local/Cellar/qt/5.11.1/mkspecs/macx-clang",
-					"$(PROJECT_DIR)/ffmpeg/include",
+					./include/ffmpeg/include,
+					./include,
 				);
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path @loader_path";
 				LIBRARY_SEARCH_PATHS = (

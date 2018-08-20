@@ -8,7 +8,6 @@
 #ifndef BaseEffectFilter_hpp
 #define BaseEffectFilter_hpp
 
-#include <stdio.h>
 
 class BaseEffectFilter {
     

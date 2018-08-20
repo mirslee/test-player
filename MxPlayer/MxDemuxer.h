@@ -7,7 +7,7 @@
 
 #ifndef MxDemuxer_h
 #define MxDemuxer_h
-#include "MxQueue.h"
+#include "../MxCore/MxQueue.h"
 #include "MxVideoDecoder.h"
 
 class MxDemuxer {

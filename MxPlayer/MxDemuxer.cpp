@@ -6,7 +6,7 @@
 //
 #include "stdafx.h"
 #include "MxDemuxer.h"
-#include "Template.h"
+//#include "Template.h"
 
 MxDemuxer::MxDemuxer()
 {
@@ -19,7 +19,7 @@ MxDemuxer::~MxDemuxer()
 }
 
 void MxDemuxer::clear() {
-    DELETE_Ptr(_pFormatCtx);
+    //DELETE_Ptr(_pFormatCtx);
 }
 
 bool MxDemuxer::open(string filepath)
