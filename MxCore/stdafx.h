@@ -5,6 +5,10 @@
 //  Created by sz17112850M01 on 2018/8/14.
 //
 
+#ifdef _WIN32
+#define MXDLL_EXPORTS
+#endif
+
 #include "dllexport.h"
 //windows
 #ifdef _WIN32

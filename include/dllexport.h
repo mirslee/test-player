@@ -1,9 +1,9 @@
 
-#ifndef __MXCONFIG_H__
-#define __MXCONFIG_H__
+#ifndef __DLLEXPORT_H__
+#define __DLLEXPORT_H__
 
 #ifdef _WIN32
-#ifdef MXGLTOOL_EXPORTS
+#ifdef MXDLL_EXPORTS
 #define MXGLTOOL_API __declspec(dllexport)
 #define MXCORE_API __declspec(dllexport)
 #else
@@ -16,4 +16,4 @@
 #endif
 
 
-#endif//__MXCONFIG_H__
+#endif//__DLLEXPORT_H__

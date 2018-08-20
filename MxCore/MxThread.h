@@ -1,10 +1,3 @@
-//
-//  MxThread.hpp
-//  MyPlayer
-//
-//  Created by sz17112850M01 on 2018/8/16.
-//
-
 #ifndef MxThread_h
 #define MxThread_h
 

@@ -1,11 +1,3 @@
-//
-//  MxMutex.hpp
-//  MxCore
-//
-//  Created by sz17112850M01 on 2018/8/20.
-//  Copyright © 2018年 lixiaopeng. All rights reserved.
-//
-
 #ifndef MxMutex_hpp
 #define MxMutex_hpp
 
