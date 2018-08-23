@@ -3,7 +3,7 @@
 
 
 template <class T>
-class MXCORE_API MxQueue  {
+class MxQueue  {
     
 public:
     MxQueue() {
@@ -13,7 +13,7 @@ public:
     void push(T & value) {
         pthread_mutex_lock(&mutex);
         {
-            stdQueue.push(value);
+			stdQueue.push(value);
         }
         pthread_mutex_unlock(&mutex);
     }

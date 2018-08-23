@@ -10,6 +10,7 @@
 #endif
 
 #include "dllexport.h"
+#include "mxtypes.h"
 //windows
 #ifdef _WIN32
 

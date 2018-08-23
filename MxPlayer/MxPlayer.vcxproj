@@ -73,7 +73,9 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -99,10 +101,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;MXPLAYER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\include;..\include\win;..\include\ffmpeg\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\lib;..\lib\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImportLibrary>$(SolutionDir)\lib\$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -141,17 +146,19 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseEffectFilter.cpp" />
-    <ClCompile Include="DirectPassRenderer.cpp" />
+    <ClCompile Include="clock\CMxClockPulse.cpp" />
+    <ClCompile Include="CMxReferenceClock.cpp" />
     <ClCompile Include="MxDemuxer.cpp" />
     <ClCompile Include="MxVideoDecoder.cpp" />
     <ClCompile Include="MxVideoPlayer.cpp" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="VideoDecoder.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseEffectFilter.h" />
-    <ClInclude Include="DirectPassRenderer.h" />
+    <ClInclude Include="clock\CMxClockPulse.h" />
+    <ClInclude Include="CMxReferenceClock.h" />
     <ClInclude Include="MxDemuxer.h" />
     <ClInclude Include="MxPlayer.h" />
     <ClInclude Include="MxVideoDecoder.h" />

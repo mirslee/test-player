@@ -13,17 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="clock">
+      <UniqueIdentifier>{c456e1a6-2d97-4939-9af6-8d27ad30da9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseEffectFilter.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectPassRenderer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="MxDemuxer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -39,31 +36,37 @@
     <ClCompile Include="VideoDecoder.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="clock\CMxClockPulse.cpp">
+      <Filter>clock</Filter>
+    </ClCompile>
+    <ClCompile Include="CMxReferenceClock.cpp">
+      <Filter>clock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseEffectFilter.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectPassRenderer.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="MxDemuxer.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MxPlayer.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MxVideoDecoder.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MxVideoPlayer.h">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="VideoDecoder.h">
-      <Filter>源文件</Filter>
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="clock\CMxClockPulse.h">
+      <Filter>clock</Filter>
+    </ClInclude>
+    <ClInclude Include="CMxReferenceClock.h">
+      <Filter>clock</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

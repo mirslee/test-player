@@ -10,11 +10,11 @@
 #include "dllexport.h"
 #ifdef _WIN32
 
-	#include "windows.h"
+	#include <windows.h>
 	#include "stdint.h"
 	#include "GL/glew.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
+	#include <gl/GL.h>
+	#include <gl/GLU.h>
 
 //#include <vxgl/glext.h>
 

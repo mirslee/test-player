@@ -33,6 +33,15 @@
     <ClInclude Include="MxThreadMutex.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="mxtypes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MxPointer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MxObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MxThread.cpp">
