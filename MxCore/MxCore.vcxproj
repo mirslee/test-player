@@ -149,6 +149,7 @@
     <ClInclude Include="MxObject.h" />
     <ClInclude Include="MxPointer.h" />
     <ClInclude Include="MxQueue.h" />
+    <ClInclude Include="MxSynchronize.h" />
     <ClInclude Include="MxThread.h" />
     <ClInclude Include="MxThreadCond.h" />
     <ClInclude Include="MxThreadMutex.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MxSynchronize.cpp" />
     <ClCompile Include="MxThread.cpp" />
     <ClCompile Include="MxThreadCond.cpp" />
     <ClCompile Include="MxThreadMutex.cpp" />
