@@ -4,7 +4,9 @@ class MxObject {
 
 };
 
-class MxSharedObject {
+class MxSharedObject: public MxObject {
 	virtual int addRef() = 0;
 	virtual int unRef() = 0;
 };
+
+

@@ -1,14 +1,12 @@
 #pragma once
 
 
-template <class T>
-class CMxSharedPointer {
-
+template<class T> class CMxSharedPointer {
 public:
 	/*默认构造*/
-	CMxSharedPointer() {
-		pointer = nullptr;
-	}
+    CMxSharedPointer() {
+        pointer = nullptr;
+    }
 
 	/*带参数构造*/
 	CMxSharedPointer(T* pointer) {
@@ -23,7 +21,7 @@ public:
 	}
 
 	/*赋值构造*/
-	T* operator=(const CMxSharedPointer<T> & other) {
+	CMxSharedPointer<T>& operator=(const CMxSharedPointer<T> & other) {
 		if (other)
 			other->addRef();
 		if (pointer)
@@ -77,3 +75,9 @@ public:
 private:
 	T* pointer;
 };
+
+
+
+
+
+

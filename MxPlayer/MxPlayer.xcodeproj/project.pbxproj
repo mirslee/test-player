@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		54C3C62B212AF230009736A1 /* BaseEffectFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C61C212AF22F009736A1 /* BaseEffectFilter.h */; };
-		54C3C62C212AF230009736A1 /* VideoOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C61D212AF22F009736A1 /* VideoOutput.h */; };
-		54C3C62D212AF230009736A1 /* BaseEffectFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C61E212AF22F009736A1 /* BaseEffectFilter.cpp */; };
+		54638AC7212E9873004EB5E4 /* libMxCoreD.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638AC8212E9873004EB5E4 /* libMxCoreD.dylib */; };
+		54638AD1212E989A004EB5E4 /* libswscale.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638AC9212E989A004EB5E4 /* libswscale.5.dylib */; };
+		54638AD2212E989A004EB5E4 /* libavfilter.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638ACA212E989A004EB5E4 /* libavfilter.7.dylib */; };
+		54638AD3212E989A004EB5E4 /* libavformat.58.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638ACB212E989A004EB5E4 /* libavformat.58.dylib */; };
+		54638AD4212E989A004EB5E4 /* libpostproc.55.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638ACC212E989A004EB5E4 /* libpostproc.55.dylib */; };
+		54638AD5212E989A004EB5E4 /* libavcodec.58.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638ACD212E989A004EB5E4 /* libavcodec.58.dylib */; };
+		54638AD6212E989A004EB5E4 /* libavdevice.58.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638ACE212E989A004EB5E4 /* libavdevice.58.dylib */; };
+		54638AD7212E989A004EB5E4 /* libavutil.56.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638ACF212E989A004EB5E4 /* libavutil.56.dylib */; };
+		54638AD8212E989A004EB5E4 /* libswresample.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638AD0212E989A004EB5E4 /* libswresample.3.dylib */; };
+		54638ADB212E98F2004EB5E4 /* CMxClock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54638AD9212E98F2004EB5E4 /* CMxClock.cpp */; };
+		54638ADC212E98F2004EB5E4 /* CMxClock.h in Headers */ = {isa = PBXBuildFile; fileRef = 54638ADA212E98F2004EB5E4 /* CMxClock.h */; };
 		54C3C62E212AF230009736A1 /* MxPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C61F212AF22F009736A1 /* MxPlayer.h */; };
 		54C3C62F212AF230009736A1 /* MxVideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C620212AF22F009736A1 /* MxVideoPlayer.cpp */; };
 		54C3C630212AF230009736A1 /* VideoDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C621212AF22F009736A1 /* VideoDecoder.h */; };
-		54C3C631212AF230009736A1 /* VideoOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C622212AF22F009736A1 /* VideoOutput.m */; };
 		54C3C632212AF230009736A1 /* MxVideoPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C623212AF230009736A1 /* MxVideoPlayer.h */; };
-		54C3C633212AF230009736A1 /* DirectPassRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C624212AF230009736A1 /* DirectPassRenderer.h */; };
 		54C3C634212AF230009736A1 /* MxVideoDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C625212AF230009736A1 /* MxVideoDecoder.h */; };
-		54C3C635212AF230009736A1 /* DirectPassRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C626212AF230009736A1 /* DirectPassRenderer.cpp */; };
 		54C3C636212AF230009736A1 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C627212AF230009736A1 /* stdafx.cpp */; };
 		54C3C637212AF230009736A1 /* stdafx.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C628212AF230009736A1 /* stdafx.h */; };
 		54C3C638212AF230009736A1 /* VideoDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C629212AF230009736A1 /* VideoDecoder.cpp */; };
@@ -27,18 +32,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		54638AC8212E9873004EB5E4 /* libMxCoreD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = libMxCoreD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		54638AC9212E989A004EB5E4 /* libswscale.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.5.dylib; path = ../dylib/libswscale.5.dylib; sourceTree = "<group>"; };
+		54638ACA212E989A004EB5E4 /* libavfilter.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.7.dylib; path = ../dylib/libavfilter.7.dylib; sourceTree = "<group>"; };
+		54638ACB212E989A004EB5E4 /* libavformat.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.58.dylib; path = ../dylib/libavformat.58.dylib; sourceTree = "<group>"; };
+		54638ACC212E989A004EB5E4 /* libpostproc.55.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.55.dylib; path = ../dylib/libpostproc.55.dylib; sourceTree = "<group>"; };
+		54638ACD212E989A004EB5E4 /* libavcodec.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.58.dylib; path = ../dylib/libavcodec.58.dylib; sourceTree = "<group>"; };
+		54638ACE212E989A004EB5E4 /* libavdevice.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.58.dylib; path = ../dylib/libavdevice.58.dylib; sourceTree = "<group>"; };
+		54638ACF212E989A004EB5E4 /* libavutil.56.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.56.dylib; path = ../dylib/libavutil.56.dylib; sourceTree = "<group>"; };
+		54638AD0212E989A004EB5E4 /* libswresample.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswresample.3.dylib; path = ../dylib/libswresample.3.dylib; sourceTree = "<group>"; };
+		54638AD9212E98F2004EB5E4 /* CMxClock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CMxClock.cpp; sourceTree = "<group>"; };
+		54638ADA212E98F2004EB5E4 /* CMxClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMxClock.h; sourceTree = "<group>"; };
 		54C3C608212AF075009736A1 /* libMxPlayerD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxPlayerD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		54C3C61C212AF22F009736A1 /* BaseEffectFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEffectFilter.h; sourceTree = "<group>"; };
-		54C3C61D212AF22F009736A1 /* VideoOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoOutput.h; sourceTree = "<group>"; };
-		54C3C61E212AF22F009736A1 /* BaseEffectFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseEffectFilter.cpp; sourceTree = "<group>"; };
 		54C3C61F212AF22F009736A1 /* MxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxPlayer.h; sourceTree = "<group>"; };
 		54C3C620212AF22F009736A1 /* MxVideoPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxVideoPlayer.cpp; sourceTree = "<group>"; };
 		54C3C621212AF22F009736A1 /* VideoDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDecoder.h; sourceTree = "<group>"; };
-		54C3C622212AF22F009736A1 /* VideoOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoOutput.m; sourceTree = "<group>"; };
 		54C3C623212AF230009736A1 /* MxVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxVideoPlayer.h; sourceTree = "<group>"; };
-		54C3C624212AF230009736A1 /* DirectPassRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectPassRenderer.h; sourceTree = "<group>"; };
 		54C3C625212AF230009736A1 /* MxVideoDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxVideoDecoder.h; sourceTree = "<group>"; };
-		54C3C626212AF230009736A1 /* DirectPassRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirectPassRenderer.cpp; sourceTree = "<group>"; };
 		54C3C627212AF230009736A1 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
 		54C3C628212AF230009736A1 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
 		54C3C629212AF230009736A1 /* VideoDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoDecoder.cpp; sourceTree = "<group>"; };
@@ -52,21 +62,52 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54638AC7212E9873004EB5E4 /* libMxCoreD.dylib in Frameworks */,
+				54638AD1212E989A004EB5E4 /* libswscale.5.dylib in Frameworks */,
+				54638AD2212E989A004EB5E4 /* libavfilter.7.dylib in Frameworks */,
+				54638AD3212E989A004EB5E4 /* libavformat.58.dylib in Frameworks */,
+				54638AD4212E989A004EB5E4 /* libpostproc.55.dylib in Frameworks */,
+				54638AD5212E989A004EB5E4 /* libavcodec.58.dylib in Frameworks */,
+				54638AD6212E989A004EB5E4 /* libavdevice.58.dylib in Frameworks */,
+				54638AD7212E989A004EB5E4 /* libavutil.56.dylib in Frameworks */,
+				54638AD8212E989A004EB5E4 /* libswresample.3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54638AC6212E9873004EB5E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				54638ACD212E989A004EB5E4 /* libavcodec.58.dylib */,
+				54638ACE212E989A004EB5E4 /* libavdevice.58.dylib */,
+				54638ACA212E989A004EB5E4 /* libavfilter.7.dylib */,
+				54638ACB212E989A004EB5E4 /* libavformat.58.dylib */,
+				54638ACF212E989A004EB5E4 /* libavutil.56.dylib */,
+				54638ACC212E989A004EB5E4 /* libpostproc.55.dylib */,
+				54638AD0212E989A004EB5E4 /* libswresample.3.dylib */,
+				54638AC9212E989A004EB5E4 /* libswscale.5.dylib */,
+				54638AC8212E9873004EB5E4 /* libMxCoreD.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		54638AE1212FAC4E004EB5E4 /* clock */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = clock;
+			sourceTree = "<group>";
+		};
 		54C3C5FF212AF075009736A1 = {
 			isa = PBXGroup;
 			children = (
+				54638AE1212FAC4E004EB5E4 /* clock */,
+				54638AD9212E98F2004EB5E4 /* CMxClock.cpp */,
+				54638ADA212E98F2004EB5E4 /* CMxClock.h */,
 				54C3C63B212AF309009736A1 /* MxDemuxer.cpp */,
 				54C3C63A212AF308009736A1 /* MxDemuxer.h */,
-				54C3C61E212AF22F009736A1 /* BaseEffectFilter.cpp */,
-				54C3C61C212AF22F009736A1 /* BaseEffectFilter.h */,
-				54C3C626212AF230009736A1 /* DirectPassRenderer.cpp */,
-				54C3C624212AF230009736A1 /* DirectPassRenderer.h */,
 				54C3C61F212AF22F009736A1 /* MxPlayer.h */,
 				54C3C62A212AF230009736A1 /* MxVideoDecoder.cpp */,
 				54C3C625212AF230009736A1 /* MxVideoDecoder.h */,
@@ -76,9 +117,8 @@
 				54C3C628212AF230009736A1 /* stdafx.h */,
 				54C3C629212AF230009736A1 /* VideoDecoder.cpp */,
 				54C3C621212AF22F009736A1 /* VideoDecoder.h */,
-				54C3C61D212AF22F009736A1 /* VideoOutput.h */,
-				54C3C622212AF22F009736A1 /* VideoOutput.m */,
 				54C3C609212AF075009736A1 /* Products */,
+				54638AC6212E9873004EB5E4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,14 +138,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				54C3C637212AF230009736A1 /* stdafx.h in Headers */,
-				54C3C62B212AF230009736A1 /* BaseEffectFilter.h in Headers */,
 				54C3C63C212AF309009736A1 /* MxDemuxer.h in Headers */,
 				54C3C630212AF230009736A1 /* VideoDecoder.h in Headers */,
+				54638ADC212E98F2004EB5E4 /* CMxClock.h in Headers */,
 				54C3C632212AF230009736A1 /* MxVideoPlayer.h in Headers */,
 				54C3C62E212AF230009736A1 /* MxPlayer.h in Headers */,
-				54C3C62C212AF230009736A1 /* VideoOutput.h in Headers */,
 				54C3C634212AF230009736A1 /* MxVideoDecoder.h in Headers */,
-				54C3C633212AF230009736A1 /* DirectPassRenderer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,14 +204,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54C3C635212AF230009736A1 /* DirectPassRenderer.cpp in Sources */,
-				54C3C631212AF230009736A1 /* VideoOutput.m in Sources */,
 				54C3C638212AF230009736A1 /* VideoDecoder.cpp in Sources */,
 				54C3C639212AF230009736A1 /* MxVideoDecoder.cpp in Sources */,
-				54C3C62D212AF230009736A1 /* BaseEffectFilter.cpp in Sources */,
 				54C3C63D212AF309009736A1 /* MxDemuxer.cpp in Sources */,
 				54C3C62F212AF230009736A1 /* MxVideoPlayer.cpp in Sources */,
 				54C3C636212AF230009736A1 /* stdafx.cpp in Sources */,
+				54638ADB212E98F2004EB5E4 /* CMxClock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

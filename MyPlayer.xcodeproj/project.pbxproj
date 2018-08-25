@@ -23,25 +23,15 @@
 
 /* Begin PBXBuildFile section */
 		546950912122E1230055ED67 /* QtWidgets.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950902122E1230055ED67 /* QtWidgets.framework */; };
-		5469509A2122E2150055ED67 /* libavdevice.58.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950922122E2150055ED67 /* libavdevice.58.dylib */; };
-		5469509B2122E2150055ED67 /* libavfilter.7.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950932122E2150055ED67 /* libavfilter.7.dylib */; };
-		5469509C2122E2150055ED67 /* libavutil.56.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950942122E2150055ED67 /* libavutil.56.dylib */; };
-		5469509D2122E2150055ED67 /* libavformat.58.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950952122E2150055ED67 /* libavformat.58.dylib */; };
-		5469509E2122E2150055ED67 /* libavcodec.58.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950962122E2150055ED67 /* libavcodec.58.dylib */; };
-		5469509F2122E2150055ED67 /* libpostproc.55.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950972122E2150055ED67 /* libpostproc.55.dylib */; };
-		546950A02122E2150055ED67 /* libswresample.3.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950982122E2150055ED67 /* libswresample.3.dylib */; };
-		546950A12122E2150055ED67 /* libswscale.5.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 546950992122E2150055ED67 /* libswscale.5.dylib */; };
-		54C3C54821259F4F009736A1 /* MxGLView.m in Compile Sources */ = {isa = PBXBuildFile; fileRef = 54C3C54721259F4F009736A1 /* MxGLView.m */; };
 		54C3C54A2125A0C9009736A1 /* Cocoa.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 54C3C5492125A0C9009736A1 /* Cocoa.framework */; };
-		54C3C5FD212ACB58009736A1 /* libMxCore.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 54C3C5B4212A5C64009736A1 /* libMxCore.dylib */; };
-		54C3C5FE212ACB64009736A1 /* libMxGLToolD.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 54C3C5D1212A5D74009736A1 /* libMxGLToolD.dylib */; };
+		54C3C5FD212ACB58009736A1 /* libMxCoreD.dylib in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 54C3C5B4212A5C64009736A1 /* libMxCoreD.dylib */; };
+		54D6AB432131259D00B78108 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB422131259D00B78108 /* main.cpp */; };
 		8771A8C96E9C391044035D99 /* OpenGL.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = D4B32C2222F82AC56BADEB21 /* OpenGL.framework */; };
 		8D267F2E4776F0ECA2F49DC8 /* IOKit.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A1A67BEAA744704B29168D39 /* IOKit.framework */; };
 		994A1BD1E426A09088330BE9 /* QtCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 53A1666EF2EC8D8B83CC35FC /* QtCore.framework */; };
 		A99B2AA0F9CBBDD12BA126A4 /* DiskArbitration.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 2B774D8E4178765CE52EAAF5 /* DiskArbitration.framework */; };
 		B07889C7F41764965C901BA2 /* dummy.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 12A9559A7F50D57FB891AC7C /* dummy.cpp */; settings = {ATTRIBUTES = (); }; };
 		C21018B3553C3BF64ECA6651 /* QtGui.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 34C3CC745F9A46849F0F12A2 /* QtGui.framework */; };
-		C3C85625D0947E6DB14E892D /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = 57B3D1BC3E5FB290CF44E967 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		E45E51A644D5FC9F942ECE55 /* AGL.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 8D9815BDB5BD9F90D2BC05C5 /* AGL.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,13 +95,11 @@
 		546950992122E2150055ED67 /* libswscale.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.5.dylib; path = ffmpeg/lib/libswscale.5.dylib; sourceTree = "<group>"; };
 		546950A52122F35D0055ED67 /* stdafx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
 		546950B82124556F0055ED67 /* Template.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Template.h; sourceTree = "<group>"; };
-		54C3C54621259F4F009736A1 /* MxGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MxGLView.h; sourceTree = "<group>"; };
-		54C3C54721259F4F009736A1 /* MxGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MxGLView.m; sourceTree = "<group>"; };
 		54C3C5492125A0C9009736A1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		54C3C5AF212A5C62009736A1 /* MxCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxCore.xcodeproj; path = MxCore/MxCore.xcodeproj; sourceTree = "<group>"; };
 		54C3C5CC212A5D72009736A1 /* MxGLTool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxGLTool.xcodeproj; path = MxGLTool/MxGLTool.xcodeproj; sourceTree = "<group>"; };
 		54C3C616212AF075009736A1 /* MxPlayer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxPlayer.xcodeproj; path = MxPlayer/MxPlayer.xcodeproj; sourceTree = "<group>"; };
-		57B3D1BC3E5FB290CF44E967 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = /Users/ws/work/MyPlayer/main.cpp; sourceTree = "<absolute>"; };
+		54D6AB422131259D00B78108 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8D9815BDB5BD9F90D2BC05C5 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		A1A67BEAA744704B29168D39 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		CD5906B4E993324963496C03 /* .qmake.stash */ = {isa = PBXFileReference; lastKnownFileType = text; name = .qmake.stash; path = /Users/ws/work/MyPlayer/.qmake.stash; sourceTree = "<absolute>"; };
@@ -125,8 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54C3C5FE212ACB64009736A1 /* libMxGLToolD.dylib in Link Binary With Libraries */,
-				54C3C5FD212ACB58009736A1 /* libMxCore.dylib in Link Binary With Libraries */,
+				54C3C5FD212ACB58009736A1 /* libMxCoreD.dylib in Link Binary With Libraries */,
 				54C3C54A2125A0C9009736A1 /* Cocoa.framework in Link Binary With Libraries */,
 				C21018B3553C3BF64ECA6651 /* QtGui.framework in Link Binary With Libraries */,
 				994A1BD1E426A09088330BE9 /* QtCore.framework in Link Binary With Libraries */,
@@ -135,14 +122,6 @@
 				8771A8C96E9C391044035D99 /* OpenGL.framework in Link Binary With Libraries */,
 				E45E51A644D5FC9F942ECE55 /* AGL.framework in Link Binary With Libraries */,
 				546950912122E1230055ED67 /* QtWidgets.framework in Link Binary With Libraries */,
-				5469509A2122E2150055ED67 /* libavdevice.58.dylib in Link Binary With Libraries */,
-				5469509B2122E2150055ED67 /* libavfilter.7.dylib in Link Binary With Libraries */,
-				5469509C2122E2150055ED67 /* libavutil.56.dylib in Link Binary With Libraries */,
-				5469509D2122E2150055ED67 /* libavformat.58.dylib in Link Binary With Libraries */,
-				5469509E2122E2150055ED67 /* libavcodec.58.dylib in Link Binary With Libraries */,
-				5469509F2122E2150055ED67 /* libpostproc.55.dylib in Link Binary With Libraries */,
-				546950A02122E2150055ED67 /* libswresample.3.dylib in Link Binary With Libraries */,
-				546950A12122E2150055ED67 /* libswscale.5.dylib in Link Binary With Libraries */,
 			);
 			name = "Link Binary With Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,9 +132,7 @@
 		2EB56BE3C2D93CDAB0C52E67 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				57B3D1BC3E5FB290CF44E967 /* main.cpp */,
-				54C3C54621259F4F009736A1 /* MxGLView.h */,
-				54C3C54721259F4F009736A1 /* MxGLView.m */,
+				54D6AB422131259D00B78108 /* main.cpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -163,7 +140,7 @@
 		54C3C5B0212A5C62009736A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				54C3C5B4212A5C64009736A1 /* libMxCore.dylib */,
+				54C3C5B4212A5C64009736A1 /* libMxCoreD.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,7 +156,7 @@
 		54C3C617212AF075009736A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				54C3C61B212AF077009736A1 /* libMxPlayer.dylib */,
+				54C3C61B212AF077009736A1 /* libMxPlayerD.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -311,10 +288,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		54C3C5B4212A5C64009736A1 /* libMxCore.dylib */ = {
+		54C3C5B4212A5C64009736A1 /* libMxCoreD.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libMxCore.dylib;
+			path = libMxCoreD.dylib;
 			remoteRef = 54C3C5B3212A5C64009736A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -325,10 +302,10 @@
 			remoteRef = 54C3C5D0212A5D74009736A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		54C3C61B212AF077009736A1 /* libMxPlayer.dylib */ = {
+		54C3C61B212AF077009736A1 /* libMxPlayerD.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libMxPlayer.dylib;
+			path = libMxPlayerD.dylib;
 			remoteRef = 54C3C61A212AF077009736A1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -375,9 +352,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3C85625D0947E6DB14E892D /* main.cpp in Compile Sources */,
-				54C3C54821259F4F009736A1 /* MxGLView.m in Compile Sources */,
 				B07889C7F41764965C901BA2 /* dummy.cpp in Compile Sources */,
+				54D6AB432131259D00B78108 /* main.cpp in Compile Sources */,
 			);
 			name = "Compile Sources";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,6 +522,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				"ARCHS[sdk=macosx*]" = x86_64;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = /usr/local/Cellar/qt/5.11.1/lib;
@@ -565,14 +542,16 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path @loader_path";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ffmpeg/lib",
+					./lib,
 					bin/mac/$CONFIGURATION,
 				);
+				OBJROOT = build;
 				PRODUCT_BUNDLE_IDENTIFIER = "Wondershare.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MyPlayer;
 				QMAKE_PKGINFO_TYPEINFO = "????";
 				QT_LIBRARY_SUFFIX = "";
 				SDKROOT = macosx;
+				SYMROOT = $SRCROOT/bin/mac/$CONFIGURATION;
 			};
 			name = Release;
 		};
@@ -581,6 +560,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				"ARCHS[sdk=macosx*]" = x86_64;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = /usr/local/Cellar/qt/5.11.1/lib;
@@ -601,9 +581,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path @loader_path";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/ffmpeg/lib",
+					./lib,
 					bin/mac/$CONFIGURATION,
 				);
+				OBJROOT = build;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-pipe",
@@ -622,6 +603,7 @@
 				QMAKE_PKGINFO_TYPEINFO = "????";
 				QT_LIBRARY_SUFFIX = "";
 				SDKROOT = macosx;
+				SYMROOT = $SRCROOT/bin/mac/$CONFIGURATION;
 			};
 			name = Debug;
 		};

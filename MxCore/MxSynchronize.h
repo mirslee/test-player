@@ -23,16 +23,24 @@
 
 #define WAIT_OBJECT_0 0
 #define WAIT_TIMEOUT ETIMEDOUT
-#define INFINITE (DWORD)(-1)
+#define INFINITE (unsigned long)(-1)
 typedef void* MxEvent;
 
-MxEvent mxCreateEvent(const pthread_condattr_t *attr, bool bManualReset, bool bInitialState, const char* name);
+struct MxEvent_t {
+    pthread_cond_t cond;
+    pthread_mutex_t mutex;
+    bool bManualReset;
+    bool signal;
+};
+
+MxEvent mxCreateEvent(pthread_condattr_t *attr, bool bManualReset, bool bInitialState, const char* name);
 bool mxCloseEvent(MxEvent event);
 bool mxSetEvent(MxEvent event);
-bool mResetEvent(MxEvent event);
-DWORD mxWaitForSingleObject(MxEvent event, DWORD dwMilliseconds);
-DWORD GetTickCount();
-void mxSleep(unsinged int millseconds);
+bool mxResetEvent(MxEvent event);
+unsigned long mxWaitObject(MxEvent event, unsigned long dwMilliseconds);
+unsigned long mxWaitObjects(unsigned long  nCount, MxEvent event, unsigned long  dwMilliseconds);
+unsigned long GetTickCount();
+void mxSleep(unsigned int millseconds);
 
 
 
