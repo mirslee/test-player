@@ -74,7 +74,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -146,8 +146,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clock\CMxClockPulse.cpp" />
-    <ClCompile Include="CMxReferenceClock.cpp" />
+    <ClCompile Include="clock\CMxMediaSysClock.cpp" />
+    <ClCompile Include="clock\CMxReferenceClock.cpp" />
+    <ClCompile Include="clock\CMxSchedule.cpp" />
     <ClCompile Include="MxDemuxer.cpp" />
     <ClCompile Include="MxVideoDecoder.cpp" />
     <ClCompile Include="MxVideoPlayer.cpp" />
@@ -157,8 +158,9 @@
     <ClCompile Include="VideoDecoder.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clock\CMxClockPulse.h" />
-    <ClInclude Include="CMxReferenceClock.h" />
+    <ClInclude Include="clock\CMxMediaSysClock.h" />
+    <ClInclude Include="clock\CMxReferenceClock.h" />
+    <ClInclude Include="clock\CMxSchedule.h" />
     <ClInclude Include="MxDemuxer.h" />
     <ClInclude Include="MxPlayer.h" />
     <ClInclude Include="MxVideoDecoder.h" />

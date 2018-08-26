@@ -36,10 +36,13 @@
     <ClCompile Include="VideoDecoder.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="clock\CMxClockPulse.cpp">
+    <ClCompile Include="clock\CMxMediaSysClock.cpp">
       <Filter>clock</Filter>
     </ClCompile>
-    <ClCompile Include="CMxReferenceClock.cpp">
+    <ClCompile Include="clock\CMxReferenceClock.cpp">
+      <Filter>clock</Filter>
+    </ClCompile>
+    <ClCompile Include="clock\CMxSchedule.cpp">
       <Filter>clock</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,10 +65,13 @@
     <ClInclude Include="stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="clock\CMxClockPulse.h">
+    <ClInclude Include="clock\CMxMediaSysClock.h">
       <Filter>clock</Filter>
     </ClInclude>
-    <ClInclude Include="CMxReferenceClock.h">
+    <ClInclude Include="clock\CMxReferenceClock.h">
+      <Filter>clock</Filter>
+    </ClInclude>
+    <ClInclude Include="clock\CMxSchedule.h">
       <Filter>clock</Filter>
     </ClInclude>
   </ItemGroup>

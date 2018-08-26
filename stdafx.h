@@ -5,9 +5,17 @@
 //  Created by sz17112850M01 on 2018/8/14.
 //
 
-//windows
+#ifdef _WIN32
+#define MXGLTOOL_API __declspec(dllimport)
+#define MXCORE_API __declspec(dllimport)
+#define MXPLAER_API __declspec(dllimport)
+#else
+#define MXGLTOOL_API
+#define MXCORE_API
+#define MXPLAER_API
+#endif
 
-#include "dllexport.h"
+//windows
 #ifdef _WIN32
 
 	#include "windows.h"
@@ -18,7 +26,9 @@
 
 //#include <vxgl/glext.h>
 
-	
+#ifdef _WIN32
+#define MXCORE_API __declspec(dllimport)
+#endif
 
 #define HAVE_STRUCT_TIMESPEC
 #include "win/pthread.h"
@@ -36,21 +46,6 @@
 #ifndef stdafx_h
 #define stdafx_h
 
-	//ffmpeg
-#ifdef __cplusplus
-	extern "C" {
-#endif
-
-#include "libavformat/avformat.h"
-#include "libavcodec/avcodec.h"
-#include "libswscale/swscale.h"
-#include "libswresample/swresample.h"
-#include "libavutil/time.h"
-
-#ifdef __cplusplus
-	}
-#endif
-
 
 
 //std
@@ -60,14 +55,6 @@
 #include <iostream>
 using namespace std;
 
-//Qt
-#include <QtCore/QtCore>
-#include <QtGui/QtGui>
-#include <QtWidgets/QtWidgets>
-#include <QtWidgets/QMacCocoaViewContainer>
-
-
-#include "mxConfig.h"
 
 
 

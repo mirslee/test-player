@@ -5,130 +5,65 @@
 //  Created by sz17112850M01 on 2018/8/25.
 //
 
+#include "stdafx.h"
 #include "MxCore/MxSynchronize.h"
+#include "./MxPlayer/clock/CMxMediaSysClock.h"
+#include <QtCore/QtCore>
 
 MxEvent event = nullptr;
 
-
-int ticketcount = 10000;
 void* thread1(void*) {
 
-    /*if (WAIT_OBJECT_0 == mxWaitObject(event, INFINITE)) {
-        std::cout << "thread1:" << ticketcount;
-    }*/
-    MxEvent_t *mxevent_t = (MxEvent_t*)event;
-    pthread_mutex_lock(&mxevent_t->mutex);
-    int ret = pthread_cond_wait(&mxevent_t->cond, &mxevent_t->mutex);
-    pthread_mutex_unlock(&mxevent_t->mutex);
+	while(1) {
+		if (WAIT_OK == mxWaitObject(event, INFINITE)) {
+			qDebug("thread1: success");
+		}
+		else {
+			qDebug("thread1: false");
+			std::cout << "thread1:false";
+		}
+	}
+    
+	return 0;
 }
 
 void* thread2(void*) {
-    /*if (WAIT_OBJECT_0 == mxWaitObject(event, INFINITE)) {
-        std::cout << "thread2:" << ticketcount;
-    }*/
-    MxEvent_t *mxevent_t = (MxEvent_t*)event;
-    pthread_mutex_lock(&mxevent_t->mutex);
-    int ret = pthread_cond_wait(&mxevent_t->cond, &mxevent_t->mutex);
-    pthread_mutex_unlock(&mxevent_t->mutex);
+	while (1) {
+		if (WAIT_OK == mxWaitObject(event, INFINITE)) {
+			qDebug("thread2: success");
+		}
+		else {
+			qDebug("thread2: false");
+		}
+	}
+	return 0;
 }
 
 int main(int argc, char** argv) {
     
     
-    event = mxCreateEvent(nullptr, false, false, "111");
+    /*event = mxCreateEvent(nullptr, false, false, "111");
     pthread_t t1;
     pthread_t t2;
     pthread_create(&t1, nullptr, thread1, nullptr);
     pthread_create(&t2, nullptr, thread2, nullptr);
 
-    mxSleep(3000);
-    mxSetEvent(event);
-    mxSleep(3000);
-    mxSetEvent(event);
-    pthread_join(t1, nullptr);
-    pthread_join(t2, nullptr);
+	
+    while (1)
+    {
+		Sleep(1000);
+		mxActiveEvent(event);
+    }*/
+
+	IVxSystemClock *clock; 
+	sysclk_cinfo info;
+	info.rate = 25;
+	info.scale = 1;
+	vxCreateSystemClock(NULL,&info, NULL, &clock);
+	while (1)
+	{
+		Sleep(10000);
+		//qDebug("%ld",clock->GetClock());
+	}
     return 0;
 }
-
-/*#include <pthread.h>
-#include <iostream>
-#include <unistd.h>
-
-
-using namespace std;
-
-static pthread_mutex_t mtx=PTHREAD_MUTEX_INITIALIZER;
-static pthread_cond_t cond;
-
-struct MXEVENT {
-    pthread_cond_t cond;
-    pthread_mutex_t mutex;
-    bool bManualReset;
-    bool signal;
-};
-
-MxEvent eee = mxCreateEvent(NULL, false, false, "111");
-static void* func_1(void* arg)
-{
-    cout << "func_1 start" << endl;
-    
-    pthread_mutex_lock(&((MXEVENT*)eee)->mutex);
-    cout << "func_1 lock mtx" << endl;
-    
-    cout << "func_1 wait cond" << endl;
-    int ret = pthread_cond_wait(&((MXEVENT*)eee)->cond, &((MXEVENT*)eee)->mutex);
-    
-    cout << "func_1 unlock mtx" << endl;
-    pthread_mutex_unlock(&((MXEVENT*)eee)->mutex);
-    
-    cout << "func_1 end" << endl;
-    sleep(5);
-    
-    return NULL;
-}
-
-static void* func_2(void* arg)
-{
-    cout << "func_2 start" << endl;
-    
-    pthread_mutex_lock(&((MXEVENT*)eee)->mutex);
-    cout << "func_2 lock mtx" << endl;
-    
-    cout << "func_2 wait cond" << endl;
-    int ret =  pthread_cond_wait(&((MXEVENT*)eee)->cond, &((MXEVENT*)eee)->mutex);
-    
-    cout << "func_2 unlock mtx" << endl;
-    pthread_mutex_unlock(&((MXEVENT*)eee)->mutex);
-    
-    cout << "func_2 end" << endl;
-    sleep(5);
-    
-    return NULL;
-}
-
-
-int main()
-{
-    pthread_t tid1, tid2;
-    pthread_cond_init(&((MXEVENT*)eee)->cond, NULL);
-    pthread_mutex_init(&((MXEVENT*)eee)->mutex, NULL);
-    
-    cout << "main create thread" << endl;
-    pthread_create(&tid1, NULL, func_1, NULL);
-    pthread_create(&tid2, NULL, func_2, NULL);
-    
-    sleep(3);
-    cout << "main boradcast signal" << endl;
-    pthread_mutex_lock(&((MXEVENT*)eee)->mutex);
-    pthread_cond_broadcast(&((MXEVENT*)eee)->cond);
-    pthread_mutex_unlock(&((MXEVENT*)eee)->mutex);
-    
-    cout << "main join thread" << endl;
-    
-    pthread_join(tid1, NULL);
-    pthread_join(tid2, NULL);
-    
-    cout << "main end" << endl;
-    return 0;
-}*/
-

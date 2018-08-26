@@ -11,31 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseEffectFilter.cpp" />
-    <ClCompile Include="DirectPassRenderer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MxDemuxer.cpp" />
-    <ClCompile Include="MxThread.cpp" />
-    <ClCompile Include="MxVideoDecoder.cpp" />
-    <ClCompile Include="MxVideoPlayer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="VideoDecoder.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseEffectFilter.h" />
-    <ClInclude Include="DirectPassRenderer.h" />
-    <ClInclude Include="include\mxConfig.h" />
-    <ClInclude Include="MxDemuxer.h" />
-    <ClInclude Include="MxPlayer.h" />
-    <ClInclude Include="MxQueue.h" />
-    <ClInclude Include="MxThread.h" />
-    <ClInclude Include="MxVideoDecoder.h" />
-    <ClInclude Include="MxVideoPlayer.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Template.h" />
-    <ClInclude Include="VideoDecoder.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
@@ -57,8 +40,8 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)\bin\$(Platform)\$(Configuration)\</OutDir>
-    <TargetName>$(ProjectName)D</TargetName>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -76,7 +59,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;./lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;./lib;$(SolutionDir)\lib\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>

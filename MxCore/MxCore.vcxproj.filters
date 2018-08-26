@@ -45,6 +45,9 @@
     <ClInclude Include="MxSynchronize.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CMxArray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MxThread.cpp">

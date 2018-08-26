@@ -17,5 +17,5 @@ bool VideoDecoder::openFile(string path) {
     avformat_network_init();
     av_register_all();
     
-    
+	return true;
 }

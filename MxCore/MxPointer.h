@@ -20,8 +20,18 @@ public:
 		pointer = other;
 	}
 
+	/*共享指针赋值给普通指针，*/
+	T* operator=(T* pointer) {
+		if (pointer)
+			pointer->addRef();
+		if (this->pointer)
+			pointer->unRef();
+		this->pointer = pointer;
+		return this->pointer;
+	}
+
 	/*赋值构造*/
-	CMxSharedPointer<T>& operator=(const CMxSharedPointer<T> & other) {
+	T* operator=(const CMxSharedPointer<T> & other) {
 		if (other)
 			other->addRef();
 		if (pointer)
@@ -31,17 +41,7 @@ public:
 	}
 
 	~CMxSharedPointer() {
-		return this->unRef();
-	}
-
-	/*共享指针赋值给普通指针，*/
-	T* operator=(T* pointer) {  
-		if (pointer)
-			pointer->addRef();
-		if (this->pointer)
-			pointer->unRef();
-		this->pointer = pointer;
-		return this->pointer;
+		this->pointer->unRef();
 	}
 
 	
@@ -69,7 +69,6 @@ public:
 	/*    指针调用， pointer->     */
 	T* operator->() const {
 		return pointer;
-		std::
 	}
 
 private:
