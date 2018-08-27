@@ -8,14 +8,14 @@
 #include "stdafx.h"
 #include "MxCore/MxSynchronize.h"
 #include "./MxPlayer/clock/CMxMediaSysClock.h"
-#include <QtCore/QtCore>
+#include <QtCore/qlogging.h>
 
 MxEvent event = nullptr;
 
 void* thread1(void*) {
 
 	while(1) {
-		if (WAIT_OK == mxWaitObject(event, INFINITE)) {
+		if (WAIT_OK == mxWaitObject(event, WAIT_INFINITE)) {
 			qDebug("thread1: success");
 		}
 		else {
@@ -29,7 +29,7 @@ void* thread1(void*) {
 
 void* thread2(void*) {
 	while (1) {
-		if (WAIT_OK == mxWaitObject(event, INFINITE)) {
+		if (WAIT_OK == mxWaitObject(event, WAIT_INFINITE)) {
 			qDebug("thread2: success");
 		}
 		else {
@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
 	vxCreateSystemClock(NULL,&info, NULL, &clock);
 	while (1)
 	{
-		Sleep(10000);
+		sleep(10000);
 		//qDebug("%ld",clock->GetClock());
 	}
     return 0;

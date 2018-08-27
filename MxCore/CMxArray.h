@@ -90,7 +90,7 @@ inline TYPE& CMxArray<TYPE, ARG_TYPE>::GetAt(int nIndex)
 {
 	if (nIndex >= 0 && nIndex < m_nSize)
 		return m_pData[nIndex];
-	_vxThrowInvalidArgException();
+	//_vxThrowInvalidArgException();
 	return m_pData[0];
 }
 
@@ -99,7 +99,7 @@ inline const TYPE& CMxArray<TYPE, ARG_TYPE>::GetAt(int nIndex) const
 {
 	if (nIndex >= 0 && nIndex < m_nSize)
 		return m_pData[nIndex];
-	_vxThrowInvalidArgException();
+	//_vxThrowInvalidArgException();
 	return m_pData[0];
 }
 template<class TYPE, class ARG_TYPE>
@@ -107,8 +107,8 @@ inline void CMxArray<TYPE, ARG_TYPE>::SetAt(int nIndex, ARG_TYPE newElement)
 {
 	if (nIndex >= 0 && nIndex < m_nSize)
 		m_pData[nIndex] = newElement;
-	else
-		_vxThrowInvalidArgException();
+	/*else
+		_vxThrowInvalidArgException();*/
 }
 template<class TYPE, class ARG_TYPE>
 inline const TYPE& CMxArray<TYPE, ARG_TYPE>::ElementAt(int nIndex) const
@@ -290,7 +290,7 @@ int CMxArray<TYPE, ARG_TYPE>::Append(const CMxArray& src)
 {
 	int nOldSize = m_nSize;
 	SetSize(m_nSize + src.m_nSize);
-	vxCopyElements<TYPE>(m_pData + nOldSize, src.m_pData, src.m_nSize);
+	//vxCopyElements<TYPE>(m_pData + nOldSize, src.m_pData, src.m_nSize);
 	return nOldSize;
 }
 
@@ -300,7 +300,7 @@ void CMxArray<TYPE, ARG_TYPE>::Copy(const CMxArray& src)
 	if (this != &src)
 	{
 		SetSize(src.m_nSize);
-		vxCopyElements<TYPE>(m_pData, src.m_pData, src.m_nSize);
+		//vxCopyElements<TYPE>(m_pData, src.m_pData, src.m_nSize);
 	}
 }
 

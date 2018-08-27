@@ -9,7 +9,8 @@
 #define MXDLL_EXPORTS
 #endif
 
-#include "dllexport.h"
+#include "MxDllexport.h"
+#include "MxInterface.h"
 //#include "mxtypes.h"
 //windows
 #ifdef _WIN32

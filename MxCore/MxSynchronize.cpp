@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "MxSynchronize.h"
 #include <time.h>
+#ifdef __APPLE__
+#include <sys/time.h>
+#endif
 
 struct MxEvent_t {
 	pthread_cond_t cond;
@@ -131,7 +134,7 @@ unsigned long mxWaitObject(MxEvent event, unsigned long dwMilliseconds) {
 
 unsigned long mxWaitObjects(unsigned long  nCount, MxEvent *event, unsigned long  dwMilliseconds) {
 	
-	if (INFINITE == dwMilliseconds) {
+	if (WAIT_INFINITE == dwMilliseconds) {
 		for (unsigned long i = 0; i < nCount; i++) {
 			MxEvent_t *mxevent_t = (MxEvent_t*)event[i];
 			if (!mxevent_t) { continue; }
@@ -210,3 +213,86 @@ unsigned long mxWaitObjects(unsigned long  nCount, MxEvent *event, unsigned long
 	}
 	return WAIT_OK;
 }
+
+#ifdef __APPLE__
+
+MxMutex_t::MxMutex_t()
+: count(0), ownerthread(nullptr), recursive_count(0)
+{
+    assert(sema = dispatch_semaphore_create(0));
+    
+} // initial count is 0
+
+MxMutex_t::~MxMutex_t()
+{
+    dispatch_release(sema);
+}
+
+void MxMutex_t::lock()
+{
+    if (pthread_equal(ownerthread, pthread_self()))
+    {
+        recursive_count++;
+    }
+    else
+    {
+        for (unsigned spins = 0; spins != 5000; ++spins)
+        {
+            if (OSAtomicCompareAndSwap32Barrier(0, 1, &count))
+            {
+                ownerthread = pthread_self();
+                recursive_count = 1;
+                return;
+            }
+            sched_yield();
+        }
+        
+        // DISPATCH_TIME_FOREVER is unsigned long long (not in ISO C++98/03).
+        // Define our own equivalent.
+        const uint64_t DISPATCH_TIME_FOREVER_u64 = ~uint64_t(0);
+        
+        if (OSAtomicIncrement32Barrier(&count) > 1) // if (++count > 1)
+        {
+            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER_u64);
+        }
+        
+        ownerthread = pthread_self();
+        recursive_count = 1;
+    }
+}
+
+bool MxMutex_t::trylock()
+{
+    if (OSAtomicCompareAndSwap32Barrier(0, 1, &count))
+    {
+        ownerthread = pthread_self();
+        recursive_count = 1;
+        return true;
+    }
+    else if (pthread_equal(ownerthread, pthread_self()))
+    {
+        recursive_count++;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void MxMutex_t::unlock()
+{
+    if (pthread_equal(ownerthread, pthread_self()))
+    {
+        recursive_count--;
+        if (recursive_count == 0)
+        {
+            ownerthread = NULL;
+            if (OSAtomicDecrement32Barrier(&count) > 0) // if (--count > 0)
+            {
+                dispatch_semaphore_signal(sema); // release a waiting thread
+            }
+        }
+    }
+}
+#endif

@@ -1,8 +1,9 @@
 #pragma once
 
+#include "stdafx.h"
 #include "CMxReferenceClock.h"
 #include "../../MxCore/MxSynchronize.h"
-#include "../../MxCore/mxtypes.h"
+#include "MxTypes.h"
 #include "../MxCore/MxPointer.h"
 #include "../MxCore/CMxArray.h"
 
@@ -10,15 +11,15 @@
 struct MXPLAER_API IVxSystemClock
 {
 virtual const sysclk_cinfo*	__stdcall GetCreateInfo() = 0;
-virtual void				__stdcall WaitSyncForSystemClock(unsigned __int64 clock) = 0;
-virtual unsigned __int64 			__stdcall WaitSyncFrameClock() = 0;
-virtual unsigned __int64			__stdcall GetClock() = 0;
+virtual void				__stdcall WaitSyncForSystemClock(uint64 clock) = 0;
+virtual uint64			__stdcall WaitSyncFrameClock() = 0;
+virtual uint64		__stdcall GetClock() = 0;
 virtual MxEvent				__stdcall CreateClockEvent(bool bManualReset = FALSE,bool bInitialState = FALSE) = 0;
 virtual void				__stdcall CloseClockEvent(MxEvent) = 0;
 
-virtual unsigned __int64			__stdcall GetTime() = 0;
-virtual unsigned __int64			__stdcall GetTimeFromSample(unsigned __int64 clock) = 0;
-virtual unsigned __int64			__stdcall GetSampleFromTime(unsigned __int64 coretime) = 0;
+virtual uint64		__stdcall GetTime() = 0;
+virtual uint64		__stdcall GetTimeFromSample(uint64 clock) = 0;
+virtual uint64			__stdcall GetSampleFromTime(uint64 coretime) = 0;
 
 virtual bool				__stdcall CanReset() = 0;
 virtual bool				__stdcall Reset(const sysclk_cinfo* cinfo, IVxClockPulse* clockpulse) = 0;
@@ -47,7 +48,7 @@ protected:
 	CMxSharedPointer<IVxClockPulse> m_clockpulse;
 	MX_MUTEX m_csPulseLock;
 
-	volatile unsigned _int64 m_ulClock;
+	volatile uint64 m_ulClock;
 	CMxArray<MxEvent, MxEvent&> m_hClocks;
 	
 	bool m_canreset;
@@ -56,15 +57,15 @@ public:
 	void Uninitialize();
 public:
 	const sysclk_cinfo*	__stdcall GetCreateInfo(){ return &m_cinfo; }
-	void			 __stdcall WaitSyncForSystemClock(unsigned _int64 dwClock);
-	unsigned _int64		 __stdcall WaitSyncFrameClock();
-	unsigned _int64		 __stdcall GetClock(){ return m_ulClock; }
+	void			 __stdcall WaitSyncForSystemClock(uint64 dwClock);
+	uint64		 __stdcall WaitSyncFrameClock();
+	uint64		 __stdcall GetClock(){ return m_ulClock; }
 	MxEvent			 __stdcall CreateClockEvent(bool bManualReset = false, bool bInitialState = false);
 	void			 __stdcall CloseClockEvent(MxEvent);
 
-	unsigned _int64		 __stdcall GetTime();
-	unsigned _int64		 __stdcall GetTimeFromSample(unsigned _int64 clock);
-	unsigned _int64		 __stdcall GetSampleFromTime(unsigned _int64 coretime);
+	uint64		 __stdcall GetTime();
+	uint64		 __stdcall GetTimeFromSample(uint64 clock);
+	uint64		 __stdcall GetSampleFromTime(uint64 coretime);
 
 	bool			 __stdcall Reset(const sysclk_cinfo* cinfo,IVxClockPulse* clockpulse);
 	bool			 __stdcall CanReset(){return m_canreset;}

@@ -29,6 +29,13 @@
 		54C3C639212AF230009736A1 /* MxVideoDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C62A212AF230009736A1 /* MxVideoDecoder.cpp */; };
 		54C3C63C212AF309009736A1 /* MxDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C63A212AF308009736A1 /* MxDemuxer.h */; };
 		54C3C63D212AF309009736A1 /* MxDemuxer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C63B212AF309009736A1 /* MxDemuxer.cpp */; };
+		54D6AB4D21338DCD00B78108 /* CMxReferenceClock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB4721338DCD00B78108 /* CMxReferenceClock.cpp */; };
+		54D6AB4E21338DCD00B78108 /* CMxMediaSysClock.h in Headers */ = {isa = PBXBuildFile; fileRef = 54D6AB4821338DCD00B78108 /* CMxMediaSysClock.h */; };
+		54D6AB4F21338DCD00B78108 /* CMxMediaSysClock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB4921338DCD00B78108 /* CMxMediaSysClock.cpp */; };
+		54D6AB5021338DCD00B78108 /* CMxReferenceClock.h in Headers */ = {isa = PBXBuildFile; fileRef = 54D6AB4A21338DCD00B78108 /* CMxReferenceClock.h */; };
+		54D6AB5121338DCD00B78108 /* CMxSchedule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB4B21338DCD00B78108 /* CMxSchedule.cpp */; };
+		54D6AB5221338DCD00B78108 /* CMxSchedule.h in Headers */ = {isa = PBXBuildFile; fileRef = 54D6AB4C21338DCD00B78108 /* CMxSchedule.h */; };
+		54D6AB5F2133AC1400B78108 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D6AB5E2133AC1400B78108 /* CoreAudio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +62,13 @@
 		54C3C62A212AF230009736A1 /* MxVideoDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxVideoDecoder.cpp; sourceTree = "<group>"; };
 		54C3C63A212AF308009736A1 /* MxDemuxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxDemuxer.h; sourceTree = "<group>"; };
 		54C3C63B212AF309009736A1 /* MxDemuxer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxDemuxer.cpp; sourceTree = "<group>"; };
+		54D6AB4721338DCD00B78108 /* CMxReferenceClock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMxReferenceClock.cpp; path = clock/CMxReferenceClock.cpp; sourceTree = "<group>"; };
+		54D6AB4821338DCD00B78108 /* CMxMediaSysClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxMediaSysClock.h; path = clock/CMxMediaSysClock.h; sourceTree = "<group>"; };
+		54D6AB4921338DCD00B78108 /* CMxMediaSysClock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMxMediaSysClock.cpp; path = clock/CMxMediaSysClock.cpp; sourceTree = "<group>"; };
+		54D6AB4A21338DCD00B78108 /* CMxReferenceClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxReferenceClock.h; path = clock/CMxReferenceClock.h; sourceTree = "<group>"; };
+		54D6AB4B21338DCD00B78108 /* CMxSchedule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CMxSchedule.cpp; path = clock/CMxSchedule.cpp; sourceTree = "<group>"; };
+		54D6AB4C21338DCD00B78108 /* CMxSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxSchedule.h; path = clock/CMxSchedule.h; sourceTree = "<group>"; };
+		54D6AB5E2133AC1400B78108 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D6AB5F2133AC1400B78108 /* CoreAudio.framework in Frameworks */,
 				54638AC7212E9873004EB5E4 /* libMxCoreD.dylib in Frameworks */,
 				54638AD1212E989A004EB5E4 /* libswscale.5.dylib in Frameworks */,
 				54638AD2212E989A004EB5E4 /* libavfilter.7.dylib in Frameworks */,
@@ -80,6 +95,7 @@
 		54638AC6212E9873004EB5E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54D6AB5E2133AC1400B78108 /* CoreAudio.framework */,
 				54638ACD212E989A004EB5E4 /* libavcodec.58.dylib */,
 				54638ACE212E989A004EB5E4 /* libavdevice.58.dylib */,
 				54638ACA212E989A004EB5E4 /* libavfilter.7.dylib */,
@@ -96,6 +112,12 @@
 		54638AE1212FAC4E004EB5E4 /* clock */ = {
 			isa = PBXGroup;
 			children = (
+				54D6AB4921338DCD00B78108 /* CMxMediaSysClock.cpp */,
+				54D6AB4821338DCD00B78108 /* CMxMediaSysClock.h */,
+				54D6AB4721338DCD00B78108 /* CMxReferenceClock.cpp */,
+				54D6AB4A21338DCD00B78108 /* CMxReferenceClock.h */,
+				54D6AB4B21338DCD00B78108 /* CMxSchedule.cpp */,
+				54D6AB4C21338DCD00B78108 /* CMxSchedule.h */,
 			);
 			name = clock;
 			sourceTree = "<group>";
@@ -137,10 +159,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D6AB5021338DCD00B78108 /* CMxReferenceClock.h in Headers */,
 				54C3C637212AF230009736A1 /* stdafx.h in Headers */,
 				54C3C63C212AF309009736A1 /* MxDemuxer.h in Headers */,
 				54C3C630212AF230009736A1 /* VideoDecoder.h in Headers */,
+				54D6AB4E21338DCD00B78108 /* CMxMediaSysClock.h in Headers */,
 				54638ADC212E98F2004EB5E4 /* CMxClock.h in Headers */,
+				54D6AB5221338DCD00B78108 /* CMxSchedule.h in Headers */,
 				54C3C632212AF230009736A1 /* MxVideoPlayer.h in Headers */,
 				54C3C62E212AF230009736A1 /* MxPlayer.h in Headers */,
 				54C3C634212AF230009736A1 /* MxVideoDecoder.h in Headers */,
@@ -204,9 +229,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D6AB4F21338DCD00B78108 /* CMxMediaSysClock.cpp in Sources */,
 				54C3C638212AF230009736A1 /* VideoDecoder.cpp in Sources */,
 				54C3C639212AF230009736A1 /* MxVideoDecoder.cpp in Sources */,
+				54D6AB4D21338DCD00B78108 /* CMxReferenceClock.cpp in Sources */,
 				54C3C63D212AF309009736A1 /* MxDemuxer.cpp in Sources */,
+				54D6AB5121338DCD00B78108 /* CMxSchedule.cpp in Sources */,
 				54C3C62F212AF230009736A1 /* MxVideoPlayer.cpp in Sources */,
 				54C3C636212AF230009736A1 /* stdafx.cpp in Sources */,
 				54638ADB212E98F2004EB5E4 /* CMxClock.cpp in Sources */,
@@ -337,6 +365,7 @@
 					../include/ffmpeg/include,
 				);
 				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path @executable_path";
 				LIBRARY_SEARCH_PATHS = (
 					../dylib,
 					bin/mac/$CONFIGURATION,
@@ -365,6 +394,7 @@
 					../include/ffmpeg/include,
 				);
 				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path @executable_path";
 				LIBRARY_SEARCH_PATHS = (
 					../dylib,
 					bin/mac/$CONFIGURATION,

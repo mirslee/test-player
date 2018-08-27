@@ -262,7 +262,7 @@ int CVxReferenceClock::AdvisePeriodic( __int64 rtStartTime, __int64 rtPeriodTime
 	int hr;
     if (rtStartTime > 0 && rtPeriodTime > 0 && rtStartTime != MAX_TIME )
     {
-        *pdwAdviseCookie = m_pSchedule->AddAdvisePacket( rtStartTime, rtPeriodTime, HANDLE(hSemaphore), TRUE );
+        *pdwAdviseCookie = m_pSchedule->AddAdvisePacket( rtStartTime, rtPeriodTime, hSemaphore/*HANDLE(hSemaphore)*/, TRUE );
         hr = *pdwAdviseCookie ? NOERROR : MX_E_OUTOFMEMORY;
     }
     else hr = MX_E_INVALIDARG;
@@ -341,7 +341,7 @@ void CVxReferenceClock::__AdviseThread()
 {
 	//_vxSetThreadName("Windows多媒体时钟");
 
-    DWORD dwWait = INFINITE;
+    DWORD dwWait = WAIT_INFINITE;
 
     // The first thing we do is wait until something interesting happens
     // (meaning a first advise or shutdown).  This prevents us calling
@@ -400,9 +400,9 @@ public:
 	void Uninitialize();
 public:
 	MxEvent				__stdcall GetFieldEvent(){return m_hCoreClock;}
-	unsigned __int64	__stdcall GetTime();
-	unsigned __int64			__stdcall GetTimeFromSample(unsigned __int64 clock);
-	unsigned __int64			__stdcall GetSampleFromTime(unsigned __int64 coretime);
+	uint64	__stdcall GetTime();
+	uint64			__stdcall GetTimeFromSample(uint64 clock);
+	uint64			__stdcall GetSampleFromTime(uint64 coretime);
 	unsigned int				__stdcall WaitForClockPluse(unsigned int timeout) { return mxWaitObject(m_hCoreClock,timeout); }
 protected:
 	void OnDelete(){Uninitialize();}
@@ -519,24 +519,24 @@ void CMxClockPulse::Uninitialize()
 }
 
 
-Mx_inline unsigned __int64 vxRound(unsigned __int64 in_ui64Numerator, unsigned __int64 in_ui64Denominator)
+Mx_inline uint64 vxRound(uint64 in_ui64Numerator, uint64 in_ui64Denominator)
 {
 	return (in_ui64Numerator % in_ui64Denominator) ? ((in_ui64Numerator + in_ui64Denominator) / in_ui64Denominator) : (in_ui64Numerator / in_ui64Denominator);
 }
 
-unsigned __int64 CMxClockPulse::GetTime()
+uint64 CMxClockPulse::GetTime()
 {
 	__int64 rtStart;
 	m_refclock->GetTime(&rtStart);
 	return rtStart;
 }
 
-unsigned __int64 CMxClockPulse::GetTimeFromSample(unsigned __int64 clock)
+uint64 CMxClockPulse::GetTimeFromSample(uint64 clock)
 {
 	return vxRound(clock*m_uiD*m_uiTD, 3);
 }
 
-unsigned __int64  CMxClockPulse::GetSampleFromTime(unsigned __int64 coretime)
+uint64  CMxClockPulse::GetSampleFromTime(uint64 coretime)
 {
 	return (3 * coretime) / (m_uiTD* m_uiD);
 }
@@ -545,7 +545,7 @@ unsigned __int64  CMxClockPulse::GetSampleFromTime(unsigned __int64 coretime)
 #include <mach/mach_time.h>
 void CMxClockPulse::__AdviseThread()
 {
-    _vxSetThreadName("OSX多媒体时钟");
+    //_vxSetThreadName("OSX多媒体时钟");
     
     mach_timebase_info_data_t tinfo;
     mach_timebase_info(&tinfo);
@@ -556,12 +556,12 @@ void CMxClockPulse::__AdviseThread()
     __uint64 steptime = GetTimeFromSample(1);
     __uint64 nexttime = begintime + steptime;
     __uint64 waittime = nexttime-curtime;
-    ASSERT(nexttime>curtime);
+    assert(nexttime>curtime);
     while (!m_bExit)
     {
         uint64_t sleepTimeInTicks = (uint64_t)(waittime*100 / hTime2nsFactor);
         mach_wait_until(mach_absolute_time() + sleepTimeInTicks);
-        vxSetEvent(m_hCoreClock);
+        mxActiveEvent(m_hCoreClock);
         nexttime += steptime;
         curtime = GetTime();
         while (nexttime<curtime) nexttime += steptime;

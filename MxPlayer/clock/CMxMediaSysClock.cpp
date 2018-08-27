@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "CMxMediaSysClock.h"
 #include "../MxCore/MxPointer.h"
+#include "MxLog.h"
 
 #ifdef _WIN32
 #include "mmsystem.h"
@@ -151,17 +152,17 @@ LONG CVxMediaSysClock::NonDelegatingQueryInterface(LONG iid, void** ppObj)
 }
 
 
-void CVxMediaSysClock::WaitSyncForSystemClock(unsigned _int64 dwClock)
+void CVxMediaSysClock::WaitSyncForSystemClock(uint64 dwClock)
 {
 	CMxMutexLocker lock(&m_csFLock);
 	while(m_ulClock<dwClock)
 		mxWaitObject(m_hWaitSyncEvent,100);
 }
 
-unsigned _int64 CVxMediaSysClock::WaitSyncFrameClock()
+uint64 CVxMediaSysClock::WaitSyncFrameClock()
 {
 	CMxMutexLocker lock(&m_csFLock);
-	unsigned _int64 ulTimeCode = 0;
+	uint64 ulTimeCode = 0;
 	do
 	{
 		mxWaitObject(m_hWaitSyncEvent,100);
@@ -192,19 +193,19 @@ void CVxMediaSysClock:: CloseClockEvent(MxEvent hClock)
 	}
 }
 
-unsigned _int64 CVxMediaSysClock::GetTime()
+uint64 CVxMediaSysClock::GetTime()
 {
 	CMxMutexLocker lock(&m_csPulseLock);
 	return m_clockpulse->GetTime();
 }
 
-unsigned _int64 CVxMediaSysClock::GetTimeFromSample(unsigned _int64 clock)
+uint64 CVxMediaSysClock::GetTimeFromSample(uint64 clock)
 {
 	CMxMutexLocker lock(&m_csPulseLock);
 	return m_clockpulse->GetTimeFromSample(clock);
 }
 
-unsigned _int64  CVxMediaSysClock::GetSampleFromTime(unsigned _int64 coretime)
+uint64  CVxMediaSysClock::GetSampleFromTime(uint64 coretime)
 {
 	CMxMutexLocker lock(&m_csPulseLock);
 	return m_clockpulse->GetSampleFromTime(coretime);
@@ -226,7 +227,7 @@ void vxTrace(const char* format, ...)
 		message[len - 1] = 0;
 #ifndef _WIN32	
 	char utf8[MAXREPORTMESSAGESIZE] = { 0 };
-	gbk2utf8(message, utf8, MAXREPORTMESSAGESIZE);
+	//gbk2utf8(message, utf8, MAXREPORTMESSAGESIZE);
 	fwrite(utf8, strlen(utf8), 1, stdout);
 #else	
 	OutputDebugStringA(message);
@@ -239,8 +240,8 @@ void CVxMediaSysClock::_ClockThread()
 	//_vxSetThreadName("软件时钟事件分发");
 
 #ifdef TESTCLOCK
-	unsigned __int64 ulllastclock = 0;
-	unsigned __int64 ullsteptime = m_clockpulse->GetTimeFromSample(1);
+	uint64 ulllastclock = 0;
+	uint64 ullsteptime = m_clockpulse->GetTimeFromSample(1);
 #endif
 	while(!m_bExitClock)
 	{
@@ -253,14 +254,15 @@ void CVxMediaSysClock::_ClockThread()
 			if (m_clockpulse->WaitForClockPluse(1000) != WAIT_OK) continue;
 		}
 
-		unsigned _int64 rtNow = m_clockpulse->GetTime();
-		unsigned _int64 clocktime = m_clockpulse->GetSampleFromTime(rtNow);
+		uint64 rtNow = m_clockpulse->GetTime();
+		uint64 clocktime = m_clockpulse->GetSampleFromTime(rtNow);
 		if(m_ulClock!=clocktime)
 		{
 			m_ulClock = clocktime;
 #ifdef TESTCLOCK
-			unsigned __int64 ss = rtNow - ullsteptime*m_ulClock;
-			vxTrace("Time:%llu,%8lu,Sysclock %d,%d---[%d]\n",rtNow, ss,m_ulClock,ulllastclock,m_ulClock-ulllastclock);
+			uint64 ss = rtNow - ullsteptime*m_ulClock;
+			//mx_debug("Time:%llu,%8lu,Sysclock %d,%d---[%d]\n",rtNow, ss,m_ulClock,ulllastclock,m_ulClock-ulllastclock);
+            mx_debug("Time:%llu,%8lu,Sysclock %llu,%llu---[%llu]\n",rtNow, ss,m_ulClock,ulllastclock,m_ulClock-ulllastclock);
             ulllastclock = m_ulClock;
 #endif
 			CMxMutexLocker lock(&m_csLock);
@@ -268,7 +270,7 @@ void CVxMediaSysClock::_ClockThread()
 			for(int i=0;i<nSize;i++) 
 				mxActiveEvent(m_hClocks[i]);
 		} else {
-			vxTrace("Time loss!!!!!!!!!!!!!!!!!");
+			mx_debug("Time loss!!!!!!!!!!!!!!!!!");
 		}
 	}
 }

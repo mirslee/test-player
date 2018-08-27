@@ -1,7 +1,8 @@
 #pragma once
 
 #include "../../MxCore/MxSynchronize.h"
-#include "../../MxCore/mxtypes.h"
+//#include "../../MxCore/mxtypes.h"
+#include "MxTypes.h"
 
 const unsigned int RESOLUTION = 1;                      /* High resolution timer */
 const int ADVISE_CACHE = 4;                     /* Default cache size */

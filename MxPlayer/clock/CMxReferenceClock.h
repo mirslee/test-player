@@ -8,7 +8,7 @@
 #include "CMxSchedule.h"
 #include "pthread.h"
 #include "../../MxCore/MxSynchronize.h"
-#include "../../MxCore/mxtypes.h"
+#include "MxTypes.h"
 #include "../../MxCore/MxObject.h"
 
 typedef struct
@@ -22,10 +22,10 @@ typedef struct
 struct IVxClockPulse: CMxSharedObject
 {
 	virtual MxEvent				__stdcall GetFieldEvent() = 0;
-virtual unsigned __int64			__stdcall GetTime() = 0;
-virtual unsigned __int64			__stdcall GetTimeFromSample(unsigned __int64 clock) = 0;
-virtual unsigned __int64			__stdcall GetSampleFromTime(unsigned __int64 coretime) = 0;
-virtual unsigned int				__stdcall WaitForClockPluse(unsigned int timeout) = 0;
+virtual uint64			__stdcall GetTime() = 0;
+virtual uint64		__stdcall GetTimeFromSample(uint64 clock) = 0;
+virtual uint64		__stdcall GetSampleFromTime(uint64 coretime) = 0;
+virtual uint				__stdcall WaitForClockPluse(uint timeout) = 0;
 };
 
 int __cdecl mxClockPulse(CMxSharedObject*, const sysclk_cinfo* cinfo, CLOCKFUNCS* funcs, IVxClockPulse** obj);

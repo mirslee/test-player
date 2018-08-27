@@ -21,6 +21,8 @@
 		54C3C5FB212AC1E3009736A1 /* MxThreadMutex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C5F9212AC1E2009736A1 /* MxThreadMutex.cpp */; };
 		54C3C5FC212AC1E3009736A1 /* MxThreadMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C5FA212AC1E3009736A1 /* MxThreadMutex.h */; };
 		54D6AB3E2131079900B78108 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D6AB3D2131079900B78108 /* CoreServices.framework */; };
+		54D6AB6C2133E57B00B78108 /* MxLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB6B2133E57B00B78108 /* MxLog.cpp */; };
+		54D6AB6E2133EA2400B78108 /* MxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB6D2133EA2400B78108 /* MxObject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		54C3C5F9212AC1E2009736A1 /* MxThreadMutex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxThreadMutex.cpp; sourceTree = "<group>"; };
 		54C3C5FA212AC1E3009736A1 /* MxThreadMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxThreadMutex.h; sourceTree = "<group>"; };
 		54D6AB3D2131079900B78108 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		54D6AB6B2133E57B00B78108 /* MxLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxLog.cpp; sourceTree = "<group>"; };
+		54D6AB6D2133EA2400B78108 /* MxObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxObject.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		54C3C598212A5C62009736A1 = {
 			isa = PBXGroup;
 			children = (
+				54D6AB6D2133EA2400B78108 /* MxObject.cpp */,
+				54D6AB6B2133E57B00B78108 /* MxLog.cpp */,
 				54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */,
 				54638AE3212FAD8A004EB5E4 /* MxSynchronize.h */,
 				54638ADD212FA354004EB5E4 /* MxObject.h */,
@@ -168,6 +174,8 @@
 				54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */,
 				54C3C5DC212A69A9009736A1 /* MxThread.cpp in Sources */,
 				54C3C5F7212AC11A009736A1 /* MxThreadCond.cpp in Sources */,
+				54D6AB6C2133E57B00B78108 /* MxLog.cpp in Sources */,
+				54D6AB6E2133EA2400B78108 /* MxObject.cpp in Sources */,
 				54C3C5FB212AC1E3009736A1 /* MxThreadMutex.cpp in Sources */,
 				54C3C5E8212A6D90009736A1 /* stdafx.cpp in Sources */,
 			);

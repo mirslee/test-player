@@ -3,12 +3,17 @@
 #define MxSynchronize_h
 
 #define _FACLS  0x008
+#ifdef _WIN32
 #define MAKE_RESULT( code )		MAKE_HRESULT( 1, _FACLS, code )
+#else
+#define MAKE_RESULT( code )     1
+#endif
 
 #define MX_S_OK							0
 #define MX_E_FAIL						0x80004005	
 #define MX_E_INVALIDARG					0x80070057	
 #define MX_E_OUTOFMEMORY				MAKE_RESULT( 0x0003 )			//	ÄÚ´æ²»×ã
+#define NOERROR 0
 
 #define Mx_Failed(hr) ((hr)<0)
 
@@ -43,7 +48,6 @@ typedef MX_MUTEX MxMutex;
 #define WAIT_OK			0
 #define WAIT_TIMEOUT	ETIMEDOUT
 #define WAIT_INFINITE	(unsigned long)(-1)
-#define
 #endif
 
 
@@ -59,80 +63,15 @@ MXCORE_API unsigned long mxWaitObjects(unsigned long  nCount, MxEvent event, uns
 
 #include <dispatch/dispatch.h>
 #include <libkern/osatomic.h>
+#include <assert.h>
 class MxMutex_t
 {
 public:
-	MxMutex() : count(0), ownerthread(nullptr), recursive_count(0) { VERIFY(sema = dispatch_semaphore_create(0)); } // initial count is 0
-	~MxMutex() { dispatch_release(sema); }
-
-	void lock()
-	{
-		if (pthread_equal(ownerthread, pthread_self()))
-		{
-			recursive_count++;
-		}
-		else
-		{
-			for (unsigned spins = 0; spins != 5000; ++spins)
-			{
-				if (OSAtomicCompareAndSwap32Barrier(0, 1, &count))
-				{
-					ownerthread = pthread_self();
-					recursive_count = 1;
-					return;
-				}
-				sched_yield();
-			}
-
-			// DISPATCH_TIME_FOREVER is unsigned long long (not in ISO C++98/03).
-			// Define our own equivalent.
-			const uint64_t DISPATCH_TIME_FOREVER_u64 = ~uint64_t(0);
-
-			if (OSAtomicIncrement32Barrier(&count) > 1) // if (++count > 1)
-			{
-				dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER_u64);
-			}
-
-			ownerthread = pthread_self();
-			recursive_count = 1;
-		}
-	}
-
-	bool trylock()
-	{
-		if (OSAtomicCompareAndSwap32Barrier(0, 1, &count))
-		{
-			ownerthread = pthread_self();
-			recursive_count = 1;
-			return true;
-		}
-		else if (pthread_equal(ownerthread, pthread_self()))
-		{
-			recursive_count++;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	void unlock()
-	{
-		if (pthread_equal(ownerthread, pthread_self()))
-		{
-			recursive_count--;
-			if (recursive_count == 0)
-			{
-				ownerthread = NULL;
-				if (OSAtomicDecrement32Barrier(&count) > 0) // if (--count > 0)
-				{
-					dispatch_semaphore_signal(sema); // release a waiting thread
-				}
-			}
-		}
-	}
-
+    MxMutex_t();
+    ~MxMutex_t();
+    void lock();
+    bool trylock();
+    void unlock();
 private:
 	int32_t count;
 	dispatch_semaphore_t sema;
@@ -140,9 +79,9 @@ private:
 	int32_t recursive_count;
 };
 
-typedef mutex2_t* MxMutex;
+typedef MxMutex_t* MxMutex;
 #define MX_MUTEX MxMutex
-#define MX_MUTEX_INIT(v)  (*v) = new mutex2_t
+#define MX_MUTEX_INIT(v)  (*v) = new MxMutex_t
 #define MX_MUTEX_DESTROY(v) delete (*v)
 #define MX_MUTEX_LOCK(v) (*v)->lock()
 #define MX_MUTEX_TRYLOCK(v) (*v)->trylock()

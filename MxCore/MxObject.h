@@ -1,8 +1,27 @@
 #pragma once
 
-class MxObject {
-	//
+struct MxObject {
+    virtual int addRef() = 0;
+    virtual int unRef() = 0;
+    virtual int queryInterface(int iid, void** ppVoid) = 0;
 };
+
+class CMxObject {
+public:
+    int addRefDelgate();
+    int unRefDelgate();
+    int queryInterfaceDelgate(int iid, void** ppVoid);
+protected:
+    volatile int _refCount;
+    
+};
+
+#define MX_OBJECT \
+public: \
+int addRef() {return this->addRefDelgate();} \
+int unRef() {return this->unRefDelgate();}\
+int queryInterface(int iid, void** ppVoid) {return this->queryInterfaceDelgate(iid,ppVoid);}
+    
 
 class CMxSharedObject: public MxObject {
 public:
@@ -27,6 +46,9 @@ public:
 		}*/
 		return _refCount;
 	}
+    int queryInterface(int iid, void** ppVoid) {
+        return 0;
+    }
 protected:
 	volatile int _refCount;
 };
