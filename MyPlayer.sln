@@ -11,6 +11,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MxPlayer", "MxPlayer\MxPlay
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MxCore", "MxCore\MxCore.vcxproj", "{88921253-4275-44E4-B105-DE15EAB7AFF3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{658D97BA-FEE8-4474-8782-ADD7F5CB6628}"
+	ProjectSection(SolutionItems) = preProject
+		include\MxDllexport.h = include\MxDllexport.h
+		include\MxError.h = include\MxError.h
+		include\MxInterface.h = include\MxInterface.h
+		include\MxLog.h = include\MxLog.h
+		include\MxMemory.h = include\MxMemory.h
+		include\MxTypes.h = include\MxTypes.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

@@ -3,15 +3,15 @@
 
 
 #include "ncx_core.h"
-#include "ncx_lock.h"
+#include "MxSynchronize.h"
 #include "ncx_log.h"
 
 typedef struct ncx_slab_page_s  ncx_slab_page_t;
 
 struct ncx_slab_page_s {
-    uintptr_t         slab;
+    mxuvoidptr         slab;
     ncx_slab_page_t  *next;
-    uintptr_t         prev;
+    mxuvoidptr         prev;
 };
 
 
@@ -25,7 +25,7 @@ typedef struct {
     u_char           *start;
     u_char           *end;
 
-	ncx_shmtx_t		 mutex;
+	MxMutex		 mutex;
 
     void             *addr;
 } ncx_slab_pool_t;

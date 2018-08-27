@@ -155,13 +155,21 @@
     <ClInclude Include="MxThreadCond.h" />
     <ClInclude Include="MxThreadMutex.h" />
     <ClInclude Include="mxtypes.h" />
+    <ClInclude Include="ncx_mempool\ncx_core.h" />
+    <ClInclude Include="ncx_mempool\ncx_log.h" />
+    <ClInclude Include="ncx_mempool\ncx_slab.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MxLog.cpp" />
+    <ClCompile Include="MxMemory.cpp" />
     <ClCompile Include="MxSynchronize.cpp" />
     <ClCompile Include="MxThread.cpp" />
     <ClCompile Include="MxThreadCond.cpp" />
     <ClCompile Include="MxThreadMutex.cpp" />
+    <ClCompile Include="ncx_mempool\ncx_slab.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>

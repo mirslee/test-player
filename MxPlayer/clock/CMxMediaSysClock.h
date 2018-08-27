@@ -1,6 +1,5 @@
 #pragma once
 
-#include "stdafx.h"
 #include "CMxReferenceClock.h"
 #include "../../MxCore/MxSynchronize.h"
 #include "MxTypes.h"

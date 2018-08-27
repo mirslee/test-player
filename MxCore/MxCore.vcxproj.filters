@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="mempool">
+      <UniqueIdentifier>{03dc44d2-e829-4ecc-aa46-a48be06765f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -48,6 +51,15 @@
     <ClInclude Include="CMxArray.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ncx_mempool\ncx_core.h">
+      <Filter>mempool</Filter>
+    </ClInclude>
+    <ClInclude Include="ncx_mempool\ncx_log.h">
+      <Filter>mempool</Filter>
+    </ClInclude>
+    <ClInclude Include="ncx_mempool\ncx_slab.h">
+      <Filter>mempool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MxThread.cpp">
@@ -64,6 +76,15 @@
     </ClCompile>
     <ClCompile Include="MxSynchronize.cpp">
       <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MxLog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ncx_mempool\ncx_slab.cpp">
+      <Filter>mempool</Filter>
+    </ClCompile>
+    <ClCompile Include="MxMemory.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "MxLog.h"
 
-void mx_debug(const char *format, ...) {
+MXCORE_API void mx_debug(const char *format, ...) {
 
     va_list args;
     char message[2048] = {0};
@@ -23,7 +23,7 @@ void mx_debug(const char *format, ...) {
         message[len - 1] = 0;
     
 #ifdef _WIN32
-    OutputDebugString(reinterpret_cast<const wchar_t*>(message.utf16()));
+    //OutputDebugString(reinterpret_cast<const wchar_t*>(message.utf16()));
     return;
 #endif
     fprintf(stdout, "%s", message);

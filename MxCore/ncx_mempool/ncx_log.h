@@ -9,7 +9,7 @@
 
 #define log(level, format, ...) \
 	do { \
-		if ( level >= LOG_LEVEL ) {\
+		if ( level >= LV_TRACE ) {\
 			fprintf(stderr, "[%c] [%s:%d] "format"\n", \
 						 #level[3],  __FUNCTION__, __LINE__, ##__VA_ARGS__); \
 		} \
