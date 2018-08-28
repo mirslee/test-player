@@ -130,6 +130,9 @@
 		54D6AB5B21338FCB00B78108 /* MxError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxError.h; path = include/MxError.h; sourceTree = SOURCE_ROOT; };
 		54D6AB5D21338FCB00B78108 /* MxTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxTypes.h; path = include/MxTypes.h; sourceTree = SOURCE_ROOT; };
 		54D6AB6A2133D54E00B78108 /* MxInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxInterface.h; path = include/MxInterface.h; sourceTree = SOURCE_ROOT; };
+		54D6AB732134E00300B78108 /* MxSynchronize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxSynchronize.h; path = include/MxSynchronize.h; sourceTree = SOURCE_ROOT; };
+		54D6AB742134E00400B78108 /* MxMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxMemory.h; path = include/MxMemory.h; sourceTree = SOURCE_ROOT; };
+		54D6AB832134E4DD00B78108 /* CMxArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxArray.h; path = include/CMxArray.h; sourceTree = SOURCE_ROOT; };
 		8D9815BDB5BD9F90D2BC05C5 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		A1A67BEAA744704B29168D39 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		CD5906B4E993324963496C03 /* .qmake.stash */ = {isa = PBXFileReference; lastKnownFileType = text; name = .qmake.stash; path = /Users/ws/work/MyPlayer/.qmake.stash; sourceTree = "<absolute>"; };
@@ -198,6 +201,9 @@
 		54D6AB5821338F9C00B78108 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				54D6AB832134E4DD00B78108 /* CMxArray.h */,
+				54D6AB742134E00400B78108 /* MxMemory.h */,
+				54D6AB732134E00300B78108 /* MxSynchronize.h */,
 				54D6AB6A2133D54E00B78108 /* MxInterface.h */,
 				54D6AB5A21338FCB00B78108 /* MxDllexport.h */,
 				54D6AB5B21338FCB00B78108 /* MxError.h */,

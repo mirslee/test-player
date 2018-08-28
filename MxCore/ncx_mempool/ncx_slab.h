@@ -25,7 +25,7 @@ typedef struct {
     u_char           *start;
     u_char           *end;
 
-	MxMutex		 mutex;
+	CMxMutex		 mutex;
 
     void             *addr;
 } ncx_slab_pool_t;

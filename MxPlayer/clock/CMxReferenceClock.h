@@ -7,7 +7,7 @@
 
 #include "CMxSchedule.h"
 #include "pthread.h"
-#include "../../MxCore/MxSynchronize.h"
+#include "MxSynchronize.h"
 #include "MxTypes.h"
 #include "../../MxCore/MxObject.h"
 
@@ -21,7 +21,7 @@ typedef struct
 #define LIID_IVxClockPulse		0xe0001001
 struct IVxClockPulse: CMxSharedObject
 {
-	virtual MxEvent				__stdcall GetFieldEvent() = 0;
+	virtual CMxEvent				__stdcall GetFieldEvent() = 0;
 virtual uint64			__stdcall GetTime() = 0;
 virtual uint64		__stdcall GetTimeFromSample(uint64 clock) = 0;
 virtual uint64		__stdcall GetSampleFromTime(uint64 coretime) = 0;
@@ -37,9 +37,9 @@ struct IVxReferenceClock: CMxSharedObject
 public:
     virtual int __stdcall GetTime( __int64 *pTime) = 0;
     
-    virtual int __stdcall AdviseTime( __int64 baseTime,__int64 streamTime,MxEvent hEvent, mxuvoidptr *pdwAdviseCookie) = 0;
+    virtual int __stdcall AdviseTime( __int64 baseTime,__int64 streamTime,CMxEvent hEvent, mxuvoidptr *pdwAdviseCookie) = 0;
     
-    virtual int __stdcall AdvisePeriodic(__int64 startTime,__int64 periodTime,MxEvent hSemaphore, mxuvoidptr *pdwAdviseCookie) = 0;
+    virtual int __stdcall AdvisePeriodic(__int64 startTime,__int64 periodTime,CMxEvent hSemaphore, mxuvoidptr *pdwAdviseCookie) = 0;
     
     virtual int __stdcall Unadvise( mxuvoidptr dwAdviseCookie) = 0;
 
@@ -57,9 +57,9 @@ public:
 public:
 	LONG __stdcall NonDelegatingQueryInterface(LONG riid,void ** ppv);
 	int __stdcall GetTime(__int64 *pTime);
-	int __stdcall AdviseTime(__int64 rtBaseTime, __int64 rtStreamTime, MxEvent hEvent, mxuvoidptr *pdwAdviseCookie);
+	int __stdcall AdviseTime(__int64 rtBaseTime, __int64 rtStreamTime, CMxEvent hEvent, mxuvoidptr *pdwAdviseCookie);
 
-	int __stdcall AdvisePeriodic(__int64 rtStartTime, __int64 rtPeriodTime, MxEvent hSemaphore, mxuvoidptr* pdwAdviseCookie);
+	int __stdcall AdvisePeriodic(__int64 rtStartTime, __int64 rtPeriodTime, CMxEvent hSemaphore, mxuvoidptr* pdwAdviseCookie);
 	int __stdcall Unadvise(mxuvoidptr dwAdviseCookie);
 
 	int __stdcall Reset( CLOCKFUNCS* funcs);
@@ -68,7 +68,7 @@ public:
 	int SetTimeDelta( const __int64& TimeDelta );
     CMxSchedule * GetSchedule() const { return m_pSchedule; }
 private:
-	MX_MUTEX m_csLock;
+	CMxMutex m_csLock;
     __int64 m_rtPrivateTime;     // Current best estimate of time
     __int64 m_rtLastGotTime;     // Last time returned by GetTime
     __int64 m_rtNextAdvise;      // Time of next advise
@@ -79,7 +79,7 @@ private:
 public:
     void TriggerThread()
     {					
-		mxActiveEvent(m_pSchedule->GetEvent());
+		mxSetEvent(m_pSchedule->GetEvent());
     }
 
 private:

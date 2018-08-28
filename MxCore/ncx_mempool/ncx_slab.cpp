@@ -107,7 +107,7 @@ ncx_slab_init(ncx_slab_pool_t *pool)
         }
     }
 
-	MX_MUTEX_INIT(&pool->mutex);
+	mxMutexInit(&pool->mutex);
 	/*
 	* 最小的obj大小，nginx默认使用8字节
 	* 即min_shift 为最小obj大小的幂指数 <=> 8 = pow(2, 3)

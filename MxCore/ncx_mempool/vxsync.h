@@ -130,7 +130,7 @@ public:
 			recursive_count++;
 			return true;
 		}
-		else
+		else DriverServices.h
 		{
 			return false;
 		}
@@ -266,9 +266,9 @@ typedef mutex2* mutex2_t;
 
 VX_EXT_API int	vxGetCPUs();
 
-#define CRIT_PLAYRESOURCE   0			//	ÓÃÓÚÌØ¼¼µÄ×ÊÔ´¶ÁÈ¡µÄËø
-#define CRIT_ALLOC			1			//	ÄÚ´æ·ÖÅä
-#define CRIT_DOWNLOAD		2			//	ÓÃÓÚÌØ¼¼×ÊÔ´ÏÂÔØµÄËø
+#define CRIT_PLAYRESOURCE   0			//	ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
+#define CRIT_ALLOC			1			//	ï¿½Ú´ï¿½ï¿½ï¿½ï¿½
+#define CRIT_DOWNLOAD		2			//	ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½
 
 VX_EXT_API void vxAppLock(int nLockType);
 VX_EXT_API void vxAppUnlock(int nLockType);
@@ -279,7 +279,7 @@ typedef void (*sigfunc)(int signo);
 VX_EXT_API void vxSigroutine(int signo);
 VX_EXT_API void vxSetSigroutine(sigfunc func, double secperf);
 
-typedef void *(*TPRUNFUNC)(void *);//»Øµ÷º¯ÊýÀàÐÍ
+typedef void *(*TPRUNFUNC)(void *);//ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 vxinterface IVxThreadPool : public IVxObject
 {
 	virtual VXBOOL AddTask(TPRUNFUNC run, void *args, VXEVENT finish) = 0;
@@ -291,9 +291,9 @@ typedef struct ncx_slab_pool_t* ncx_slab_pool;
 typedef struct {
 	size_t 			pool_size, used_size, used_pct;
 	size_t			pages, free_page;
-	size_t			p_small, p_exact, p_big, p_page; /* ËÄÖÖslabÕ¼ÓÃµÄpageÊý */
-	size_t			b_small, b_exact, b_big, b_page; /* ËÄÖÖslabÕ¼ÓÃµÄbyteÊý */
-	size_t			max_free_pages;					 /* ×î´óµÄÁ¬Ðø¿ÉÓÃpageÊý */
+	size_t			p_small, p_exact, p_big, p_page; /* ï¿½ï¿½ï¿½ï¿½slabÕ¼ï¿½Ãµï¿½pageï¿½ï¿½ */
+	size_t			b_small, b_exact, b_big, b_page; /* ï¿½ï¿½ï¿½ï¿½slabÕ¼ï¿½Ãµï¿½byteï¿½ï¿½ */
+	size_t			max_free_pages;					 /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pageï¿½ï¿½ */
 } ncx_slab_stat_t;
 
 VX_EXT_API ncx_slab_pool ncx_create_pool(int initsize = 0x1000000);

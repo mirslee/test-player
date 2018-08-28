@@ -15,12 +15,12 @@
 static unsigned char _bvxAlignLandFill = 0xED;   /* fill no-man's land for aligned routines */
 static int __cdecl CheckBytes(unsigned char * pb, unsigned char bCheck, size_t nSize)
 {
-	int bOkay = TRUE;
+	int bOkay = 1;
 	while (nSize--)
 	{
 		if (*pb++ != bCheck)
 		{
-			bOkay = FALSE;
+			bOkay = 0;
 		}
 	}
 	return bOkay;
@@ -77,14 +77,14 @@ void vxDumpStack(const char* dumpname)
 /** Print a demangled stack backtrace of the caller function to FILE* out. */
 void vxDumpStack(const char* dumpname)
 {
-	vxTrace("%s stack trace:\n", dumpname);
+	mx_debug("%s stack trace:\n", dumpname);
 
 	void* addrlist[MAX_STACK_DEPTH + 1] = { 0 };
 	int addrlen = backtrace(addrlist, sizeof(addrlist) / sizeof(void*));
 
 	if (addrlen == 0)
 	{
-		vxTrace("  <empty, possibly corrupt>\n");
+		mx_debug("  <empty, possibly corrupt>\n");
 		return;
 	}
 
@@ -126,14 +126,14 @@ void vxDumpStack(const char* dumpname)
 			int status;
 			char* ret = abi::__cxa_demangle(begin_name, funcname, &funcnamesize, &status);
 			if (status == 0)
-				vxTrace("  %s : %s+%s\n", symbollist[i], ret, begin_offset);
+				mx_debug("  %s : %s+%s\n", symbollist[i], ret, begin_offset);
 			else
-				vxTrace("  %s : %s()+%s\n", symbollist[i], begin_name, begin_offset);
+				mx_debug("  %s : %s()+%s\n", symbollist[i], begin_name, begin_offset);
 		}
 		else
 		{
 			// couldn't parse the line? print the whole line.
-			vxTrace("  %s\n", symbollist[i]);
+			mx_debug("  %s\n", symbollist[i]);
 		}
 	}
 	free(funcname);
@@ -278,6 +278,20 @@ MXCORE_API void _vxfreep(void ** memblock)
 	}
 }
 
+#include <sys/time.h>
+uint64_t usTime()
+{
+    struct timeval tv;
+    uint64_t usec;
+    
+    gettimeofday(&tv, NULL);
+    
+    usec = ((uint64_t)tv.tv_sec)*1000000LL;
+    usec += tv.tv_usec;
+    
+    return usec;
+}
+
 class CMxSlabMemoryPool
 {
 public:
@@ -290,6 +304,35 @@ public:
 		pool->min_shift = 3;
 		pool->end = space + poolSize;
 		ncx_slab_init(pool);
+        
+        /*uint64_t us_begin;
+        uint64_t us_end;
+        uint64_t t1, t2;
+        
+        size_t size[] = { 30, 120, 256, 500, 1000, 2000, 3000, 5000};
+        
+        for (int j = 0; j < sizeof(size)/sizeof(size_t); j++) {
+            size_t s = size[j];
+            us_begin  = usTime();
+            for(int i = 0; i < 1000000; i++)  {
+                void* p = mx_pool_alloc(s);
+                mx_pool_free(p);
+                //void* p = ncx_slab_alloc(pool, s);
+                //ncx_slab_free(pool, p);
+            }
+            us_end  = usTime();
+            t1 = (us_end - us_begin);
+            
+            us_begin  = usTime();
+            for(int i = 0; i < 1000000; i++)  {
+                void*p = (char*)malloc(s);
+                
+                free(p);
+            }
+            us_end  = usTime();
+            t2 = (us_end - us_begin);
+            continue;
+        }*/
 	}
 	~CMxSlabMemoryPool()
 	{
@@ -297,7 +340,7 @@ public:
 		ncx_slab_stat(pool, &stat);
 		if (pool)
 		{
-			MX_MUTEX_DESTROY(&pool->mutex);
+			mxMutexDestroy(&pool->mutex);
 			mx_free(pool);
 		}
 	}
@@ -343,7 +386,11 @@ MXCORE_API void* mx_pool_alloc(int size) {
 	return p;
 }
 
+MXCORE_API void mx_pool_free(void * ptr) {
+    ncx_slab_free(g_memoryPool.pool, ptr);
+}
 
+#ifdef _WIN32
 #define BUFFERSIZE 8192
 
 // Define how many levels of callstack that should be fetched for each allocation.
@@ -521,3 +568,4 @@ BOOL GetSourceInfoFromAddress(DWORD64 address, LPTSTR lpszSourceInfo, rsize_t lp
 	return ret;*/
 	return true;
 }
+#endif

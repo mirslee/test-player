@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "CMxMediaSysClock.h"
-#include "../MxCore/MxPointer.h"
+#include "MxPointer.h"
 #include "MxLog.h"
 
 #ifdef _WIN32
@@ -12,22 +12,22 @@
 
 CVxMediaSysClock::CVxMediaSysClock(const sysclk_cinfo* info)
 : m_cinfo(*info)
-, m_hCoreClock(NULL)
-, m_bExitClock(FALSE)
-, m_canreset(FALSE)
+, m_hCoreClock(nullptr)
+, m_bExitClock(false)
+, m_canreset(false)
 {
-	MX_MUTEX_INIT(&m_csLock);
-	MX_MUTEX_INIT(&m_csFLock);
-	MX_MUTEX_INIT(&m_csPulseLock);
+	mxMutexInit(&m_csLock);
+	mxMutexInit(&m_csFLock);
+	mxMutexInit(&m_csPulseLock);
 	
 	INITPTHREAD(m_hClockThread);
 }
 
 CVxMediaSysClock::~CVxMediaSysClock(void)
 {
-	MX_MUTEX_DESTROY(&m_csPulseLock);
-	MX_MUTEX_DESTROY(&m_csFLock);
-	MX_MUTEX_DESTROY(&m_csLock);
+	mxMutexDestroy(&m_csPulseLock);
+	mxMutexDestroy(&m_csFLock);
+	mxMutexDestroy(&m_csLock);
 }
 
 IVxReferenceClock* CreateReferenceClock(CLOCKFUNCS* funcs);
@@ -109,7 +109,7 @@ bool CVxMediaSysClock::Reset(const sysclk_cinfo* cinfo,IVxClockPulse* clockpulse
 	if(!tmppulse)
 	{	
 		mxClockPulse(NULL,cinfo,NULL,&tmppulse);
-		m_canreset = TRUE;
+		m_canreset = true;
 	}
 
 	EXITPTHREAD(m_hClockThread,m_bExitClock);
@@ -138,7 +138,7 @@ bool CVxMediaSysClock::Reset(const sysclk_cinfo* cinfo,IVxClockPulse* clockpulse
 	SetThreadPriority(pthread_getw32threadhandle_np(m_hClockThread),THREAD_PRIORITY_TIME_CRITICAL);
 #endif
 	
-	return TRUE;
+	return true;
 }
 
 LONG CVxMediaSysClock::NonDelegatingQueryInterface(LONG iid, void** ppObj)
@@ -156,7 +156,7 @@ void CVxMediaSysClock::WaitSyncForSystemClock(uint64 dwClock)
 {
 	CMxMutexLocker lock(&m_csFLock);
 	while(m_ulClock<dwClock)
-		mxWaitObject(m_hWaitSyncEvent,100);
+		mxWaitEvent(m_hWaitSyncEvent,100);
 }
 
 uint64 CVxMediaSysClock::WaitSyncFrameClock()
@@ -165,20 +165,20 @@ uint64 CVxMediaSysClock::WaitSyncFrameClock()
 	uint64 ulTimeCode = 0;
 	do
 	{
-		mxWaitObject(m_hWaitSyncEvent,100);
+		mxWaitEvent(m_hWaitSyncEvent,100);
 	}while(((ulTimeCode = m_ulClock)&0x1)/*&&(m_cinfo.scantype!=SCANTYPE_PROGRESSIVE)*/);
 	return ulTimeCode;
 }
 
-MxEvent CVxMediaSysClock:: CreateClockEvent(bool bManualReset,bool bInitialState)
+CMxEvent CVxMediaSysClock:: CreateClockEvent(bool bManualReset,bool bInitialState)
 {
-	MxEvent hClockEvent = mxCreateEvent(NULL,bManualReset,bInitialState,NULL);
+	CMxEvent hClockEvent = mxCreateEvent(nullptr,bManualReset,bInitialState,nullptr);
 	CMxMutexLocker lock(&m_csLock);
 	m_hClocks.Add(hClockEvent);
 	return hClockEvent;
 }
 
-void CVxMediaSysClock:: CloseClockEvent(MxEvent hClock)
+void CVxMediaSysClock:: CloseClockEvent(CMxEvent hClock)
 {
 	int nSize = m_hClocks.GetSize();
 	for(int i=0;i<nSize;i++)
@@ -247,7 +247,7 @@ void CVxMediaSysClock::_ClockThread()
 	{
 		if (m_hCoreClock)
 		{
-			if (mxWaitObject(m_hCoreClock, 1000) != WAIT_OK) continue;
+			if (mxWaitEvent(m_hCoreClock, 1000) != WAIT_OK) continue;
 		}
 		else
 		{
@@ -268,7 +268,7 @@ void CVxMediaSysClock::_ClockThread()
 			CMxMutexLocker lock(&m_csLock);
 			int nSize = m_hClocks.GetSize();
 			for(int i=0;i<nSize;i++) 
-				mxActiveEvent(m_hClocks[i]);
+				mxSetEvent(m_hClocks[i]);
 		} else {
 			mx_debug("Time loss!!!!!!!!!!!!!!!!!");
 		}

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../../MxCore/MxSynchronize.h"
-//#include "../../MxCore/mxtypes.h"
+#include "MxSynchronize.h"
 #include "MxTypes.h"
 
 const unsigned int RESOLUTION = 1;                      /* High resolution timer */
@@ -12,7 +11,7 @@ const __int64 MAX_TIME = 0x7FFFFFFFFFFFFFFFll;   /* Maximum __int64 value */
 class CMxSchedule
 {
 public:
-	CMxSchedule(MxEvent ev);
+	CMxSchedule(CMxEvent ev);
 	~CMxSchedule(void);
 public:
 	unsigned int GetAdviseCount();
@@ -20,7 +19,7 @@ public:
 
 
 	// We need a method for derived classes to add advise packets, we return the cookie
-	mxuvoidptr AddAdvisePacket( const __int64 & time1, const __int64 & time2, MxEvent h, bool periodic );
+	mxuvoidptr AddAdvisePacket( const __int64 & time1, const __int64 & time2, CMxEvent h, bool periodic );
 	// And a way to cancel
 	int Unadvise(mxuvoidptr dwAdviseCookie);
 
@@ -30,7 +29,7 @@ public:
 	__int64 Advise( const __int64 & rtTime );
 
 	// Get the event handle which will be set if advise time requires re-evaluation.
-	MxEvent GetEvent() const { return m_ev; }
+	CMxEvent GetEvent() const { return m_ev; }
 private:
 	 class CVxAdvisePacket
 	 {
@@ -41,7 +40,7 @@ private:
 		 unsigned int       m_dwAdviseCookie;
 		 __int64		 m_rtEventTime;      // Time at which event should be set
 		 __int64		 m_rtPeriod;         // Periodic time
-		 MxEvent         m_hNotify;          // Handle to event or semephore
+		 CMxEvent         m_hNotify;          // Handle to event or semephore
 		 bool            m_bPeriodic;        // TRUE => Periodic event
 
 		 CVxAdvisePacket( CVxAdvisePacket * next, __int64 time ) : m_next(next), m_rtEventTime(time)
@@ -89,12 +88,12 @@ private:
 	 volatile unsigned int  m_dwNextCookie;     // Strictly increasing
 	 volatile unsigned int  m_dwAdviseCount;    // Number of elements on list
 
-	 MxMutex        m_Serialize;
+	 CMxMutex        m_Serialize;
 
 	 // AddAdvisePacket: adds the packet, returns the cookie (0 if failed)
 	 mxuvoidptr AddAdvisePacket( CVxAdvisePacket * pPacket );
 	 // Event that we should set if the packed added above will be the next to fire.
-	 const MxEvent m_ev;
+	 const CMxEvent m_ev;
 
 	 // A Shunt is where we have changed the first element in the
 	 // list and want it re-evaluating (i.e. repositioned) in

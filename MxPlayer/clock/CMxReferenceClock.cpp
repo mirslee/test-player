@@ -4,7 +4,8 @@
 
 #include "stdafx.h"
 #include "CMxReferenceClock.h"
-#include "../MxCore/MxPointer.h"
+#include "MxPointer.h"
+#include "MxError.h"
 
 #ifdef _WIN32
 #include "mmsystem.h"
@@ -50,7 +51,7 @@ CVxReferenceClock::CVxReferenceClock(CLOCKFUNCS* funcs)
 , m_rtPreRoll(2)
 , m_extfunc(FALSE)
 {
-	MX_MUTEX_INIT(&m_csLock);
+	mxMutexInit(&m_csLock);
 	INITPTHREAD(m_hThread);
 
 	if(funcs)
@@ -101,7 +102,7 @@ CVxReferenceClock::~CVxReferenceClock()
 	if (PTHREADISVALID(m_hThread))
 	{
 		m_bAbort = TRUE;
-		mxActiveEvent(m_pSchedule->GetEvent());
+		mxSetEvent(m_pSchedule->GetEvent());
 		pthread_join(m_hThread,NULL);
 		mxCloseEvent(m_pSchedule->GetEvent());
 		delete m_pSchedule;
@@ -118,7 +119,7 @@ CVxReferenceClock::~CVxReferenceClock()
 #endif
 
 	}
-	MX_MUTEX_DESTROY(&m_csLock);
+	mxMutexDestroy(&m_csLock);
 }
 
 int CVxReferenceClock::Reset( CLOCKFUNCS* funcs)
@@ -126,7 +127,7 @@ int CVxReferenceClock::Reset( CLOCKFUNCS* funcs)
 	if (PTHREADISVALID(m_hThread))
 	{
 		m_bAbort = TRUE;
-		mxActiveEvent(m_pSchedule->GetEvent());
+		mxSetEvent(m_pSchedule->GetEvent());
 		pthread_join(m_hThread,NULL);
 	}
 
@@ -232,7 +233,7 @@ Mx_inline __int64 ConvertToMilliseconds(const __int64& RT)
 
 
 /* Ask for an async notification that a time has elapsed */
-int CVxReferenceClock::AdviseTime(__int64 rtBaseTime, __int64 rtStreamTime,MxEvent hEvent, mxuvoidptr* pdwAdviseCookie)
+int CVxReferenceClock::AdviseTime(__int64 rtBaseTime, __int64 rtStreamTime,CMxEvent hEvent, mxuvoidptr* pdwAdviseCookie)
 {
     *pdwAdviseCookie = 0;
 
@@ -255,7 +256,7 @@ int CVxReferenceClock::AdviseTime(__int64 rtBaseTime, __int64 rtStreamTime,MxEve
 
 /* Ask for an asynchronous periodic notification that a time has elapsed */
 
-int CVxReferenceClock::AdvisePeriodic( __int64 rtStartTime, __int64 rtPeriodTime,MxEvent hSemaphore, mxuvoidptr* pdwAdviseCookie)
+int CVxReferenceClock::AdvisePeriodic( __int64 rtStartTime, __int64 rtPeriodTime,CMxEvent hSemaphore, mxuvoidptr* pdwAdviseCookie)
 {
     *pdwAdviseCookie = 0;
 
@@ -351,7 +352,7 @@ void CVxReferenceClock::__AdviseThread()
 
     while ( !m_bAbort )
     {
-        mxWaitObject(m_pSchedule->GetEvent(), dwWait);
+        mxWaitEvent(m_pSchedule->GetEvent(), dwWait);
         if (m_bAbort) break;
 
         // There are several reasons why we need to work from the internal
@@ -393,17 +394,17 @@ protected:
 	unsigned int m_uiD;
 	unsigned int m_uiTD;
 
-	MxEvent m_hCoreClock;
+	CMxEvent m_hCoreClock;
 	mxuvoidptr m_dwTimeID;
 public:
 	bool Initialize(CLOCKFUNCS* funcs);
 	void Uninitialize();
 public:
-	MxEvent				__stdcall GetFieldEvent(){return m_hCoreClock;}
+	CMxEvent				__stdcall GetFieldEvent(){return m_hCoreClock;}
 	uint64	__stdcall GetTime();
 	uint64			__stdcall GetTimeFromSample(uint64 clock);
 	uint64			__stdcall GetSampleFromTime(uint64 coretime);
-	unsigned int				__stdcall WaitForClockPluse(unsigned int timeout) { return mxWaitObject(m_hCoreClock,timeout); }
+	unsigned int				__stdcall WaitForClockPluse(unsigned int timeout) { return mxWaitEvent(m_hCoreClock,timeout); }
 protected:
 	void OnDelete(){Uninitialize();}
     
@@ -561,7 +562,7 @@ void CMxClockPulse::__AdviseThread()
     {
         uint64_t sleepTimeInTicks = (uint64_t)(waittime*100 / hTime2nsFactor);
         mach_wait_until(mach_absolute_time() + sleepTimeInTicks);
-        mxActiveEvent(m_hCoreClock);
+        mxSetEvent(m_hCoreClock);
         nexttime += steptime;
         curtime = GetTime();
         while (nexttime<curtime) nexttime += steptime;

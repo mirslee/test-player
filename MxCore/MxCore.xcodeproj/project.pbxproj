@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		54638ADF212FA354004EB5E4 /* MxObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 54638ADD212FA354004EB5E4 /* MxObject.h */; };
-		54638AE0212FA354004EB5E4 /* MxPointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54638ADE212FA354004EB5E4 /* MxPointer.h */; };
 		54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */; };
-		54638AE5212FAD8A004EB5E4 /* MxSynchronize.h in Headers */ = {isa = PBXBuildFile; fileRef = 54638AE3212FAD8A004EB5E4 /* MxSynchronize.h */; };
 		54C3C5DB212A69A9009736A1 /* MxQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C5D8212A69A9009736A1 /* MxQueue.h */; };
 		54C3C5DC212A69A9009736A1 /* MxThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C5D9212A69A9009736A1 /* MxThread.cpp */; };
 		54C3C5DD212A69A9009736A1 /* MxThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C5DA212A69A9009736A1 /* MxThread.h */; };
@@ -23,13 +21,16 @@
 		54D6AB3E2131079900B78108 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D6AB3D2131079900B78108 /* CoreServices.framework */; };
 		54D6AB6C2133E57B00B78108 /* MxLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB6B2133E57B00B78108 /* MxLog.cpp */; };
 		54D6AB6E2133EA2400B78108 /* MxObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB6D2133EA2400B78108 /* MxObject.cpp */; };
+		54D6AB782134E02500B78108 /* MxMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB762134E02500B78108 /* MxMemory.cpp */; };
+		54D6AB7F2134E07600B78108 /* ncx_slab.h in Headers */ = {isa = PBXBuildFile; fileRef = 54D6AB7B2134E07600B78108 /* ncx_slab.h */; };
+		54D6AB802134E07600B78108 /* ncx_slab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54D6AB7C2134E07600B78108 /* ncx_slab.cpp */; };
+		54D6AB812134E07600B78108 /* ncx_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 54D6AB7D2134E07600B78108 /* ncx_log.h */; };
+		54D6AB822134E07600B78108 /* ncx_core.h in Headers */ = {isa = PBXBuildFile; fileRef = 54D6AB7E2134E07600B78108 /* ncx_core.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		54638ADD212FA354004EB5E4 /* MxObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxObject.h; sourceTree = "<group>"; };
-		54638ADE212FA354004EB5E4 /* MxPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxPointer.h; sourceTree = "<group>"; };
 		54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxSynchronize.cpp; sourceTree = "<group>"; };
-		54638AE3212FAD8A004EB5E4 /* MxSynchronize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MxSynchronize.h; sourceTree = "<group>"; };
 		54C3C5A1212A5C62009736A1 /* libMxCoreD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxCoreD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C3C5D8212A69A9009736A1 /* MxQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxQueue.h; sourceTree = SOURCE_ROOT; };
 		54C3C5D9212A69A9009736A1 /* MxThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxThread.cpp; sourceTree = SOURCE_ROOT; };
@@ -43,6 +44,11 @@
 		54D6AB3D2131079900B78108 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		54D6AB6B2133E57B00B78108 /* MxLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxLog.cpp; sourceTree = "<group>"; };
 		54D6AB6D2133EA2400B78108 /* MxObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxObject.cpp; sourceTree = "<group>"; };
+		54D6AB762134E02500B78108 /* MxMemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxMemory.cpp; sourceTree = "<group>"; };
+		54D6AB7B2134E07600B78108 /* ncx_slab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ncx_slab.h; path = ncx_mempool/ncx_slab.h; sourceTree = "<group>"; };
+		54D6AB7C2134E07600B78108 /* ncx_slab.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ncx_slab.cpp; path = ncx_mempool/ncx_slab.cpp; sourceTree = "<group>"; };
+		54D6AB7D2134E07600B78108 /* ncx_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ncx_log.h; path = ncx_mempool/ncx_log.h; sourceTree = "<group>"; };
+		54D6AB7E2134E07600B78108 /* ncx_core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ncx_core.h; path = ncx_mempool/ncx_core.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +66,12 @@
 		54C3C598212A5C62009736A1 = {
 			isa = PBXGroup;
 			children = (
+				54D6AB7A2134E05500B78108 /* mempool */,
+				54D6AB762134E02500B78108 /* MxMemory.cpp */,
 				54D6AB6D2133EA2400B78108 /* MxObject.cpp */,
 				54D6AB6B2133E57B00B78108 /* MxLog.cpp */,
 				54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */,
-				54638AE3212FAD8A004EB5E4 /* MxSynchronize.h */,
 				54638ADD212FA354004EB5E4 /* MxObject.h */,
-				54638ADE212FA354004EB5E4 /* MxPointer.h */,
 				54C3C5F9212AC1E2009736A1 /* MxThreadMutex.cpp */,
 				54C3C5FA212AC1E3009736A1 /* MxThreadMutex.h */,
 				54C3C5F5212AC11A009736A1 /* MxThreadCond.cpp */,
@@ -96,6 +102,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		54D6AB7A2134E05500B78108 /* mempool */ = {
+			isa = PBXGroup;
+			children = (
+				54D6AB7E2134E07600B78108 /* ncx_core.h */,
+				54D6AB7D2134E07600B78108 /* ncx_log.h */,
+				54D6AB7C2134E07600B78108 /* ncx_slab.cpp */,
+				54D6AB7B2134E07600B78108 /* ncx_slab.h */,
+			);
+			name = mempool;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -103,12 +120,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54638AE5212FAD8A004EB5E4 /* MxSynchronize.h in Headers */,
+				54D6AB812134E07600B78108 /* ncx_log.h in Headers */,
 				54C3C5E9212A6D90009736A1 /* stdafx.h in Headers */,
+				54D6AB7F2134E07600B78108 /* ncx_slab.h in Headers */,
 				54C3C5DB212A69A9009736A1 /* MxQueue.h in Headers */,
+				54D6AB822134E07600B78108 /* ncx_core.h in Headers */,
 				54638ADF212FA354004EB5E4 /* MxObject.h in Headers */,
 				54C3C5F8212AC11A009736A1 /* MxThreadCond.h in Headers */,
-				54638AE0212FA354004EB5E4 /* MxPointer.h in Headers */,
 				54C3C5FC212AC1E3009736A1 /* MxThreadMutex.h in Headers */,
 				54C3C5DD212A69A9009736A1 /* MxThread.h in Headers */,
 			);
@@ -172,8 +190,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */,
+				54D6AB802134E07600B78108 /* ncx_slab.cpp in Sources */,
 				54C3C5DC212A69A9009736A1 /* MxThread.cpp in Sources */,
 				54C3C5F7212AC11A009736A1 /* MxThreadCond.cpp in Sources */,
+				54D6AB782134E02500B78108 /* MxMemory.cpp in Sources */,
 				54D6AB6C2133E57B00B78108 /* MxLog.cpp in Sources */,
 				54D6AB6E2133EA2400B78108 /* MxObject.cpp in Sources */,
 				54C3C5FB212AC1E3009736A1 /* MxThreadMutex.cpp in Sources */,

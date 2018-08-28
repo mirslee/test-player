@@ -1,10 +1,10 @@
 #pragma once
 
 #include "CMxReferenceClock.h"
-#include "../../MxCore/MxSynchronize.h"
+#include "MxSynchronize.h"
 #include "MxTypes.h"
-#include "../MxCore/MxPointer.h"
-#include "../MxCore/CMxArray.h"
+#include "MxPointer.h"
+#include "CMxArray.h"
 
 #define LIID_IVxSystemClock		0xe0001000
 struct MXPLAER_API IVxSystemClock
@@ -13,8 +13,8 @@ virtual const sysclk_cinfo*	__stdcall GetCreateInfo() = 0;
 virtual void				__stdcall WaitSyncForSystemClock(uint64 clock) = 0;
 virtual uint64			__stdcall WaitSyncFrameClock() = 0;
 virtual uint64		__stdcall GetClock() = 0;
-virtual MxEvent				__stdcall CreateClockEvent(bool bManualReset = FALSE,bool bInitialState = FALSE) = 0;
-virtual void				__stdcall CloseClockEvent(MxEvent) = 0;
+virtual CMxEvent				__stdcall CreateClockEvent(bool bManualReset = false,bool bInitialState = false) = 0;
+virtual void				__stdcall CloseClockEvent(CMxEvent) = 0;
 
 virtual uint64		__stdcall GetTime() = 0;
 virtual uint64		__stdcall GetTimeFromSample(uint64 clock) = 0;
@@ -35,20 +35,20 @@ public:
 	virtual ~CVxMediaSysClock(void);
 protected:
 	sysclk_cinfo m_cinfo;
-	MX_MUTEX m_csLock;
+	CMxMutex m_csLock;
 
-	MX_MUTEX m_csFLock;
-	MxEvent	m_hWaitSyncEvent;
+	CMxMutex m_csFLock;
+	CMxEvent	m_hWaitSyncEvent;
 
 #ifdef _WIN32
 	UINT    m_TimerResolution;
 #endif
 
 	CMxSharedPointer<IVxClockPulse> m_clockpulse;
-	MX_MUTEX m_csPulseLock;
+	CMxMutex m_csPulseLock;
 
 	volatile uint64 m_ulClock;
-	CMxArray<MxEvent, MxEvent&> m_hClocks;
+	CMxArray<CMxEvent, CMxEvent&> m_hClocks;
 	
 	bool m_canreset;
 public:
@@ -59,8 +59,8 @@ public:
 	void			 __stdcall WaitSyncForSystemClock(uint64 dwClock);
 	uint64		 __stdcall WaitSyncFrameClock();
 	uint64		 __stdcall GetClock(){ return m_ulClock; }
-	MxEvent			 __stdcall CreateClockEvent(bool bManualReset = false, bool bInitialState = false);
-	void			 __stdcall CloseClockEvent(MxEvent);
+	CMxEvent			 __stdcall CreateClockEvent(bool bManualReset = false, bool bInitialState = false);
+	void			 __stdcall CloseClockEvent(CMxEvent);
 
 	uint64		 __stdcall GetTime();
 	uint64		 __stdcall GetTimeFromSample(uint64 clock);
@@ -73,7 +73,7 @@ public:
 protected:
 	long __stdcall NonDelegatingQueryInterface(LONG iid, void**);
 
-	MxEvent m_hCoreClock;
+	CMxEvent m_hCoreClock;
 	bool m_bExitClock;
 	pthread_t m_hClockThread;
 	static void* ClockThreadProc(void* lpThis){((CVxMediaSysClock*)lpThis)->_ClockThread();return 0;}

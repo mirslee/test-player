@@ -1,15 +1,14 @@
 #include "stdafx.h"
 #include "CMxSchedule.h"
-//#include "vxtempl.h"
-//#include "vxerror.h"
+#include "MxError.h"
 
-CMxSchedule::CMxSchedule(MxEvent ev)
+CMxSchedule::CMxSchedule(CMxEvent ev)
 : head(&z, 0), z(0, MAX_TIME)
 , m_dwNextCookie(0), m_dwAdviseCount(0)
 , m_pAdviseCache(0), m_dwCacheCount(0)
 , m_ev( ev )
 {
-	MX_MUTEX_INIT(&m_Serialize);
+	mxMutexInit(&m_Serialize);
 	head.m_dwAdviseCookie = z.m_dwAdviseCookie = 0;
 }
 
@@ -34,7 +33,7 @@ CMxSchedule::~CMxSchedule(void)
 			--m_dwAdviseCount;
 		}
 	}
-	MX_MUTEX_DESTROY(&m_Serialize);
+	mxMutexDestroy(&m_Serialize);
 }
 
 
@@ -52,7 +51,7 @@ __int64 CMxSchedule::GetNextAdviseTime()
 	return head.m_next->m_rtEventTime;
 }
 
-mxuvoidptr CMxSchedule::AddAdvisePacket( const __int64 & time1 , const __int64 & time2, MxEvent h,bool periodic)
+mxuvoidptr CMxSchedule::AddAdvisePacket( const __int64 & time1 , const __int64 & time2, CMxEvent h,bool periodic)
 {
 	// Since we use MAX_TIME as a sentry, we can't afford to
 	// schedule a notification at MAX_TIME
@@ -113,15 +112,15 @@ __int64 CMxSchedule::Advise( const __int64 & rtTime )
 
 	while (rtTime>=(rtNextTime=(pAdvise=head.m_next)->m_rtEventTime)&&!pAdvise->IsZ() )
 	{
-		if (pAdvise->m_bPeriodic == TRUE)
+		if (pAdvise->m_bPeriodic == true)
 		{
-			mxActiveEvent(pAdvise->m_hNotify);
+			mxSetEvent(pAdvise->m_hNotify);
 			pAdvise->m_rtEventTime += pAdvise->m_rtPeriod;
 			ShuntHead();
 		}
 		else
 		{
-			mxActiveEvent(pAdvise->m_hNotify);
+			mxSetEvent(pAdvise->m_hNotify);
 			--m_dwAdviseCount;
 			Delete( head.RemoveNext() );
 		}
@@ -147,7 +146,7 @@ mxuvoidptr CMxSchedule::AddAdvisePacket(CVxAdvisePacket * pPacket )
 	++m_dwAdviseCount;
 
 	// If packet added at the head, then clock needs to re-evaluate wait time.
-	if ( p_prev == &head ) mxActiveEvent( m_ev );
+	if ( p_prev == &head ) mxSetEvent( m_ev );
 
 	return Result;
 }
