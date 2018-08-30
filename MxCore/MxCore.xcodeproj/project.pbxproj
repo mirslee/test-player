@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		54638ADF212FA354004EB5E4 /* MxObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 54638ADD212FA354004EB5E4 /* MxObject.h */; };
 		54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */; };
 		54C3C5DB212A69A9009736A1 /* MxQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C5D8212A69A9009736A1 /* MxQueue.h */; };
 		54C3C5DC212A69A9009736A1 /* MxThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C5D9212A69A9009736A1 /* MxThread.cpp */; };
@@ -29,7 +28,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		54638ADD212FA354004EB5E4 /* MxObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxObject.h; sourceTree = "<group>"; };
 		54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxSynchronize.cpp; sourceTree = "<group>"; };
 		54C3C5A1212A5C62009736A1 /* libMxCoreD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxCoreD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C3C5D8212A69A9009736A1 /* MxQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxQueue.h; sourceTree = SOURCE_ROOT; };
@@ -71,7 +69,6 @@
 				54D6AB6D2133EA2400B78108 /* MxObject.cpp */,
 				54D6AB6B2133E57B00B78108 /* MxLog.cpp */,
 				54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */,
-				54638ADD212FA354004EB5E4 /* MxObject.h */,
 				54C3C5F9212AC1E2009736A1 /* MxThreadMutex.cpp */,
 				54C3C5FA212AC1E3009736A1 /* MxThreadMutex.h */,
 				54C3C5F5212AC11A009736A1 /* MxThreadCond.cpp */,
@@ -125,7 +122,6 @@
 				54D6AB7F2134E07600B78108 /* ncx_slab.h in Headers */,
 				54C3C5DB212A69A9009736A1 /* MxQueue.h in Headers */,
 				54D6AB822134E07600B78108 /* ncx_core.h in Headers */,
-				54638ADF212FA354004EB5E4 /* MxObject.h in Headers */,
 				54C3C5F8212AC11A009736A1 /* MxThreadCond.h in Headers */,
 				54C3C5FC212AC1E3009736A1 /* MxThreadMutex.h in Headers */,
 				54C3C5DD212A69A9009736A1 /* MxThread.h in Headers */,

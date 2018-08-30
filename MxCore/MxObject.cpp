@@ -10,7 +10,7 @@
 #include "MxObject.h"
 
 
-int CMxObject::addRefDelgate() {
+/*int CMxObject::addRefDelgate() {
     _refCount++;
     return _refCount;
 }
@@ -31,4 +31,4 @@ int CMxObject::queryInterfaceDelgate(int iid, void** ppVoid) {
         *ppVoid = nullptr;
     }
     return 0;
-}
+}*/

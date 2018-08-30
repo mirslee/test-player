@@ -374,19 +374,20 @@ void CVxReferenceClock::__AdviseThread()
 }
 
 
-int CreateReferenceClock(CLOCKFUNCS* funcs,IVxReferenceClock** refclock)
+int CreateReferenceClock(CLOCKFUNCS* funcs,MxReferenceClock** refclock)
 {
 	//return GetVxInterface(static_cast<IVxReferenceClock*>(new CVxReferenceClock(funcs)),(void**)refclock);
-	*refclock = static_cast<IVxReferenceClock*>(new CVxReferenceClock(funcs));
+	*refclock = static_cast<MxReferenceClock*>(new CVxReferenceClock(funcs));
 	return 0;
 }
 
-class CMxClockPulse :public IVxClockPulse
+class CMxClockPulse :public MxClockPulse, public CMxObject
 {
+    MX_OBJECT
 public:
 	CMxClockPulse(const sysclk_cinfo* cinfo);
 protected:
-	CMxSharedPointer<IVxReferenceClock> m_refclock;
+	CMxObjectPointer<MxReferenceClock> m_refclock;
 	int m_rate, m_scale;
 	int m_timestep;
 	int m_framestep;
@@ -593,7 +594,7 @@ void CMxClockPulse::__AdviseThread()
 }
 #endif
 
-int __cdecl mxClockPulse(CMxSharedObject*, const sysclk_cinfo* cinfo, CLOCKFUNCS* funcs, IVxClockPulse** obj)
+int __cdecl mxClockPulse(MxObject*, const sysclk_cinfo* cinfo, CLOCKFUNCS* funcs, MxClockPulse** obj)
 {
 	CMxClockPulse* pObj = new CMxClockPulse(cinfo);
 	if(!pObj->Initialize(funcs))
@@ -602,7 +603,7 @@ int __cdecl mxClockPulse(CMxSharedObject*, const sysclk_cinfo* cinfo, CLOCKFUNCS
 		delete pObj;
 		return -1;
 	}
-	*obj = static_cast<IVxClockPulse*>(pObj);
+	*obj = static_cast<MxClockPulse*>(pObj);
 	return 0;
 	//return GetVxInterface(static_cast<IVxClockPulse*>(pObj),(void**)obj);
 }

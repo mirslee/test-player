@@ -1,20 +1,20 @@
 #pragma once
 
 
-template<class T> class CMxSharedPointer {
+template<class T> class CMxObjectPointer {
 public:
 	/*默认构造*/
-    CMxSharedPointer() {
-        pointer = nullptr;
+    CMxObjectPointer() {
+        this->pointer = nullptr;
     }
 
 	/*带参数构造*/
-	CMxSharedPointer(T* pointer) {
+	CMxObjectPointer(T* pointer) {
 		this->pointer = pointer;
 	}
 
 	/*拷贝构造*/
-	CMxSharedPointer(const CMxSharedPointer<T> & other) {
+	CMxObjectPointer(const CMxObjectPointer<T> & other) {
 		if (other)
 			other->addRef();
 		pointer = other;
@@ -31,7 +31,7 @@ public:
 	}
 
 	/*赋值构造*/
-	T* operator=(const CMxSharedPointer<T> & other) {
+	T* operator=(const CMxObjectPointer<T> & other) {
 		if (other)
 			other->addRef();
 		if (pointer)
@@ -40,7 +40,7 @@ public:
 		return this->pointer;
 	}
 
-	~CMxSharedPointer() {
+	~CMxObjectPointer() {
 		this->pointer->unRef();
 	}
 
@@ -63,18 +63,52 @@ public:
 
 	/*    取指针地址，&pointer     */
 	T** operator&() {
-		return &pointer;
+		return &this->pointer;
 	}
 
 	/*    指针调用， pointer->     */
-	T* operator->() const {
+    T* operator->() const {
 		return pointer;
 	}
-
 private:
 	T* pointer;
 };
 
+template<class T> class CMxSharedPointer {
+public:
+    CMxSharedPointer() {
+        this->pointer = nullptr;
+    }
+    ~CMxSharedPointer() {
+        if (pointer) {
+            delete pointer;
+            pointer = nullptr;
+        }
+    }
+    CMxSharedPointer(T* pointer) {
+        this->pointer = pointer;
+    }
+    T* operator=(T* pointer) {
+        if (pointer) {
+            delete pointer;
+            pointer = nullptr;
+        }
+        
+        this->pointer = pointer;
+        
+    }
+private:
+    T* operator=(const CMxSharedPointer<T> & other) {
+        if (other)
+            other->addRef();
+        if (pointer)
+            pointer->unRef();
+        this->pointer = pointer;
+        return this->pointer;
+    }
+private:
+    T* pointer;
+};
 
 
 

@@ -9,7 +9,7 @@
 #include "pthread.h"
 #include "MxSynchronize.h"
 #include "MxTypes.h"
-#include "../../MxCore/MxObject.h"
+#include "MxObject.h"
 
 typedef struct
 {
@@ -19,7 +19,7 @@ typedef struct
 }CLOCKFUNCS;
 
 #define LIID_IVxClockPulse		0xe0001001
-struct IVxClockPulse: CMxSharedObject
+struct MxClockPulse: MxObject
 {
 	virtual CMxEvent				__stdcall GetFieldEvent() = 0;
 virtual uint64			__stdcall GetTime() = 0;
@@ -28,11 +28,11 @@ virtual uint64		__stdcall GetSampleFromTime(uint64 coretime) = 0;
 virtual uint				__stdcall WaitForClockPluse(uint timeout) = 0;
 };
 
-int __cdecl mxClockPulse(CMxSharedObject*, const sysclk_cinfo* cinfo, CLOCKFUNCS* funcs, IVxClockPulse** obj);
+int __cdecl mxClockPulse(MxObject*, const sysclk_cinfo* cinfo, CLOCKFUNCS* funcs, MxClockPulse** obj);
 
 
 
-struct IVxReferenceClock: CMxSharedObject
+struct MxReferenceClock: MxObject
 {
 public:
     virtual int __stdcall GetTime( __int64 *pTime) = 0;
@@ -47,8 +47,9 @@ public:
 
 };
 
-class CVxReferenceClock : public IVxReferenceClock
+class CVxReferenceClock : public MxReferenceClock, public CMxObject
 {
+    MX_OBJECT
 public:
 	CVxReferenceClock(CLOCKFUNCS* funcs);
 	virtual ~CVxReferenceClock();

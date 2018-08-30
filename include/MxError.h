@@ -10,6 +10,7 @@
 #define MAKE_RESULT( code )     1
 #endif
 
+typedef long MxResult;
 #define MX_S_OK                            0
 #define MX_E_FAIL                        0x80004005
 #define MX_E_INVALIDARG                    0x80070057

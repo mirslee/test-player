@@ -1,17 +1,13 @@
-//
-//  MxVideoPlayer.hpp
-//  MyPlayer
-//
-//  Created by sz17112850M01 on 2018/8/16.
-//
 
-#ifndef MxVideoPlayer_h
-#define MxVideoPlayer_h
+
+#ifndef __CMXVIDEOPLAYER_H__
+#define __CMXVIDEOPLAYER_H__
 
 #include "../MxCore/MxQueue.h"
 #include "../MxCore/MxThread.h"
 #include "MxDemuxer.h"
 #include "MxVideoDecoder.h"
+#include "MxPlayer.h"
 
 class MxThread;
 
@@ -111,9 +107,11 @@ public:
     }
 };
 
-class MxVideoPlayer {
+class CMxVideoPlayer: public MxVideoPlayer, public CMxObject {
+    
+    MX_OBJECT
 public:
-    MxVideoPlayer();
+    CMxVideoPlayer();
     bool open(string filepath);
     
 private:
@@ -129,6 +127,6 @@ private:
     OutThread outThread;
 };
 
-#endif /* MxVideoPlayer_hpp */
+#endif /* __CMXVIDEOPLAYER_H__ */
 
 

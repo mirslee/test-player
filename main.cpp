@@ -13,6 +13,8 @@
 #ifdef __APPLE__
 #include <unistd.h>
 #endif
+#include "MxTypes.h"
+#include "MainWidget.h"
 
 CMxEvent event = nullptr;
 
@@ -73,21 +75,21 @@ int main(int argc, char** argv) {
 		mxActiveEvent(event);
     }*/
     
-    CMxMutex mutex;
+    /*CMxMutex mutex;
     mxMutexInit(&mutex);
     CMxMutexLocker locker(&mutex);
 
     //时钟测试
-	IVxSystemClock *clock;
+	MxSystemClock *clock;
 	sysclk_cinfo info;
 	info.rate = 25;
 	info.scale = 1;
-	vxCreateSystemClock(NULL,&info, NULL, &clock);
+	mxCreateSystemClock(NULL,&info, NULL, &clock);
 	while (1)
 	{
 		sleep(10000);
 		//qDebug("%ld",clock->GetClock());
-	}
+	}*/
     
     //内存测试
     
@@ -110,6 +112,12 @@ int main(int argc, char** argv) {
     }
     us_end  = usTime();
     t2 = (us_end - us_begin);*/
+    
+    QApplication a(argc,argv);
+    MainWidget w;
+    w.resize(300, 300);
+    w.show();
+    a.exec();
     
     return 0;
 }

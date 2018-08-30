@@ -10,7 +10,7 @@
 #include "mmsystem.h"
 #endif
 
-CVxMediaSysClock::CVxMediaSysClock(const sysclk_cinfo* info)
+CMxMediaSysClock::CMxMediaSysClock(const sysclk_cinfo* info)
 : m_cinfo(*info)
 , m_hCoreClock(nullptr)
 , m_bExitClock(false)
@@ -23,16 +23,16 @@ CVxMediaSysClock::CVxMediaSysClock(const sysclk_cinfo* info)
 	INITPTHREAD(m_hClockThread);
 }
 
-CVxMediaSysClock::~CVxMediaSysClock(void)
+CMxMediaSysClock::~CMxMediaSysClock(void)
 {
 	mxMutexDestroy(&m_csPulseLock);
 	mxMutexDestroy(&m_csFLock);
 	mxMutexDestroy(&m_csLock);
 }
 
-IVxReferenceClock* CreateReferenceClock(CLOCKFUNCS* funcs);
+MxReferenceClock* CreateReferenceClock(CLOCKFUNCS* funcs);
 
-bool CVxMediaSysClock::Initialize(IVxClockPulse* clockpulse)
+bool CMxMediaSysClock::Initialize(MxClockPulse* clockpulse)
 {
 	m_clockpulse = clockpulse;
 	if (!m_clockpulse)
@@ -73,7 +73,7 @@ bool CVxMediaSysClock::Initialize(IVxClockPulse* clockpulse)
 
 }
 
-void CVxMediaSysClock::Uninitialize()
+void CMxMediaSysClock::Uninitialize()
 {
 	CloseClockEvent(m_hWaitSyncEvent);
 	EXITPTHREAD(m_hClockThread,m_bExitClock);
@@ -89,7 +89,7 @@ void CVxMediaSysClock::Uninitialize()
 }
 
 
-bool CVxMediaSysClock::Reset(const sysclk_cinfo* cinfo,IVxClockPulse* clockpulse)
+bool CMxMediaSysClock::Reset(const sysclk_cinfo* cinfo,MxClockPulse* clockpulse)
 {
 	if(m_clockpulse==clockpulse) 
 	{
@@ -105,7 +105,7 @@ bool CVxMediaSysClock::Reset(const sysclk_cinfo* cinfo,IVxClockPulse* clockpulse
 		return false;
 	m_canreset = false;
 
-	CMxSharedPointer<IVxClockPulse> tmppulse(clockpulse);
+	CMxObjectPointer<MxClockPulse> tmppulse(clockpulse);
 	if(!tmppulse)
 	{	
 		mxClockPulse(NULL,cinfo,NULL,&tmppulse);
@@ -141,9 +141,9 @@ bool CVxMediaSysClock::Reset(const sysclk_cinfo* cinfo,IVxClockPulse* clockpulse
 	return true;
 }
 
-LONG CVxMediaSysClock::NonDelegatingQueryInterface(LONG iid, void** ppObj)
+LONG CMxMediaSysClock::NonDelegatingQueryInterface(LONG iid, void** ppObj)
 {
-	*ppObj = static_cast<IVxSystemClock*>(this);
+	*ppObj = static_cast<MxSystemClock*>(this);
 	return 0;
 	/*if(iid==LIID_IVxSystemClock)
 		return GetVxInterface(static_cast<IVxSystemClock*>(this),ppObj);
@@ -152,14 +152,14 @@ LONG CVxMediaSysClock::NonDelegatingQueryInterface(LONG iid, void** ppObj)
 }
 
 
-void CVxMediaSysClock::WaitSyncForSystemClock(uint64 dwClock)
+void CMxMediaSysClock::WaitSyncForSystemClock(uint64 dwClock)
 {
 	CMxMutexLocker lock(&m_csFLock);
 	while(m_ulClock<dwClock)
 		mxWaitEvent(m_hWaitSyncEvent,100);
 }
 
-uint64 CVxMediaSysClock::WaitSyncFrameClock()
+uint64 CMxMediaSysClock::WaitSyncFrameClock()
 {
 	CMxMutexLocker lock(&m_csFLock);
 	uint64 ulTimeCode = 0;
@@ -170,7 +170,7 @@ uint64 CVxMediaSysClock::WaitSyncFrameClock()
 	return ulTimeCode;
 }
 
-CMxEvent CVxMediaSysClock:: CreateClockEvent(bool bManualReset,bool bInitialState)
+CMxEvent CMxMediaSysClock:: CreateClockEvent(bool bManualReset,bool bInitialState)
 {
 	CMxEvent hClockEvent = mxCreateEvent(nullptr,bManualReset,bInitialState,nullptr);
 	CMxMutexLocker lock(&m_csLock);
@@ -178,7 +178,7 @@ CMxEvent CVxMediaSysClock:: CreateClockEvent(bool bManualReset,bool bInitialStat
 	return hClockEvent;
 }
 
-void CVxMediaSysClock:: CloseClockEvent(CMxEvent hClock)
+void CMxMediaSysClock:: CloseClockEvent(CMxEvent hClock)
 {
 	int nSize = m_hClocks.GetSize();
 	for(int i=0;i<nSize;i++)
@@ -193,19 +193,19 @@ void CVxMediaSysClock:: CloseClockEvent(CMxEvent hClock)
 	}
 }
 
-uint64 CVxMediaSysClock::GetTime()
+uint64 CMxMediaSysClock::GetTime()
 {
 	CMxMutexLocker lock(&m_csPulseLock);
 	return m_clockpulse->GetTime();
 }
 
-uint64 CVxMediaSysClock::GetTimeFromSample(uint64 clock)
+uint64 CMxMediaSysClock::GetTimeFromSample(uint64 clock)
 {
 	CMxMutexLocker lock(&m_csPulseLock);
 	return m_clockpulse->GetTimeFromSample(clock);
 }
 
-uint64  CVxMediaSysClock::GetSampleFromTime(uint64 coretime)
+uint64  CMxMediaSysClock::GetSampleFromTime(uint64 coretime)
 {
 	CMxMutexLocker lock(&m_csPulseLock);
 	return m_clockpulse->GetSampleFromTime(coretime);
@@ -235,7 +235,7 @@ void vxTrace(const char* format, ...)
 }
 
 #define TESTCLOCK
-void CVxMediaSysClock::_ClockThread()
+void CMxMediaSysClock::_ClockThread()
 {
 	//_vxSetThreadName("软件时钟事件分发");
 
@@ -275,9 +275,9 @@ void CVxMediaSysClock::_ClockThread()
 	}
 }
 
-int __cdecl vxCreateSystemClock(CMxSharedObject* setup,const sysclk_cinfo* cinfo,IVxClockPulse* clockpulse,IVxSystemClock** obj)
+int __cdecl mxCreateSystemClock(MxObject* setup,const sysclk_cinfo* cinfo,MxClockPulse* clockpulse,MxSystemClock** obj)
 {
-	CVxMediaSysClock* pObj = new CVxMediaSysClock(cinfo);
+	CMxMediaSysClock* pObj = new CMxMediaSysClock(cinfo);
 	pObj->Initialize(clockpulse);
 	/*if (!pObj->Initialize(clockpulse))
 	{
@@ -286,7 +286,7 @@ int __cdecl vxCreateSystemClock(CMxSharedObject* setup,const sysclk_cinfo* cinfo
 		return -1;
 	}*/
 
-	*obj = static_cast<IVxSystemClock*>(pObj);
+	*obj = static_cast<MxSystemClock*>(pObj);
 	return  1;
 	//return GetVxInterface(,(void**)obj);
 }

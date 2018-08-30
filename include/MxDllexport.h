@@ -22,10 +22,17 @@
 #define MXPLAER_API __declspec(dllimport)
 #endif //MXPLAYER_EXPORT
 
+#ifdef MXCODEC_EXPORT
+#define MXCODEC_API __declspec(dllexport)
+#else
+#define MXCODEC_API __declspec(dllimport)
+#endif //MXCODEC_EXPORT
+
 #else
 #define MXCORE_API
 #define MXGLTOOL_API
 #define MXPLAER_API
+#define MXCODEC_API
 #endif //_WIN32
 
 

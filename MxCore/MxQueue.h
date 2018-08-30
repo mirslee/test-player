@@ -7,7 +7,8 @@ class MxQueue  {
     
 public:
     MxQueue() {
-        pthread_mutex_init(&mutex, nullptr);
+        int ret = pthread_mutex_init(&mutex, nullptr);
+        return;
     }
     
     void push(T & value) {

@@ -5,15 +5,11 @@
 //  Created by sz17112850M01 on 2018/8/14.
 //
 
-#ifdef _WIN32
-#define MXGLTOOL_API __declspec(dllimport)
-#define MXCORE_API __declspec(dllimport)
-#define MXPLAER_API __declspec(dllimport)
-#else
-#define MXGLTOOL_API
-#define MXCORE_API
-#define MXPLAER_API
-#endif
+#include "MxDllexport.h"
+
+#include "QtCore/QtCore"
+#include "QtGui/QtGui"
+#include "QtWidgets/QtWidgets"
 
 //windows
 #ifdef _WIN32

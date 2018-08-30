@@ -1,17 +1,12 @@
-//
-//  MxVideoPlayer.cpp
-//  MyPlayer
-//
-//  Created by sz17112850M01 on 2018/8/16.
-//
-#include "stdafx.h"
-#include "MxVideoPlayer.h"
 
-MxVideoPlayer::MxVideoPlayer()
+#include "stdafx.h"
+#include "CMxVideoPlayer.h"
+
+CMxVideoPlayer::CMxVideoPlayer()
 {
 }
 
-bool MxVideoPlayer::open(string filepath)
+bool CMxVideoPlayer::open(string filepath)
 {
     demul = new MxDemuxer();
     //demul->packetQueue = packetQueue;
