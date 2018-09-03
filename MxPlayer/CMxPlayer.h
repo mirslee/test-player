@@ -5,7 +5,7 @@
 
 #include "MxPlayer.h"
 #include "MxPointer.h"
-#include "../MxCore/MxQueue.h"
+#include "CMxQueue.h"
 
 enum PlayerCommand {
     PC_play,
@@ -21,9 +21,9 @@ public:
     CMxPlayer();
     virtual ~CMxPlayer();
     
-    virtual void play() {PlayerCommand cmd = PC_play; __cmdQueue.push(cmd);}
-    virtual void pause() {PlayerCommand cmd = PC_pause; __cmdQueue.push(cmd);}
-    virtual void stop() {PlayerCommand cmd = PC_stop; __cmdQueue.push(cmd);}
+    virtual void play() {PlayerCommand cmd = PC_play; __cmdQueue.Push(cmd);}
+    virtual void pause() {PlayerCommand cmd = PC_pause; __cmdQueue.Push(cmd);}
+    virtual void stop() {PlayerCommand cmd = PC_stop; __cmdQueue.Push(cmd);}
     
 protected:
     CMxObjectPointer<MxVideoPlayer> _pVideoPlayer;
@@ -36,7 +36,7 @@ private:
         return nullptr;
     }
     void __cmdThreadFun();
-    MxQueue<PlayerCommand> __cmdQueue;
+	CMxQueue<PlayerCommand> __cmdQueue;
 };
 
 #endif /* __CMXPLAYER_H__ */

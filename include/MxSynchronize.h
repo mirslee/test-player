@@ -21,7 +21,7 @@
 #define mxMutexTrylock(mtx) (TryEnterCriticalSection(mtx) != 0)
 #define mxMutexUnlock(mtx)  LeaveCriticalSection(mtx)
 
-#define CMxMutex            HANDLE
+#define CMxEvent            HANDLE
 #define mxCreateEvent       CreateEvent
 #define mxCloseEvent        CloseHandle
 #define mxSetEvent          SetEvent

@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{564703B8-F3ED-45E8-9FA3-416B041DC761}</ProjectGuid>
+    <ProjectGuid>{4B1388B5-98F0-4CE8-B504-96124845D140}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>MxPlayer</RootNamespace>
+    <RootNamespace>MxCodec</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -88,7 +88,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;MXPLAYER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;MXCODEC_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -100,7 +100,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;MXPLAYER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;MXCODEC_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\include;..\include\win;..\include\ffmpeg\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -117,7 +117,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MXPLAYER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MXCODEC_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -133,7 +133,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;MXPLAYER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;MXCODEC_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,30 +146,31 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="clock\CMxMediaSysClock.cpp" />
-    <ClCompile Include="clock\CMxReferenceClock.cpp" />
-    <ClCompile Include="clock\CMxSchedule.cpp" />
-    <ClCompile Include="CMxPlayer.cpp" />
-    <ClCompile Include="CMxVideoPlayer.cpp" />
-    <ClCompile Include="MxDemuxer.cpp" />
-    <ClCompile Include="MxVideoDecoder.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="VideoDecoder.cpp" />
+    <ClInclude Include="CMxAudioDecoder.h" />
+    <ClInclude Include="CMxAudioEncoder.h" />
+    <ClInclude Include="CMxDemuxer.h" />
+    <ClInclude Include="CMxMuxer.h" />
+    <ClInclude Include="CMxStreamReader.h" />
+    <ClInclude Include="CMxStreamWriter.h" />
+    <ClInclude Include="CMxVideoDecoder.h" />
+    <ClInclude Include="CMxVideoEncoder.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="clock\CMxMediaSysClock.h" />
-    <ClInclude Include="clock\CMxReferenceClock.h" />
-    <ClInclude Include="clock\CMxSchedule.h" />
-    <ClInclude Include="CMxPlayer.h" />
-    <ClInclude Include="CMxVideoPlayer.h" />
-    <ClInclude Include="MxDemuxer.h" />
-    <ClInclude Include="MxPlayer.h" />
-    <ClInclude Include="MxVideoDecoder.h" />
-    <ClInclude Include="MxVideoPlayer.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="VideoDecoder.h" />
+    <ClCompile Include="CMxAudioDecoder.cpp" />
+    <ClCompile Include="CMxAudioEncoder.cpp" />
+    <ClCompile Include="CMxDemuxer.cpp" />
+    <ClCompile Include="CMxMuxer.cpp" />
+    <ClCompile Include="CMxStreamReader.cpp" />
+    <ClCompile Include="CMxStreamWriter.cpp" />
+    <ClCompile Include="CMxVideoDecoder.cpp" />
+    <ClCompile Include="CMxVideoEncoder.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

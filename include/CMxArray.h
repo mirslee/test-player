@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __CMXARRAT_H__
+#define __CMXARRAT_H__
 
 template<class TYPE, class ARG_TYPE = const TYPE&>
 class CMxArray
@@ -413,3 +414,6 @@ void CMxArray<TYPE, ARG_TYPE>::Serialize(CVxArchive& ar)
 	}
 	vxSerializeElements<TYPE>(ar, m_pData, m_nSize);
 }*/
+
+
+#endif //__CMXARRAT_H__

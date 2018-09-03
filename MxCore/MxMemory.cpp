@@ -278,19 +278,19 @@ MXCORE_API void _vxfreep(void ** memblock)
 	}
 }
 
-#include <sys/time.h>
-uint64_t usTime()
-{
-    struct timeval tv;
-    uint64_t usec;
-    
-    gettimeofday(&tv, NULL);
-    
-    usec = ((uint64_t)tv.tv_sec)*1000000LL;
-    usec += tv.tv_usec;
-    
-    return usec;
-}
+//#include <sys/time.h>
+//uint64_t usTime()
+//{
+//    struct timeval tv;
+//    uint64_t usec;
+//    
+//    gettimeofday(&tv, NULL);
+//    
+//    usec = ((uint64_t)tv.tv_sec)*1000000LL;
+//    usec += tv.tv_usec;
+//    
+//    return usec;
+//}
 
 class CMxSlabMemoryPool
 {

@@ -3,22 +3,28 @@
 #define __MXTYPES_H__
 
 typedef char int8;
+#ifndef _WIN32
 typedef char _int8;
 typedef char __int8;
+#endif
 typedef unsigned char uint8;
 typedef unsigned char _uint8;
 typedef unsigned char __uint8;
 
 typedef short int16;
+#ifndef _WIN32
 typedef short _int16;
 typedef short __int16;
+#endif
 typedef unsigned short uint16;
 typedef unsigned short _uint16;
 typedef unsigned short __uint16;
 
 typedef long int32;
+#ifndef _WIN32
 typedef long _int32;
 typedef long __int32;
+#endif
 typedef unsigned long uint32;
 typedef unsigned long _uint32;
 typedef unsigned long __uint32;

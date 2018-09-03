@@ -13,13 +13,22 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MxCore", "MxCore\MxCore.vcx
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{658D97BA-FEE8-4474-8782-ADD7F5CB6628}"
 	ProjectSection(SolutionItems) = preProject
+		include\CMxArray.h = include\CMxArray.h
+		include\CMxQueue.h = include\CMxQueue.h
+		include\MxCodec.h = include\MxCodec.h
+		include\mxConfig1.h = include\mxConfig1.h
 		include\MxDllexport.h = include\MxDllexport.h
 		include\MxError.h = include\MxError.h
 		include\MxInterface.h = include\MxInterface.h
 		include\MxLog.h = include\MxLog.h
 		include\MxMemory.h = include\MxMemory.h
+		include\MxObject.h = include\MxObject.h
+		include\MxPointer.h = include\MxPointer.h
+		include\MxSynchronize.h = include\MxSynchronize.h
 		include\MxTypes.h = include\MxTypes.h
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MxCodec", "MxCodec\MxCodec.vcxproj", "{4B1388B5-98F0-4CE8-B504-96124845D140}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +68,14 @@ Global
 		{88921253-4275-44E4-B105-DE15EAB7AFF3}.Release|x64.Build.0 = Release|x64
 		{88921253-4275-44E4-B105-DE15EAB7AFF3}.Release|x86.ActiveCfg = Release|Win32
 		{88921253-4275-44E4-B105-DE15EAB7AFF3}.Release|x86.Build.0 = Release|Win32
+		{4B1388B5-98F0-4CE8-B504-96124845D140}.Debug|x64.ActiveCfg = Debug|x64
+		{4B1388B5-98F0-4CE8-B504-96124845D140}.Debug|x64.Build.0 = Debug|x64
+		{4B1388B5-98F0-4CE8-B504-96124845D140}.Debug|x86.ActiveCfg = Debug|Win32
+		{4B1388B5-98F0-4CE8-B504-96124845D140}.Debug|x86.Build.0 = Debug|Win32
+		{4B1388B5-98F0-4CE8-B504-96124845D140}.Release|x64.ActiveCfg = Release|x64
+		{4B1388B5-98F0-4CE8-B504-96124845D140}.Release|x64.Build.0 = Release|x64
+		{4B1388B5-98F0-4CE8-B504-96124845D140}.Release|x86.ActiveCfg = Release|Win32
+		{4B1388B5-98F0-4CE8-B504-96124845D140}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

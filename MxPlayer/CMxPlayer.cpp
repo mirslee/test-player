@@ -16,10 +16,8 @@ void CMxPlayer::__cmdThreadFun() {
     
     for (;;) {
         PlayerCommand cmd;
-        if (0 != __cmdQueue.pop(&cmd)) {
-            av_usleep(1);
-            continue;
-        }
+		if (!__cmdQueue.Pop(&cmd,true))
+			continue;
         
         switch (cmd) {
             case  PC_play:

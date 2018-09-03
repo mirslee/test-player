@@ -27,9 +27,6 @@
     <ClCompile Include="MxVideoDecoder.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MxVideoPlayer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -44,6 +41,12 @@
     </ClCompile>
     <ClCompile Include="clock\CMxSchedule.cpp">
       <Filter>clock</Filter>
+    </ClCompile>
+    <ClCompile Include="CMxPlayer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CMxVideoPlayer.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="clock\CMxSchedule.h">
       <Filter>clock</Filter>
+    </ClInclude>
+    <ClInclude Include="CMxVideoPlayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CMxPlayer.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
