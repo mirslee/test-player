@@ -9,6 +9,10 @@
 #include "MxVideoDecoder.h"
 #include "MxPlayer.h"
 
+#include "MxTypes.h"
+#include "MxPointer.h"
+#include "CMxQueue.h"
+
 class MxThread;
 
 class DecodeSendThread: public MxThread {
@@ -125,6 +129,31 @@ private:
     DecodeFinshedThread decodeFinshed;
     MxQueue<AVFrame*> decodeFinshedQueue;
     OutThread outThread;
+    
+protected:
+    static void* static_playOutFun(void* pObj) {
+        ((CMxVideoPlayer*)pObj)->_playOutFun();
+        return 0;
+    }
+    void _playOutFun();
+    
+    uint64 m_dwStartClock;
+    int m_timestep;
+    int m_framestep;
+    double m_fSamplesOfFrame;
+    double m_playreqframe;
+    
+    int64 m_curframe;
+    int64 m_startframe;
+    int64 m_endframe;
+    double m_playspeed;
+    int     m_cueframes;
+    CVxQueue<EFFECTOUT_SURFACE> m_qOutput;
+    
+    CMxEvent m_hOutClock;
+    CMxEvent m_hBeginPlay;
+    bool m_bExitOut;
+    bool m_displayfirst;
 };
 
 #endif /* __CMXVIDEOPLAYER_H__ */

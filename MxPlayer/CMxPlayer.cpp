@@ -14,6 +14,9 @@ CMxPlayer::~CMxPlayer() {
 
 void CMxPlayer::__cmdThreadFun() {
     
+    /*
+     s（秒）、ms（毫秒）、μs（微秒）、ns（纳秒），其中：1s=1000ms，1 ms=1000μs，1μs=1000ns
+     */
     for (;;) {
         PlayerCommand cmd;
 		if (!__cmdQueue.Pop(&cmd,true))

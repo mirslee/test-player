@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5426A6EC213E6AF0001745C4 /* CMxPlayerThreadController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5426A6EA213E6AF0001745C4 /* CMxPlayerThreadController.cpp */; };
+		5426A6ED213E6AF0001745C4 /* CMxPlayerThreadController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5426A6EB213E6AF0001745C4 /* CMxPlayerThreadController.h */; };
 		54638AC7212E9873004EB5E4 /* libMxCoreD.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638AC8212E9873004EB5E4 /* libMxCoreD.dylib */; };
 		54638AD1212E989A004EB5E4 /* libswscale.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638AC9212E989A004EB5E4 /* libswscale.5.dylib */; };
 		54638AD2212E989A004EB5E4 /* libavfilter.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638ACA212E989A004EB5E4 /* libavfilter.7.dylib */; };
@@ -18,7 +20,6 @@
 		54638AD8212E989A004EB5E4 /* libswresample.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 54638AD0212E989A004EB5E4 /* libswresample.3.dylib */; };
 		54638ADB212E98F2004EB5E4 /* CMxClock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54638AD9212E98F2004EB5E4 /* CMxClock.cpp */; };
 		54638ADC212E98F2004EB5E4 /* CMxClock.h in Headers */ = {isa = PBXBuildFile; fileRef = 54638ADA212E98F2004EB5E4 /* CMxClock.h */; };
-		54C3C62E212AF230009736A1 /* MxPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C61F212AF22F009736A1 /* MxPlayer.h */; };
 		54C3C62F212AF230009736A1 /* CMxVideoPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C620212AF22F009736A1 /* CMxVideoPlayer.cpp */; };
 		54C3C630212AF230009736A1 /* VideoDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C621212AF22F009736A1 /* VideoDecoder.h */; };
 		54C3C632212AF230009736A1 /* CMxVideoPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C623212AF230009736A1 /* CMxVideoPlayer.h */; };
@@ -41,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5426A6EA213E6AF0001745C4 /* CMxPlayerThreadController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CMxPlayerThreadController.cpp; sourceTree = "<group>"; };
+		5426A6EB213E6AF0001745C4 /* CMxPlayerThreadController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMxPlayerThreadController.h; sourceTree = "<group>"; };
 		54638AC8212E9873004EB5E4 /* libMxCoreD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = libMxCoreD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		54638AC9212E989A004EB5E4 /* libswscale.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.5.dylib; path = ../dylib/libswscale.5.dylib; sourceTree = "<group>"; };
 		54638ACA212E989A004EB5E4 /* libavfilter.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.7.dylib; path = ../dylib/libavfilter.7.dylib; sourceTree = "<group>"; };
@@ -53,7 +56,6 @@
 		54638AD9212E98F2004EB5E4 /* CMxClock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CMxClock.cpp; sourceTree = "<group>"; };
 		54638ADA212E98F2004EB5E4 /* CMxClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMxClock.h; sourceTree = "<group>"; };
 		54C3C608212AF075009736A1 /* libMxPlayerD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxPlayerD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		54C3C61F212AF22F009736A1 /* MxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxPlayer.h; sourceTree = "<group>"; };
 		54C3C620212AF22F009736A1 /* CMxVideoPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxVideoPlayer.cpp; sourceTree = "<group>"; };
 		54C3C621212AF22F009736A1 /* VideoDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDecoder.h; sourceTree = "<group>"; };
 		54C3C623212AF230009736A1 /* CMxVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxVideoPlayer.h; sourceTree = "<group>"; };
@@ -148,8 +150,8 @@
 		54D2B4202137DA7700FDE754 /* header */ = {
 			isa = PBXGroup;
 			children = (
-				54C3C61F212AF22F009736A1 /* MxPlayer.h */,
 				54D2B41D2137DA6300FDE754 /* CMxPlayer.h */,
+				5426A6EB213E6AF0001745C4 /* CMxPlayerThreadController.h */,
 				54C3C623212AF230009736A1 /* CMxVideoPlayer.h */,
 				54C3C625212AF230009736A1 /* MxVideoDecoder.h */,
 				54C3C621212AF22F009736A1 /* VideoDecoder.h */,
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				54D2B41C2137DA6300FDE754 /* CMxPlayer.cpp */,
+				5426A6EA213E6AF0001745C4 /* CMxPlayerThreadController.cpp */,
 				54638AD9212E98F2004EB5E4 /* CMxClock.cpp */,
 				54C3C63B212AF309009736A1 /* MxDemuxer.cpp */,
 				54C3C62A212AF230009736A1 /* MxVideoDecoder.cpp */,
@@ -186,11 +189,11 @@
 				54C3C63C212AF309009736A1 /* MxDemuxer.h in Headers */,
 				54C3C630212AF230009736A1 /* VideoDecoder.h in Headers */,
 				54D6AB4E21338DCD00B78108 /* CMxMediaSysClock.h in Headers */,
+				5426A6ED213E6AF0001745C4 /* CMxPlayerThreadController.h in Headers */,
 				54638ADC212E98F2004EB5E4 /* CMxClock.h in Headers */,
 				54D2B41F2137DA6300FDE754 /* CMxPlayer.h in Headers */,
 				54D6AB5221338DCD00B78108 /* CMxSchedule.h in Headers */,
 				54C3C632212AF230009736A1 /* CMxVideoPlayer.h in Headers */,
-				54C3C62E212AF230009736A1 /* MxPlayer.h in Headers */,
 				54C3C634212AF230009736A1 /* MxVideoDecoder.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +261,7 @@
 				54C3C639212AF230009736A1 /* MxVideoDecoder.cpp in Sources */,
 				54D6AB4D21338DCD00B78108 /* CMxReferenceClock.cpp in Sources */,
 				54C3C63D212AF309009736A1 /* MxDemuxer.cpp in Sources */,
+				5426A6EC213E6AF0001745C4 /* CMxPlayerThreadController.cpp in Sources */,
 				54D6AB5121338DCD00B78108 /* CMxSchedule.cpp in Sources */,
 				54C3C62F212AF230009736A1 /* CMxVideoPlayer.cpp in Sources */,
 				54C3C636212AF230009736A1 /* stdafx.cpp in Sources */,

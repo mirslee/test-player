@@ -11,13 +11,13 @@
 typedef struct
 {
 	DWORD			fmt;
-	VXBOOL			topfirst;
+	bool			topfirst;
 	int				planes;		//平面数
-	PBYTE			buf[VX_MAX_PLANES];		//视频分量数据
+	BYTE*			buf[VX_MAX_PLANES];		//视频分量数据
 	int				pitch[VX_MAX_PLANES];	//每行字节大小，每行一般为 64 字节对齐的
 	int				fields;				//该帧持续的场数目
-	VXBOOL			getpic;
-	vxuintptr		reserved;			//保留数据，可存储一些附加信息。
+	bool			getpic;
+	mxuvoidptr		reserved;			//保留数据，可存储一些附加信息。
 }DECOUT_IMAGE;
 
 #define MAX_AUD_CHANNELS	64
@@ -37,18 +37,18 @@ typedef struct
 	int			nb_colors;				///< number of colors in pict, undefined when pict is not set
 
 	int			planes;					//平面数
-	PBYTE		buf[VX_MAX_PLANES];		//视频分量数据
+	BYTE*		buf[VX_MAX_PLANES];		//视频分量数据
 	int			pitch[VX_MAX_PLANES];	//每行字节大小，每行一般为 64 字节对齐的
 } SUBTITLERECT;
 
 typedef struct
 {
-	DWORD			fmt;
-	DWORD			start_display_time; //relative to packet pts, in ms 
-	DWORD			end_display_time;	// relative to packet pts, in ms
+	uint			fmt;
+	uint			start_display_time; //relative to packet pts, in ms
+	uint			end_display_time;	// relative to packet pts, in ms
 	int				num_rects;
 	SUBTITLERECT	rects[8];
-	DWORD			reserved;			//保留数据，可存储一些附加信息。
+	uint			reserved;			//保留数据，可存储一些附加信息。
 }DECOUT_SUBTITLE;
 
 struct MxPath

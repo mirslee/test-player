@@ -27,8 +27,8 @@ MainWidget::MainWidget(QWidget* parent)
 void MainWidget::resizeEvent(QResizeEvent* )
 {
     m_pBtnPlay->setGeometry(10, 10, 120, 25);
-    m_pBtnPause->setGeometry(10, 55, 120, 25);
-    m_pBtnStop->setGeometry(10, 90, 120, 25);
+    m_pBtnPause->setGeometry(10, 45, 120, 25);
+    m_pBtnStop->setGeometry(10, 80, 120, 25);
 }
 
 
