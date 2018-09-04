@@ -1,0 +1,11 @@
+Revision: 3963
+Author: zbk
+Date: 2013年4月17日 11:31:56
+Message:
+bug编号：0021687
+bug描述：特殊素材（mov封装/视频格式RLE），导入非编，非编直接闪退，无任何报错，重启非编恢复工程，出现报错提示
+问题原因：函数quicktime_user_atoms_read_atom 传入参数leaf_atom的size为0, 为0时继续分配内存,继续执行内存操作,导致崩溃
+解决方案：在leaf_atom的size为0时,不再调用quicktime_user_atoms_read_atom()函数
+测试建议：无
+----
+Modified : /trunk/srclib/libqt2/stsdtable.c

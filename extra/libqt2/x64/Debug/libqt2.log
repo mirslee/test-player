@@ -1,0 +1,178 @@
+﻿生成启动时间为 2018/5/6 11:33:39。
+     1>项目“D:\JetsenNet2NLE\srclib\libqt2\libqt2.vcxproj”在节点 4 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“x64\Debug\libqt2.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /I../../inc /I../../wininc /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _AFXDLL /D _MBCS /D _AFXDLL /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"x64\Debug\libqt2D.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /Gd /TP /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /I../../inc /I../../wininc /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _AFXDLL /D _MBCS /D _AFXDLL /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"x64\Debug\libqt2D.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /Gd /TP /errorReport:prompt atom.c chan.c charset.c clap.c colr.c ctab.c ctts.c dinf.c dref.c edts.c elst.c enda.c esds.c fiel.c frma.c ftab.c ftyp.c gama.c gmhd.c gmhd_text.c gmin.c hdlr.c imgp.c impn.c iods.c language.c log.c lqt_qtvr.c lqt_quicktime.c matrix.c mdat.c mdhd.c mdia.c minf.c moov.c mvhd.c navg.c ndhd.c nloc.c nmhd.c obji.c pano.c pasp.c pdat.c pHdr.c qtatom.c qtvr.c sdtp.c smhd.c stbl.c stco.c stps.c stsc.c stsd.c stsdtable.c stss.c stsz.c stts.c tcmi.c texttrack.c timecode.c tkhd.c tmcd.c trak.c translation.c tref.c udta.c useratoms.c util.c vmhd.c vrni.c vrnp.c vrsc.c wave.c workarounds.c
+         atom.c
+         chan.c
+         charset.c
+         clap.c
+         colr.c
+         ctab.c
+         ctts.c
+         dinf.c
+         dref.c
+         edts.c
+         elst.c
+         enda.c
+         esds.c
+         fiel.c
+         frma.c
+         ftab.c
+         ftyp.c
+         gama.c
+         gmhd.c
+         gmhd_text.c
+         Generating Code...
+         Compiling...
+         gmin.c
+         hdlr.c
+         imgp.c
+         impn.c
+         iods.c
+         language.c
+         log.c
+         lqt_qtvr.c
+         lqt_quicktime.c
+         matrix.c
+         mdat.c
+         mdhd.c
+         mdia.c
+         minf.c
+         moov.c
+         mvhd.c
+         navg.c
+         ndhd.c
+         nloc.c
+         nmhd.c
+         Generating Code...
+         Compiling...
+         obji.c
+         pano.c
+         pasp.c
+         pdat.c
+         pHdr.c
+         qtatom.c
+         qtvr.c
+         sdtp.c
+         smhd.c
+         stbl.c
+         stco.c
+         stps.c
+         stsc.c
+         stsd.c
+         stsdtable.c
+         stss.c
+         stsz.c
+         stts.c
+         tcmi.c
+         texttrack.c
+         Generating Code...
+         Compiling...
+         timecode.c
+         tkhd.c
+         tmcd.c
+         trak.c
+         translation.c
+         tref.c
+         udta.c
+         useratoms.c
+         util.c
+     1>util.c(296): warning C4244: “初始化”: 从“int64_t”转换到“int”，可能丢失数据
+         vmhd.c
+         vrni.c
+         vrnp.c
+         vrsc.c
+         wave.c
+         workarounds.c
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\Lib.exe /OUT:"D:\JetsenNet2NLE\Lib\x64\libqt2D.lib" /NOLOGO /MACHINE:X64 x64\Debug\atom.obj
+         x64\Debug\chan.obj
+         x64\Debug\charset.obj
+         x64\Debug\clap.obj
+         x64\Debug\colr.obj
+         x64\Debug\ctab.obj
+         x64\Debug\ctts.obj
+         x64\Debug\dinf.obj
+         x64\Debug\dref.obj
+         x64\Debug\edts.obj
+         x64\Debug\elst.obj
+         x64\Debug\enda.obj
+         x64\Debug\esds.obj
+         x64\Debug\fiel.obj
+         x64\Debug\frma.obj
+         x64\Debug\ftab.obj
+         x64\Debug\ftyp.obj
+         x64\Debug\gama.obj
+         x64\Debug\gmhd.obj
+         x64\Debug\gmhd_text.obj
+         x64\Debug\gmin.obj
+         x64\Debug\hdlr.obj
+         x64\Debug\imgp.obj
+         x64\Debug\impn.obj
+         x64\Debug\iods.obj
+         x64\Debug\language.obj
+         x64\Debug\log.obj
+         x64\Debug\lqt_qtvr.obj
+         x64\Debug\lqt_quicktime.obj
+         x64\Debug\matrix.obj
+         x64\Debug\mdat.obj
+         x64\Debug\mdhd.obj
+         x64\Debug\mdia.obj
+         x64\Debug\minf.obj
+         x64\Debug\moov.obj
+         x64\Debug\mvhd.obj
+         x64\Debug\navg.obj
+         x64\Debug\ndhd.obj
+         x64\Debug\nloc.obj
+         x64\Debug\nmhd.obj
+         x64\Debug\obji.obj
+         x64\Debug\pano.obj
+         x64\Debug\pasp.obj
+         x64\Debug\pdat.obj
+         x64\Debug\pHdr.obj
+         x64\Debug\qtatom.obj
+         x64\Debug\qtvr.obj
+         x64\Debug\sdtp.obj
+         x64\Debug\smhd.obj
+         x64\Debug\stbl.obj
+         x64\Debug\stco.obj
+         x64\Debug\stdafx.obj
+         x64\Debug\stps.obj
+         x64\Debug\stsc.obj
+         x64\Debug\stsd.obj
+         x64\Debug\stsdtable.obj
+         x64\Debug\stss.obj
+         x64\Debug\stsz.obj
+         x64\Debug\stts.obj
+         x64\Debug\tcmi.obj
+         x64\Debug\texttrack.obj
+         x64\Debug\timecode.obj
+         x64\Debug\tkhd.obj
+         x64\Debug\tmcd.obj
+         x64\Debug\trak.obj
+         x64\Debug\translation.obj
+         x64\Debug\tref.obj
+         x64\Debug\udta.obj
+         x64\Debug\useratoms.obj
+         x64\Debug\util.obj
+         x64\Debug\vmhd.obj
+         x64\Debug\vrni.obj
+         x64\Debug\vrnp.obj
+         x64\Debug\vrsc.obj
+         x64\Debug\wave.obj
+         x64\Debug\workarounds.obj
+     1>stdafx.obj : warning LNK4221: 此对象文件未定义任何之前未定义的公共符号，因此任何耗用此库的链接操作都不会使用此文件
+         libqt2.vcxproj -> D:\JetsenNet2NLE\Lib\x64\libqt2D.lib
+       FinalizeBuildStatus:
+         正在删除文件“x64\Debug\libqt2.unsuccessfulbuild”。
+         正在对“x64\Debug\libqt2.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\JetsenNet2NLE\srclib\libqt2\libqt2.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:09.87

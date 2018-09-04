@@ -44,6 +44,7 @@ typedef unsigned long long __uint64;
 
 typedef long LONG;
 typedef unsigned long ULONG;
+typedef unsigned long ulong;
 
 //typedef void* mxuvoidptr;
 
@@ -65,5 +66,23 @@ typedef MxIntegerSizeOf<void*>::UIntegerSize mxuvoidptr;*/
 #ifndef _WIN32
 #define HANDLE void*
 #endif
+
+//	消息来源的最高字节：模块
+#define		MAILSRC_UNKNOWN			0x00000000						//	来源不重要
+#define		MAILSRC_HARDHEL			0x01000000						//	来源自引擎
+#define		MAILSRC_HWENGINE		(MAILSRC_HARDHEL+0x00000000)	//	硬件播放引擎
+#define		MAILSRC_GETHER			(MAILSRC_HARDHEL+0x01000000)	//	硬件采集引擎
+#define		MAILSRC_SWENGINE		(MAILSRC_HARDHEL+0x02000000)	//	软件播放引擎
+#define		MAILSRC_DATACORE		0x21000000						//	数据核心出错
+#define		MAILSRC_CONFIGLV		0x22000000						//	数据核心层之下的基本配置层
+#define		MAILSRC_UIVIEW			0x41000000						//	主要界面层
+#define		MAILSRC_UIPANEL			0x61000000						//	面板
+//	消息来源的次最高字节：级别
+#define		MAILSRC_ERROR			0x00010000						//	系统出现严重错误，请存盘退出
+#define		MAILSRC_FAILED			0x00020000						//	系统出现可恢复错误
+#define		MAILSRC_WARNING			0x00030000						//	系统出现不太严重错误，最好存盘退出
+#define		MAILSRC_MESSAGE			0x00040000						//	系统发出消息
+#define		MAILSRC_LOG				0x00050000						//	发送一条记录消息，在log模式下会写入记录文件
+#define     MAILSRC_MASK			0x000f0000	
 
 #endif //__MXTYPES_H__

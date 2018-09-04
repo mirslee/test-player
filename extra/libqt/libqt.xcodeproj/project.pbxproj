@@ -1,0 +1,409 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		61F60C480EA7300700CB06DC /* atom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60BF90EA7300700CB06DC /* atom.cpp */; };
+		61F60C490EA7300700CB06DC /* cmodel_default.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C090EA7300700CB06DC /* cmodel_default.cpp */; };
+		61F60C4A0EA7300700CB06DC /* cmodel_permutation.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C0A0EA7300700CB06DC /* cmodel_permutation.h */; };
+		61F60C4B0EA7300700CB06DC /* cmodel_yuv420p.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C0B0EA7300700CB06DC /* cmodel_yuv420p.cpp */; };
+		61F60C4C0EA7300700CB06DC /* cmodel_yuv422.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C0C0EA7300700CB06DC /* cmodel_yuv422.cpp */; };
+		61F60C5B0EA7300700CB06DC /* colormodels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C1B0EA7300700CB06DC /* colormodels.cpp */; };
+		61F60C5C0EA7300700CB06DC /* colormodels.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C1C0EA7300700CB06DC /* colormodels.h */; };
+		61F60C5D0EA7300700CB06DC /* ctab.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C1D0EA7300700CB06DC /* ctab.cpp */; };
+		61F60C5E0EA7300700CB06DC /* ctab.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C1E0EA7300700CB06DC /* ctab.h */; };
+		61F60C5F0EA7300700CB06DC /* dinf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C1F0EA7300700CB06DC /* dinf.cpp */; };
+		61F60C600EA7300700CB06DC /* dref.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C200EA7300700CB06DC /* dref.cpp */; };
+		61F60C610EA7300700CB06DC /* edts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C210EA7300700CB06DC /* edts.cpp */; };
+		61F60C620EA7300700CB06DC /* elst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C220EA7300700CB06DC /* elst.cpp */; };
+		61F60C630EA7300700CB06DC /* esds.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C230EA7300700CB06DC /* esds.cpp */; };
+		61F60C640EA7300700CB06DC /* gmhd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C240EA7300700CB06DC /* gmhd.cpp */; };
+		61F60C650EA7300700CB06DC /* hdlr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C250EA7300700CB06DC /* hdlr.cpp */; };
+		61F60C660EA7300700CB06DC /* io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C260EA7300700CB06DC /* io.cpp */; };
+		61F60C670EA7300700CB06DC /* iods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C270EA7300700CB06DC /* iods.cpp */; };
+		61F60C680EA7300700CB06DC /* libqt.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C280EA7300700CB06DC /* libqt.h */; };
+		61F60C690EA7300700CB06DC /* m12v.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C290EA7300700CB06DC /* m12v.cpp */; };
+		61F60C6A0EA7300700CB06DC /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C2A0EA7300700CB06DC /* matrix.cpp */; };
+		61F60C6B0EA7300700CB06DC /* mdat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C2B0EA7300700CB06DC /* mdat.cpp */; };
+		61F60C6C0EA7300700CB06DC /* mdhd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C2C0EA7300700CB06DC /* mdhd.cpp */; };
+		61F60C6D0EA7300700CB06DC /* mdia.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C2D0EA7300700CB06DC /* mdia.cpp */; };
+		61F60C6E0EA7300700CB06DC /* minf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C2E0EA7300700CB06DC /* minf.cpp */; };
+		61F60C6F0EA7300700CB06DC /* moov.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C2F0EA7300700CB06DC /* moov.cpp */; };
+		61F60C700EA7300700CB06DC /* mvhd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C300EA7300700CB06DC /* mvhd.cpp */; };
+		61F60C720EA7300700CB06DC /* qtcodec.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C320EA7300700CB06DC /* qtcodec.h */; };
+		61F60C730EA7300700CB06DC /* qtfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C330EA7300700CB06DC /* qtfile.cpp */; };
+		61F60C740EA7300700CB06DC /* qtfuncs.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C340EA7300700CB06DC /* qtfuncs.h */; };
+		61F60C750EA7300700CB06DC /* qttype.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C350EA7300700CB06DC /* qttype.h */; };
+		61F60C760EA7300700CB06DC /* smhd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C360EA7300700CB06DC /* smhd.cpp */; };
+		61F60C770EA7300700CB06DC /* stbl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C370EA7300700CB06DC /* stbl.cpp */; };
+		61F60C780EA7300700CB06DC /* stco.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C380EA7300700CB06DC /* stco.cpp */; };
+		61F60C790EA7300700CB06DC /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C390EA7300700CB06DC /* stdafx.cpp */; };
+		61F60C7A0EA7300700CB06DC /* stdafx.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C3A0EA7300700CB06DC /* stdafx.h */; };
+		61F60C7B0EA7300700CB06DC /* stsc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C3B0EA7300700CB06DC /* stsc.cpp */; };
+		61F60C7C0EA7300700CB06DC /* stsd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C3C0EA7300700CB06DC /* stsd.cpp */; };
+		61F60C7D0EA7300700CB06DC /* stsdtable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C3D0EA7300700CB06DC /* stsdtable.cpp */; };
+		61F60C7E0EA7300700CB06DC /* stss.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C3E0EA7300700CB06DC /* stss.cpp */; };
+		61F60C7F0EA7300700CB06DC /* stsz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C3F0EA7300700CB06DC /* stsz.cpp */; };
+		61F60C800EA7300700CB06DC /* stts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C400EA7300700CB06DC /* stts.cpp */; };
+		61F60C810EA7300700CB06DC /* tkhd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C410EA7300700CB06DC /* tkhd.cpp */; };
+		61F60C820EA7300700CB06DC /* trak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C420EA7300700CB06DC /* trak.cpp */; };
+		61F60C830EA7300700CB06DC /* udta.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C430EA7300700CB06DC /* udta.cpp */; };
+		61F60C840EA7300700CB06DC /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C440EA7300700CB06DC /* util.cpp */; };
+		61F60C850EA7300700CB06DC /* vmhd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F60C450EA7300700CB06DC /* vmhd.cpp */; };
+		61F60C860EA7300700CB06DC /* zconf.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C460EA7300700CB06DC /* zconf.h */; };
+		61F60C870EA7300700CB06DC /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F60C470EA7300700CB06DC /* zlib.h */; };
+		D2AAC0700554677100DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08FB77AAFE841565C02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		32BAE0B70371A74B00C91783 /* libqt_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libqt_Prefix.pch; sourceTree = "<group>"; };
+		61F60BF90EA7300700CB06DC /* atom.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = atom.cpp; sourceTree = "<group>"; };
+		61F60C090EA7300700CB06DC /* cmodel_default.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = cmodel_default.cpp; sourceTree = "<group>"; };
+		61F60C0A0EA7300700CB06DC /* cmodel_permutation.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = cmodel_permutation.h; sourceTree = "<group>"; };
+		61F60C0B0EA7300700CB06DC /* cmodel_yuv420p.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = cmodel_yuv420p.cpp; sourceTree = "<group>"; };
+		61F60C0C0EA7300700CB06DC /* cmodel_yuv422.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = cmodel_yuv422.cpp; sourceTree = "<group>"; };
+		61F60C1B0EA7300700CB06DC /* colormodels.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = colormodels.cpp; sourceTree = "<group>"; };
+		61F60C1C0EA7300700CB06DC /* colormodels.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = colormodels.h; sourceTree = "<group>"; };
+		61F60C1D0EA7300700CB06DC /* ctab.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = ctab.cpp; sourceTree = "<group>"; };
+		61F60C1E0EA7300700CB06DC /* ctab.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = ctab.h; sourceTree = "<group>"; };
+		61F60C1F0EA7300700CB06DC /* dinf.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = dinf.cpp; sourceTree = "<group>"; };
+		61F60C200EA7300700CB06DC /* dref.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = dref.cpp; sourceTree = "<group>"; };
+		61F60C210EA7300700CB06DC /* edts.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = edts.cpp; sourceTree = "<group>"; };
+		61F60C220EA7300700CB06DC /* elst.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = elst.cpp; sourceTree = "<group>"; };
+		61F60C230EA7300700CB06DC /* esds.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = esds.cpp; sourceTree = "<group>"; };
+		61F60C240EA7300700CB06DC /* gmhd.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = gmhd.cpp; sourceTree = "<group>"; };
+		61F60C250EA7300700CB06DC /* hdlr.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = hdlr.cpp; sourceTree = "<group>"; };
+		61F60C260EA7300700CB06DC /* io.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = io.cpp; sourceTree = "<group>"; };
+		61F60C270EA7300700CB06DC /* iods.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = iods.cpp; sourceTree = "<group>"; };
+		61F60C280EA7300700CB06DC /* libqt.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = libqt.h; sourceTree = "<group>"; };
+		61F60C290EA7300700CB06DC /* m12v.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = m12v.cpp; sourceTree = "<group>"; };
+		61F60C2A0EA7300700CB06DC /* matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = matrix.cpp; sourceTree = "<group>"; };
+		61F60C2B0EA7300700CB06DC /* mdat.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = mdat.cpp; sourceTree = "<group>"; };
+		61F60C2C0EA7300700CB06DC /* mdhd.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = mdhd.cpp; sourceTree = "<group>"; };
+		61F60C2D0EA7300700CB06DC /* mdia.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = mdia.cpp; sourceTree = "<group>"; };
+		61F60C2E0EA7300700CB06DC /* minf.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = minf.cpp; sourceTree = "<group>"; };
+		61F60C2F0EA7300700CB06DC /* moov.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = moov.cpp; sourceTree = "<group>"; };
+		61F60C300EA7300700CB06DC /* mvhd.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = mvhd.cpp; sourceTree = "<group>"; };
+		61F60C320EA7300700CB06DC /* qtcodec.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = qtcodec.h; sourceTree = "<group>"; };
+		61F60C330EA7300700CB06DC /* qtfile.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = qtfile.cpp; sourceTree = "<group>"; };
+		61F60C340EA7300700CB06DC /* qtfuncs.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = qtfuncs.h; sourceTree = "<group>"; };
+		61F60C350EA7300700CB06DC /* qttype.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = qttype.h; sourceTree = "<group>"; };
+		61F60C360EA7300700CB06DC /* smhd.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = smhd.cpp; sourceTree = "<group>"; };
+		61F60C370EA7300700CB06DC /* stbl.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = stbl.cpp; sourceTree = "<group>"; };
+		61F60C380EA7300700CB06DC /* stco.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = stco.cpp; sourceTree = "<group>"; };
+		61F60C390EA7300700CB06DC /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		61F60C3A0EA7300700CB06DC /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		61F60C3B0EA7300700CB06DC /* stsc.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = stsc.cpp; sourceTree = "<group>"; };
+		61F60C3C0EA7300700CB06DC /* stsd.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = stsd.cpp; sourceTree = "<group>"; };
+		61F60C3D0EA7300700CB06DC /* stsdtable.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = stsdtable.cpp; sourceTree = "<group>"; };
+		61F60C3E0EA7300700CB06DC /* stss.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = stss.cpp; sourceTree = "<group>"; };
+		61F60C3F0EA7300700CB06DC /* stsz.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = stsz.cpp; sourceTree = "<group>"; };
+		61F60C400EA7300700CB06DC /* stts.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = stts.cpp; sourceTree = "<group>"; };
+		61F60C410EA7300700CB06DC /* tkhd.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = tkhd.cpp; sourceTree = "<group>"; };
+		61F60C420EA7300700CB06DC /* trak.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = trak.cpp; sourceTree = "<group>"; };
+		61F60C430EA7300700CB06DC /* udta.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = udta.cpp; sourceTree = "<group>"; };
+		61F60C440EA7300700CB06DC /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		61F60C450EA7300700CB06DC /* vmhd.cpp */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.cpp.cpp; path = vmhd.cpp; sourceTree = "<group>"; };
+		61F60C460EA7300700CB06DC /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = zconf.h; sourceTree = "<group>"; };
+		61F60C470EA7300700CB06DC /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 2147484705; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
+		D2AAC06F0554671400DB518D /* libqtd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libqtd.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC06D0554671400DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2AAC0700554677100DB518D /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DDFF38A45A11DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC06F0554671400DB518D /* libqtd.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* libqt */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77ACFE841707C02AAC07 /* Source */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				034768DDFF38A45A11DB9C8B /* Products */,
+			);
+			name = libqt;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AAFE841565C02AAC07 /* Carbon.framework */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		08FB77ACFE841707C02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				61F60BF90EA7300700CB06DC /* atom.cpp */,
+				61F60C090EA7300700CB06DC /* cmodel_default.cpp */,
+				61F60C0A0EA7300700CB06DC /* cmodel_permutation.h */,
+				61F60C0B0EA7300700CB06DC /* cmodel_yuv420p.cpp */,
+				61F60C0C0EA7300700CB06DC /* cmodel_yuv422.cpp */,
+				61F60C1B0EA7300700CB06DC /* colormodels.cpp */,
+				61F60C1C0EA7300700CB06DC /* colormodels.h */,
+				61F60C1D0EA7300700CB06DC /* ctab.cpp */,
+				61F60C1E0EA7300700CB06DC /* ctab.h */,
+				61F60C1F0EA7300700CB06DC /* dinf.cpp */,
+				61F60C200EA7300700CB06DC /* dref.cpp */,
+				61F60C210EA7300700CB06DC /* edts.cpp */,
+				61F60C220EA7300700CB06DC /* elst.cpp */,
+				61F60C230EA7300700CB06DC /* esds.cpp */,
+				61F60C240EA7300700CB06DC /* gmhd.cpp */,
+				61F60C250EA7300700CB06DC /* hdlr.cpp */,
+				61F60C260EA7300700CB06DC /* io.cpp */,
+				61F60C270EA7300700CB06DC /* iods.cpp */,
+				61F60C280EA7300700CB06DC /* libqt.h */,
+				61F60C290EA7300700CB06DC /* m12v.cpp */,
+				61F60C2A0EA7300700CB06DC /* matrix.cpp */,
+				61F60C2B0EA7300700CB06DC /* mdat.cpp */,
+				61F60C2C0EA7300700CB06DC /* mdhd.cpp */,
+				61F60C2D0EA7300700CB06DC /* mdia.cpp */,
+				61F60C2E0EA7300700CB06DC /* minf.cpp */,
+				61F60C2F0EA7300700CB06DC /* moov.cpp */,
+				61F60C300EA7300700CB06DC /* mvhd.cpp */,
+				61F60C320EA7300700CB06DC /* qtcodec.h */,
+				61F60C330EA7300700CB06DC /* qtfile.cpp */,
+				61F60C340EA7300700CB06DC /* qtfuncs.h */,
+				61F60C350EA7300700CB06DC /* qttype.h */,
+				61F60C360EA7300700CB06DC /* smhd.cpp */,
+				61F60C370EA7300700CB06DC /* stbl.cpp */,
+				61F60C380EA7300700CB06DC /* stco.cpp */,
+				61F60C390EA7300700CB06DC /* stdafx.cpp */,
+				61F60C3A0EA7300700CB06DC /* stdafx.h */,
+				61F60C3B0EA7300700CB06DC /* stsc.cpp */,
+				61F60C3C0EA7300700CB06DC /* stsd.cpp */,
+				61F60C3D0EA7300700CB06DC /* stsdtable.cpp */,
+				61F60C3E0EA7300700CB06DC /* stss.cpp */,
+				61F60C3F0EA7300700CB06DC /* stsz.cpp */,
+				61F60C400EA7300700CB06DC /* stts.cpp */,
+				61F60C410EA7300700CB06DC /* tkhd.cpp */,
+				61F60C420EA7300700CB06DC /* trak.cpp */,
+				61F60C430EA7300700CB06DC /* udta.cpp */,
+				61F60C440EA7300700CB06DC /* util.cpp */,
+				61F60C450EA7300700CB06DC /* vmhd.cpp */,
+				61F60C460EA7300700CB06DC /* zconf.h */,
+				61F60C470EA7300700CB06DC /* zlib.h */,
+				32BAE0B70371A74B00C91783 /* libqt_Prefix.pch */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC06B0554671400DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61F60C4A0EA7300700CB06DC /* cmodel_permutation.h in Headers */,
+				61F60C5C0EA7300700CB06DC /* colormodels.h in Headers */,
+				61F60C5E0EA7300700CB06DC /* ctab.h in Headers */,
+				61F60C680EA7300700CB06DC /* libqt.h in Headers */,
+				61F60C720EA7300700CB06DC /* qtcodec.h in Headers */,
+				61F60C740EA7300700CB06DC /* qtfuncs.h in Headers */,
+				61F60C750EA7300700CB06DC /* qttype.h in Headers */,
+				61F60C7A0EA7300700CB06DC /* stdafx.h in Headers */,
+				61F60C860EA7300700CB06DC /* zconf.h in Headers */,
+				61F60C870EA7300700CB06DC /* zlib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC06E0554671400DB518D /* libqt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB920108733DBB0010E9CD /* Build configuration list for PBXNativeTarget "libqt" */;
+			buildPhases = (
+				D2AAC06B0554671400DB518D /* Headers */,
+				D2AAC06C0554671400DB518D /* Sources */,
+				D2AAC06D0554671400DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libqt;
+			productName = libqt;
+			productReference = D2AAC06F0554671400DB518D /* libqtd.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB920508733DBB0010E9CD /* Build configuration list for PBXProject "libqt" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* libqt */;
+			productRefGroup = 034768DDFF38A45A11DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC06E0554671400DB518D /* libqt */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC06C0554671400DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61F60C480EA7300700CB06DC /* atom.cpp in Sources */,
+				61F60C490EA7300700CB06DC /* cmodel_default.cpp in Sources */,
+				61F60C4B0EA7300700CB06DC /* cmodel_yuv420p.cpp in Sources */,
+				61F60C4C0EA7300700CB06DC /* cmodel_yuv422.cpp in Sources */,
+				61F60C5B0EA7300700CB06DC /* colormodels.cpp in Sources */,
+				61F60C5D0EA7300700CB06DC /* ctab.cpp in Sources */,
+				61F60C5F0EA7300700CB06DC /* dinf.cpp in Sources */,
+				61F60C600EA7300700CB06DC /* dref.cpp in Sources */,
+				61F60C610EA7300700CB06DC /* edts.cpp in Sources */,
+				61F60C620EA7300700CB06DC /* elst.cpp in Sources */,
+				61F60C630EA7300700CB06DC /* esds.cpp in Sources */,
+				61F60C640EA7300700CB06DC /* gmhd.cpp in Sources */,
+				61F60C650EA7300700CB06DC /* hdlr.cpp in Sources */,
+				61F60C660EA7300700CB06DC /* io.cpp in Sources */,
+				61F60C670EA7300700CB06DC /* iods.cpp in Sources */,
+				61F60C690EA7300700CB06DC /* m12v.cpp in Sources */,
+				61F60C6A0EA7300700CB06DC /* matrix.cpp in Sources */,
+				61F60C6B0EA7300700CB06DC /* mdat.cpp in Sources */,
+				61F60C6C0EA7300700CB06DC /* mdhd.cpp in Sources */,
+				61F60C6D0EA7300700CB06DC /* mdia.cpp in Sources */,
+				61F60C6E0EA7300700CB06DC /* minf.cpp in Sources */,
+				61F60C6F0EA7300700CB06DC /* moov.cpp in Sources */,
+				61F60C700EA7300700CB06DC /* mvhd.cpp in Sources */,
+				61F60C730EA7300700CB06DC /* qtfile.cpp in Sources */,
+				61F60C760EA7300700CB06DC /* smhd.cpp in Sources */,
+				61F60C770EA7300700CB06DC /* stbl.cpp in Sources */,
+				61F60C780EA7300700CB06DC /* stco.cpp in Sources */,
+				61F60C790EA7300700CB06DC /* stdafx.cpp in Sources */,
+				61F60C7B0EA7300700CB06DC /* stsc.cpp in Sources */,
+				61F60C7C0EA7300700CB06DC /* stsd.cpp in Sources */,
+				61F60C7D0EA7300700CB06DC /* stsdtable.cpp in Sources */,
+				61F60C7E0EA7300700CB06DC /* stss.cpp in Sources */,
+				61F60C7F0EA7300700CB06DC /* stsz.cpp in Sources */,
+				61F60C800EA7300700CB06DC /* stts.cpp in Sources */,
+				61F60C810EA7300700CB06DC /* tkhd.cpp in Sources */,
+				61F60C820EA7300700CB06DC /* trak.cpp in Sources */,
+				61F60C830EA7300700CB06DC /* udta.cpp in Sources */,
+				61F60C840EA7300700CB06DC /* util.cpp in Sources */,
+				61F60C850EA7300700CB06DC /* vmhd.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB920208733DBB0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../lib;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = libqt_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = qtd;
+				USER_HEADER_SEARCH_PATHS = ../../inc;
+			};
+			name = Debug;
+		};
+		1DEB920308733DBB0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../lib;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = libqt_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = qt;
+				USER_HEADER_SEARCH_PATHS = ../../inc;
+			};
+			name = Release;
+		};
+		1DEB920608733DBB0010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = ../../lib;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				USER_HEADER_SEARCH_PATHS = ../../inc;
+			};
+			name = Debug;
+		};
+		1DEB920708733DBB0010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB920108733DBB0010E9CD /* Build configuration list for PBXNativeTarget "libqt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB920208733DBB0010E9CD /* Debug */,
+				1DEB920308733DBB0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB920508733DBB0010E9CD /* Build configuration list for PBXProject "libqt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB920608733DBB0010E9CD /* Debug */,
+				1DEB920708733DBB0010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

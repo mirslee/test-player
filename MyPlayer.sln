@@ -14,9 +14,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{658D97BA-FEE8-4474-8782-ADD7F5CB6628}"
 	ProjectSection(SolutionItems) = preProject
 		include\CMxArray.h = include\CMxArray.h
+		include\CMxList.h = include\CMxList.h
 		include\CMxQueue.h = include\CMxQueue.h
 		include\MxCodec.h = include\MxCodec.h
-		include\mxConfig1.h = include\mxConfig1.h
 		include\MxDllexport.h = include\MxDllexport.h
 		include\MxError.h = include\MxError.h
 		include\MxInterface.h = include\MxInterface.h
