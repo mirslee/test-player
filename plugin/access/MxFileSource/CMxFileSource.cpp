@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "MxGlobal.h"
 #include "CMxFileSource.h"
 #include "MxInterface.h"
 
@@ -28,15 +29,15 @@ CMxFileSource::~CMxFileSource() {
 long CMxFileSource::queryInterfaceDelegate(long iid, void** ppv) {
     if(iid == LIID_IVxSource)
     {
-        //return GetVxInterface(static_cast<IVxSource *>(this), ppv);
+        return mxGetInterface(static_cast<MxSource *>(this), ppv);
     }
     else if(iid == LIID_IVxFastIO)
     {
-        //return GetVxInterface(static_cast<IVxFastIO *>(this), ppv);
+        return mxGetInterface(static_cast<MxFastIO *>(this), ppv);
     }
     else
     {
-        //return CVxObject::NonDelegatingQueryInterface(iid, ppv);
+        return CMxObject::queryInterfaceDelgate(iid, ppv);
     }
     return
 }
@@ -217,7 +218,7 @@ typedef struct _STORAGE_DEVICE_DESCRIPTOR {
 #define IOCTL_STORAGE_QUERY_PROPERTY                CTL_CODE(IOCTL_STORAGE_BASE, 0x0500, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #endif
 
-VXBOOL IsRemovable(const vxUWChar* filepath)
+bool isRemovable(const char* filepath)
 {
     if(filepath[1] != ':')
     {
@@ -233,14 +234,9 @@ VXBOOL IsRemovable(const vxUWChar* filepath)
     STORAGE_PROPERTY_QUERY query = {StorageDeviceProperty, PropertyStandardQuery};
     STORAGE_DEVICE_DESCRIPTOR desc = {0, sizeof(STORAGE_DEVICE_DESCRIPTOR)};
     DWORD lOutBytes = 0;
-    VXBOOL ret = DeviceIoControl(hDevice, IOCTL_STORAGE_QUERY_PROPERTY, &query, sizeof(STORAGE_PROPERTY_QUERY), &desc, sizeof(STORAGE_DEVICE_DESCRIPTOR), &lOutBytes, NULL);
+    bool ret = DeviceIoControl(hDevice, IOCTL_STORAGE_QUERY_PROPERTY, &query, sizeof(STORAGE_PROPERTY_QUERY), &desc, sizeof(STORAGE_DEVICE_DESCRIPTOR), &lOutBytes, NULL);
     CloseHandle(hDevice);
     return ret ? ((desc.BusType == BusType1394) || (desc.BusType == BusTypeUsb)) : FALSE;
-}
-
-extern "C"
-{
-    extern VX_EXT_API VXBOOL g_bSyncRead;
 }
 
 LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
@@ -263,24 +259,24 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
             }
             else
             {
-                DWORD vSysErrId = vxGetSysLastError();
+                /*DWORD vSysErrId = vxGetSysLastError();
                 if (vSysErrId != 38) // 38: 到达文件结尾
                 {
                     char vErrStr[256] = {0};
                     sprintf(vErrStr, vxLoadMessageLV("Read source file ReadFile Error, Pos:%lld, Size:%d, SysError:[%d]%s"), pos, nNumberOfBytesToRead, vSysErrId, vxGetSysErrorString(vSysErrId));
                     VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
-                }
+                }*/
             }
         }
         else
         {
-            DWORD vSysErrId = vxGetSysLastError();
+            /*DWORD vSysErrId = vxGetSysLastError();
             if (vSysErrId != 38) // 38: 到达文件结尾
             {
                 char vErrStr[256] = {0};
                 sprintf(vErrStr, vxLoadMessageLV("Read source file SetFilePointer Error, Pos:%lld, Size:%d, SysError:[%d]%s"), pos, nNumberOfBytesToRead, vSysErrId, vxGetSysErrorString(vSysErrId));
                 VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
-            }
+            }*/
         }
     }
     else
@@ -307,18 +303,18 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
                     }
                     else
                     {
-                        DWORD vSysErrId = vxGetSysLastError();
+                        /*DWORD vSysErrId = vxGetSysLastError();
                         if (vSysErrId != 38) // 38: 到达文件结尾
                         {
                             char vErrStr[256] = {0};
                             sprintf(vErrStr, vxLoadMessageLV("Read source file GetOverlappedResult Error, Pos:%lld, Size:%d, SysError:[%d]%s"), pos, nNumberOfBytesToRead, vSysErrId, vxGetSysErrorString(vSysErrId));
                             VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
-                        }
+                        }*/
                     }
                 }
                 else
                 {
-                    char vErrStr[256] = {0};
+                    /*char vErrStr[256] = {0};
                     sprintf(vErrStr, vxLoadMessageLV("Read source file Over Time Error, Pos:%lld, Size:%d"), pos, nNumberOfBytesToRead);
                     VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
                     
@@ -332,7 +328,7 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
                         DWORD vSysErrId = vxGetSysLastError();
                         sprintf(vErrStr, vxLoadMessageLV("Read source file Over Time CancelIo Error, Pos:%lld, Size:%d, SysError:[%d]%s"), pos, nNumberOfBytesToRead, vSysErrId, vxGetSysErrorString(vSysErrId));
                         VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
-                    }
+                    }*/
                 }
             }
         }
@@ -341,7 +337,7 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
     return (frp->reads = lread);
 }
 
-HANDLE __openfastiohandle(const char* filename, VXBOOL unbuffer)
+HANDLE __openfastiohandle(const char* filename, bool unbuffer)
 {
     int slen = (int)strlen(filename) + 1;
     vxUWChar* wchUTF16 = VXNew(vxUWChar, slen);
@@ -372,7 +368,7 @@ HANDLE __openfastiohandle(const char* filename, VXBOOL unbuffer)
     return fastio;
 }
 
-void CVxFileSource::AddFastIO(IVxFastIORead* pFastIO)
+void CMxFileSource::AddFastIO(MxFastIORead* pFastIO)
 {
     HANDLE hFast = __openfastiohandle(m_filepath.szPath, m_bUnbuffer);
     if(pFastIO->InitFile(hFast, this, m_fid, m_sectorsize, filefastioread))
@@ -385,19 +381,19 @@ void CVxFileSource::AddFastIO(IVxFastIORead* pFastIO)
     }
 };
 
-void CVxFileSource::RemoveFastIO(int nFastIoID, HVXFILE hFile)
+void CMxFileSource::RemoveFastIO(int nFastIoID, HVXFILE hFile)
 {
     m_pFastIO[nFastIoID] = NULL;
     CloseHandle(hFile);
 }
 
-void CVxFileSource::Close()
+void CMxFileSource::Close()
 {
     if((m_hFile != INVALID_HANDLE_VALUE) && (m_hFile != NULL))
     {
         if(m_fid != -1)
         {
-            _vxUnrefFile(m_fid);
+            //_vxUnrefFile(m_fid);
         }
         CloseHandle(m_hFile);
         m_hFile = INVALID_HANDLE_VALUE;
@@ -405,40 +401,58 @@ void CVxFileSource::Close()
     }
 }
 
-VXBOOL CVxFileSource::__open(const char* filename,VXBOOL unbuffer)
+DWORD __cdecl _vxGetSectorSizeForFileNameW(const char* lpFileName)
 {
-    int slen = (int)strlen(filename) + 1;
+	return 512;
+	//vxUWChar szRoot[MAX_PATH];
+	//DWORD dwSectorSize;
+	//if (SplitPathRootW(szRoot, lpFileName) == NULL)
+	//{
+	//	return 512; // (DWORD) - 1;
+	//}
+	//DWORD dwSectorsPerCluster, dwNumberOfFreeClusters, dwTotalNumberOfClusters;
+	//if (0 == GetDiskFreeSpaceW((LPCWSTR)szRoot, &dwSectorsPerCluster, &dwSectorSize, &dwNumberOfFreeClusters, &dwTotalNumberOfClusters))
+	//{
+	//	return 512; // (DWORD) - 1;
+	//}
+	//return dwSectorSize;
+}
+
+bool CMxFileSource::__open(const char* filename,bool unbuffer)
+{
+	const char* wchUTF16 = filename;
+    /*int slen = (int)strlen(filename) + 1;
     vxUWChar* wchUTF16 = VXNew(vxUWChar, slen);
     memset(wchUTF16, 0, slen * 2);
 #ifdef USE_UTF8PATH
     utf82utf16(filename, wchUTF16, slen);
 #else
     gbk2utf16(filename, wchUTF16, slen);
-#endif
+#endif*/
     m_bUnbuffer = unbuffer;
     DWORD dwOpenFlags = FILE_ATTRIBUTE_NORMAL | FILE_FLAG_SEQUENTIAL_SCAN;
     m_hFile = CreateFileW((LPCWSTR)wchUTF16, GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, dwOpenFlags, NULL);
     if ((m_hFile == INVALID_HANDLE_VALUE) || (m_hFile == NULL))
     {
         char vErrStr[1000] = {0};
-        DWORD vSysErrId = vxGetSysLastError();
+        /*DWORD vSysErrId = vxGetSysLastError();
         sprintf(vErrStr, vxLoadMessageLV("open source file Error, FileName: %s, SysError:[%d]%s"), filename, vSysErrId, vxGetSysErrorString(vSysErrId));
         VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxFileSource::__open"), 0, MAILSRC_HWENGINE | MAILSRC_ERROR);
         
-        VXFree(wchUTF16);
-        return FALSE;
+        VXFree(wchUTF16);*/
+        return false;
     }
     m_i64FilePosition = 0;
-    BOOL vRet = GetFileSizeEx(m_hFile, (PLARGE_INTEGER)&m_i64FileSize);
+    bool vRet = GetFileSizeEx(m_hFile, (PLARGE_INTEGER)&m_i64FileSize);
     if (0 == vRet)
     {
         char vErrStr[1000] = {0};
-        DWORD vSysErrId = vxGetSysLastError();
+        /*DWORD vSysErrId = vxGetSysLastError();
         sprintf(vErrStr, vxLoadMessageLV("source file get file size Error, FileName: %s, SysError:[%d]%s"), filename, vSysErrId, vxGetSysErrorString(vSysErrId));
         VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxFileSource::__open"), 0, MAILSRC_HWENGINE | MAILSRC_ERROR);
         
-        VXFree(wchUTF16);
-        return FALSE;
+        VXFree(wchUTF16);*/
+        return false;
     }
     
     m_sectorsize = _vxGetSectorSizeForFileNameW(wchUTF16);
@@ -447,7 +461,7 @@ VXBOOL CVxFileSource::__open(const char* filename,VXBOOL unbuffer)
         // 在SMB读取和新硬盘1TB以上可能出现512读取失败的情况
         m_sectorsize = 4096;
     }
-    m_removable = IsRemovable(wchUTF16);
+    m_removable = isRemovable(wchUTF16);
     if(m_removable)
     {
         m_storagetype = st_removable;
@@ -461,36 +475,36 @@ VXBOOL CVxFileSource::__open(const char* filename,VXBOOL unbuffer)
     return TRUE;
 }
 
-void CVxFileSource::Refresh()
+void CMxFileSource::Refresh()
 {
     GetFileSizeEx(m_hFile, (PLARGE_INTEGER)&m_i64FileSize);
 }
 
-LONG CVxFileSource::Read(PBYTE buf, LONG size, int bSeek)
+long CMxFileSource::read(uint8* buf, long size, int bSeek)
 {
     __int64 realpos = 0;
     if (!SetFilePointerEx(m_hFile, *(LARGE_INTEGER*)&m_i64FilePosition, (LARGE_INTEGER*)&realpos, FILE_BEGIN) || (realpos != m_i64FilePosition))
     {
         char vErrStr[256] = {0};
-        DWORD vSysErrId = vxGetSysLastError();
-        sprintf(vErrStr, vxLoadMessageLV("read source file SetFilePointerEx Error, Pos:%lld, Size:%d, SysError:[%d]%s"), m_i64FilePosition, size, vSysErrId, vxGetSysErrorString(vSysErrId));
-        VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxFileSource::Read"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
+        //DWORD vSysErrId = vxGetSysLastError();
+        //sprintf(vErrStr, vxLoadMessageLV("read source file SetFilePointerEx Error, Pos:%lld, Size:%d, SysError:[%d]%s"), m_i64FilePosition, size, vSysErrId, vxGetSysErrorString(vSysErrId));
+        //VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxFileSource::Read"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
         return -1;
     }
     DWORD dwActual;
     if(!ReadFile(m_hFile, buf, size, &dwActual,NULL))
     {
         char vErrStr[256] = {0};
-        DWORD vSysErrId = vxGetSysLastError();
-        sprintf(vErrStr, vxLoadMessageLV("read source file ReadFile Error, Pos:%lld, Size:%d, SysError:[%d]%s"), m_i64FilePosition, size, vSysErrId, vxGetSysErrorString(vSysErrId));
-        VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxFileSource::Read"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
+        //DWORD vSysErrId = vxGetSysLastError();
+        //sprintf(vErrStr, vxLoadMessageLV("read source file ReadFile Error, Pos:%lld, Size:%d, SysError:[%d]%s"), m_i64FilePosition, size, vSysErrId, vxGetSysErrorString(vSysErrId));
+        //VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxFileSource::Read"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
         return -1;
     }
     m_i64FilePosition += dwActual;
     return (LONG)dwActual;
 }
 
-void CVxFileSource::InfoEnd()
+void CMxFileSource::InfoEnd()
 {
     
 }
@@ -498,6 +512,23 @@ void CVxFileSource::InfoEnd()
 #else
 
 #if defined(__APPLE__)
+
+DWORD __cdecl _vxGetSectorSizeForFileName(const char* lpFileName)
+{
+	FSRef fileref = { 0 };
+	if (FSPathMakeRef((UInt8*)lpFileName, &fileref, NULL) == noErr)
+	{
+		FSCatalogInfo	catalogInfo;
+		if (FSGetCatalogInfo(&fileref, kFSCatInfoVolume, &catalogInfo, NULL, NULL, NULL) == noErr)
+		{
+			FSVolumeInfo vinfo;
+			if (FSGetVolumeInfo(catalogInfo.volume, 0, NULL, kFSVolInfoBlocks, &vinfo, NULL, NULL) == noErr)
+				return vinfo.blockSize;
+		}
+	}
+
+	return 2048;
+}
 
 long filefastioread(FASTRDPARAM* frp, asynccallback acb)
 {
@@ -699,11 +730,11 @@ void CMxFileSource::Refresh()
 
 #endif
 
-LONG CMxFileSource::GetExtra(IVxSource** extra)
+long CMxFileSource::getExtra(MxSource** extra)
 {
     if(m_extra)
     {
-        return GetVxInterface(m_extra, (void**)extra);
+        return mxGetInterface(m_extra, (void**)extra);
     }
     if(strlen(m_filepath.szExtraPath) <= 0)
     {
@@ -712,61 +743,61 @@ LONG CMxFileSource::GetExtra(IVxSource** extra)
     CMxFileSource* ext = new CMxFileSource;
     if(!ext->__open(m_filepath.szExtraPath, FALSE))
     {
-        ext->Close();
+        ext->close();
         delete ext;
         return -1;
     }
-    return GetVxInterface(static_cast<IVxSource *>(ext), (void**)extra);
+    return mxGetInterface(static_cast<MxSource *>(ext), (void**)extra);
 }
 
-LONG CMxFileSource::GetExtra(const char* privatefile, IVxSource** extra)
+long CMxFileSource::getExtra(const char* privatefile, MxSource** extra)
 {
-    CVxFileSource* ext = new CVxFileSource;
+	CMxFileSource* ext = new CMxFileSource;
     if(!ext->__open(privatefile, FALSE))
     {
-        ext->Close();
+        ext->close();
         delete ext;
         return -1;
     }
-    return GetVxInterface(static_cast<IVxSource *>(ext), (void**)extra);
+    return mxGetInterface(static_cast<MxSource *>(ext), (void**)extra);
 }
 
-void CMxFileSource::GetFileName(LPVX_AVPATH file)
+void CMxFileSource::getFileName(MxPath* file)
 {
-    memcpy(file, &m_filepath, sizeof(VX_AVPATH));
+    memcpy(file, &m_filepath, sizeof(MxPath));
 }
 
-int64    CMxFileSource::Seek(__int64 pos)
+int64    CMxFileSource::seek(__int64 pos)
 {
     if(pos > m_i64FileSize)
     {
-        char vErrStr[256] = {0};
+        /*char vErrStr[256] = {0};
         sprintf(vErrStr, vxLoadMessageLV("seek source file Error, Pos:%lld, Size:%lld"), pos, m_i64FileSize);
-        VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxFileSource::Seek"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
+        VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxFileSource::Seek"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);*/
         
         return -1;
     }
     return (m_i64FilePosition = pos);
 }
 
-long CMxFileSource::FastRead(int64 pos, PBYTE buf, LONG size, int stream, int bSeek, int nIoID)
+long CMxFileSource::fastRead(int64 pos, uint8* buf, long size, int stream, int bSeek, int nIoID)
 {
     if(m_pFastIO[nIoID])
     {
         if((bSeek == 3) || (m_removable && (bSeek != 0)))
         {
-            return m_pFastIO[nIoID]->DirectRead(pos, buf, size);
+            return m_pFastIO[nIoID]->directRead(pos, buf, size);
         }
         else
         {
-            return m_pFastIO[nIoID]->Read(stream, pos, buf, size, bSeek == 0 ? fastio_sequential : fastio_random);
+            return m_pFastIO[nIoID]->read(stream, pos, buf, size, bSeek == 0 ? fastio_sequential : fastio_random);
         }
     }
     else
     {
-        ASSERT(FALSE);
+        assert(false);
         m_i64FilePosition = pos;
-        return Read(buf, size, bSeek);
+        return read(buf, size, bSeek);
     }
 }
 
@@ -779,7 +810,7 @@ long CMxFileSource::FastRead(int64 pos, PBYTE buf, LONG size, int stream, int bS
         delete pObj;
         return -1;
     }
-    return GetVxInterface(static_cast<IVxSource *>(pObj), (void**)obj);
+    return mxGetInterface(static_cast<IVxSource *>(pObj), (void**)obj);
 }*/
 
 /*extern "C" __declspec( dllexport ) LONG vxGetObjects(VXOBJECT* vxObj, LONG flags)

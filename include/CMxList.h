@@ -1,6 +1,40 @@
 #ifndef __CMXLIST_H__
 #define __CMXLIST_H__
 
+struct CMxPlex     // warning variable length structure
+{
+	CMxPlex* pNext;
+#ifndef _WIN64
+#if (_AFX_PACKING >= 8)
+	DWORD dwReserved[1];    // align on 8 byte boundary
+#endif
+#endif
+							// BYTE data[maxNum*elementSize];
+
+	void* data() { return this + 1; }
+
+	static CMxPlex* Create(CMxPlex*& head, unsigned int nMax, unsigned int cbElement)
+	{
+		CMxPlex* p = (CMxPlex*)mx_mallocz(sizeof(CMxPlex) + nMax * cbElement);
+		// may throw exception
+		p->pNext = head;
+		head = p;  // change head (adds in reverse order for simplicity)
+		return p;
+	}
+
+	void FreeDataChain()     // free this one and links
+	{
+		CMxPlex* p = this;
+		while (p != NULL)
+		{
+			BYTE* bytes = (BYTE*)p;
+			CMxPlex* pNext = p->pNext;
+			mx_free(bytes);
+			p = pNext;
+		}
+	}
+};
+
 /////////////////////////////////////////////////////////////////////////////
 // CMxList<TYPE, ARG_TYPE>
 
@@ -82,7 +116,7 @@ protected:
 	CMxNode* m_pNodeTail;
 	int m_nCount;
 	CMxNode* m_pNodeFree;
-	struct CVxPlex* m_pBlocks;
+	struct CMxPlex* m_pBlocks;
 	int m_nBlockSize;
 
 	CMxNode* NewNode(CMxNode*, CMxNode*);
@@ -226,15 +260,15 @@ CMxList<TYPE, ARG_TYPE>::~CMxList()
 /////////////////////////////////////////////////////////////////////////////
 // Node helpers
 //
-// Implementation note: CMxNode's are stored in CVxPlex blocks and
+// Implementation note: CMxNode's are stored in CMxPlex blocks and
 //  chained together. Free blocks are maintained in a singly linked list
 //  using the 'pNext' member of CMxNode with 'm_pNodeFree' as the head.
 //  Used blocks are maintained in a doubly linked list using both 'pNext'
 //  and 'pPrev' as links and 'm_pNodeHead' and 'm_pNodeTail'
 //   as the head/tail.
 //
-// We never free a CVxPlex block unless the List is destroyed or RemoveAll()
-//  is used - so the total number of CVxPlex blocks may grow large depending
+// We never free a CMxPlex block unless the List is destroyed or RemoveAll()
+//  is used - so the total number of CMxPlex blocks may grow large depending
 //  on the maximum past size of the list.
 //
 /*
@@ -250,7 +284,7 @@ CMxList<TYPE, ARG_TYPE>::NewNode(CMxNode* pPrev, CMxNode* pNext)
 	if (m_pNodeFree == NULL)
 	{
 		// add another block
-		CVxPlex* pNewBlock = CVxPlex::Create(m_pBlocks, m_nBlockSize,
+		CMxPlex* pNewBlock = CMxPlex::Create(m_pBlocks, m_nBlockSize,
 			sizeof(CMxNode));
 
 		// chain them into free list

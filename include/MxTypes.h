@@ -2,6 +2,10 @@
 #ifndef __MXTYPES_H__
 #define __MXTYPES_H__
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 typedef char int8;
 #ifndef _WIN32
 typedef char _int8;

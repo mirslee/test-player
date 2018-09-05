@@ -1,9 +1,23 @@
 #ifndef __CMXFILESOURCE_H__
 #define __CMXFILESOURCE_H__
 
+#define MX_MAXPLANES 6
+#define MX_MAXAUDIOCHANNELS 64
+#define MAX_FASTIONUM		300
+#define MX_MAXPATH 512
+
+struct MxPath
+{
+	DWORD	reffile;
+	char	szExtraPath[MX_MAXPATH];
+	char	szUserName[64];
+	char	szPassword[64];
+} ;
+
 #include "MxObject.h"
 #include "MxCodec.h"
 #include "MxPointer.h"
+
 
 
 class CMxFileSource : public CMxObject, public MxSource {
@@ -13,7 +27,7 @@ public:
     virtual ~CMxFileSource();
     
 protected:
-    MxPath _filePath;
+    MxPath m_filepath;
 #ifdef _WIN32
     HANDLE m_hFile;
     bool m_bUnbuffer;
@@ -46,11 +60,11 @@ public:
     
     int64 getPosition() {return m_i64FilePosition;}
     int64 getSize() {return m_i64FileSize;}
-    int64 seek(int64 pos) = 0;
-    long read(BYTE* buf, long size, bool bSeek = false) = 0;
-    long fastRead(int64 pos, BYTE* buf, long size, int stream, bool bSeek, int nIoID) = 0;
-    void infoEnd() = 0;
-    void refresh() = 0;
+    int64 seek(int64 pos);
+    long read(BYTE* buf, long size, bool bSeek = false);
+    long fastRead(int64 pos, BYTE* buf, long size, int stream, bool bSeek, int nIoID);
+    void infoEnd();
+    void refresh();
     
     long queryInterfaceDelegate(long iid, void** ppv);
 };

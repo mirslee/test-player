@@ -20,21 +20,6 @@
 #include "win/pthread.h"
 #endif
 
-	//ffmpeg
-#ifdef __cplusplus
-	extern "C" {
-#endif
-
-#include "libavformat/avformat.h"
-#include "libavcodec/avcodec.h"
-#include "libswscale/swscale.h"
-#include "libswresample/swresample.h"
-#include "libavutil/time.h"
-
-#ifdef __cplusplus
-	}
-#endif
-
 
 //std
 #include <string>

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MxGlobal.h"
+#include "MxError.h"
 #include "MxInterface.h"
 
 struct MxObject {
@@ -45,3 +47,9 @@ long unRef() {return this->unRefDelgate();}\
 long queryInterface(long iid, void** ppVoid) {return this->queryInterfaceDelgate(iid,ppVoid);}
 
 
+mxinline long mxGetInterface(MxObject* pObj, void **ppVoid)
+{
+	*ppVoid = pObj;
+	pObj->addRef();
+	return MX_NOERROR;
+}

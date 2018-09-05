@@ -4,7 +4,7 @@
 
 #include "MxObject.h"
 #include "MxTypes.h"
-#include "MxMediaDefine.h"
+//#include "MxMediaDefine.h"
 
 struct MxFastIO;
 struct MxFastIORead;
@@ -74,7 +74,7 @@ struct FASTRDPARAM {
 #ifdef _WIN32
 	long reads;
 #elif __APPLE__
-	/*ByteCount*/ uint64 reads;
+	/*ByteCount*/ uint32 reads;
 #else
 	int reads;
 #endif
@@ -87,17 +87,16 @@ enum fastioreadtype { fastio_sequential, fastio_random };
 struct MxFastIO;
 struct MxFastIORead : public MxObject
 {
-	virtual int   GetId() = 0;
-virtual bool  InitFile(void* srcp, MxFastIO* vxdemul, mxuvoidptr fid,uint sectorsize, fastioread ioread,bool asyncrd = false) = 0;
-virtual void   UninitFile(bool bRemove = true) = 0;
-virtual mxuvoidptr  GetFileId() = 0;
-virtual long   Read(int stream, __int64 pos, BYTE* buf, long lBytes, fastioreadtype mode = fastio_random) = 0;
-virtual long   DirectRead(__int64 pos, BYTE* buf, long lBytes) = 0;
-virtual int    LockCached(int stream, __int64 pos) = 0;
-virtual const BYTE*  GetCache(int idx, long& size) = 0;
-virtual void    UnlockCached(int lockidx) = 0;
-
-virtual long   GetBlockSize() = 0;
+	virtual int   getId() = 0;
+	virtual bool  initFile(void* srcp, MxFastIO* vxdemul, mxuvoidptr fid, uint sectorsize, fastioread ioread, bool asyncrd = false) = 0;
+	virtual void   uninitFile(bool bRemove = true) = 0;
+	virtual mxuvoidptr  getFileId() = 0;
+	virtual long   read(int stream, __int64 pos, BYTE* buf, long lBytes, fastioreadtype mode = fastio_random) = 0;
+	virtual long   directRead(__int64 pos, BYTE* buf, long lBytes) = 0;
+	virtual int    lockCached(int stream, int64 pos) = 0;
+	virtual const uint8*  getCache(int idx, long& size) = 0;
+	virtual void    unlockCached(int lockidx) = 0;
+	virtual long   getBlockSize() = 0;
 };
 
 struct MxFastIO : public MxObject
