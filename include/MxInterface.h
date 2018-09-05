@@ -23,5 +23,8 @@ typedef struct
 #define LIID_IVxVideoReadStream		0xe0000006
 #define LIID_IVxSubtitleReadStream		0xe000000f
 #define LIID_IVxReadStream2			0xe0000020
+#define LIID_IVxSource 0xe0001000
+#define LIID_IVxFastIO 0xe0001001
+
 
 #endif //__MXINTERFACE_H__

@@ -3,216 +3,8 @@
 #include "CMxDemuxer.h"
 #include "MxMemory.h"
 
-namespace VXAUXTOOLS_CPP_NAMESPACE {
-	CAVIIndexChain::CAVIIndexChain()
-	{
-		head = tail = NULL;
-		total_ents = 0;
-	}
 
-	void CAVIIndexChain::delete_chain()
-	{
-		CAVIIndexChainNode *aicn = head, *aicn2;
-		while (aicn)
-		{
-			aicn2 = aicn->next;
-			delete aicn;
-			aicn = aicn2;
-		}
-		head = tail = NULL;
-	}
-
-	CAVIIndexChain::~CAVIIndexChain()
-	{
-		delete_chain();
-	}
-
-	bool CAVIIndexChain::add(AVIIndexEntry *avie)
-	{
-		if (!tail || !tail->add(avie->ckid, avie->dwChunkOffset, avie->dwChunkLength, total_ents, !!(avie->dwFlags & AVIIF_KEYFRAME)))
-		{
-			CAVIIndexChainNode *aicn = new CAVIIndexChainNode();
-			if (tail) tail->next = aicn; else head = aicn;
-			tail = aicn;
-			if (tail->add(avie->ckid, avie->dwChunkOffset, avie->dwChunkLength, total_ents, !!(avie->dwFlags & AVIIF_KEYFRAME)))
-			{
-				++total_ents;
-				return true;
-			}
-
-			return false;
-		}
-
-		++total_ents;
-
-		return true;
-	}
-
-	bool CAVIIndexChain::add(AVIIndexEntry2 *avie2)
-	{
-		return add(avie2->ckid, avie2->pos, avie2->size & 0x3FFFFFFF, avie2->displayno, !!(avie2->size & 0x80000000), avie2->reserve);
-	}
-
-	bool CAVIIndexChain::add(DWORD ckid, __int64 pos, LONG size, LONG displayno, bool is_keyframe, DWORD reserve)
-	{
-		if (displayno == -1)
-			displayno = total_ents;
-		if (!tail || !tail->add(ckid, pos, size, displayno, is_keyframe, reserve))
-		{
-			CAVIIndexChainNode *aicn = new CAVIIndexChainNode();
-
-			if (tail) tail->next = aicn; else head = aicn;
-			tail = aicn;
-
-			if (tail->add(ckid, pos, size, displayno, is_keyframe, reserve))
-			{
-				++total_ents;
-				return TRUE;
-			}
-
-			return FALSE;
-		}
-
-		++total_ents;
-
-		return TRUE;
-	}
-
-	void CAVIIndexChain::put(AVIIndexEntry *avietbl)
-	{
-		CAVIIndexChainNode *aicn = head;
-
-		while (aicn)
-		{
-			aicn->put(avietbl);
-			aicn = aicn->next;
-		}
-
-		delete_chain();
-	}
-
-	void CAVIIndexChain::put(AVIIndexEntry2 *avie2tbl)
-	{
-		CAVIIndexChainNode *aicn = head;
-
-		while (aicn)
-		{
-			aicn->put(avie2tbl);
-			aicn = aicn->next;
-		}
-
-		delete_chain();
-	}
-
-	void CAVIIndexChain::put(AVIIndexEntry3 *avie3tbl, __int64 offset)
-	{
-		CAVIIndexChainNode *aicn = head;
-
-		while (aicn)
-		{
-			aicn->put(avie3tbl, offset);
-			aicn = aicn->next;
-		}
-
-		delete_chain();
-	}
-
-	CAVIIndex::CAVIIndex()
-	{
-		index = NULL;
-		index2 = NULL;
-		index3 = NULL;
-		oldindex2s.SetMaxSize(8);
-	}
-
-	CAVIIndex::~CAVIIndex()
-	{
-		delete[] index;
-		delete[] index2;
-		delete[] index3;
-		AVIIndexEntry2* oldinex2 = nullptr;
-		while (oldindex2s.Pop(&oldinex2, false))
-			delete[] oldinex2;
-	}
-
-	bool CAVIIndex::makeIndex()
-	{
-		AVIIndexEntry* newindex = new AVIIndexEntry[total_ents];
-		put(newindex);
-		AVIIndexEntry* oldindex = (AVIIndexEntry*)InterlockedExchangePointer((void**)&index, newindex);
-		if (oldindex) delete oldindex;
-		index_len = total_ents;
-		return true;
-	}
-
-	bool CAVIIndex::makeIndex2()
-	{
-		AVIIndexEntry2* newindex2 = new AVIIndexEntry2[total_ents];
-		put(newindex2);
-		AVIIndexEntry2* oldindex2 = (AVIIndexEntry2*)InterlockedExchangePointer((void**)&index2, newindex2);
-		index_len = total_ents;
-		if (oldindex2)
-		{
-			if (oldindex2s.IsFull())
-			{
-				AVIIndexEntry2* delentry = nullptr;
-				oldindex2s.Pop(&delentry);
-				delete[] delentry;
-			}
-			oldindex2s.Push(oldindex2);
-		}
-		return true;
-	}
-
-	bool CAVIIndex::makeIndex3(int64 offset)
-	{
-		AVIIndexEntry3* newindex3 = new AVIIndexEntry3[total_ents];
-		put(newindex3, offset);
-		AVIIndexEntry3* oldindex3 = (AVIIndexEntry3*)InterlockedExchangePointer((void**)&index3, newindex3);
-		if (oldindex3) delete oldindex3;
-		index_len = total_ents;
-		return true;
-	}
-
-
-	void CAVIIndex::clear()
-	{
-		delete_chain();
-		delete[] index;
-		delete[] index2;
-		delete[] index3;
-		index = nullptr;
-		index2 = nullptr;
-		index3 = nullptr;
-		total_ents = 0;
-	}
-
-	CAVIStreamNode::CAVIStreamNode(DWORD fcc)
-		: fccType(fcc)
-	{
-		bytes = 0;
-		strmid = 0;
-		starttime = 0;
-		priv_data = NULL;
-		keyonly = TRUE;
-		memset(&vinfo, 0, sizeof(MxVideoInfo));
-	}
-
-	CAVIStreamNode::~CAVIStreamNode()
-	{
-		if (fccType == vxstreamVIDEO)
-		{
-			if (vinfo.pExtraData) mx_free(vinfo.pExtraData);
-			if (vinfo.metadata) mx_free(vinfo.metadata);
-		}
-		else if (fccType == vxstreamAUDIO)
-		{
-			if (ainfo.pExtraData) mx_free(ainfo.pExtraData);
-			if (ainfo.metadata) mx_free(ainfo.metadata);
-		}
-	}
-
-	CMxDemuxer::CMxDemuxer(MxSource* source, DWORD type)
+	CMxDemuxer::CMxDemuxer(MxSource* source, uint32 type)
 	: m_pSource(source)
 	{
 		mxMutexInit(&m_csRead);
@@ -227,7 +19,7 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 		mxMutexDestroy(&m_csRead);
 	}
 
-	bool CMxDemuxer::Initialize()
+	bool CMxDemuxer::init()
 	{
 		m_pSource->Seek(0);
 		bool bFinally = FALSE;
@@ -245,30 +37,30 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 				while (pos)
 				{
 					CAVIStreamNode* node = m_listStreams.GetNext(pos);
-					if (node->fccType == vxstreamVIDEO)
+					if (node->fccType == MxStreamType_video)
 					{
 						bitrate += node->vinfo.bitrate;
 						if (node->vinfo.dwKeyframeSpace == 0 && node->vinfo.dectype != 1)
 						{   //有索引的时候，根据帧类型获取GOPsize及B帧个数
-							static DWORD frametype[] = { vxFrameIType,vxFrameBType,vxFramePType };
+							static uint32 frametype[] = { MxFrameType_I,MxFrameType_B,MxFrameType_P };
 							int length = node->vinfo.frames;
 							int frmIdx = 0;
 							for (; frmIdx < length; frmIdx++)
 							{
-								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] == vxFrameIType)
+								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] == MxFrameType_I)
 									break;
 							}
 							int frstI = frmIdx++;
 							while (frmIdx < length)
 							{
-								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] != vxFramePType)
+								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] != MxFrameType_P)
 									break;
 								frmIdx++;
 							}
 							int bFrames = 0;
 							while (frmIdx < length)
 							{
-								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] != vxFrameBType)
+								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] != MxFrameType_B)
 									break;
 								else
 									bFrames++;
@@ -276,14 +68,14 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 							}
 							while (frmIdx < length)
 							{
-								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] == vxFrameIType)
+								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] == MxFrameType_I)
 									break;
 								frmIdx++;
 							}
 							int scndI = frmIdx++;
 							while (frmIdx < length)
 							{
-								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] == vxFrameIType)
+								if (frametype[((DWORD)(node->index.index2Ptr()[frmIdx].size) >> 29)] == MxFrameType_I)
 									break;
 								frmIdx++;
 							}
@@ -302,7 +94,7 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 		}
 		catch (...)
 		{
-			Uninitialize();
+			unInit();
 			bFinally = TRUE;
 		}
 #endif
@@ -310,7 +102,7 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 		return !bFinally;
 	}
 
-	void CMxDemuxer::Uninitialize()
+	void CMxDemuxer::unInit()
 	{
 		CAVIStreamNode *pasn;
 		MXPOSITION pos = m_listStreams.GetHeadPosition();
@@ -325,7 +117,7 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 	}
 
 
-	LONG CMxDemuxer::GetStream(DWORD fccType, LONG lParam, MxStreamReader** stream)
+	long CMxDemuxer::getStream(uint32 fccType, long lParam, MxStreamReader** stream)
 	{
 		if (lParam < 0) return -1;
 		CAVIStreamNode *pasn;
@@ -350,23 +142,23 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 
 		if (bFind)
 		{
-			if (pasn->fccType == vxstreamAUDIO&&pasn->ainfo.blockalign == 0)
+			if (pasn->fccType == MxStreamType_audio&&pasn->ainfo.blockalign == 0)
 			{
 				pasn->ainfo.blockalign = pasn->ainfo.channels*((pasn->ainfo.bitpersample + 7) >> 3);
-				if (pasn->ainfo.fourcc == vxFormat_PCM)
+				if (pasn->ainfo.fourcc == MxFormatType_pcm)
 				{
 					pasn->length = (LONG)pasn->bytes / pasn->ainfo.blockalign;
 				}
 			}
-			CMxStream* gstream = nullptr;
-			if (pasn->fccType == vxstreamVIDEO)
-				gstream = new CMxVideoStream(this, pasn, streamno);
-			else if (pasn->fccType == vxstreamAUDIO)
-				gstream = new CMxAudioStream(this, pasn, streamno);
+			CMxStreamReader* gstream = nullptr;
+			if (pasn->fccType == MxStreamType_video)
+				gstream = new CMxVideoStreamReader(this, pasn, streamno);
+			else if (pasn->fccType == MxStreamType_audio)
+				gstream = new CMxAudioStreamReader(this, pasn, streamno);
 			if (gstream)
 			{
 				//return GetVxInterface(static_cast<IVxReadStream*>(gstream), (void**)stream);
-				*stream = static_cast<IVxReadStream*>(gstream);
+				*stream = static_cast<MxStreamReader*>(gstream);
 				return 0;
 			}	
 			else
@@ -376,7 +168,7 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 		return -1;
 	}
 
-	long CMxDemuxer::ReadData(DWORD dwType, int stream, BYTE* buffer, int64 position, LONG len, DWORD dwReserve, bool bSeek, bool bFastRead, int nIoID)
+	long CMxDemuxer::readData(uint32 dwType, int stream, BYTE* buffer, int64 position, LONG len, DWORD dwReserve, bool bSeek, bool bFastRead, int nIoID)
 	{
 		if (bFastRead&&m_pSource->IsFastIO(nIoID))
 		{
@@ -421,7 +213,7 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 		return m_pSource->Seek(offset1);
 	}
 
-	LONG CMxDemuxer::_readFile(void *data, long len, int bSeek)
+	long CMxDemuxer::_readFile(void *data, long len, bool bSeek)
 	{
 		return m_pSource->Read((BYTE*)data, len, bSeek);
 	}
@@ -464,326 +256,6 @@ namespace VXAUXTOOLS_CPP_NAMESPACE {
 		return m_pSource->GetSize();
 	}
 
-	CMxStream::CMxStream(CMxDemuxer* demux, CAVIStreamNode* node, int idx)
-	: m_demux(demux)
-		, m_psnData(node)
-		, m_strmid(idx)
-		, m_length(node->length)
-		, m_frames(node->frames)
-	{
-		demux->addRef();
-	}
-
-	bool CMxStream::IsKeyFrame(LONG lFrame)
-	{
-		if (m_sampsize)	return TRUE;
-		if (lFrame < 0 || lFrame >= m_length)
-			return FALSE;
-		return !(m_psnData->index.index2Ptr()[lFrame].size & 0xE0000000);
-	}
-
-	LONG CMxStream::PrevKeyFrame(LONG lFrame)
-	{
-		if (m_sampsize)	return lFrame > 0 ? lFrame - 1 : -1;
-		if (lFrame < 0)	return -1;
-
-		if (lFrame > m_length) lFrame = (LONG)m_length;
-
-		while (--lFrame >= 0)
-		{
-			if (!(m_psnData->index.index2Ptr()[lFrame].size & 0xE0000000))
-				return lFrame;
-		}
-		return -1;
-	}
-
-	LONG CMxStream::NextKeyFrame(LONG lFrame)
-	{
-		if (m_sampsize)	return lFrame < m_length ? lFrame + 1 : -1;
-
-		if (lFrame < 0) return 0;
-		if (lFrame >= m_length)	return -1;
-
-		while (++lFrame < m_length)
-			if (!(m_psnData->index.index2Ptr()[lFrame].size & 0xE0000000))
-				return lFrame;
-		return -1;
-	}
-
-	LONG CMxStream::NearestKeyFrame(LONG lFrame)
-	{
-		if (m_sampsize)	return lFrame;
-
-		if (IsKeyFrame(lFrame))
-			return lFrame;
-
-		LONG lprev = PrevKeyFrame(lFrame);
-
-		if (lprev < 0)
-			return 0;
-		else
-			return lprev;
-	}
-
-	uint CMxStream::GetFrameType(LONG lFrame)
-	{
-		if (m_sampsize)	return 1;
-		if (lFrame < 0 || lFrame >= m_length)
-			return false;
-		static DWORD frametype[] = { vxFrameIType,vxFrameBType,vxFramePType };
-		int idx = ((DWORD)(m_psnData->index.index2Ptr()[lFrame].size) >> 29);
-		return frametype[idx];
-	}
-
-
-	LONG CMxStream::Read2(__int64 start, LONG lSamples, PBYTE lpBuffer, LONG cbBuffer, LONG *plBytes, LONG *plSamples, DWORD* ftype, int bSeek, bool bFastRead, int nIoID, VXFEXTINFO* extinfo)
-	{
-		LONG lActual;
-		if (lSamples <= 0 && lSamples != -1)
-		{
-			if (plBytes) *plBytes = 0;
-			if (plSamples) *plSamples = 0;
-			return 0;
-		}
-		if (start < 0) start = 0;
-		if (start >= m_length) start = m_length - 1;
-		VXFEXTINFO tmpinfo = { 0 };
-		if (!extinfo) extinfo = &tmpinfo;
-
-		if (m_sampsize)
-		{
-			AVIIndexEntry2 *avie2, *avie2_limit = m_psnData->index.index2Ptr() + m_frames;
-			__int64 byte_off = (__int64)start * m_sampsize;
-			__int64 bytecnt;
-			__int64 actual_bytes = 0;
-			__int64 block_pos;
-
-			// too small to hold a sample?
-
-			if (lpBuffer && (cbBuffer < m_sampsize))
-			{
-				if (plBytes) *plBytes = m_sampsize * lSamples;
-				if (plSamples) *plSamples = lSamples;
-				return -1;
-			}
-
-			// find the frame that has the starting sample -- try and work
-			// from our last position to save time
-
-			if (byte_off >= m_i64CachedPosition)
-			{
-				block_pos = m_i64CachedPosition;
-				avie2 = m_pCachedEntry;
-				byte_off -= block_pos;
-			}
-			else
-			{
-				block_pos = 0;
-				avie2 = m_psnData->index.index2Ptr();
-			}
-
-			while ((byte_off >= (avie2->size & 0x3FFFFFFF)) && (avie2 < avie2_limit))
-			{
-				byte_off -= (avie2->size & 0x3FFFFFFF);
-				block_pos += (avie2->size & 0x3FFFFFFF);
-				++avie2;
-			}
-
-			m_pCachedEntry = avie2;
-			m_i64CachedPosition = block_pos;
-
-			// Client too lazy to specify a size?
-
-			if (lSamples == -1)
-			{
-				lSamples = ((avie2->size & 0x3FFFFFFF) - (LONG)byte_off) / m_sampsize;
-
-				if (!lSamples && avie2 + 1 < avie2_limit)
-					lSamples = ((avie2[0].size & 0x3FFFFFFF) + (avie2[1].size & 0x3FFFFFFF) - (LONG)byte_off) / m_sampsize;
-
-				if (lSamples < 0)
-					lSamples = 1;
-			}
-
-			// trim down sample count
-
-			if (lpBuffer && (lSamples > cbBuffer / m_sampsize))
-				lSamples = cbBuffer / m_sampsize;
-			if (start + lSamples > m_length)
-				lSamples = (LONG)(m_length - start);
-
-			bytecnt = lSamples * m_sampsize;
-
-			// begin reading frames from this point on
-
-			if (lpBuffer)
-			{
-
-				while (bytecnt > 0)
-				{
-					LONG tc = (avie2->size & 0x3FFFFFFF) - (LONG)byte_off;
-					if (tc > bytecnt)
-						tc = (LONG)bytecnt;
-
-					__int64 fileoffset = avie2->pos + byte_off + 8;
-					if ((lActual = m_demux->ReadData(m_psnData->fccType, m_strmid, lpBuffer, fileoffset, tc, avie2->reserve, bSeek, bFastRead, nIoID)) < 0)
-						break;
-					actual_bytes += lActual;
-					++avie2;
-					byte_off = 0;
-					if ((extinfo->infotype&FEEXTINFO_OFFSET) && (extinfo->fileoffset == 0))
-						extinfo->fileoffset = fileoffset;
-
-					if (lActual < tc)
-						break;
-
-					bytecnt -= tc;
-					lpBuffer = lpBuffer + tc;
-				}
-
-				if (actual_bytes < m_sampsize)
-				{
-					if (plBytes) *plBytes = 0;
-					if (plSamples) *plSamples = 0;
-					return -1;
-				}
-
-				actual_bytes -= actual_bytes % m_sampsize;
-
-				if (plBytes) *plBytes = (LONG)actual_bytes;
-				if (plSamples) *plSamples = (LONG)actual_bytes / m_sampsize;
-			}
-			else
-			{
-				if (plBytes) *plBytes = (LONG)bytecnt;
-				if (plSamples) *plSamples = lSamples;
-			}
-
-		}
-		else if (start < m_frames)
-		{
-			AVIIndexEntry2 *avie2 = &m_psnData->index.index2Ptr()[start];
-
-			if (lpBuffer && (avie2->size & 0x1FFFFFFF) > cbBuffer)
-			{
-				if (plBytes) *plBytes = avie2->size & 0x1FFFFFFF;
-				if (plSamples) *plSamples = 1;
-
-				char vErrStr[256] = { 0 };
-				//sprintf(vErrStr, vxLoadMessageLV("read stream Frame Error, start:%lld, size:%ld > cbBuffer:%ld"), start, avie2->size & 0x1FFFFFFF, cbBuffer);
-				//VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxKeyStream::Read2"), 0, MAILSRC_HWENGINE | MAILSRC_ERROR);
-				return -1;
-			}
-
-			__int64 fileoffset = avie2->pos + 8;
-			LONG bytecnt = avie2->size & 0x1FFFFFFF;
-			if (lpBuffer)
-			{
-				lActual = m_demux->ReadData(m_psnData->fccType, m_strmid, lpBuffer, fileoffset, bytecnt, avie2->reserve, bSeek, bFastRead, nIoID);
-				if (lActual != bytecnt)
-				{
-					if (plBytes) *plBytes = 0;
-					if (plSamples) *plSamples = 0;
-
-					char vErrStr[256] = { 0 };
-					//sprintf(vErrStr, vxLoadMessageLV("read stream Frame Error, start:%lld, lActual:%ld != bytecnt:%ld"), start, lActual, bytecnt);
-					//VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxKeyStream::Read2"), 0, MAILSRC_HWENGINE | MAILSRC_ERROR);
-					return -1;
-				}
-			}
-			else
-				lActual = bytecnt;
-			if (extinfo->infotype&FEEXTINFO_OFFSET)
-				extinfo->fileoffset = fileoffset;
-
-			if (plBytes) *plBytes = lActual;
-			if (plSamples) *plSamples = 1;
-			if (ftype)
-			{
-				static DWORD frametype[] = { vxFrameIType,vxFrameBType,vxFramePType };
-				int idx = (avie2->size >> 29);
-				*ftype = frametype[idx];
-			}
-		}
-		else
-		{
-			char vErrStr[256] = { 0 };
-			//sprintf(vErrStr, vxLoadMessageLV("read stream Frame Error, start:%lld, start:%lld >= m_frames:%lld"), start, start, m_frames);
-			//VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CVxKeyStream::Read2"), 0, MAILSRC_HWENGINE | MAILSRC_ERROR);
-			return -1;
-		}
-
-		return 0;
-	}
-
-	LONG  CMxStream::Read(__int64 start, LONG lSamples, PBYTE lpBuffer, LONG cbBuffer, LONG *plBytes, LONG *plSamples, DWORD* ftype, int bSeek, bool bFastRead, int nIoID)
-	{
-		VXFEXTINFO extinfo = { 0 };
-		return Read2(start, lSamples, lpBuffer, cbBuffer, plBytes, plSamples, ftype, bSeek, bFastRead, nIoID, &extinfo);
-	}
-
-	LONG CMxStream::NonDelegatingQueryInterface(LONG iid, void** ppv)
-	{
-		if (iid == LIID_IVxReadStream)
-		{
-			//return GetVxInterface(static_cast<IVxReadStream*>(this), ppv);
-			*ppv = static_cast<MxStreamReader*>(this);
-			return 0;
-		}	
-		else if (iid == LIID_IVxReadStream2)
-		{
-			//return GetVxInterface(static_cast<IVxReadStream2*>(this), ppv);
-			*ppv = static_cast<MxStreamReader*>(this);
-			return 0;
-		}	
-		else
-			return CMxObject::queryInterfaceDelgate(iid, ppv);
-	}
-
-	CMxVideoStream::CMxVideoStream(CMxDemuxer* demux, CAVIStreamNode* node, int idx)
-		: CMxStream(demux, node, idx)
-	{
-		m_sampsize = 0;
-	}
-
-	LONG CMxVideoStream::NonDelegatingQueryInterface(LONG iid, void** ppv)
-	{
-		if (iid == LIID_IVxVideoReadStream)
-		{
-			//return GetVxInterface((MxVideoStreamReader*)this, ppv);
-			*ppv = (MxVideoStreamReader*)this;
-			return 0;
-		}
-		else
-		{
-			return CMxStream::NonDelegatingQueryInterface(iid, ppv);
-		}
-	}
-
-	CMxAudioStream::CMxAudioStream(CMxDemuxer* demux, CAVIStreamNode* node, int idx)
-		: CMxStream(demux, node, idx)
-	{
-		if (((node->ainfo.dectype == 0) && (node->ainfo.framesize == 0)) || (node->ainfo.dectype == 2))
-			m_sampsize = node->ainfo.blockalign;
-		else
-			m_sampsize = node->ainfo.framesize;
-
-		m_i64CachedPosition = 0;
-		m_pCachedEntry = m_psnData->index.index2Ptr();
-	}
-
-
-	LONG CMxAudioStream::NonDelegatingQueryInterface(LONG iid, void** ppv)
-	{
-		if (iid == LIID_IVxAudioReadStream)
-		{
-			//return GetVxInterface((IVxAudioReadStream*)this, ppv);
-			*ppv = (MxAudioStreamReader*)this;
-			return 1;
-		}
-		else
-		{
-			return CMxStream::NonDelegatingQueryInterface(iid, ppv);
-		}
-	}
+	
+namespace VXAUXTOOLS_CPP_NAMESPACE {
 }

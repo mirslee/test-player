@@ -1,9 +1,4 @@
-//
-//  MxPlayer.hpp
-//  MyPlayer
-//
-//  Created by sz17112850M01 on 2018/8/16.
-//
+
 
 #ifndef __MXPLAYER_H__
 #define __MXPLAYER_H__

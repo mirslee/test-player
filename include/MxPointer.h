@@ -44,8 +44,6 @@ public:
 		this->pointer->unRef();
 	}
 
-	
-
 	/*Ö¸ÕëÊÇ·ñÎª¿Õ*/
 	bool operator!() const {
 		return pointer == nullptr;

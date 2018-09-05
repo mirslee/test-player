@@ -37,6 +37,8 @@ typedef long long __int64;
 typedef unsigned char BYTE;
 typedef unsigned short WORD;
 typedef unsigned long DWORD;
+#define TRUE true
+#define FALSE false
 #endif
 typedef unsigned long long uint64;
 typedef unsigned long long _uint64;

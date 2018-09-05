@@ -3,20 +3,20 @@
 #include "MxInterface.h"
 
 struct MxObject {
-    virtual int addRef() = 0;
-    virtual int unRef() = 0;
-    virtual int queryInterface(int iid, void** ppVoid) = 0;
+    virtual long addRef() = 0;
+    virtual long unRef() = 0;
+    virtual long queryInterface(long iid, void** ppVoid) = 0;
 };
 
 class CMxObject {
 public:
     CMxObject() {_refCount = 0;}
     virtual ~CMxObject() {}
-    virtual int addRefDelgate() {
+    virtual long addRefDelgate() {
         _refCount++;
         return _refCount;
     }
-    virtual int unRefDelgate() {
+    virtual long unRefDelgate() {
         _refCount--;
         if (_refCount == 0)
         {
@@ -26,7 +26,7 @@ public:
         }
         return _refCount;
     }
-    virtual int queryInterfaceDelgate(int iid, void** ppVoid) {
+    virtual long queryInterfaceDelgate(long iid, void** ppVoid) {
         if (IID_CMxObject == iid) {
             *ppVoid = this;
         } else {
@@ -35,13 +35,13 @@ public:
         return 0;
     }
 protected:
-    volatile int _refCount;
+    volatile long _refCount;
 };
 
 #define MX_OBJECT \
 public: \
-int addRef() {return this->addRefDelgate();} \
-int unRef() {return this->unRefDelgate();}\
-int queryInterface(int iid, void** ppVoid) {return this->queryInterfaceDelgate(iid,ppVoid);}
+long addRef() {return this->addRefDelgate();} \
+long unRef() {return this->unRefDelgate();}\
+long queryInterface(long iid, void** ppVoid) {return this->queryInterfaceDelgate(iid,ppVoid);}
 
 

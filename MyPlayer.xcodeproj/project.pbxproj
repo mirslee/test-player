@@ -41,6 +41,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		54685473213FED9100B2F121 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54685460213FED8F00B2F121;
+			remoteInfo = MxFileSource;
+		};
 		5469508F2122E0530055ED67 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6DB9C3763D02B1415CD9D565 /* Project object */;
@@ -125,6 +132,7 @@
 		34C3CC745F9A46849F0F12A2 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /usr/local/Cellar/qt/5.11.1/lib/QtGui.framework; sourceTree = "<absolute>"; };
 		53A1666EF2EC8D8B83CC35FC /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /usr/local/Cellar/qt/5.11.1/lib/QtCore.framework; sourceTree = "<absolute>"; };
 		5426A6E7213E67CE001745C4 /* MxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxPlayer.h; path = include/MxPlayer.h; sourceTree = SOURCE_ROOT; };
+		5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxFileSource.xcodeproj; path = plugin/access/MxFileSource/MxFileSource.xcodeproj; sourceTree = "<group>"; };
 		546950902122E1230055ED67 /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = ../../../../usr/local/Cellar/qt/5.11.1/lib/QtWidgets.framework; sourceTree = "<group>"; };
 		546950922122E2150055ED67 /* libavdevice.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.58.dylib; path = ffmpeg/lib/libavdevice.58.dylib; sourceTree = "<group>"; };
 		546950932122E2150055ED67 /* libavfilter.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.7.dylib; path = ffmpeg/lib/libavfilter.7.dylib; sourceTree = "<group>"; };
@@ -136,6 +144,10 @@
 		546950992122E2150055ED67 /* libswscale.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.5.dylib; path = ffmpeg/lib/libswscale.5.dylib; sourceTree = "<group>"; };
 		546950A52122F35D0055ED67 /* stdafx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
 		546950B82124556F0055ED67 /* Template.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Template.h; sourceTree = "<group>"; };
+		54BC8792213FA9490042350E /* CMxList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxList.h; path = include/CMxList.h; sourceTree = SOURCE_ROOT; };
+		54BC8795213FA9490042350E /* CMxQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxQueue.h; path = include/CMxQueue.h; sourceTree = SOURCE_ROOT; };
+		54BC8796213FA9490042350E /* MxMediaDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxMediaDefine.h; path = include/MxMediaDefine.h; sourceTree = SOURCE_ROOT; };
+		54BC8797213FC8950042350E /* MxCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxCodec.h; path = include/MxCodec.h; sourceTree = SOURCE_ROOT; };
 		54BC8E74213E22F200FDAFE1 /* MxMov.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxMov.xcodeproj; path = plugin/MxMov/MxMov.xcodeproj; sourceTree = "<group>"; };
 		54C3C5492125A0C9009736A1 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		54C3C5AF212A5C62009736A1 /* MxCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxCore.xcodeproj; path = MxCore/MxCore.xcodeproj; sourceTree = "<group>"; };
@@ -151,7 +163,6 @@
 		54D6AB732134E00300B78108 /* MxSynchronize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxSynchronize.h; path = include/MxSynchronize.h; sourceTree = SOURCE_ROOT; };
 		54D6AB742134E00400B78108 /* MxMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxMemory.h; path = include/MxMemory.h; sourceTree = SOURCE_ROOT; };
 		54D6AB832134E4DD00B78108 /* CMxArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxArray.h; path = include/CMxArray.h; sourceTree = SOURCE_ROOT; };
-		54DD15432137BCDD006EE7EC /* MxCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxCodec.h; path = include/MxCodec.h; sourceTree = SOURCE_ROOT; };
 		54DD15852137C13B006EE7EC /* MxCodec.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxCodec.xcodeproj; path = MxCodec/MxCodec.xcodeproj; sourceTree = "<group>"; };
 		54DD158B2137C1A0006EE7EC /* MxObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxObject.h; path = include/MxObject.h; sourceTree = SOURCE_ROOT; };
 		54DD158C2137C1A0006EE7EC /* MxPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxPointer.h; path = include/MxPointer.h; sourceTree = SOURCE_ROOT; };
@@ -202,6 +213,14 @@
 			name = Sources;
 			sourceTree = "<group>";
 		};
+		5468546F213FED8F00B2F121 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54685474213FED9100B2F121 /* libMxFileSource.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		54BC8E75213E22F200FDAFE1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,10 +256,13 @@
 		54D6AB5821338F9C00B78108 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				54BC8797213FC8950042350E /* MxCodec.h */,
+				54BC8792213FA9490042350E /* CMxList.h */,
+				54BC8795213FA9490042350E /* CMxQueue.h */,
+				54BC8796213FA9490042350E /* MxMediaDefine.h */,
 				5426A6E7213E67CE001745C4 /* MxPlayer.h */,
 				54DD158B2137C1A0006EE7EC /* MxObject.h */,
 				54DD158C2137C1A0006EE7EC /* MxPointer.h */,
-				54DD15432137BCDD006EE7EC /* MxCodec.h */,
 				54D6AB832134E4DD00B78108 /* CMxArray.h */,
 				54D6AB742134E00400B78108 /* MxMemory.h */,
 				54D6AB732134E00300B78108 /* MxSynchronize.h */,
@@ -306,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				54D6AB5821338F9C00B78108 /* include */,
+				5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */,
 				54BC8E74213E22F200FDAFE1 /* MxMov.xcodeproj */,
 				54DD15852137C13B006EE7EC /* MxCodec.xcodeproj */,
 				54C3C5AF212A5C62009736A1 /* MxCore.xcodeproj */,
@@ -382,6 +405,10 @@
 					ProjectRef = 54C3C5AF212A5C62009736A1 /* MxCore.xcodeproj */;
 				},
 				{
+					ProductGroup = 5468546F213FED8F00B2F121 /* Products */;
+					ProjectRef = 5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */;
+				},
+				{
 					ProductGroup = 54C3C5CD212A5D72009736A1 /* Products */;
 					ProjectRef = 54C3C5CC212A5D72009736A1 /* MxGLTool.xcodeproj */;
 				},
@@ -403,6 +430,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		54685474213FED9100B2F121 /* libMxFileSource.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libMxFileSource.dylib;
+			remoteRef = 54685473213FED9100B2F121 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		54BC8E7A213E22F300FDAFE1 /* libMxMovD.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
