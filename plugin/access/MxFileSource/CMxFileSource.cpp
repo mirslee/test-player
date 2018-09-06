@@ -2,6 +2,8 @@
 #include "MxGlobal.h"
 #include "CMxFileSource.h"
 #include "MxInterface.h"
+#include "MxMemory.h"
+#include "CMxString.h"
 
 #ifdef _WIN32
 #include "io.h"
@@ -15,11 +17,11 @@ CMxFileSource::CMxFileSource() {
 #ifdef _WIN32
     m_bUnbuffer = false;
 #endif
-    m_storagetype = st_harrdisk;
+    m_storagetype = st_harddisk;
     m_removable = false;
     m_i64FileSize = -1;
-    memset(&_filePath, 0, sizeof(_filePath));
-    memset(&m_pFastIO, 0, sizeof(m_pFastIO)*MAX_FASTIONUM);
+    memset(&m_filePath, 0, sizeof(m_filePath));
+    memset(&m_pFastIO, 0, sizeof(m_pFastIO)*MX_MAXFASTIONUM);
 }
 
 CMxFileSource::~CMxFileSource() {
@@ -39,7 +41,7 @@ long CMxFileSource::queryInterfaceDelegate(long iid, void** ppv) {
     {
         return CMxObject::queryInterfaceDelgate(iid, ppv);
     }
-    return
+	return -1;
 }
 
 bool CMxFileSource::open(MxPath* file) {
@@ -234,7 +236,7 @@ bool isRemovable(const char* filepath)
     STORAGE_PROPERTY_QUERY query = {StorageDeviceProperty, PropertyStandardQuery};
     STORAGE_DEVICE_DESCRIPTOR desc = {0, sizeof(STORAGE_DEVICE_DESCRIPTOR)};
     DWORD lOutBytes = 0;
-    bool ret = DeviceIoControl(hDevice, IOCTL_STORAGE_QUERY_PROPERTY, &query, sizeof(STORAGE_PROPERTY_QUERY), &desc, sizeof(STORAGE_DEVICE_DESCRIPTOR), &lOutBytes, NULL);
+	BOOL ret = DeviceIoControl(hDevice, IOCTL_STORAGE_QUERY_PROPERTY, &query, sizeof(STORAGE_PROPERTY_QUERY), &desc, sizeof(STORAGE_DEVICE_DESCRIPTOR), &lOutBytes, NULL);
     CloseHandle(hDevice);
     return ret ? ((desc.BusType == BusType1394) || (desc.BusType == BusTypeUsb)) : FALSE;
 }
@@ -339,14 +341,8 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
 
 HANDLE __openfastiohandle(const char* filename, bool unbuffer)
 {
+	wchar_t*  wchUTF16 = CMxString(filename).wcStr().data();
     int slen = (int)strlen(filename) + 1;
-    vxUWChar* wchUTF16 = VXNew(vxUWChar, slen);
-    memset(wchUTF16, 0, slen * 2);
-#ifdef USE_UTF8PATH
-    utf82utf16(filename, wchUTF16, slen);
-#else
-    gbk2utf16(filename, wchUTF16, slen);
-#endif
     HANDLE fastio = INVALID_HANDLE_VALUE;
     if (unbuffer)
     {
@@ -358,22 +354,21 @@ HANDLE __openfastiohandle(const char* filename, bool unbuffer)
         fastio = CreateFileW((LPCWSTR)wchUTF16, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, dwOpenFlags, NULL);
         if ((fastio == INVALID_HANDLE_VALUE) || (fastio == NULL))
         {
-            char vErrStr[1000] = {0};
+            /*char vErrStr[1000] = {0};
             DWORD vSysErrId = vxGetSysLastError();
             sprintf(vErrStr, vxLoadMessageLV("open source file fastio handle Error, FileName: %s, SysError:[%d]%s"), filename, vSysErrId, vxGetSysErrorString(vSysErrId));
-            VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSource::__openfastiohandle"), 0, MAILSRC_HWENGINE | MAILSRC_ERROR);
+            VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSource::__openfastiohandle"), 0, MAILSRC_HWENGINE | MAILSRC_ERROR);*/
         }
     }
-    VXFree(wchUTF16);
     return fastio;
 }
 
-void CMxFileSource::AddFastIO(MxFastIORead* pFastIO)
+void CMxFileSource::addFastIO(MxFastIORead* pFastIO)
 {
-    HANDLE hFast = __openfastiohandle(m_filepath.szPath, m_bUnbuffer);
-    if(pFastIO->InitFile(hFast, this, m_fid, m_sectorsize, filefastioread))
+    HANDLE hFast = __openfastiohandle(m_filePath.szPath, m_bUnbuffer);
+    if(pFastIO->initFile(hFast, this, m_fid, m_sectorsize, filefastioread))
     {
-        m_pFastIO[pFastIO->GetId()] = pFastIO;
+        m_pFastIO[pFastIO->getId()] = pFastIO;
     }
     else
     {
@@ -381,13 +376,13 @@ void CMxFileSource::AddFastIO(MxFastIORead* pFastIO)
     }
 };
 
-void CMxFileSource::RemoveFastIO(int nFastIoID, HVXFILE hFile)
+void CMxFileSource::removeFastIO(int nFastIoID, void* hFile)
 {
     m_pFastIO[nFastIoID] = NULL;
     CloseHandle(hFile);
 }
 
-void CMxFileSource::Close()
+void CMxFileSource::close()
 {
     if((m_hFile != INVALID_HANDLE_VALUE) && (m_hFile != NULL))
     {
@@ -420,15 +415,7 @@ DWORD __cdecl _vxGetSectorSizeForFileNameW(const char* lpFileName)
 
 bool CMxFileSource::__open(const char* filename,bool unbuffer)
 {
-	const char* wchUTF16 = filename;
-    /*int slen = (int)strlen(filename) + 1;
-    vxUWChar* wchUTF16 = VXNew(vxUWChar, slen);
-    memset(wchUTF16, 0, slen * 2);
-#ifdef USE_UTF8PATH
-    utf82utf16(filename, wchUTF16, slen);
-#else
-    gbk2utf16(filename, wchUTF16, slen);
-#endif*/
+	wchar_t*  wchUTF16 = CMxString(filename).wcStr().data();
     m_bUnbuffer = unbuffer;
     DWORD dwOpenFlags = FILE_ATTRIBUTE_NORMAL | FILE_FLAG_SEQUENTIAL_SCAN;
     m_hFile = CreateFileW((LPCWSTR)wchUTF16, GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, dwOpenFlags, NULL);
@@ -443,7 +430,7 @@ bool CMxFileSource::__open(const char* filename,bool unbuffer)
         return false;
     }
     m_i64FilePosition = 0;
-    bool vRet = GetFileSizeEx(m_hFile, (PLARGE_INTEGER)&m_i64FileSize);
+    BOOL vRet = GetFileSizeEx(m_hFile, (PLARGE_INTEGER)&m_i64FileSize);
     if (0 == vRet)
     {
         char vErrStr[1000] = {0};
@@ -471,11 +458,10 @@ bool CMxFileSource::__open(const char* filename,bool unbuffer)
     {
         m_storagetype = st_netshare;
     }
-    VXFree(wchUTF16);
     return TRUE;
 }
 
-void CMxFileSource::Refresh()
+void CMxFileSource::refresh()
 {
     GetFileSizeEx(m_hFile, (PLARGE_INTEGER)&m_i64FileSize);
 }
@@ -504,7 +490,7 @@ long CMxFileSource::read(uint8* buf, long size, int bSeek)
     return (LONG)dwActual;
 }
 
-void CMxFileSource::InfoEnd()
+void CMxFileSource::infoEnd()
 {
     
 }
@@ -580,7 +566,7 @@ void CMxFileSource::AddFastIO(IVxFastIORead* pFastIO)
     }
 }
 
-void CMxFileSource::RemoveFastIO(int nFastIoID,void* srcp)
+void CMxFileSource::removeFastIO(int nFastIoID,void* srcp)
 {
     HVXFILE hFile = (HVXFILE)(vxuintptr)srcp;
     m_pFastIO[nFastIoID] = NULL;
@@ -718,12 +704,12 @@ LONG CMxFileSource::Read(PBYTE buf, LONG size, int bSeek)
     return reads;
 }
 
-void CMxFileSource::InfoEnd()
+void CMxFileSource::infoEnd()
 {
     
 }
 
-void CMxFileSource::Refresh()
+void CMxFileSource::refresh()
 {
     m_i64FileSize = lseek((int)m_hFile, 0, SEEK_END);
 }
@@ -736,12 +722,12 @@ long CMxFileSource::getExtra(MxSource** extra)
     {
         return mxGetInterface(m_extra, (void**)extra);
     }
-    if(strlen(m_filepath.szExtraPath) <= 0)
+    if(strlen(m_filePath.szExtraPath) <= 0)
     {
         return -1;
     }
     CMxFileSource* ext = new CMxFileSource;
-    if(!ext->__open(m_filepath.szExtraPath, FALSE))
+    if(!ext->__open(m_filePath.szExtraPath, FALSE))
     {
         ext->close();
         delete ext;
@@ -764,7 +750,7 @@ long CMxFileSource::getExtra(const char* privatefile, MxSource** extra)
 
 void CMxFileSource::getFileName(MxPath* file)
 {
-    memcpy(file, &m_filepath, sizeof(MxPath));
+    memcpy(file, &m_filePath, sizeof(MxPath));
 }
 
 int64    CMxFileSource::seek(__int64 pos)

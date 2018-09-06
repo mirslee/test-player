@@ -7,12 +7,13 @@
 #define MX_MAXPATH    512
 #define MX_MAXPLANES  6                // Number of planes in a picture
 #define MX_MAXAUDIOCHANNELS  64
+#define MX_MAXFASTIONUM  300
 
 #ifdef ROCKBOX_BIG_ENDIAN
-#define MX_FOURCC( a, b, c, d ) ( ((uint32)d) | ( ((uint32)c) << 8 ) | ( ((uint32)b) << 16 ) | ( ((uint32)a) << 24 ) )
+#define MX_FOURCC( a, b, c, d ) ( ((uint32)(d)) | ( ((uint32)(c)) << 8 ) | ( ((uint32)(b)) << 16 ) | ( ((uint32)(a)) << 24 ) )
 #define MX_TWOCC( a, b ) ( (uint16)(b) | ( (uint16)(a) << 8 ) )
 #else
-#define MX_FOURCC( a, b, c, d ) ( ((uint32)a) | ( ((uint32)b) << 8 ) | ( (uint32)c << 16 ) | ( ((uint32)d) << 24 ) )
+#define MX_FOURCC( a, b, c, d ) ( ((uint32)(a)) | ( ((uint32)(b)) << 8 ) | ( (uint32)(c) << 16 ) | ( ((uint32)(d)) << 24 ) )
 #define MX_TWOCC( a, b ) ( (uint16)(a) | ( (uint16)(b) << 8 ) )
 #endif
 

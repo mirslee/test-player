@@ -89,5 +89,8 @@
     <ClCompile Include="MxGlobal.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CMxString.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

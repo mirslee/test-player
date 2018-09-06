@@ -3,37 +3,45 @@
 #include "CMxString.h"
 #include "iconv.h"
 
-// CMxString采用utf8存储
-CMxString::CMxString() {
-    __data = nullptr;
+static char* convert(const char* src, const char* dstEncode, const char* srcEncode) {
+	size_t srcLen = strlen(src);
+	if (srcLen > 0) {
+		iconv_t converter = iconv_open(dstEncode, srcEncode);
+		if (converter != (iconv_t)-1) {
+			size_t destLen = srcLen * 3 + 1;
+			char *dest = new char[destLen];
+			memset(dest, 0, destLen);
+			size_t ret = iconv(converter, (char**)&src, (size_t*)&srcLen, &dest, (size_t*)&destLen);
+			char* retStr = nullptr;
+			if (ret > 0) {
+				destLen = strlen(dest);
+				retStr = new char[destLen + 1];
+				memset(retStr, 0, destLen + 1);
+				memcpy(retStr, dest, destLen);
+			}
+			delete[] dest;
+			iconv_close(converter);
+			return retStr;
+		}
+	}
+	return nullptr;
 }
 
-CMxString::CMxString(char *sz, char* encode = "utf-8") {
-    __data = nullptr;
-    int len = strlen(sz);
-    if (insize > 0) {
+// CMxString采用utf8存储
+CMxString::CMxString() {
+	__pData = nullptr;
+}
+
+CMxString::CMxString(const char *sz, const char* encode = "utf-8") {
+	__pData = nullptr;
+	size_t len = strlen(sz);
+    if (len > 0) {
         if (encode == "utf-8") {
-            __data = new char[len+1];
-            memset(__data, 0, len+1);
-            memcpy(__data, sz, len);
+			__pData = new char[len+1];
+            memset(__pData, 0, len+1);
+            memcpy(__pData, sz, len);
         } else if (encode == "gbk") {
-            iconv_t converter = iconv_open("utf-8","gb18030");
-            if (converter != (iconv_t)-1) {
-                int outsize = len*3+1;
-                char *output = new char[outsize];
-                memset(output,0,outsize);
-                size_t ret = iconv(converter,(char**)&input,&insize,&output,&outsize);
-                if (ret > 0) {
-                    len = strlen(output);
-                    __data = new char[len+1];
-                    memset(__data, 0, len+1);
-                    memcpy(__data, output, len);
-                }
-                delete []output;
-                iconv_close(converter);
-            }
-            
-            
+			__pData = convert(sz, "utf-8", "gb18030");
         }
     }
     
@@ -129,34 +137,29 @@ CMxString::CMxString(char *sz, char* encode = "utf-8") {
      */
 }
 
-CMxCharArray CMxString::cString() {
-    if (__cdata) {
+CMxString::CMxString(const char *sz) {
 #ifdef _WIN32
-        int iTextLen = ::MultiByteToWideChar( CP_UTF8, 0, str.c_str(), -1, nullptr, 0 );
+	CMxString(sz, "gbk");
 #else
-        
-#endif
-    }
-    
-    return CMxCharArray();
-}
-CMxWCharArray CMxString::wcString() {
-    if (__cdata) {
-#ifdef _WIN32
-        int iTextLen = ::MultiByteToWideChar( CP_UTF8, 0, str.c_str(), -1, nullptr, 0 );
-#else
-        
-#endif
-    }
-    
-    return CMxCharArray();
+	CMxString(sz, "utf-8");
+#endif // _WIN32
 }
 
-void CMxString::__c2w() {
-    if __wdata
-    char* __cdata;
-    wchar_t* __wdata;
+CMxCharArray CMxString::cStr() {
+#ifdef _WIN32
+	char* gbkStr = convert(__pData, "gb18030", "utf-8");
+	return CMxCharArray(gbkStr);
+#endif
+	size_t len = strlen(__pData);
+	if (len > 0) {
+		char* utf8Str = new char[len + 1];
+		memset(__pData, 0, len + 1);
+		memcpy(utf8Str, __pData, len);
+		return  CMxCharArray(utf8Str);
+	}
+	return CMxCharArray(nullptr);
 }
-void CMxString::__w2c() {
-    
+
+CMxWCharArray CMxString::wcStr() {
+	return CMxWCharArray(nullptr);
 }

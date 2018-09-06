@@ -4,7 +4,7 @@
 
 #include "MxObject.h"
 #include "MxTypes.h"
-//#include "MxMediaDefine.h"
+#include "MxMediaDefine.h"
 
 struct MxFastIO;
 struct MxFastIORead;
@@ -119,8 +119,8 @@ struct MxSource: public MxFastIO
 	virtual int64 getPosition() = 0;
 	virtual int64 getSize() = 0;
 	virtual int64 seek(int64 pos) = 0;
-	virtual long read(BYTE* buf, long size, bool bSeek = false) = 0;
-	virtual long fastRead(int64 pos, BYTE* buf, long size, int stream, bool bSeek, int nIoID) = 0;
+	virtual long read(BYTE* buf, long size, int bSeek = 0) = 0;
+	virtual long fastRead(int64 pos, BYTE* buf, long size, int stream, int bSeek, int nIoID) = 0;
 	virtual void infoEnd() = 0;
 	virtual void refresh() = 0;
 };

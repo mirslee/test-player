@@ -3,39 +3,35 @@
 
 class CMxCharArray {
 public:
-    CMxCharArray() {__data = nullptr;}
-    vritual ~CMxCharArray() {delete [] __data;}
+    CMxCharArray(char* str) {__data = str;}
+	virtual ~CMxCharArray() {delete [] __data;}
     
     char* data();
 private:
     char* __data;
-}
+};
 
 class CMxWCharArray {
 public:
-    CMxWCharArray() {__data = nullptr;}
-    vritual !CMxWCharArray() {delete [] __data;}
+    CMxWCharArray(wchar_t* wstr) {__data = wstr;}
+    virtual ~CMxWCharArray() {delete [] __data;}
     
     wchar_t* data();
 private:
     wchar_t* __data;
-}
+};
 
 class CMxString {
 public:
 public:
     CMxString();
-    CMxString(char *sz, char* encode = "utf-8"); /*utf-8  or  gbk*/
+    CMxString(const char *sz, const char* encode); /*utf-8  or  gbk*/
+	CMxString(const char *sz);
     
-    char* cString();
-    wchar_t* wcString();
-    
+	CMxCharArray cStr();
+	CMxWCharArray wcStr();
 private:
-    void __c2w();
-    void __w2c();
-private:
-    char* __cdata;
-    wchar_t* __wdata;
+    char* __pData;
 };
 
 #endif //__CMXSTRING_H__
