@@ -699,19 +699,19 @@ LONG CMxFileSource::Read(PBYTE buf, LONG size, int bSeek)
 {
     if (-1 == lseek((int)m_hFile, m_i64FilePosition, SEEK_SET))
     {
-        char vErrStr[256] = {0};
+        /*char vErrStr[256] = {0};
         DWORD vSysErrId = vxGetSysLastError();
         sprintf(vErrStr, vxLoadMessageLV("read source file lseek Error, Pos:%lld, Size:%d, SysError:[%d]%s"), m_i64FilePosition, size, vSysErrId, vxGetSysErrorString(vSysErrId));
-        VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CMxFileSource::Read"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
+        VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CMxFileSource::Read"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);*/
         return -1;
     }
     int reads = read((int)m_hFile, buf, size);
     if(reads < 0)
     {
-        char vErrStr[256] = {0};
+        /*char vErrStr[256] = {0};
         DWORD vSysErrId = vxGetSysLastError();
         sprintf(vErrStr, vxLoadMessageLV("read source file read Error, Pos:%lld, Size:%d, SysError:[%d]%s"), m_i64FilePosition, size, vSysErrId, vxGetSysErrorString(vSysErrId));
-        VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CMxFileSource::Read"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
+        VX_MailMSG(vErrStr, vxLoadMessageLV("Error: CMxFileSource::Read"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);*/
         return -1;
     }
     m_i64FilePosition += reads;

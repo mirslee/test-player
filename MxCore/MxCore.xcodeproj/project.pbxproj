@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5434155F21414004009FBC13 /* CMxString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5434155E21414004009FBC13 /* CMxString.cpp */; };
 		54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */; };
 		54C3C5DB212A69A9009736A1 /* MxQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C5D8212A69A9009736A1 /* MxQueue.h */; };
 		54C3C5DC212A69A9009736A1 /* MxThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C5D9212A69A9009736A1 /* MxThread.cpp */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5434155E21414004009FBC13 /* CMxString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxString.cpp; sourceTree = "<group>"; };
 		54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxSynchronize.cpp; sourceTree = "<group>"; };
 		54C3C5A1212A5C62009736A1 /* libMxCoreD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxCoreD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		54C3C5D8212A69A9009736A1 /* MxQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxQueue.h; sourceTree = SOURCE_ROOT; };
@@ -64,6 +66,7 @@
 		54C3C598212A5C62009736A1 = {
 			isa = PBXGroup;
 			children = (
+				5434155E21414004009FBC13 /* CMxString.cpp */,
 				54D6AB7A2134E05500B78108 /* mempool */,
 				54D6AB762134E02500B78108 /* MxMemory.cpp */,
 				54D6AB6D2133EA2400B78108 /* MxObject.cpp */,
@@ -188,6 +191,7 @@
 				54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */,
 				54D6AB802134E07600B78108 /* ncx_slab.cpp in Sources */,
 				54C3C5DC212A69A9009736A1 /* MxThread.cpp in Sources */,
+				5434155F21414004009FBC13 /* CMxString.cpp in Sources */,
 				54C3C5F7212AC11A009736A1 /* MxThreadCond.cpp in Sources */,
 				54D6AB782134E02500B78108 /* MxMemory.cpp in Sources */,
 				54D6AB6C2133E57B00B78108 /* MxLog.cpp in Sources */,

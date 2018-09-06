@@ -132,6 +132,7 @@
 		34C3CC745F9A46849F0F12A2 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /usr/local/Cellar/qt/5.11.1/lib/QtGui.framework; sourceTree = "<absolute>"; };
 		53A1666EF2EC8D8B83CC35FC /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /usr/local/Cellar/qt/5.11.1/lib/QtCore.framework; sourceTree = "<absolute>"; };
 		5426A6E7213E67CE001745C4 /* MxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxPlayer.h; path = include/MxPlayer.h; sourceTree = SOURCE_ROOT; };
+		5434155A21413FEC009FBC13 /* CMxString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxString.h; path = include/CMxString.h; sourceTree = SOURCE_ROOT; };
 		5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxFileSource.xcodeproj; path = plugin/access/MxFileSource/MxFileSource.xcodeproj; sourceTree = "<group>"; };
 		546950902122E1230055ED67 /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = ../../../../usr/local/Cellar/qt/5.11.1/lib/QtWidgets.framework; sourceTree = "<group>"; };
 		546950922122E2150055ED67 /* libavdevice.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.58.dylib; path = ffmpeg/lib/libavdevice.58.dylib; sourceTree = "<group>"; };
@@ -216,7 +217,7 @@
 		5468546F213FED8F00B2F121 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				54685474213FED9100B2F121 /* libMxFileSource.dylib */,
+				54685474213FED9100B2F121 /* libMxFileSourceD.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -256,6 +257,7 @@
 		54D6AB5821338F9C00B78108 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				5434155A21413FEC009FBC13 /* CMxString.h */,
 				54BC8797213FC8950042350E /* MxCodec.h */,
 				54BC8792213FA9490042350E /* CMxList.h */,
 				54BC8795213FA9490042350E /* CMxQueue.h */,
@@ -430,10 +432,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		54685474213FED9100B2F121 /* libMxFileSource.dylib */ = {
+		54685474213FED9100B2F121 /* libMxFileSourceD.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libMxFileSource.dylib;
+			path = libMxFileSourceD.dylib;
 			remoteRef = 54685473213FED9100B2F121 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};

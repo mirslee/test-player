@@ -1,0 +1,392 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		54DD15732137BFA0006EE7EC /* CMxVideoEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 54DD15612137BF9D006EE7EC /* CMxVideoEncoder.h */; };
+		54DD15742137BFA0006EE7EC /* CMxAudioDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 54DD15622137BF9E006EE7EC /* CMxAudioDecoder.h */; };
+		54DD15752137BFA0006EE7EC /* CMxStreamWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 54DD15632137BF9E006EE7EC /* CMxStreamWriter.h */; };
+		54DD15762137BFA0006EE7EC /* CMxStreamWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54DD15642137BF9E006EE7EC /* CMxStreamWriter.cpp */; };
+		54DD15772137BFA0006EE7EC /* CMxVideoDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 54DD15652137BF9E006EE7EC /* CMxVideoDecoder.h */; };
+		54DD15782137BFA0006EE7EC /* CMxVideoEncoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54DD15662137BF9E006EE7EC /* CMxVideoEncoder.cpp */; };
+		54DD15792137BFA0006EE7EC /* CMxDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54DD15672137BF9E006EE7EC /* CMxDemuxer.h */; };
+		54DD157A2137BFA0006EE7EC /* CMxAudioDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54DD15682137BF9E006EE7EC /* CMxAudioDecoder.cpp */; };
+		54DD157B2137BFA0006EE7EC /* CMxMuxer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54DD15692137BF9F006EE7EC /* CMxMuxer.cpp */; };
+		54DD157C2137BFA0006EE7EC /* CMxAudioEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 54DD156A2137BF9F006EE7EC /* CMxAudioEncoder.h */; };
+		54DD157D2137BFA0006EE7EC /* stdafx.h in Headers */ = {isa = PBXBuildFile; fileRef = 54DD156B2137BF9F006EE7EC /* stdafx.h */; };
+		54DD157E2137BFA0006EE7EC /* CMxDemuxer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54DD156C2137BF9F006EE7EC /* CMxDemuxer.cpp */; };
+		54DD157F2137BFA0006EE7EC /* CMxStreamReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 54DD156D2137BF9F006EE7EC /* CMxStreamReader.h */; };
+		54DD15802137BFA0006EE7EC /* CMxAudioEncoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54DD156E2137BFA0006EE7EC /* CMxAudioEncoder.cpp */; };
+		54DD15812137BFA0006EE7EC /* CMxMuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = 54DD156F2137BFA0006EE7EC /* CMxMuxer.h */; };
+		54DD15822137BFA0006EE7EC /* CMxStreamReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54DD15702137BFA0006EE7EC /* CMxStreamReader.cpp */; };
+		54DD15832137BFA0006EE7EC /* CMxVideoDecoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54DD15712137BFA0006EE7EC /* CMxVideoDecoder.cpp */; };
+		54DD15842137BFA0006EE7EC /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54DD15722137BFA0006EE7EC /* stdafx.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		54BC8798213FD64E0042350E /* MxAvi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MxAvi.h; sourceTree = "<group>"; };
+		54DD154D2137BF57006EE7EC /* libMxCodecD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxCodecD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		54DD15612137BF9D006EE7EC /* CMxVideoEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxVideoEncoder.h; sourceTree = "<group>"; };
+		54DD15622137BF9E006EE7EC /* CMxAudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxAudioDecoder.h; sourceTree = "<group>"; };
+		54DD15632137BF9E006EE7EC /* CMxStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxStreamWriter.h; sourceTree = "<group>"; };
+		54DD15642137BF9E006EE7EC /* CMxStreamWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxStreamWriter.cpp; sourceTree = "<group>"; };
+		54DD15652137BF9E006EE7EC /* CMxVideoDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxVideoDecoder.h; sourceTree = "<group>"; };
+		54DD15662137BF9E006EE7EC /* CMxVideoEncoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxVideoEncoder.cpp; sourceTree = "<group>"; };
+		54DD15672137BF9E006EE7EC /* CMxDemuxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxDemuxer.h; sourceTree = "<group>"; };
+		54DD15682137BF9E006EE7EC /* CMxAudioDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxAudioDecoder.cpp; sourceTree = "<group>"; };
+		54DD15692137BF9F006EE7EC /* CMxMuxer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxMuxer.cpp; sourceTree = "<group>"; };
+		54DD156A2137BF9F006EE7EC /* CMxAudioEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxAudioEncoder.h; sourceTree = "<group>"; };
+		54DD156B2137BF9F006EE7EC /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		54DD156C2137BF9F006EE7EC /* CMxDemuxer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxDemuxer.cpp; sourceTree = "<group>"; };
+		54DD156D2137BF9F006EE7EC /* CMxStreamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxStreamReader.h; sourceTree = "<group>"; };
+		54DD156E2137BFA0006EE7EC /* CMxAudioEncoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxAudioEncoder.cpp; sourceTree = "<group>"; };
+		54DD156F2137BFA0006EE7EC /* CMxMuxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxMuxer.h; sourceTree = "<group>"; };
+		54DD15702137BFA0006EE7EC /* CMxStreamReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxStreamReader.cpp; sourceTree = "<group>"; };
+		54DD15712137BFA0006EE7EC /* CMxVideoDecoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxVideoDecoder.cpp; sourceTree = "<group>"; };
+		54DD15722137BFA0006EE7EC /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		54DD154A2137BF57006EE7EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		54D2B41A2137C9FE00FDE754 /* header */ = {
+			isa = PBXGroup;
+			children = (
+				54BC8798213FD64E0042350E /* MxAvi.h */,
+				54DD15672137BF9E006EE7EC /* CMxDemuxer.h */,
+				54DD156D2137BF9F006EE7EC /* CMxStreamReader.h */,
+				54DD15652137BF9E006EE7EC /* CMxVideoDecoder.h */,
+				54DD15622137BF9E006EE7EC /* CMxAudioDecoder.h */,
+				54DD156F2137BFA0006EE7EC /* CMxMuxer.h */,
+				54DD15632137BF9E006EE7EC /* CMxStreamWriter.h */,
+				54DD15612137BF9D006EE7EC /* CMxVideoEncoder.h */,
+				54DD156A2137BF9F006EE7EC /* CMxAudioEncoder.h */,
+				54DD156B2137BF9F006EE7EC /* stdafx.h */,
+			);
+			name = header;
+			sourceTree = "<group>";
+		};
+		54D2B41B2137CA0500FDE754 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				54DD156C2137BF9F006EE7EC /* CMxDemuxer.cpp */,
+				54DD15702137BFA0006EE7EC /* CMxStreamReader.cpp */,
+				54DD15712137BFA0006EE7EC /* CMxVideoDecoder.cpp */,
+				54DD15682137BF9E006EE7EC /* CMxAudioDecoder.cpp */,
+				54DD15692137BF9F006EE7EC /* CMxMuxer.cpp */,
+				54DD15642137BF9E006EE7EC /* CMxStreamWriter.cpp */,
+				54DD15662137BF9E006EE7EC /* CMxVideoEncoder.cpp */,
+				54DD156E2137BFA0006EE7EC /* CMxAudioEncoder.cpp */,
+				54DD15722137BFA0006EE7EC /* stdafx.cpp */,
+			);
+			name = source;
+			sourceTree = "<group>";
+		};
+		54DD15442137BF56006EE7EC = {
+			isa = PBXGroup;
+			children = (
+				54D2B41A2137C9FE00FDE754 /* header */,
+				54D2B41B2137CA0500FDE754 /* source */,
+				54DD154E2137BF57006EE7EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		54DD154E2137BF57006EE7EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54DD154D2137BF57006EE7EC /* libMxCodecD.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		54DD154B2137BF57006EE7EC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54DD15812137BFA0006EE7EC /* CMxMuxer.h in Headers */,
+				54DD157D2137BFA0006EE7EC /* stdafx.h in Headers */,
+				54DD15772137BFA0006EE7EC /* CMxVideoDecoder.h in Headers */,
+				54DD157C2137BFA0006EE7EC /* CMxAudioEncoder.h in Headers */,
+				54DD15732137BFA0006EE7EC /* CMxVideoEncoder.h in Headers */,
+				54DD157F2137BFA0006EE7EC /* CMxStreamReader.h in Headers */,
+				54DD15752137BFA0006EE7EC /* CMxStreamWriter.h in Headers */,
+				54DD15792137BFA0006EE7EC /* CMxDemuxer.h in Headers */,
+				54DD15742137BFA0006EE7EC /* CMxAudioDecoder.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		54DD154C2137BF57006EE7EC /* MxCodec */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54DD15582137BF57006EE7EC /* Build configuration list for PBXNativeTarget "MxCodec" */;
+			buildPhases = (
+				54DD15492137BF57006EE7EC /* Sources */,
+				54DD154A2137BF57006EE7EC /* Frameworks */,
+				54DD154B2137BF57006EE7EC /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MxCodec;
+			productName = MxCodec;
+			productReference = 54DD154D2137BF57006EE7EC /* libMxCodecD.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		54DD15452137BF56006EE7EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = lixiaopeng;
+				TargetAttributes = {
+					54DD154C2137BF57006EE7EC = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 54DD15482137BF56006EE7EC /* Build configuration list for PBXProject "MxCodec" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 54DD15442137BF56006EE7EC;
+			productRefGroup = 54DD154E2137BF57006EE7EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				54DD154C2137BF57006EE7EC /* MxCodec */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		54DD15492137BF57006EE7EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54DD157A2137BFA0006EE7EC /* CMxAudioDecoder.cpp in Sources */,
+				54DD157E2137BFA0006EE7EC /* CMxDemuxer.cpp in Sources */,
+				54DD15832137BFA0006EE7EC /* CMxVideoDecoder.cpp in Sources */,
+				54DD15822137BFA0006EE7EC /* CMxStreamReader.cpp in Sources */,
+				54DD15802137BFA0006EE7EC /* CMxAudioEncoder.cpp in Sources */,
+				54DD157B2137BFA0006EE7EC /* CMxMuxer.cpp in Sources */,
+				54DD15762137BFA0006EE7EC /* CMxStreamWriter.cpp in Sources */,
+				54DD15782137BFA0006EE7EC /* CMxVideoEncoder.cpp in Sources */,
+				54DD15842137BFA0006EE7EC /* stdafx.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		54DD15562137BF57006EE7EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		54DD15572137BF57006EE7EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		54DD15592137BF57006EE7EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CONFIGURATION_BUILD_DIR = ../bin/mac/$CONFIGURATION;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = stdafx.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../include/ffmpeg/include,
+				);
+				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path @executable_path";
+				LIBRARY_SEARCH_PATHS = (
+					../dylib,
+					bin/mac/$CONFIGURATION,
+				);
+				OBJROOT = build;
+				PRODUCT_NAME = "$(TARGET_NAME)D";
+				SYMROOT = ../bin/mac/$CONFIGURATION;
+			};
+			name = Debug;
+		};
+		54DD155A2137BF57006EE7EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CONFIGURATION_BUILD_DIR = ../bin/mac/$CONFIGURATION;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = stdafx.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../include/ffmpeg/include,
+				);
+				INSTALL_PATH = "@rpath";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path @executable_path";
+				LIBRARY_SEARCH_PATHS = (
+					../dylib,
+					bin/mac/$CONFIGURATION,
+				);
+				OBJROOT = build;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ../bin/mac/$CONFIGURATION;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		54DD15482137BF56006EE7EC /* Build configuration list for PBXProject "MxCodec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54DD15562137BF57006EE7EC /* Debug */,
+				54DD15572137BF57006EE7EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		54DD15582137BF57006EE7EC /* Build configuration list for PBXNativeTarget "MxCodec" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54DD15592137BF57006EE7EC /* Debug */,
+				54DD155A2137BF57006EE7EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 54DD15452137BF56006EE7EC /* Project object */;
+}
