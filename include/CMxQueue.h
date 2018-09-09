@@ -109,7 +109,7 @@ CMxQueue<T>::~CMxQueue()
 		{
 			(m_pData + i)->~T();
 		}
-		_vxfree(m_pData);
+		mx_free(m_pData);
 	}
 	mxMutexDestroy(&m_ptmutex);
 }
@@ -123,9 +123,9 @@ void CMxQueue<T>::SetMaxSize(int size)
 		{
 			for (int i = 0; i < m_maxSize; i++)
 				(m_pData + i)->~T();
-			_vxfree(m_pData);
+			mx_free(m_pData);
 		}
-		m_pData = (T*)_vxmallocz(sizeof(T)*size);
+		m_pData = (T*)mx_mallocz(sizeof(T)*size);
 		for (int i = 0; i < size; i++)
 		{
 #ifdef _WIN32			

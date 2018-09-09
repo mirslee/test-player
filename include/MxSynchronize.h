@@ -29,6 +29,7 @@
 #define mxWaitEvent         WaitForSingleObject
 #define mxWaitEvents(c, h, m)    WaitForMultipleObjects(c, h, TRUE, m)
 
+#define mxSleep(x) Sleep(x)
 #else
 
 #define WAIT_OK             0

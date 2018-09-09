@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{658D
 		include\MxObject.h = include\MxObject.h
 		include\MxPointer.h = include\MxPointer.h
 		include\MxSynchronize.h = include\MxSynchronize.h
+		include\MxSystem.h = include\MxSystem.h
 		include\MxTypes.h = include\MxTypes.h
 	EndProjectSection
 EndProject

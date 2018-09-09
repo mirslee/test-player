@@ -568,4 +568,19 @@ BOOL GetSourceInfoFromAddress(DWORD64 address, LPTSTR lpszSourceInfo, rsize_t lp
 	return ret;*/
 	return true;
 }
+
+MXCORE_API void*  mxAlloc(int size) {
+	void *p = ncx_slab_alloc(g_memoryPool.pool, size);
+	if (p == 0)
+	{
+		ncx_slab_stat_t stat;
+		ncx_slab_stat(g_memoryPool.pool, &stat);
+	}
+	return p;
+}
+
+MXCORE_API void  mxFree(void * ptr) {
+	ncx_slab_free(g_memoryPool.pool, ptr);
+}
+
 #endif

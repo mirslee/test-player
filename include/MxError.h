@@ -11,6 +11,8 @@
 #endif
 
 #define MX_NOERROR						0x0
+#define MX_OK							0x0
+#define MX_FAILED					    -1
 
 typedef long MxResult;
 #define MX_S_OK                            0

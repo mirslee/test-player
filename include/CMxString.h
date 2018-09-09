@@ -1,37 +1,30 @@
 #ifndef __CMXSTRING_H__
 #define __CMXSTRING_H__
 
-class CMxCharArray {
-public:
-    CMxCharArray(char* str) {__data = str;}
-	virtual ~CMxCharArray() {delete [] __data;}
-    
-    char* data();
-private:
-    char* __data;
-};
+enum MxTextEncode { MxTextEncode_GBK, MxTextEncode_UTF8, MxTextEncode_UTF16};
+typedef unsigned short MxWChar;
 
-class CMxWCharArray {
-public:
-    CMxWCharArray(wchar_t* wstr) {__data = wstr;}
-    virtual ~CMxWCharArray() {delete [] __data;}
-    
-    wchar_t* data();
-private:
-    wchar_t* __data;
-};
+MXCORE_API int mxWCharLen(const MxWChar* str);
+MXCORE_API long utf8_to_gbk(const char* str, char* dst, int len);
+MXCORE_API long gbk_to_utf8(const char* str, char* dst, int len);
+MXCORE_API long utf8_to_utf16(const char* str, MxWChar* dst, int len);
+MXCORE_API long gbk_to_utf16(const char* str, MxWChar* dst, int len);
+MXCORE_API long utf16_to_gbk(const MxWChar* str, char* dst, int len);
+MXCORE_API long utf16_to_utf8(const MxWChar* str, char* dst, int len);
 
-class CMxString {
+
+class MXCORE_API CMxString {
 public:
 public:
     CMxString();
-    CMxString(const char *sz, const char* encode); /*utf-8  or  gbk*/
 	CMxString(const char *sz);
-    
-	CMxCharArray cStr();
-	CMxWCharArray wcStr();
+    CMxString(const char *sz, MxTextEncode mte);
+	CMxString(const MxWChar *sz);
+	~CMxString();
+ 
+	MxWChar* mxStr() { return __pData; }
 private:
-    char* __pData;
+	MxWChar* __pData;
 };
 
 #endif //__CMXSTRING_H__

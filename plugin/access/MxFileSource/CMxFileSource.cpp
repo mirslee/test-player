@@ -4,6 +4,7 @@
 #include "MxInterface.h"
 #include "MxMemory.h"
 #include "CMxString.h"
+#include "MxSystem.h"
 
 #ifdef _WIN32
 #include "io.h"
@@ -51,7 +52,7 @@ bool CMxFileSource::open(MxPath* file) {
         return false;
     }
     if (file->reffile & 1) {
-        m_fid = _vxRefFile(file->szPath);
+        m_fid = mxRefFile(file->szPath);
     }
     return true;
 }
@@ -59,186 +60,24 @@ bool CMxFileSource::open(MxPath* file) {
 
 #if defined(_WIN32)
 #include "winioctl.h"
-//
-// Types of queries
-//
-#if (_MSC_VER<1600)
 
-typedef enum _STORAGE_QUERY_TYPE {
-    PropertyStandardQuery = 0,          // Retrieves the descriptor
-    PropertyExistsQuery,                // Used to test whether the descriptor is supported
-    PropertyMaskQuery,                  // Used to retrieve a mask of writeable fields in the descriptor
-    PropertyQueryMaxDefined     // use to validate the value
-} STORAGE_QUERY_TYPE, *PSTORAGE_QUERY_TYPE;
-
-//
-// define some initial property id's
-//
-
-typedef enum _STORAGE_PROPERTY_ID {
-    StorageDeviceProperty = 0,
-    StorageAdapterProperty,
-    StorageDeviceIdProperty,
-    StorageDeviceUniqueIdProperty,              // See storduid.h for details
-    StorageDeviceWriteCacheProperty,
-    StorageMiniportProperty,
-    StorageAccessAlignmentProperty,
-    StorageDeviceSeekPenaltyProperty,
-    StorageDeviceTrimProperty,
-    StorageDeviceWriteAggregationProperty
-} STORAGE_PROPERTY_ID, *PSTORAGE_PROPERTY_ID;
-
-//
-// Query structure - additional parameters for specific queries can follow
-// the header
-//
-
-typedef struct _STORAGE_PROPERTY_QUERY {
-    
-    //
-    // ID of the property being retrieved
-    //
-    
-    STORAGE_PROPERTY_ID PropertyId;
-    
-    //
-    // Flags indicating the type of query being performed
-    //
-    
-    STORAGE_QUERY_TYPE QueryType;
-    
-    //
-    // Space for additional parameters if necessary
-    //
-    
-    UCHAR AdditionalParameters[1];
-    
-} STORAGE_PROPERTY_QUERY, *PSTORAGE_PROPERTY_QUERY;
-
-//
-// Device property descriptor - this is really just a rehash of the inquiry
-// data retrieved from a scsi device
-//
-// This may only be retrieved from a target device.  Sending this to the bus
-// will result in an error
-//
-
-typedef struct _STORAGE_DEVICE_DESCRIPTOR {
-    
-    //
-    // Sizeof(STORAGE_DEVICE_DESCRIPTOR)
-    //
-    
-    ULONG Version;
-    
-    //
-    // Total size of the descriptor, including the space for additional
-    // data and id strings
-    //
-    
-    ULONG Size;
-    
-    //
-    // The SCSI-2 device type
-    //
-    
-    UCHAR DeviceType;
-    
-    //
-    // The SCSI-2 device type modifier (if any) - this may be zero
-    //
-    
-    UCHAR DeviceTypeModifier;
-    
-    //
-    // Flag indicating whether the device's media (if any) is removable.  This
-    // field should be ignored for media-less devices
-    //
-    
-    BOOLEAN RemovableMedia;
-    
-    //
-    // Flag indicating whether the device can support mulitple outstanding
-    // commands.  The actual synchronization in this case is the responsibility
-    // of the port driver.
-    //
-    
-    BOOLEAN CommandQueueing;
-    
-    //
-    // Byte offset to the zero-terminated ascii string containing the device's
-    // vendor id string.  For devices with no such ID this will be zero
-    //
-    
-    ULONG VendorIdOffset;
-    
-    //
-    // Byte offset to the zero-terminated ascii string containing the device's
-    // product id string.  For devices with no such ID this will be zero
-    //
-    
-    ULONG ProductIdOffset;
-    
-    //
-    // Byte offset to the zero-terminated ascii string containing the device's
-    // product revision string.  For devices with no such string this will be
-    // zero
-    //
-    
-    ULONG ProductRevisionOffset;
-    
-    //
-    // Byte offset to the zero-terminated ascii string containing the device's
-    // serial number.  For devices with no serial number this will be zero
-    //
-    
-    ULONG SerialNumberOffset;
-    
-    //
-    // Contains the bus type (as defined above) of the device.  It should be
-    // used to interpret the raw device properties at the end of this structure
-    // (if any)
-    //
-    
-    STORAGE_BUS_TYPE BusType;
-    
-    //
-    // The number of bytes of bus-specific data which have been appended to
-    // this descriptor
-    //
-    
-    ULONG RawPropertiesLength;
-    
-    //
-    // Place holder for the first byte of the bus specific property data
-    //
-    
-    UCHAR RawDeviceProperties[1];
-    
-} STORAGE_DEVICE_DESCRIPTOR, *PSTORAGE_DEVICE_DESCRIPTOR;
-
-#define IOCTL_STORAGE_QUERY_PROPERTY                CTL_CODE(IOCTL_STORAGE_BASE, 0x0500, METHOD_BUFFERED, FILE_ANY_ACCESS)
-#endif
-
-bool isRemovable(const char* filepath)
+bool isRemovable(const wchar_t* filepath)
 {
     if(filepath[1] != ':')
-    {
-        return FALSE;
-    }
+        return false;
+  
     wchar_t szDeviceName[64];
     swprintf(szDeviceName, L"\\\\.\\%c:", filepath[0]);
     HANDLE hDevice = CreateFileW(szDeviceName, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, 0);
-    if((hDevice == INVALID_HANDLE_VALUE) || (hDevice == NULL))
-    {
-        return FALSE;
-    }
+	if (INVALID_HANDLE_VALUE == hDevice  || NULL == hDevice)
+		return false;
+
     STORAGE_PROPERTY_QUERY query = {StorageDeviceProperty, PropertyStandardQuery};
     STORAGE_DEVICE_DESCRIPTOR desc = {0, sizeof(STORAGE_DEVICE_DESCRIPTOR)};
     DWORD lOutBytes = 0;
 	BOOL ret = DeviceIoControl(hDevice, IOCTL_STORAGE_QUERY_PROPERTY, &query, sizeof(STORAGE_PROPERTY_QUERY), &desc, sizeof(STORAGE_DEVICE_DESCRIPTOR), &lOutBytes, NULL);
     CloseHandle(hDevice);
-    return ret ? ((desc.BusType == BusType1394) || (desc.BusType == BusTypeUsb)) : FALSE;
+    return ret ? ((desc.BusType == BusType1394) || (desc.BusType == BusTypeUsb)) : false;
 }
 
 LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
@@ -255,30 +94,17 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
         if (0xFFFFFFFF != SetFilePointer(hFile, lLow, &lHigh, FILE_BEGIN))
         {
             DWORD dwRead;
-            if(ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &dwRead, NULL))
-            {
+            if(ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, &dwRead, NULL)) {
                 lread = dwRead;
             }
-            else
-            {
-                /*DWORD vSysErrId = vxGetSysLastError();
-                if (vSysErrId != 38) // 38: 到达文件结尾
-                {
-                    char vErrStr[256] = {0};
-                    sprintf(vErrStr, vxLoadMessageLV("Read source file ReadFile Error, Pos:%lld, Size:%d, SysError:[%d]%s"), pos, nNumberOfBytesToRead, vSysErrId, vxGetSysErrorString(vSysErrId));
-                    VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
-                }*/
+            else {
+				//DWORD vSysErrId = GetLastError();
+				//if (vSysErrId != 38) // 38: 到达文件结尾
             }
         }
-        else
-        {
-            /*DWORD vSysErrId = vxGetSysLastError();
-            if (vSysErrId != 38) // 38: 到达文件结尾
-            {
-                char vErrStr[256] = {0};
-                sprintf(vErrStr, vxLoadMessageLV("Read source file SetFilePointer Error, Pos:%lld, Size:%d, SysError:[%d]%s"), pos, nNumberOfBytesToRead, vSysErrId, vxGetSysErrorString(vSysErrId));
-                VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
-            }*/
+        else {
+			//DWORD vSysErrId = GetLastError();
+			//if (vSysErrId != 38) // 38: 到达文件结尾
         }
     }
     else
@@ -297,7 +123,7 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
             DWORD vLastError = GetLastError();
             if(vLastError == ERROR_IO_PENDING)
             {
-                if(WaitForSingleObject(overlap.hEvent, 50000) == WAIT_OBJECT_0)
+                if(WAIT_OBJECT_0 == WaitForSingleObject(overlap.hEvent, 50000))
                 {
                     if(GetOverlappedResult(hFile, &overlap, &dwRead, TRUE))
                     {
@@ -305,20 +131,15 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
                     }
                     else
                     {
-                        /*DWORD vSysErrId = vxGetSysLastError();
-                        if (vSysErrId != 38) // 38: 到达文件结尾
-                        {
-                            char vErrStr[256] = {0};
-                            sprintf(vErrStr, vxLoadMessageLV("Read source file GetOverlappedResult Error, Pos:%lld, Size:%d, SysError:[%d]%s"), pos, nNumberOfBytesToRead, vSysErrId, vxGetSysErrorString(vSysErrId));
-                            VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
-                        }*/
+						//DWORD vSysErrId = GetLastError();
+						//if (vSysErrId != 38) // 38: 到达文件结尾
                     }
                 }
                 else
                 {
                     /*char vErrStr[256] = {0};
                     sprintf(vErrStr, vxLoadMessageLV("Read source file Over Time Error, Pos:%lld, Size:%d"), pos, nNumberOfBytesToRead);
-                    VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
+                    VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);*/
                     
                     if (CancelIo(hFile))
                     {
@@ -326,11 +147,9 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
                     }
                     else
                     {
-                        char vErrStr[256] = {0};
-                        DWORD vSysErrId = vxGetSysLastError();
-                        sprintf(vErrStr, vxLoadMessageLV("Read source file Over Time CancelIo Error, Pos:%lld, Size:%d, SysError:[%d]%s"), pos, nNumberOfBytesToRead, vSysErrId, vxGetSysErrorString(vSysErrId));
-                        VX_MailMSG(vErrStr, vxLoadMessageLV("Error: VxFileSoruce::filefastioread"), 0, MAILSRC_SWENGINE | MAILSRC_ERROR);
-                    }*/
+						//DWORD vSysErrId = GetLastError();
+						//if (vSysErrId != 38) // 38: 到达文件结尾
+                    }
                 }
             }
         }
@@ -341,17 +160,15 @@ LONG __cdecl filefastioread(FASTRDPARAM* frp, asynccallback acb)
 
 HANDLE __openfastiohandle(const char* filename, bool unbuffer)
 {
-	wchar_t*  wchUTF16 = CMxString(filename).wcStr().data();
-    int slen = (int)strlen(filename) + 1;
     HANDLE fastio = INVALID_HANDLE_VALUE;
     if (unbuffer)
     {
-        fastio = _vxCanUnbufferW(wchUTF16, FALSE);
+        fastio = mxCanUnbuffer(CMxString(filename).mxStr(), FALSE);
     }
     if ((fastio == INVALID_HANDLE_VALUE) || (fastio == NULL))
     {
         DWORD dwOpenFlags = FILE_ATTRIBUTE_NORMAL | FILE_FLAG_RANDOM_ACCESS| FILE_FLAG_OVERLAPPED;
-        fastio = CreateFileW((LPCWSTR)wchUTF16, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, dwOpenFlags, NULL);
+        fastio = CreateFileW((LPCWSTR)CMxString(filename).mxStr(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, dwOpenFlags, NULL);
         if ((fastio == INVALID_HANDLE_VALUE) || (fastio == NULL))
         {
             /*char vErrStr[1000] = {0};
@@ -396,29 +213,12 @@ void CMxFileSource::close()
     }
 }
 
-DWORD __cdecl _vxGetSectorSizeForFileNameW(const char* lpFileName)
-{
-	return 512;
-	//vxUWChar szRoot[MAX_PATH];
-	//DWORD dwSectorSize;
-	//if (SplitPathRootW(szRoot, lpFileName) == NULL)
-	//{
-	//	return 512; // (DWORD) - 1;
-	//}
-	//DWORD dwSectorsPerCluster, dwNumberOfFreeClusters, dwTotalNumberOfClusters;
-	//if (0 == GetDiskFreeSpaceW((LPCWSTR)szRoot, &dwSectorsPerCluster, &dwSectorSize, &dwNumberOfFreeClusters, &dwTotalNumberOfClusters))
-	//{
-	//	return 512; // (DWORD) - 1;
-	//}
-	//return dwSectorSize;
-}
-
 bool CMxFileSource::__open(const char* filename,bool unbuffer)
 {
-	wchar_t*  wchUTF16 = CMxString(filename).wcStr().data();
+	wchar_t* wStr = (wchar_t*)CMxString(filename).mxStr();
     m_bUnbuffer = unbuffer;
     DWORD dwOpenFlags = FILE_ATTRIBUTE_NORMAL | FILE_FLAG_SEQUENTIAL_SCAN;
-    m_hFile = CreateFileW((LPCWSTR)wchUTF16, GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, dwOpenFlags, NULL);
+    m_hFile = CreateFileW((LPCWSTR)CMxString(filename).mxStr(), GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, OPEN_EXISTING, dwOpenFlags, NULL);
     if ((m_hFile == INVALID_HANDLE_VALUE) || (m_hFile == NULL))
     {
         char vErrStr[1000] = {0};
@@ -442,23 +242,24 @@ bool CMxFileSource::__open(const char* filename,bool unbuffer)
         return false;
     }
     
-    m_sectorsize = _vxGetSectorSizeForFileNameW(wchUTF16);
+    m_sectorsize = mxGetSectorSizeForFileName(CMxString(filename).mxStr());
     if(m_sectorsize < 4096)
     {
         // 在SMB读取和新硬盘1TB以上可能出现512读取失败的情况
         m_sectorsize = 4096;
     }
-    m_removable = isRemovable(wchUTF16);
+    m_removable = isRemovable((LPCWSTR)CMxString(filename).mxStr());
     if(m_removable)
     {
         m_storagetype = st_removable;
     }
-    if (((wchUTF16[0] == '\\') && (wchUTF16[1] == '\\')) ||
+    /*if (((wchUTF16[0] == '\\') && (wchUTF16[1] == '\\')) ||
         ((wchUTF16[0] == '/') && (wchUTF16[1] == '/')))
     {
         m_storagetype = st_netshare;
-    }
-    return TRUE;
+    }*/
+
+    return true;
 }
 
 void CMxFileSource::refresh()
@@ -538,7 +339,7 @@ long filefastioread(FASTRDPARAM* frp, asynccallback acb)
 
 #endif
 
-void CMxFileSource::AddFastIO(IVxFastIORead* pFastIO)
+void CMxFileSource::addFastIO(IVxFastIORead* pFastIO)
 {
     int fast = open(m_filepath.szPath, O_RDONLY, 0666);
     if (fast == -1)
@@ -551,12 +352,12 @@ void CMxFileSource::AddFastIO(IVxFastIORead* pFastIO)
 #ifdef __APPLE__
     fcntl(fast, F_RDAHEAD, 1);
     fcntl(fast, F_NOCACHE, 1);
-    VXBOOL bAysnc = FALSE;
+    bool bAysnc = false;
 #else
-    VXBOOL bAysnc = TRUE;
+	bool bAysnc = true;
 #endif
     
-    if(pFastIO->InitFile((void *)(vxuintptr)fast, this, m_fid, m_sectorsize, filefastioread, bAysnc))
+    if(pFastIO->initFile((void *)(vxuintptr)fast, this, m_fid, m_sectorsize, filefastioread, bAysnc))
     {
         m_pFastIO[pFastIO->GetId()] = pFastIO;
     }
@@ -636,7 +437,7 @@ bool is_removable(const char* devpath)
     return false;
 }
 
-VXBOOL CMxFileSource::__open(const char* filename,VXBOOL unbuffer)
+bool CMxFileSource::__open(const char* filename, bool unbuffer)
 {
     m_hFile = (HVXFILE)open(filename, O_RDONLY);
     if (m_hFile == -1)

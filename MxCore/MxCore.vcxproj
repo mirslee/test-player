@@ -162,10 +162,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMxString.cpp" />
+    <ClCompile Include="MxFileHash.cpp" />
     <ClCompile Include="MxGlobal.cpp" />
     <ClCompile Include="MxLog.cpp" />
     <ClCompile Include="MxMemory.cpp" />
     <ClCompile Include="MxSynchronize.cpp" />
+    <ClCompile Include="MxSystem.cpp" />
     <ClCompile Include="MxThread.cpp" />
     <ClCompile Include="MxThreadCond.cpp" />
     <ClCompile Include="MxThreadMutex.cpp" />

@@ -6,6 +6,16 @@
 #include <windows.h>
 #endif
 
+#ifdef _WIN32
+#define mxinline __forceinline
+typedef HANDLE	HVXFILE;
+typedef HWND	HVXWND;
+#else
+#define mxinline inline
+typedef int	HVXFILE;
+typedef void* HVXWND;
+#endif
+
 typedef char int8;
 #ifndef _WIN32
 typedef char _int8;
