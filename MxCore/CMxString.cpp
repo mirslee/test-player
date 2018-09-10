@@ -3,6 +3,9 @@
 #include "iconv.h"
 #include "MxError.h"
 #include "MxMemory.h"
+#ifdef __APPLE__
+#include <CoreFoundation/CoreFoundation.h>
+#endif
 
 MXCORE_API int mxWCharLen(const MxWChar* str) {
 	if (!str)
@@ -106,7 +109,7 @@ MXCORE_API long utf8_to_utf16(const char* str, MxWChar* dst, int len) {
 	CFStringRef strref = CFStringCreateWithBytes(kCFAllocatorDefault, (const UInt8*)str, strlen(str), kCFStringEncodingUTF8, false);
 	if (strref)
 	{
-		CFStringGetCString(strref, (char*)dst, lens, kCFStringEncodingUTF16);
+		CFStringGetCString(strref, (char*)dst, len, kCFStringEncodingUTF16);
 		CFRelease(strref);
 		return MX_OK;
 	}
@@ -136,7 +139,7 @@ MXCORE_API long gbk_to_utf16(const char* str, MxWChar* dst, int len) {
 	CFStringRef strref = CFStringCreateWithBytes(kCFAllocatorDefault, (const UInt8*)str, strlen(str), kCFStringEncodingDOSChineseSimplif, false);
 	if (strref)
 	{
-		CFStringGetCString(strref, (char*)dst, lens, kCFStringEncodingUTF16);
+		CFStringGetCString(strref, (char*)dst, len, kCFStringEncodingUTF16);
 		CFRelease(strref);
 		return MX_FAILED;
 	}

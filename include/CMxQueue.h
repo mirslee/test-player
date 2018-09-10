@@ -2,6 +2,7 @@
 #define __CMXQUEUE_H__
 
 #include "MxSynchronize.h"
+#include "MxMemory.h"
 
 typedef int(*compareq)(void* t0, void* T1);
 template <class T>

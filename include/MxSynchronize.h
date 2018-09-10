@@ -50,6 +50,8 @@ bool mxSetEvent(CMxEvent event);
 bool mxResetEvent(CMxEvent event);
 unsigned long mxWaitEvent(CMxEvent event, unsigned long dwMilliseconds);
 unsigned long mxWaitEvents(unsigned long  nCount, CMxEvent* lpEvents, unsigned long  dwMilliseconds);
+
+#define mxSleep(x)
 #endif
 
 

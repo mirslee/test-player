@@ -7,6 +7,7 @@
 #include "MxSynchronize.h"
 #include "CMxArray.h"
 #include "CMxQueue.h"
+#include "MxTypes.h"
 #include <map>
 
 class _FastIO
@@ -23,7 +24,7 @@ public:
 		LONG lAge;
 		LONG lHistoryVal;
 		LONG lUsers;
-		PBYTE buf;
+		uint8* buf;
 	};
 	void increment(int count);
 	void decrement(int count);
@@ -56,7 +57,7 @@ private:
 		__int64 i64BlockNo;
 		fastioread ioread;
 		int idxbuf;
-		PBYTE buf;
+		uint8* buf;
 		LONG size;
 	};
 
@@ -82,13 +83,13 @@ private:
 	CMxMutex m_csFile;
 	bool m_bExitSend;
 	pthread_t m_hSendThread;
-	static void* SendTaskProc(LPVOID lp) { ((_FastIO*)lp)->_SendTask(); return 0; }
+	static void* SendTaskProc(void* lp) { ((_FastIO*)lp)->_SendTask(); return 0; }
 	void _SendTask();
 	SENDREAD m_task[MAX_READS + MAX_ASYNCREADS];
 	CMxQueue<int> m_qReadCompletes;
 	bool m_bExitComplete;
 	pthread_t m_hCompleteThread;
-	static void* TaskCompleteProc(LPVOID lp) { ((_FastIO*)lp)->_TaskComplete(); return 0; }
+	static void* TaskCompleteProc(void* lp) { ((_FastIO*)lp)->_TaskComplete(); return 0; }
 	void _TaskComplete();
 	CMxQueue<SENDREAD> m_qReads[MAX_READS];
 	pthread_t m_hReadThreads[MAX_READS];
@@ -97,7 +98,7 @@ private:
 		void* pThis;
 		int idx;
 	};
-	static void* ReadFileProc(LPVOID lp)
+	static void* ReadFileProc(void* lp)
 	{
 		READSTARTPARAM* p = (READSTARTPARAM*)lp;
 		_FastIO* pThis = (_FastIO*)p->pThis;
@@ -123,17 +124,17 @@ public:
 	CMxFastIORead(LONG lBlockCount, int nId, _FastIO* fastio, PONRELEASE OnRel, void* p);
 	virtual ~CMxFastIORead();
 public:
-	int   __stdcall getId() { return m_nId; }
-	bool  __stdcall initFile(void* srcp, MxFastIO* vxdemul, mxuvoidptr fid, DWORD sectorsize, fastioread ioread, bool asyncrd);
-	void  __stdcall uninitFile(bool bRemove = TRUE);
-	mxuvoidptr __stdcall getFileId() { return m_fid; }
-	LONG  __stdcall read(int stream, __int64 pos, PBYTE buf, LONG lBytes, fastioreadtype mode);
-	LONG  __stdcall directRead(__int64 pos, PBYTE buf, LONG lBytes);
-	int  __stdcall lockCached(int stream, __int64 pos);
-	const BYTE* __stdcall getCache(int idx, LONG& size);
-	void  __stdcall unlockCached(int lockidx);
+	int   getId() { return m_nId; }
+	bool  initFile(void* srcp, MxFastIO* vxdemul, mxuvoidptr fid, DWORD sectorsize, fastioread ioread, bool asyncrd);
+	void  uninitFile(bool bRemove = TRUE);
+	mxuvoidptr getFileId() { return m_fid; }
+	LONG  read(int stream, __int64 pos, uint8* buf, LONG lBytes, fastioreadtype mode);
+	LONG  directRead(__int64 pos, uint8* buf, LONG lBytes);
+	int  lockCached(int stream, __int64 pos);
+	const BYTE* getCache(int idx, LONG& size);
+	void  unlockCached(int lockidx);
 
-	LONG  __stdcall getBlockSize();
+	LONG  getBlockSize();
 private:
 	_FastIO* m_fastio;
 	mxuvoidptr m_fid;
@@ -147,7 +148,7 @@ private:
 	int m_nId;
 	PONRELEASE OnRelease;
 	void* m_releasep;
-	PBYTE m_direct;
+	uint8* m_direct;
 	__int64 m_sectorsize;
 	bool m_bnet;
 

@@ -19,7 +19,7 @@ static struct DISKTEST
 	bool unbuffer;
 }g_diskinfo[64] = { 0 };
 
-
+#ifdef _WIN32
 mxinline char *splitPathRoot(char *dst, const char *path)
 {
 	if (!path)	return NULL;
@@ -442,3 +442,4 @@ MXCORE_API DWORD mxGetSectorSizeForFileName(const unsigned short* lpFileName) {
 	}
 	return dwSectorSize;
 }
+#endif

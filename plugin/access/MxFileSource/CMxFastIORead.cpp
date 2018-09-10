@@ -3,6 +3,7 @@
 #include "MxMemory.h"
 #include "MxSystem.h"
 #include "MxPointer.h"
+#include "MxSynchronize.h"
 
 extern MXCORE_API bool g_bSyncRead;
 extern MXCORE_API int g_rdblocksize;
@@ -241,7 +242,7 @@ void _FastIO::addFile(mxuvoidptr fid, void* srcp)
 		for (int i = 0; i < MAX_READS; i++)
 		{
 			m_qReads[i].SetMaxSize(2);
-			m_qReads[i].SetWaitTime(INFINITE);
+			m_qReads[i].SetWaitTime(WAIT_INFINITE);
 			READSTARTPARAM* start = new READSTARTPARAM;
 			start->pThis = this;
 			start->idx = i;
@@ -291,7 +292,8 @@ void _FastIO::removeFile(mxuvoidptr fid, void* srcp, bool bRemove)
 	}
 
 	LONG& preads = m_srcpmap[srcp];
-	while (preads > 0) mxSleep(10);
+	while (preads > 0)
+        mxSleep(10);
 	m_srcpmap.erase(srcp);
 }
 
@@ -306,7 +308,7 @@ void _FastIO::increment(int count)
 #if __linux__
 		memalign = sysconf(_SC_PAGESIZE);
 #endif
-		iobuf.buf = (PBYTE)mx_malloc(g_rdblocksize, memalign);
+		iobuf.buf = (uint8*)mx_malloc(g_rdblocksize, memalign);
 		m_bufs.Add(iobuf);
 	}
 	m_lbufs += count;

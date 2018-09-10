@@ -11,6 +11,9 @@
 		54685479213FEEFC00B2F121 /* CMxFileSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 54685477213FEEFC00B2F121 /* CMxFileSource.h */; };
 		5468547C213FEFCF00B2F121 /* stdafx.h in Headers */ = {isa = PBXBuildFile; fileRef = 5468547A213FEFCF00B2F121 /* stdafx.h */; };
 		5468547D213FEFCF00B2F121 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5468547B213FEFCF00B2F121 /* stdafx.cpp */; };
+		546DA9502145FE9400DF99E3 /* CMxFastIORead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 546DA94E2145FE9300DF99E3 /* CMxFastIORead.cpp */; };
+		546DA9512145FE9400DF99E3 /* CMxFastIORead.h in Headers */ = {isa = PBXBuildFile; fileRef = 546DA94F2145FE9300DF99E3 /* CMxFastIORead.h */; };
+		546DA9582146195B00DF99E3 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546DA9572146195B00DF99E3 /* CoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		54685477213FEEFC00B2F121 /* CMxFileSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMxFileSource.h; sourceTree = "<group>"; };
 		5468547A213FEFCF00B2F121 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
 		5468547B213FEFCF00B2F121 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		546DA94E2145FE9300DF99E3 /* CMxFastIORead.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxFastIORead.cpp; sourceTree = "<group>"; };
+		546DA94F2145FE9300DF99E3 /* CMxFastIORead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMxFastIORead.h; sourceTree = "<group>"; };
+		546DA9572146195B00DF99E3 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546DA9582146195B00DF99E3 /* CoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -35,11 +42,14 @@
 		54685457213FED8F00B2F121 = {
 			isa = PBXGroup;
 			children = (
+				546DA94E2145FE9300DF99E3 /* CMxFastIORead.cpp */,
+				546DA94F2145FE9300DF99E3 /* CMxFastIORead.h */,
 				54685477213FEEFC00B2F121 /* CMxFileSource.h */,
 				54685476213FEEFC00B2F121 /* CMxFileSource.cpp */,
 				5468547A213FEFCF00B2F121 /* stdafx.h */,
 				5468547B213FEFCF00B2F121 /* stdafx.cpp */,
 				54685461213FED8F00B2F121 /* Products */,
+				546DA9542146190C00DF99E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,6 +61,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		546DA9542146190C00DF99E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				546DA9572146195B00DF99E3 /* CoreServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -58,6 +76,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546DA9512145FE9400DF99E3 /* CMxFastIORead.h in Headers */,
 				5468547C213FEFCF00B2F121 /* stdafx.h in Headers */,
 				54685479213FEEFC00B2F121 /* CMxFileSource.h in Headers */,
 			);
@@ -121,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54685478213FEEFC00B2F121 /* CMxFileSource.cpp in Sources */,
+				546DA9502145FE9400DF99E3 /* CMxFastIORead.cpp in Sources */,
 				5468547D213FEFCF00B2F121 /* stdafx.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

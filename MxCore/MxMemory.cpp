@@ -224,14 +224,14 @@ MXCORE_API void*  mx_malloc(size_t _Size, int align)
 	return (void *)r_ptr;
 }
 
-MXCORE_API void* __cdecl mx_mallocz(size_t _Size, int align)
+MXCORE_API void* mx_mallocz(size_t _Size, int align)
 {
 	void* p = mx_malloc(_Size, align);
 	memset(p, 0, _Size);
 	return p;
 }
 
-MXCORE_API void* __cdecl mx_realloc(void * memblock, size_t size, int align)
+MXCORE_API void* mx_realloc(void * memblock, size_t size, int align)
 {
 	if (memblock == NULL)
 		return mx_mallocz(size, align);
@@ -387,6 +387,20 @@ MXCORE_API void* mx_pool_alloc(int size) {
 }
 
 MXCORE_API void mx_pool_free(void * ptr) {
+    ncx_slab_free(g_memoryPool.pool, ptr);
+}
+
+MXCORE_API void*  mxAlloc(int size) {
+    void *p = ncx_slab_alloc(g_memoryPool.pool, size);
+    if (p == 0)
+    {
+        ncx_slab_stat_t stat;
+        ncx_slab_stat(g_memoryPool.pool, &stat);
+    }
+    return p;
+}
+
+MXCORE_API void  mxFree(void * ptr) {
     ncx_slab_free(g_memoryPool.pool, ptr);
 }
 
@@ -567,20 +581,6 @@ BOOL GetSourceInfoFromAddress(DWORD64 address, LPTSTR lpszSourceInfo, rsize_t lp
 
 	return ret;*/
 	return true;
-}
-
-MXCORE_API void*  mxAlloc(int size) {
-	void *p = ncx_slab_alloc(g_memoryPool.pool, size);
-	if (p == 0)
-	{
-		ncx_slab_stat_t stat;
-		ncx_slab_stat(g_memoryPool.pool, &stat);
-	}
-	return p;
-}
-
-MXCORE_API void  mxFree(void * ptr) {
-	ncx_slab_free(g_memoryPool.pool, ptr);
 }
 
 #endif

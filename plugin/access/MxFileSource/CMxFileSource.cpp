@@ -12,6 +12,11 @@
 #include <unistd.h>
 #endif
 
+#ifdef __APPLE__
+#include <CoreServices/CoreServices.h>
+#define INVALID_HANDLE_VALUE -1
+#endif
+
 CMxFileSource::CMxFileSource() {
     m_fid = -1;
     m_hFile = INVALID_HANDLE_VALUE;

@@ -21,7 +21,7 @@ struct _FileHash
 	{
 		DWORD	refcode;	//	非唯一CODE,HPOS才是唯一CODE
 		int		ref;
-		CHAR	name[MX_MAXPATH];
+		char	name[MX_MAXPATH];
 		DATA	data;
 	};
 

@@ -5,7 +5,7 @@
 #define stdafx_h
 
 #ifdef _WIN32
-#define MXCODEC_EXPORT
+//#define MXCODEC_EXPORT
 #endif
 
 #include "MxDllexport.h"
