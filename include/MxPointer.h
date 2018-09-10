@@ -108,7 +108,181 @@ private:
     T* pointer;
 };
 
+template <class T>
+class CMemArrayPtr
+{
+private:
+	T* p;
+public:
+	CMemArrayPtr()
+	{
+		p = nullptr;
+	}
+	CMemArrayPtr(T* lp)
+	{
+		p = lp;
+	}
+	~CMemArrayPtr()
+	{
+		if (p) delete[] p;
+	}
 
+	operator T*() const
+	{
+		return (T*)p;
+	}
+	T& operator*() const
+	{
+		assert(p != nullptr);
+		return *p;
+	}
+	T** operator&()
+	{
+		return &p;
+	}
+
+	T* operator=(T* lp)
+	{
+		if (p) delete[] p;
+		return (p = lp);
+	}
+
+	bool operator!() const
+	{
+		return (p == NULL);
+	}
+	bool operator==(T* pT) const
+	{
+		return p == pT;
+	}
+
+	bool operator!=(T* pT) const
+	{
+		return p != pT;
+	}
+
+	T* operator->() const
+	{
+		assert(p != nullptr);
+		return p;
+	}
+};
+
+template <class T>
+class CMemClassPtr
+{
+private:
+	T* p;
+public:
+	CMemClassPtr()
+	{
+		p = nullptr;
+	}
+	CMemClassPtr(T* lp)
+	{
+		p = lp;
+	}
+	~CMemClassPtr()
+	{
+		if (p) delete p;
+	}
+
+	operator T*() const
+	{
+		return (T*)p;
+	}
+	T& operator*() const
+	{
+		assert(p != nullptr);
+		return *p;
+	}
+	T** operator&()
+	{
+		return &p;
+	}
+
+	T* operator=(T* lp)
+	{
+		if (p) delete p;
+		return (p = lp);
+	}
+
+	bool operator!() const
+	{
+		return (p == NULL);
+	}
+	bool operator==(T* pT) const
+	{
+		return p == pT;
+	}
+
+	bool operator!=(T* pT) const
+	{
+		return p != pT;
+	}
+
+	T* operator->() const
+	{
+		ASSERT(p != NULL);
+		return p;
+	}
+};
+
+
+template <class T>
+class CVxMallocPtr
+{
+private:
+	T* p;
+public:
+	CVxMallocPtr()
+	{
+		p = NULL;
+	}
+	CVxMallocPtr(T* lp)
+	{
+		p = lp;
+	}
+	~CVxMallocPtr()
+	{
+		if (p) mx_free(p);
+	}
+
+	operator T*() const
+	{
+		return (T*)p;
+	}
+	T** operator&()
+	{
+		return &p;
+	}
+
+	T* operator=(T* lp)
+	{
+		if (p) mx_free(p);
+		return (p = lp);
+	}
+
+	bool operator!() const
+	{
+		return (p == nullptr);
+	}
+	bool operator==(T* pT) const
+	{
+		return p == pT;
+	}
+
+	bool operator!=(T* pT) const
+	{
+		return p != pT;
+	}
+
+	T* operator->() const
+	{
+		assert(p != nullptr);
+		return p;
+	}
+};
 
 
 

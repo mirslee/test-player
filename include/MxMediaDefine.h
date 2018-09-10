@@ -41,11 +41,29 @@ enum MxMuxerType {
 };
 
 enum MxFormatType {
-    MxFormatType_h264   = MX_FOURCC('h','2','6','4'),
+    MxFormatType_h264	= MX_FOURCC('h','2','6','4'),
     MxFormatType_x264   = MX_FOURCC('x','2','6','4'),
+	MxFormatType_mpeg2	= MX_FOURCC('m','p','2','v'),
+	MxFormatType_mpeg4	= MX_FOURCC('m','p','4','v'),
+	MxFormatType_dvsd	= MX_FOURCC('d','v','s','d'),
+	MxFormatType_dv25	= MX_FOURCC('d', 'v', '2', '5'),
+	MxFormatType_dv50 = MX_FOURCC('d', 'v', '5', '0'),
+	MxFormatType_dvh1 = MX_FOURCC('d', 'v', 'h', '1'),
+	MxFormatType_AVC_I = MX_FOURCC('4', '6', '2', 'p'),
+	MxFormatType_apch =  MX_FOURCC('a', 'p', 'c', 'h') ,//Apple ProRes 422 HQ
+	MxFormatType_apcn = MX_FOURCC('a', 'p', 'c', 'n'), //Apple ProRes 422
+	MxFormatType_DNxHD = MX_FOURCC('a', 'v', 'd', 'n'),//AVID DNxHD codec
+	vxFormat_bid = ' bid',
+	vxFormat_DivX5 = '05xd',
+	vxFormat_mjpg = 'gpjm',//motion-jpeg
+	vxFormat_ap208 = 'v208',//Apple Component Y'CbCr 8-bit 4:2:2
+	vxFormat_ap210 = 'v210',//Apple Component Y'CbCr 10-bit 4:2:2
+	vxFormat_yuy2 = '2yuy',
     
     
-    MxFormatType_pcm   = MX_FOURCC('p','c','m',' '),
+    MxFormatType_pcm	= MX_FOURCC('p','c','m',' '),
+	MxFormatType_dpcm	= MX_FOURCC('d','p','c','m',),
+	MxFormatType_mp3	= MX_FOURCC('m','p','3',' '),
 };
 
 enum MxStreamType {
