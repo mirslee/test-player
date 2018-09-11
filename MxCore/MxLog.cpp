@@ -30,3 +30,22 @@ MXCORE_API void mx_debug(const char *format, ...) {
     fflush(stdout);
 }
 
+MXCORE_API void msg_Warn(const char *msg, ...) {
+    va_list args;
+    char message[2048] = {0};
+    
+    va_start(args, format);
+    vsnprintf(message, 2048, format, args);
+    va_end(args);
+    
+    int len = (int)strlen(message);
+    if (message[len - 2] == '\n'&&message[len - 1] == '\n')
+        message[len - 1] = 0;
+    
+#ifdef _WIN32
+    //OutputDebugString(reinterpret_cast<const wchar_t*>(message.utf16()));
+    return;
+#endif
+    fprintf(stdout, "%s", message);
+    fflush(stdout);
+}

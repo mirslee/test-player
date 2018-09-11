@@ -1,0 +1,324 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		546DA9872147538700DF99E3 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 546DA9822147538700DF99E3 /* stdafx.cpp */; };
+		546DA9892147538700DF99E3 /* stdafx.h in Headers */ = {isa = PBXBuildFile; fileRef = 546DA9842147538700DF99E3 /* stdafx.h */; };
+		546DA99521476F9B00DF99E3 /* libavi.c in Sources */ = {isa = PBXBuildFile; fileRef = 546DA99221476F9A00DF99E3 /* libavi.c */; };
+		546DA99621476F9B00DF99E3 /* libavi.h in Headers */ = {isa = PBXBuildFile; fileRef = 546DA99321476F9B00DF99E3 /* libavi.h */; };
+		546DA99821479B4200DF99E3 /* MxWave.h in Headers */ = {isa = PBXBuildFile; fileRef = 546DA99721479B4200DF99E3 /* MxWave.h */; };
+		546DA99A21479FC300DF99E3 /* MxFourcc.h in Headers */ = {isa = PBXBuildFile; fileRef = 546DA99921479FC300DF99E3 /* MxFourcc.h */; };
+		546DA99C2147AFA200DF99E3 /* MxCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 546DA99B2147AFA200DF99E3 /* MxCommon.h */; };
+		546DA99E2147C81F00DF99E3 /* MxStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 546DA99D2147C81F00DF99E3 /* MxStream.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		546DA9692147534900DF99E3 /* libMxAviD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxAviD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		546DA9822147538700DF99E3 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		546DA9842147538700DF99E3 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		546DA99221476F9A00DF99E3 /* libavi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libavi.c; sourceTree = "<group>"; };
+		546DA99321476F9B00DF99E3 /* libavi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libavi.h; sourceTree = "<group>"; };
+		546DA99721479B4200DF99E3 /* MxWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxWave.h; sourceTree = "<group>"; };
+		546DA99921479FC300DF99E3 /* MxFourcc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxFourcc.h; sourceTree = "<group>"; };
+		546DA99B2147AFA200DF99E3 /* MxCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxCommon.h; sourceTree = "<group>"; };
+		546DA99D2147C81F00DF99E3 /* MxStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxStream.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		546DA9662147534900DF99E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		546DA9602147534900DF99E3 = {
+			isa = PBXGroup;
+			children = (
+				546DA99D2147C81F00DF99E3 /* MxStream.h */,
+				546DA99B2147AFA200DF99E3 /* MxCommon.h */,
+				546DA99921479FC300DF99E3 /* MxFourcc.h */,
+				546DA99721479B4200DF99E3 /* MxWave.h */,
+				546DA99221476F9A00DF99E3 /* libavi.c */,
+				546DA99321476F9B00DF99E3 /* libavi.h */,
+				546DA9822147538700DF99E3 /* stdafx.cpp */,
+				546DA9842147538700DF99E3 /* stdafx.h */,
+				546DA96A2147534900DF99E3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		546DA96A2147534900DF99E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				546DA9692147534900DF99E3 /* libMxAviD.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		546DA9672147534900DF99E3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				546DA99821479B4200DF99E3 /* MxWave.h in Headers */,
+				546DA99C2147AFA200DF99E3 /* MxCommon.h in Headers */,
+				546DA9892147538700DF99E3 /* stdafx.h in Headers */,
+				546DA99E2147C81F00DF99E3 /* MxStream.h in Headers */,
+				546DA99621476F9B00DF99E3 /* libavi.h in Headers */,
+				546DA99A21479FC300DF99E3 /* MxFourcc.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		546DA9682147534900DF99E3 /* MxAvi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 546DA9742147534900DF99E3 /* Build configuration list for PBXNativeTarget "MxAvi" */;
+			buildPhases = (
+				546DA9652147534900DF99E3 /* Sources */,
+				546DA9662147534900DF99E3 /* Frameworks */,
+				546DA9672147534900DF99E3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MxAvi;
+			productName = MxAvi;
+			productReference = 546DA9692147534900DF99E3 /* libMxAviD.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		546DA9612147534900DF99E3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = lixiaopeng;
+				TargetAttributes = {
+					546DA9682147534900DF99E3 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 546DA9642147534900DF99E3 /* Build configuration list for PBXProject "MxAvi" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 546DA9602147534900DF99E3;
+			productRefGroup = 546DA96A2147534900DF99E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				546DA9682147534900DF99E3 /* MxAvi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		546DA9652147534900DF99E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				546DA99521476F9B00DF99E3 /* libavi.c in Sources */,
+				546DA9872147538700DF99E3 /* stdafx.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		546DA9722147534900DF99E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		546DA9732147534900DF99E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		546DA9752147534900DF99E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CONFIGURATION_BUILD_DIR = ../../../bin/mac/$CONFIGURATION/plugin/access;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = stdafx.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../include,
+					../../../include/ffmpeg/include,
+				);
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path @executable_path";
+				OBJROOT = build;
+				PRODUCT_NAME = "$(TARGET_NAME)D";
+				SYMROOT = ../../../bin/mac/$CONFIGURATION/plugin/access;
+			};
+			name = Debug;
+		};
+		546DA9762147534900DF99E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CONFIGURATION_BUILD_DIR = ../../../bin/mac/$CONFIGURATION/plugin/access;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = stdafx.h;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					../../../include,
+					../../../include/ffmpeg/include,
+				);
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path @executable_path";
+				OBJROOT = build;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ../../../bin/mac/$CONFIGURATION/plugin/access;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		546DA9642147534900DF99E3 /* Build configuration list for PBXProject "MxAvi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				546DA9722147534900DF99E3 /* Debug */,
+				546DA9732147534900DF99E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		546DA9742147534900DF99E3 /* Build configuration list for PBXNativeTarget "MxAvi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				546DA9752147534900DF99E3 /* Debug */,
+				546DA9762147534900DF99E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 546DA9612147534900DF99E3 /* Project object */;
+}

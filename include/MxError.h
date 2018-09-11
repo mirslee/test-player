@@ -10,9 +10,11 @@
 #define MAKE_RESULT( code )     1
 #endif
 
-#define MX_NOERROR						0x0
-#define MX_OK							0x0
+#define MX_NOERROR						0
+#define MX_OK							0
+#define MX_SUCCESS                      0
 #define MX_FAILED					    -1
+#define MX_EGENERIC                     -1
 
 typedef long MxResult;
 #define MX_S_OK                            0

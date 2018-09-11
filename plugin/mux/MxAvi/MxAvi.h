@@ -367,56 +367,56 @@ typedef struct
 
 typedef struct
 {
-	DWORD fcc;
-	DWORD dwSize;
-	DWORD dwSizeUsed;
-	DWORD dwFrameIndex;
-	DWORD dwReallocation;
-	DWORD dwFrameType;
-	PBYTE pOBMem;
+	uint32 fcc;
+	uint32 dwSize;
+	uint32 dwSizeUsed;
+	uint32 dwFrameIndex;
+	uint32 dwReallocation;
+	uint32 dwFrameType;
+	uint8* pOBMem;
 }MATROXMPEG2AVI_INDEX;
 
 typedef struct
 {
-	DWORD fcc;
-	DWORD dwSize;
-	DWORD dwSizeUsed;
-	VXBOOL bKey;
-	PBYTE pOBMem;
+	uint32 fcc;
+	uint32 dwSize;
+	uint32 dwSizeUsed;
+	bool bKey;
+	uint8* pOBMem;
 }MATROXDVAVI_INDEX;
 
 typedef struct
 {
-	DWORD dwSize;
-	DWORD dwSizeUsed;
-	DWORD dwField0Size;
-	DWORD dwField1Size;
+	uint32 dwSize;
+	uint32 dwSizeUsed;
+	uint32 dwField0Size;
+	uint32 dwField1Size;
 }MATROXMJPEG_INDEX;
 
 
 struct _video_field_desc
 {
-   ULONG    CompressedBMHeight;
-   ULONG    CompressedBMWidth;
-   ULONG    ValidBMHeight;          // Not used
-   ULONG    ValidBMWidth;           // Not used
-   ULONG    ValidBMXOffset;         // Not used
-   ULONG    ValidBMYOffset;         // Not used
-   ULONG    VideoXOffsetInT;        // Not used
-   ULONG    VideoYValidStartLine;   // Not used
+   ulong    CompressedBMHeight;
+   ulong    CompressedBMWidth;
+   ulong    ValidBMHeight;          // Not used
+   ulong    ValidBMWidth;           // Not used
+   ulong    ValidBMXOffset;         // Not used
+   ulong    ValidBMYOffset;         // Not used
+   ulong    VideoXOffsetInT;        // Not used
+   ulong    VideoYValidStartLine;   // Not used
 };
 
 typedef struct 
 {
-	DWORD VideoFormatToken;
-	DWORD VideoStandard;
-	DWORD dwVerticalRefreshRate;
-	DWORD dwHTotalInT;
-	DWORD dwVTotalInLines;
-	DWORD dwFrameAspectRatio;
-	DWORD dwFrameWidthInPixels;
-	DWORD dwFrameHeightInLines;
-	DWORD nbFieldPerFrame;
+	uint32 VideoFormatToken;
+	uint32 VideoStandard;
+	uint32 dwVerticalRefreshRate;
+	uint32 dwHTotalInT;
+	uint32 dwVTotalInLines;
+	uint32 dwFrameAspectRatio;
+	uint32 dwFrameWidthInPixels;
+	uint32 dwFrameHeightInLines;
+	uint32 nbFieldPerFrame;
 	struct _video_field_desc* a;
 }VIDEOPROPHEADER;
 
@@ -427,11 +427,11 @@ typedef struct _AMMediaType2 {
 	GUID subtype;
 	int bFixedSizeSamples;
 	int bTemporalCompression;
-	ULONG lSampleSize;
+	ulong lSampleSize;
 	GUID formattype;
-	DWORD pUnk;
-	ULONG cbFormat;
-	DWORD pbFormat;
+	uint32 pUnk;
+	ulong cbFormat;
+	uint32 pbFormat;
 } AM_MEDIA_TYPE2;
 
 typedef struct 
@@ -468,12 +468,12 @@ typedef struct
 typedef struct  
 {
 	BITMAPINFOHEADER bmp;
-	DWORD scanmode;		//1:firstfield,2:secondfiled,3:Progressive
-	DWORD format;		//5:keMvSurfaceFormatYUYV422,6:keMvSurfaceFormatYUYV4224
-	DWORD dwBit;
-	DWORD dwFieldFirst;//1 Top First,2 Bottom Fisrt,3 InterlacedFieldsInAFrame
-	DWORD dwDataType;  //4 ProgressiveFrame,5 BackToBackFieldsInAFrame
-	DWORD dwRowPitch;
+	uint32 scanmode;		//1:firstfield,2:secondfiled,3:Progressive
+	uint32 format;		//5:keMvSurfaceFormatYUYV422,6:keMvSurfaceFormatYUYV4224
+	uint32 dwBit;
+	uint32 dwFieldFirst;//1 Top First,2 Bottom Fisrt,3 InterlacedFieldsInAFrame
+	uint32 dwDataType;  //4 ProgressiveFrame,5 BackToBackFieldsInAFrame
+	uint32 dwRowPitch;
 }M101AVI_FORMAT,*LPM101AVI_FORMAT;
 
 typedef struct {
@@ -484,19 +484,19 @@ typedef struct {
 } RECT16;
 
 typedef struct {
-	FOURCC		fccType;
-	FOURCC		fccHandler;
-	DWORD		dwFlags;
-	WORD		wPriority;
-	WORD		wLanguage;
-	DWORD		dwInitialFrames;
-	DWORD		dwScale;	
-	DWORD		dwRate;
-	DWORD		dwStart;
-	DWORD		dwLength;
-	DWORD		dwSuggestedBufferSize;
-	DWORD		dwQuality;
-	DWORD		dwSampleSize;
+	uint32		fccType;
+	uint32		fccHandler;
+	uint32		dwFlags;
+	uint16		wPriority;
+	uint16		wLanguage;
+	uint32		dwInitialFrames;
+	uint32		dwScale;
+	uint32		dwRate;
+	uint32		dwStart;
+	uint32		dwLength;
+	uint32		dwSuggestedBufferSize;
+	uint32		dwQuality;
+	uint32		dwSampleSize;
 	RECT16		rcFrame;
 } AVIStreamHeader_fixed;
 
@@ -506,17 +506,17 @@ typedef struct {
 
 vxinterface IMatroxAVIOutputEx : public IVxObject
 {
-	virtual VXBOOL __stdcall CreateFile(IVxSink* file) = 0;
-	virtual VXBOOL __stdcall CreateFile(IVxSink* file,const AVIStreamHeader_fixed* pStreamInfo,const PBYTE pmt,DWORD mtsize,const PBYTE pVideoProp,DWORD vpsize) = 0;
-	virtual VXBOOL __stdcall CloseFile(VXBOOL bDelete = FALSE) = 0;
+	virtual bool __stdcall CreateFile(MxSink* file) = 0;
+	virtual bool __stdcall CreateFile(MxSink* file,const AVIStreamHeader_fixed* pStreamInfo,const uint8* pmt,DWORD mtsize,const uint8* pVideoProp,uint32 vpsize) = 0;
+	virtual bool __stdcall CloseFile(bool bDelete = FALSE) = 0;
 
 	virtual void __stdcall SetStreamInfo(AVIStreamHeader_fixed* pStreamInfo) = 0;
-	virtual PBYTE __stdcall AllocAndGetFormat(DWORD dwSize) = 0;
-	virtual PBYTE __stdcall AllocAndGetVideoProp(DWORD dwSize) = 0;
+	virtual uint8* __stdcall AllocAndGetFormat(uint32 dwSize) = 0;
+	virtual uint8* __stdcall AllocAndGetVideoProp(uint32 dwSize) = 0;
 	virtual void* __stdcall GetFormat() = 0;
 
-	virtual DWORD __stdcall GetLastError() = 0;
-	virtual VXBOOL __stdcall WriteSingleFrame(PBYTE pBuffer,DWORD dwSize,DWORD dwType) = 0;//MPEG2 File:[1] I frame, [2] P frame, [3] B frame;
+	virtual uint32 __stdcall GetLastError() = 0;
+	virtual bool __stdcall WriteSingleFrame(uint8* pBuffer,uint32 dwSize,uint32 dwType) = 0;//MPEG2 File:[1] I frame, [2] P frame, [3] B frame;
 };
 
 LONG CreateMatroxAVIOutputEx(DWORD type,IMatroxAVIOutputEx**);
@@ -549,18 +549,18 @@ vxinterface IEsFileOutput
 {
 	virtual void __stdcall Release() = 0;
 
-	virtual VXBOOL __stdcall CreateFile(const char* lpFileName) = 0;
-	virtual VXBOOL __stdcall CloseFile(VXBOOL bDelete = FALSE) = 0;
+	virtual bool __stdcall CreateFile(const char* lpFileName) = 0;
+	virtual bool __stdcall CloseFile(bool bDelete = false) = 0;
 	virtual void __stdcall DeleteLastFile() = 0;
 
-	virtual VXBOOL __stdcall WriteToFile(PBYTE pBuffer,DWORD dwSize) = 0;		//dwSize必须是磁盘Sector大小的倍数
-	virtual DWORD __stdcall GetLastError() = 0;
+	virtual bool __stdcall WriteToFile(uint8* pBuffer,uint32 dwSize) = 0;		//dwSize必须是磁盘Sector大小的倍数
+	virtual uint32 __stdcall GetLastError() = 0;
 };
 IEsFileOutput* CreateEsFileOutput();
 
 vxinterface IEsFileOutputEx : public IEsFileOutput
 {
-	virtual VXBOOL __stdcall WriteToFileEx(PBYTE pBuffer,DWORD dwSize) = 0;		//dwSize没有限制
+	virtual bool __stdcall WriteToFileEx(uint8* pBuffer,uint32 dwSize) = 0;		//dwSize没有限制
 };
 IEsFileOutputEx* CreateEsFileOutputEx();
 
@@ -576,31 +576,31 @@ typedef struct
 #define BFRAME                  3
 #define EFRAME                  4
 
-vxinterface IESIdxFile
+struct IESIdxFile
 {
 	virtual void __stdcall Release() = 0;
 
-	virtual VXBOOL __stdcall CreateFile(const char* lpFileName) = 0;
-	virtual void __stdcall CloseFile(VXBOOL bDelete = FALSE) = 0;
+	virtual bool __stdcall CreateFile(const char* lpFileName) = 0;
+	virtual void __stdcall CloseFile(bool bDelete = FALSE) = 0;
 	virtual void __stdcall DeleteLastFile() = 0;
 
 	virtual void __stdcall SetStreamInfo(AVIStreamHeader_fixed* pStreamInfo) = 0;
 
-	virtual void __stdcall AddIndex(__int64 pos,DWORD dwSize,DWORD type) = 0;
+	virtual void __stdcall AddIndex(int64 pos,uint32 dwSize,uint32 type) = 0;
 	virtual void __stdcall AddIndex(int count,IDXFRAME*) = 0;
 };
 
 IESIdxFile* CreateESIdxFile();
 
-vxinterface IComplexFile
+struct IComplexFile
 {
 	virtual void __stdcall Release() = 0;
 
-	virtual VXBOOL __stdcall CreateFile(IVxSink* file,LPVX_VIDEOINFO2 vinfo,LPVX_AUDIOINFO2 ainfo) = 0;
+	virtual bool __stdcall CreateFile(MxSink* file,LPVX_VIDEOINFO2 vinfo,LPVX_AUDIOINFO2 ainfo) = 0;
 	virtual void __stdcall CloseFile() = 0;
 
-	virtual VXBOOL __stdcall AddVideo(PBYTE data,LONG len,VXBOOL keyframe = TRUE) = 0;
-	virtual VXBOOL __stdcall AddAudio(PBYTE data,LONG len,VXBOOL keyframe = TRUE) = 0;
+	virtual bool __stdcall AddVideo(PBYTE data,LONG len,bool keyframe = true) = 0;
+	virtual bool __stdcall AddAudio(PBYTE data,LONG len,bool keyframe = true) = 0;
 };
 
 typedef enum

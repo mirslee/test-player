@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		5434155F21414004009FBC13 /* CMxString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5434155E21414004009FBC13 /* CMxString.cpp */; };
 		54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */; };
-		54C3C5DB212A69A9009736A1 /* MxQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C5D8212A69A9009736A1 /* MxQueue.h */; };
+		546DA94B2145FE4800DF99E3 /* MxGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 546DA9482145FE4700DF99E3 /* MxGlobal.cpp */; };
+		546DA94C2145FE4800DF99E3 /* MxFileHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 546DA9492145FE4700DF99E3 /* MxFileHash.cpp */; };
+		546DA94D2145FE4800DF99E3 /* MxSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 546DA94A2145FE4800DF99E3 /* MxSystem.cpp */; };
+		546DA9532146003300DF99E3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546DA9522146003200DF99E3 /* CoreFoundation.framework */; };
 		54C3C5DC212A69A9009736A1 /* MxThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C5D9212A69A9009736A1 /* MxThread.cpp */; };
 		54C3C5DD212A69A9009736A1 /* MxThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C3C5DA212A69A9009736A1 /* MxThread.h */; };
 		54C3C5E8212A6D90009736A1 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54C3C5E6212A6D90009736A1 /* stdafx.cpp */; };
@@ -31,8 +34,11 @@
 /* Begin PBXFileReference section */
 		5434155E21414004009FBC13 /* CMxString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxString.cpp; sourceTree = "<group>"; };
 		54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxSynchronize.cpp; sourceTree = "<group>"; };
+		546DA9482145FE4700DF99E3 /* MxGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxGlobal.cpp; sourceTree = "<group>"; };
+		546DA9492145FE4700DF99E3 /* MxFileHash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxFileHash.cpp; sourceTree = "<group>"; };
+		546DA94A2145FE4800DF99E3 /* MxSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxSystem.cpp; sourceTree = "<group>"; };
+		546DA9522146003200DF99E3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		54C3C5A1212A5C62009736A1 /* libMxCoreD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxCoreD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		54C3C5D8212A69A9009736A1 /* MxQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxQueue.h; sourceTree = SOURCE_ROOT; };
 		54C3C5D9212A69A9009736A1 /* MxThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxThread.cpp; sourceTree = SOURCE_ROOT; };
 		54C3C5DA212A69A9009736A1 /* MxThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MxThread.h; sourceTree = SOURCE_ROOT; };
 		54C3C5E6212A6D90009736A1 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
@@ -56,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546DA9532146003300DF99E3 /* CoreFoundation.framework in Frameworks */,
 				54D6AB3E2131079900B78108 /* CoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +73,9 @@
 		54C3C598212A5C62009736A1 = {
 			isa = PBXGroup;
 			children = (
+				546DA9492145FE4700DF99E3 /* MxFileHash.cpp */,
+				546DA9482145FE4700DF99E3 /* MxGlobal.cpp */,
+				546DA94A2145FE4800DF99E3 /* MxSystem.cpp */,
 				5434155E21414004009FBC13 /* CMxString.cpp */,
 				54D6AB7A2134E05500B78108 /* mempool */,
 				54D6AB762134E02500B78108 /* MxMemory.cpp */,
@@ -78,7 +88,6 @@
 				54C3C5F6212AC11A009736A1 /* MxThreadCond.h */,
 				54C3C5E6212A6D90009736A1 /* stdafx.cpp */,
 				54C3C5E7212A6D90009736A1 /* stdafx.h */,
-				54C3C5D8212A69A9009736A1 /* MxQueue.h */,
 				54C3C5D9212A69A9009736A1 /* MxThread.cpp */,
 				54C3C5DA212A69A9009736A1 /* MxThread.h */,
 				54C3C5A2212A5C62009736A1 /* Products */,
@@ -97,6 +106,7 @@
 		54D6AB3A213106DB00B78108 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				546DA9522146003200DF99E3 /* CoreFoundation.framework */,
 				54D6AB3D2131079900B78108 /* CoreServices.framework */,
 			);
 			name = Frameworks;
@@ -123,7 +133,6 @@
 				54D6AB812134E07600B78108 /* ncx_log.h in Headers */,
 				54C3C5E9212A6D90009736A1 /* stdafx.h in Headers */,
 				54D6AB7F2134E07600B78108 /* ncx_slab.h in Headers */,
-				54C3C5DB212A69A9009736A1 /* MxQueue.h in Headers */,
 				54D6AB822134E07600B78108 /* ncx_core.h in Headers */,
 				54C3C5F8212AC11A009736A1 /* MxThreadCond.h in Headers */,
 				54C3C5FC212AC1E3009736A1 /* MxThreadMutex.h in Headers */,
@@ -188,15 +197,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546DA94C2145FE4800DF99E3 /* MxFileHash.cpp in Sources */,
 				54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */,
 				54D6AB802134E07600B78108 /* ncx_slab.cpp in Sources */,
 				54C3C5DC212A69A9009736A1 /* MxThread.cpp in Sources */,
 				5434155F21414004009FBC13 /* CMxString.cpp in Sources */,
 				54C3C5F7212AC11A009736A1 /* MxThreadCond.cpp in Sources */,
+				546DA94B2145FE4800DF99E3 /* MxGlobal.cpp in Sources */,
 				54D6AB782134E02500B78108 /* MxMemory.cpp in Sources */,
 				54D6AB6C2133E57B00B78108 /* MxLog.cpp in Sources */,
 				54D6AB6E2133EA2400B78108 /* MxObject.cpp in Sources */,
 				54C3C5FB212AC1E3009736A1 /* MxThreadMutex.cpp in Sources */,
+				546DA94D2145FE4800DF99E3 /* MxSystem.cpp in Sources */,
 				54C3C5E8212A6D90009736A1 /* stdafx.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
