@@ -41,6 +41,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		54216F96214A3C51006A208E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54216F8F214A3C4F006A208E /* MxFileSystem.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 54216F81214A3C4F006A208E;
+			remoteInfo = MxFileSystem;
+		};
 		54685473213FED9100B2F121 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */;
@@ -138,6 +145,7 @@
 		2B774D8E4178765CE52EAAF5 /* DiskArbitration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiskArbitration.framework; path = /System/Library/Frameworks/DiskArbitration.framework; sourceTree = "<absolute>"; };
 		34C3CC745F9A46849F0F12A2 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = /usr/local/Cellar/qt/5.11.1/lib/QtGui.framework; sourceTree = "<absolute>"; };
 		53A1666EF2EC8D8B83CC35FC /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = /usr/local/Cellar/qt/5.11.1/lib/QtCore.framework; sourceTree = "<absolute>"; };
+		54216F8F214A3C4F006A208E /* MxFileSystem.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxFileSystem.xcodeproj; path = plugin/access/MxFileSystem/MxFileSystem.xcodeproj; sourceTree = "<group>"; };
 		5426A6E7213E67CE001745C4 /* MxPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxPlayer.h; path = include/MxPlayer.h; sourceTree = SOURCE_ROOT; };
 		5434155A21413FEC009FBC13 /* CMxString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxString.h; path = include/CMxString.h; sourceTree = SOURCE_ROOT; };
 		5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxFileSource.xcodeproj; path = plugin/access/MxFileSource/MxFileSource.xcodeproj; sourceTree = "<group>"; };
@@ -223,6 +231,14 @@
 				54D6AB422131259D00B78108 /* main.cpp */,
 			);
 			name = Sources;
+			sourceTree = "<group>";
+		};
+		54216F90214A3C4F006A208E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				54216F97214A3C51006A208E /* libMxFileSystem.dylib */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		5468546F213FED8F00B2F121 /* Products */ = {
@@ -351,6 +367,7 @@
 		E8C543AB96796ECAA2E65C57 /* MyPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				54216F8F214A3C4F006A208E /* MxFileSystem.xcodeproj */,
 				54D6AB5821338F9C00B78108 /* include */,
 				546DA9772147534900DF99E3 /* MxAvi.xcodeproj */,
 				5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */,
@@ -438,6 +455,10 @@
 					ProjectRef = 5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */;
 				},
 				{
+					ProductGroup = 54216F90214A3C4F006A208E /* Products */;
+					ProjectRef = 54216F8F214A3C4F006A208E /* MxFileSystem.xcodeproj */;
+				},
+				{
 					ProductGroup = 54C3C5CD212A5D72009736A1 /* Products */;
 					ProjectRef = 54C3C5CC212A5D72009736A1 /* MxGLTool.xcodeproj */;
 				},
@@ -459,6 +480,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		54216F97214A3C51006A208E /* libMxFileSystem.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libMxFileSystem.dylib;
+			remoteRef = 54216F96214A3C51006A208E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		54685474213FED9100B2F121 /* libMxFileSourceD.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
@@ -469,7 +497,7 @@
 		546DA97C2147534B00DF99E3 /* libMxAvi.dylib */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.dylib";
-			path = libMxAvi.dylib;
+			path = libMxAviD.dylib;
 			remoteRef = 546DA97B2147534B00DF99E3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
