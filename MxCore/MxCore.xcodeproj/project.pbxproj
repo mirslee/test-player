@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54216FAD214B5E2B006A208E /* MxFileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54216FAB214B5E2B006A208E /* MxFileSystem.cpp */; };
+		5431D1D4214B8FD80083FAD1 /* MxFileSystem_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5431D1D3214B8FD80083FAD1 /* MxFileSystem_mac.cpp */; };
 		5434155F21414004009FBC13 /* CMxString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5434155E21414004009FBC13 /* CMxString.cpp */; };
 		54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */; };
 		546DA94B2145FE4800DF99E3 /* MxGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 546DA9482145FE4700DF99E3 /* MxGlobal.cpp */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		54216FAB214B5E2B006A208E /* MxFileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxFileSystem.cpp; sourceTree = "<group>"; };
+		5431D1D3214B8FD80083FAD1 /* MxFileSystem_mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxFileSystem_mac.cpp; sourceTree = "<group>"; };
 		5434155E21414004009FBC13 /* CMxString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxString.cpp; sourceTree = "<group>"; };
 		54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxSynchronize.cpp; sourceTree = "<group>"; };
 		546DA9482145FE4700DF99E3 /* MxGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxGlobal.cpp; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 		54C3C598212A5C62009736A1 = {
 			isa = PBXGroup;
 			children = (
+				5431D1D3214B8FD80083FAD1 /* MxFileSystem_mac.cpp */,
+				54216FAB214B5E2B006A208E /* MxFileSystem.cpp */,
 				546DA9492145FE4700DF99E3 /* MxFileHash.cpp */,
 				546DA9482145FE4700DF99E3 /* MxGlobal.cpp */,
 				546DA94A2145FE4800DF99E3 /* MxSystem.cpp */,
@@ -201,9 +207,11 @@
 				54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */,
 				54D6AB802134E07600B78108 /* ncx_slab.cpp in Sources */,
 				54C3C5DC212A69A9009736A1 /* MxThread.cpp in Sources */,
+				5431D1D4214B8FD80083FAD1 /* MxFileSystem_mac.cpp in Sources */,
 				5434155F21414004009FBC13 /* CMxString.cpp in Sources */,
 				54C3C5F7212AC11A009736A1 /* MxThreadCond.cpp in Sources */,
 				546DA94B2145FE4800DF99E3 /* MxGlobal.cpp in Sources */,
+				54216FAD214B5E2B006A208E /* MxFileSystem.cpp in Sources */,
 				54D6AB782134E02500B78108 /* MxMemory.cpp in Sources */,
 				54D6AB6C2133E57B00B78108 /* MxLog.cpp in Sources */,
 				54D6AB6E2133EA2400B78108 /* MxObject.cpp in Sources */,

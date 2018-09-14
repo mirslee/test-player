@@ -62,7 +62,7 @@ enum MxFormatType {
     
     
     MxFormatType_pcm	= MX_FOURCC('p','c','m',' '),
-	MxFormatType_dpcm	= MX_FOURCC('d','p','c','m',),
+	MxFormatType_dpcm	= MX_FOURCC('d','p','c','m'),
 	MxFormatType_mp3	= MX_FOURCC('m','p','3',' '),
 };
 

@@ -9,6 +9,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include "MxError.h"
+#include "MxCommon.h"
 
 #ifndef HAVE_STRUCT_POLLFD
 enum
@@ -38,21 +39,7 @@ struct pollfd
 #define msg_Warn(p_this, ...)
 #define msg_Dbg(p_this, ...)
 
-#ifdef __GNUC__
-# define likely(p)     __builtin_expect(!!(p), 1)
-# define unlikely(p)   __builtin_expect(!!(p), 0)
-# define unreachable() __builtin_unreachable()
-#else
-# define likely(p)     (!!(p))
-# define unlikely(p)   (!!(p))
-# define unreachable() ((void)0)
-#endif
 
-#ifndef O_TMPFILE
-# define O_TMPFILE 0
-#endif
-
-#define MX_UNUSED(x) (void)(x)
 
 #define LC_MESSAGES_MASK 0
 typedef void *locale_t;
