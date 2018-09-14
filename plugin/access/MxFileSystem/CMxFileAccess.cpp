@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include "MxError.h"
 #include "MxCommon.h"
+#include "MxFileSystem.h"
 
 #ifndef HAVE_STRUCT_POLLFD
 enum
@@ -196,59 +197,6 @@ const char *vlc_strerror_c(int errnum)
     return vlc_strerror_l(errnum, "C");
 }
 
-int vlc_open (const char *filename, int flags, ...)
-{
-    unsigned int mode = 0;
-    va_list ap;
-    
-    va_start (ap, flags);
-    if (flags & (O_CREAT|O_TMPFILE))
-        mode = va_arg (ap, unsigned int);
-    va_end (ap);
-    
-#ifdef O_CLOEXEC
-    return open(filename, flags | O_CLOEXEC, mode);
-#else
-    int fd = open(filename, flags, mode);
-    if (fd != -1)
-        vlc_cloexec(fd);
-    return -1;
-#endif
-}
-
-int vlc_openat (int dir, const char *filename, int flags, ...)
-{
-    unsigned int mode = 0;
-    va_list ap;
-    
-    va_start (ap, flags);
-    if (flags & (O_CREAT|O_TMPFILE))
-        mode = va_arg (ap, unsigned int);
-    va_end (ap);
-    
-#ifdef HAVE_OPENAT
-    return openat(dir, filename, flags | O_CLOEXEC, mode);
-#else
-    MX_UNUSED(dir);
-    MX_UNUSED(filename);
-    MX_UNUSED(mode);
-    errno = ENOSYS;
-    return -1;
-#endif
-}
-
-int vlc_dup (int oldfd)
-{
-#ifdef F_DUPFD_CLOEXEC
-    return fcntl (oldfd, F_DUPFD_CLOEXEC, 0);
-#else
-    int newfd = dup (oldfd);
-    if (newfd != -1)
-        vlc_cloexec(oldfd);
-    return newfd;
-#endif
-}
-
 char *vlc_uri_decode (char *str)
 {
     char *in = str, *out = str;
@@ -298,14 +246,14 @@ int CMxFileAccess::open(CMxStream *pStream)
         int oldfd = strtol (p_access->psz_location, &end, 10);
         
         if (*end == '\0')
-            fd = vlc_dup (oldfd);
+            fd = mxDup (oldfd);
         else if (*end == '/' && end > p_access->psz_location)
         {
             char *name = vlc_uri_decode_duplicate (end - 1);
             if (name != NULL)
             {
                 name[0] = '.';
-                fd = vlc_openat (oldfd, name, O_RDONLY | O_NONBLOCK);
+                fd = mxOpenat (oldfd, name, O_RDONLY | O_NONBLOCK);
                 free (name);
             }
         }
@@ -314,7 +262,7 @@ int CMxFileAccess::open(CMxStream *pStream)
     {
         if (unlikely(p_access->psz_filepath == NULL))
             return MX_EGENERIC;
-        fd = vlc_open (p_access->psz_filepath, O_RDONLY | O_NONBLOCK);
+        fd = mxOpen (p_access->psz_filepath, O_RDONLY | O_NONBLOCK);
     }
     
     if (fd == -1)
