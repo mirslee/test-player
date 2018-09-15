@@ -3,12 +3,18 @@
 
 #include "MxCommon.h"
 
-# include <MxThread.h>
+# include "MxThread.h"
 # ifndef _WIN32
 #  include <sys/socket.h> /* socklen_t */
 # else
 #  include <ws2tcpip.h>
 # endif
+
+#include "MxAtomic.h"
+
+#ifdef __cplusplus
+using namespace std;
+#endif
 
 struct vlc_interrupt
 {

@@ -16,13 +16,14 @@
 #endif
 
 #include "MxCommon.h"
-#include <MxFileSystem.h> /* vlc_pipe */
-//#include <vlc_network.h> /* vlc_accept */
+#include <MxFileSystem.h>
+#include <MxNetwork.h>
 
 #include "MxInterrupt.h"
 //#include "libvlc.h"
 
 #include "MxThread.h"
+#include "MxFixups.h"
 
 static thread_local vlc_interrupt_t *vlc_interrupt_var;
 
@@ -313,8 +314,8 @@ static int vlc_poll_i11e_inner( pollfd */*restrict*/ fds, unsigned nfds,
     
     for (unsigned i = 0; i < nfds; i++)
     {
-        ufd[i].fd = fds[i].fd;
-        ufd[i].events = fds[i].events;
+        //ufd[i].fd = fds[i].fd;
+        //ufd[i].events = fds[i].events;
     }
     ufd[nfds].fd = fd[0];
     ufd[nfds].events = POLLIN;
@@ -344,8 +345,8 @@ static int vlc_poll_i11e_inner( pollfd */*restrict*/ fds, unsigned nfds,
     
     canc = vlc_savecancel();
     if (fd[1] != fd[0])
-        vlc_close(fd[1]);
-    vlc_close(fd[0]);
+        mxClose(fd[1]);
+    mxClose(fd[0]);
     vlc_restorecancel(canc);
     return ret;
 }
@@ -366,7 +367,7 @@ int vlc_poll_i11e(struct pollfd *fds, unsigned nfds, int timeout)
     }
     else
     {   /* Slow path but poll() is slow with large nfds anyway. */
-        struct pollfd *ufd = vlc_alloc(nfds + 1, sizeof (*ufd));
+        struct pollfd *ufd = (pollfd*)vlc_alloc(nfds + 1, sizeof (*ufd));
         if (unlikely(ufd == NULL))
             return -1; /* ENOMEM */
         

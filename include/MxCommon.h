@@ -141,4 +141,72 @@ static inline void mxFourccToChar( MxFourcc fcc, char *psz_fourcc )
 
 #define MX_UNUSED(x) (void)(x)
 
+static inline bool umul_overflow(unsigned a, unsigned b, unsigned *res)
+{
+#if MX_GCC_VERSION(5,0) || defined(__clang__)
+    return __builtin_umul_overflow(a, b, res);
+#else
+    *res = a * b;
+    return b > 0 && a > (UINT_MAX / b);
+#endif
+}
+
+static inline bool umull_overflow(unsigned long a, unsigned long b,
+                                  unsigned long *res)
+{
+#if MX_GCC_VERSION(5,0) || defined(__clang__)
+    return __builtin_umull_overflow(a, b, res);
+#else
+    *res = a * b;
+    return b > 0 && a > (ULONG_MAX / b);
+#endif
+}
+
+static inline bool umulll_overflow(unsigned long long a, unsigned long long b,
+                                   unsigned long long *res)
+{
+#if MX_GCC_VERSION(5,0) || defined(__clang__)
+    return __builtin_umulll_overflow(a, b, res);
+#else
+    *res = a * b;
+    return b > 0 && a > (ULLONG_MAX / b);
+#endif
+}
+
+#ifndef __cplusplus
+#define mul_overflow(a,b,r) \
+_Generic(*(r), \
+unsigned: umul_overflow(a, b, (unsigned *)(r)), \
+unsigned long: umull_overflow(a, b, (unsigned long *)(r)), \
+unsigned long long: umulll_overflow(a, b, (unsigned long long *)(r)))
+#else
+static inline bool mul_overflow(unsigned a, unsigned b, unsigned *res)
+{
+    return umul_overflow(a, b, res);
+}
+
+static inline bool mul_overflow(unsigned long a, unsigned long b,
+                                unsigned long *res)
+{
+    return umull_overflow(a, b, res);
+}
+
+static inline bool mul_overflow(unsigned long long a, unsigned long long b,
+                                unsigned long long *res)
+{
+    return umulll_overflow(a, b, res);
+}
+#endif
+
+MX_USED MX_MALLOC
+static inline void *vlc_alloc(size_t count, size_t size)
+{
+    return mul_overflow(count, size, &size) ? NULL : malloc(size);
+}
+
+struct libvlc_int_t
+{
+    //VLC_COMMON_MEMBERS
+};
+
 #endif //MXCOMMON_H

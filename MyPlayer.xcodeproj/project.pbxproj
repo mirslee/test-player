@@ -152,6 +152,9 @@
 		5431D1D5214B93BE0083FAD1 /* MxConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxConfig.h; path = include/MxConfig.h; sourceTree = SOURCE_ROOT; };
 		5431D1DF214BA5B70083FAD1 /* MxInterrupt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxInterrupt.h; path = include/MxInterrupt.h; sourceTree = SOURCE_ROOT; };
 		5431D1E0214BB1100083FAD1 /* MxThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxThread.h; path = include/MxThread.h; sourceTree = SOURCE_ROOT; };
+		5431D1E7214C9DEC0083FAD1 /* MxFixups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxFixups.h; path = include/MxFixups.h; sourceTree = SOURCE_ROOT; };
+		5431D1EE214CAAC50083FAD1 /* MxNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxNetwork.h; path = include/MxNetwork.h; sourceTree = SOURCE_ROOT; };
+		5431D1F7214CB5C40083FAD1 /* MxAtomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MxAtomic.h; path = include/MxAtomic.h; sourceTree = SOURCE_ROOT; };
 		5434155A21413FEC009FBC13 /* CMxString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMxString.h; path = include/CMxString.h; sourceTree = SOURCE_ROOT; };
 		5468546E213FED8F00B2F121 /* MxFileSource.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MxFileSource.xcodeproj; path = plugin/access/MxFileSource/MxFileSource.xcodeproj; sourceTree = "<group>"; };
 		546950902122E1230055ED67 /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = ../../../../usr/local/Cellar/qt/5.11.1/lib/QtWidgets.framework; sourceTree = "<group>"; };
@@ -297,6 +300,9 @@
 		54D6AB5821338F9C00B78108 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				5431D1F7214CB5C40083FAD1 /* MxAtomic.h */,
+				5431D1EE214CAAC50083FAD1 /* MxNetwork.h */,
+				5431D1E7214C9DEC0083FAD1 /* MxFixups.h */,
 				5431D1E0214BB1100083FAD1 /* MxThread.h */,
 				5431D1DF214BA5B70083FAD1 /* MxInterrupt.h */,
 				5431D1D5214B93BE0083FAD1 /* MxConfig.h */,

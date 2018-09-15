@@ -11,6 +11,7 @@
 #include "MxError.h"
 #include "MxCommon.h"
 #include "MxFileSystem.h"
+#include "MxInterrupt.h"
 
 #ifndef HAVE_STRUCT_POLLFD
 enum
@@ -278,7 +279,9 @@ int CMxFileAccess::open(CMxStream *pStream)
     if (fstat (fd, &st))
     {
         msg_Err (p_access, "read error: %s", vlc_strerror_c(errno));
-        goto error;
+        //goto error;
+        mxClose (fd);
+        return MX_EGENERIC;
     }
     
 #if O_NONBLOCK
@@ -299,7 +302,9 @@ int CMxFileAccess::open(CMxStream *pStream)
         return DirInit (p_access, p_dir);
 #else
         msg_Dbg (p_access, "ignoring directory");
-        goto error;
+        //goto error;
+        mxClose (fd);
+        return MX_EGENERIC;
 #endif
     }
     
@@ -341,7 +346,7 @@ int CMxFileAccess::open(CMxStream *pStream)
     return MX_SUCCESS;
     
 error:
-    vlc_close (fd);
+    mxClose (fd);
     return MX_EGENERIC;
 }
 

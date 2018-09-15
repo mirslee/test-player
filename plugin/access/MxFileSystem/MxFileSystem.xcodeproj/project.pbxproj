@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		54216F9B214A4BA8006A208E /* CMxFileAccess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54216F99214A4BA8006A208E /* CMxFileAccess.cpp */; };
 		54216F9C214A4BA8006A208E /* CMxFileAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = 54216F9A214A4BA8006A208E /* CMxFileAccess.h */; };
+		5431D202214CC9AF0083FAD1 /* MxCoreD.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5431D203214CC9AF0083FAD1 /* MxCoreD.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		54216F81214A3C4F006A208E /* libMxFileSystemD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMxFileSystemD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		54216F99214A4BA8006A208E /* CMxFileAccess.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CMxFileAccess.cpp; sourceTree = "<group>"; };
 		54216F9A214A4BA8006A208E /* CMxFileAccess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMxFileAccess.h; sourceTree = "<group>"; };
+		5431D1FF214CC7E00083FAD1 /* libMxCoreD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = libMxCoreD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		5431D201214CC90C0083FAD1 /* MxCoreD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = MxCoreD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		5431D203214CC9AF0083FAD1 /* MxCoreD.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = MxCoreD.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -22,6 +26,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5431D202214CC9AF0083FAD1 /* MxCoreD.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -34,6 +39,7 @@
 				54216F99214A4BA8006A208E /* CMxFileAccess.cpp */,
 				54216F9A214A4BA8006A208E /* CMxFileAccess.h */,
 				54216F82214A3C4F006A208E /* Products */,
+				5431D1FD214CC7E00083FAD1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -43,6 +49,16 @@
 				54216F81214A3C4F006A208E /* libMxFileSystemD.dylib */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5431D1FD214CC7E00083FAD1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5431D203214CC9AF0083FAD1 /* MxCoreD.dylib */,
+				5431D201214CC90C0083FAD1 /* MxCoreD.dylib */,
+				5431D1FF214CC7E00083FAD1 /* libMxCoreD.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,7 +243,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CONFIGURATION_BUILD_DIR = ../../../bin/mac/$CONFIGURATION/plugin/access;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -241,9 +257,13 @@
 				);
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path @executable_path";
+				LIBRARY_SEARCH_PATHS = (
+					../../../dylib,
+					../../../bin/mac/$CONFIGURATION,
+				);
 				OBJROOT = build;
 				PRODUCT_NAME = "$(TARGET_NAME)D";
-				SYMROOT = ../../../bin/mac/$CONFIGURATION/plugin/access;
+				SYMROOT = ../../../bin/mac/$CONFIGURATION;
 			};
 			name = Debug;
 		};
@@ -251,7 +271,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CONFIGURATION_BUILD_DIR = ../../../bin/mac/$CONFIGURATION/plugin/access;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
@@ -265,9 +285,13 @@
 				);
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path @executable_path";
+				LIBRARY_SEARCH_PATHS = (
+					../../../dylib,
+					../../../bin/mac/$CONFIGURATION,
+				);
 				OBJROOT = build;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SYMROOT = ../../../bin/mac/$CONFIGURATION/plugin/access;
+				SYMROOT = ../../../bin/mac/$CONFIGURATION;
 			};
 			name = Release;
 		};
