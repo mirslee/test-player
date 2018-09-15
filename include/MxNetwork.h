@@ -27,6 +27,6 @@
 
 #include "MxCommon.h"
 
-MX_API int vlc_accept(int lfd, struct sockaddr *addr, socklen_t *alen, bool nonblock) MX_USED;
+MX_API int mxAccept(int lfd, struct sockaddr *addr, socklen_t *alen, bool nonblock) MX_USED;
 
 #endif /* MXNETWORK_H */

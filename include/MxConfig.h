@@ -66,7 +66,7 @@
 #define VOUT_OUTMEM_SLEEP               (CLOCK_FREQ/50)
 
 /* The default video output window title */
-#define VOUT_TITLE                      "VLC"
+#define VOUT_TITLE                      "MXPlayer"
 
 /*****************************************************************************
  * Messages and console interfaces configuration

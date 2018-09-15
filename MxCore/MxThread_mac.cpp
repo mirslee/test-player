@@ -17,18 +17,18 @@
 #include <mach/mach_time.h>
 #include <execinfo.h>
 
-static mach_timebase_info_data_t vlc_clock_conversion_factor;
+static mach_timebase_info_data_t mx_clock_conversion_factor;
 
-static void vlc_clock_setup_once (void)
+static void mx_clock_setup_once (void)
 {
-    if (unlikely(mach_timebase_info (&vlc_clock_conversion_factor) != 0))
+    if (unlikely(mach_timebase_info (&mx_clock_conversion_factor) != 0))
         abort ();
 }
 
-static pthread_once_t vlc_clock_once = PTHREAD_ONCE_INIT;
+static pthread_once_t mx_clock_once = PTHREAD_ONCE_INIT;
 
-#define vlc_clock_setup() \
-pthread_once(&vlc_clock_once, vlc_clock_setup_once)
+#define mx_clock_setup() \
+pthread_once(&mx_clock_once, mx_clock_setup_once)
 
 static struct timespec mtime_to_ts (mtime_t date)
 {
@@ -39,7 +39,7 @@ static struct timespec mtime_to_ts (mtime_t date)
 }
 
 /* Print a backtrace to the standard error for debugging purpose. */
-void vlc_trace (const char *fn, const char *file, unsigned line)
+void mxTrace (const char *fn, const char *file, unsigned line)
 {
     fprintf (stderr, "at %s:%u in %s\n", file, line, fn);
     fflush (stderr); /* needed before switch to low-level I/O */
@@ -52,13 +52,13 @@ void vlc_trace (const char *fn, const char *file, unsigned line)
 #ifndef NDEBUG
 /* Reports a fatal error from the threading layer, for debugging purposes. */
 static void
-vlc_thread_fatal (const char *action, int error,
+mx_thread_fatal (const char *action, int error,
                   const char *function, const char *file, unsigned line)
 {
-    int canc = vlc_savecancel ();
+    int canc = mxSaveCancel ();
     fprintf (stderr, "LibVLC fatal error %s (%d) in thread %lu ",
-             action, error, vlc_thread_id ());
-    vlc_trace (function, file, line);
+             action, error, mxThreadId ());
+    mxTrace (function, file, line);
     
     char buf[1000];
     const char *msg;
@@ -78,19 +78,19 @@ vlc_thread_fatal (const char *action, int error,
     fprintf (stderr, " Error message: %s\n", msg);
     fflush (stderr);
     
-    vlc_restorecancel (canc);
+    mxRestoreCancel (canc);
     abort ();
 }
 
-# define VLC_THREAD_ASSERT( action ) \
+# define MX_THREAD_ASSERT( action ) \
 if (unlikely(val)) \
-vlc_thread_fatal (action, val, __func__, __FILE__, __LINE__)
+mx_thread_fatal (action, val, __func__, __FILE__, __LINE__)
 #else
-# define VLC_THREAD_ASSERT( action ) ((void)val)
+# define MX_THREAD_ASSERT( action ) ((void)val)
 #endif
 
 /* Initializes a fast mutex. */
-void vlc_mutex_init( vlc_mutex_t *p_mutex )
+void mxMutexInit( MxMutex *p_mutex )
 {
     pthread_mutexattr_t attr;
     
@@ -101,28 +101,28 @@ void vlc_mutex_init( vlc_mutex_t *p_mutex )
 #else
     pthread_mutexattr_settype (&attr, PTHREAD_MUTEX_ERRORCHECK);
 #endif
-    if (unlikely(pthread_mutex_init (p_mutex, &attr)))
+    if (unlikely(pthread_mutex_init(p_mutex, &attr)))
         abort();
     pthread_mutexattr_destroy( &attr );
 }
 
-void vlc_mutex_init_recursive( vlc_mutex_t *p_mutex )
+void mxMutexInitRecursive( MxMutex *p_mutex )
 {
     pthread_mutexattr_t attr;
     
     if (unlikely(pthread_mutexattr_init (&attr)))
         abort();
     pthread_mutexattr_settype (&attr, PTHREAD_MUTEX_RECURSIVE);
-    if (unlikely(pthread_mutex_init (p_mutex, &attr)))
+    if (unlikely(pthread_mutex_init(p_mutex, &attr)))
         abort();
     pthread_mutexattr_destroy( &attr );
 }
 
 
-void vlc_mutex_destroy (vlc_mutex_t *p_mutex)
+void mxMutexDestroy (MxMutex *p_mutex)
 {
     int val = pthread_mutex_destroy( p_mutex );
-    VLC_THREAD_ASSERT ("destroying mutex");
+    MX_THREAD_ASSERT ("destroying mutex");
 }
 
 #ifndef NDEBUG
@@ -132,7 +132,7 @@ void vlc_mutex_destroy (vlc_mutex_t *p_mutex)
 #  define RUNNING_ON_VALGRIND (0)
 # endif
 
-void vlc_assert_locked (vlc_mutex_t *p_mutex)
+void mxAssertLocked (MxMutex *p_mutex)
 {
     if (RUNNING_ON_VALGRIND > 0)
         return;
@@ -140,40 +140,40 @@ void vlc_assert_locked (vlc_mutex_t *p_mutex)
 }
 #endif
 
-void vlc_mutex_lock (vlc_mutex_t *p_mutex)
+void mxMutexLock (MxMutex *p_mutex)
 {
     int val = pthread_mutex_lock( p_mutex );
-    VLC_THREAD_ASSERT ("locking mutex");
+    MX_THREAD_ASSERT ("locking mutex");
 }
 
-int vlc_mutex_trylock (vlc_mutex_t *p_mutex)
+int mxMutexTrylock (MxMutex *p_mutex)
 {
     int val = pthread_mutex_trylock( p_mutex );
     
     if (val != EBUSY)
-        VLC_THREAD_ASSERT ("locking mutex");
+        MX_THREAD_ASSERT ("locking mutex");
     return val;
 }
 
-void vlc_mutex_unlock (vlc_mutex_t *p_mutex)
+void mxMutexUnlock (MxMutex *p_mutex)
 {
     int val = pthread_mutex_unlock( p_mutex );
-    VLC_THREAD_ASSERT ("unlocking mutex");
+    MX_THREAD_ASSERT ("unlocking mutex");
 }
 
-void vlc_cond_init (vlc_cond_t *p_condvar)
+void mxCondInit (MxCond *p_condvar)
 {
     if (unlikely(pthread_cond_init (p_condvar, NULL)))
         abort ();
 }
 
-void vlc_cond_init_daytime (vlc_cond_t *p_condvar)
+void mxCondInitDaytime (MxCond *p_condvar)
 {
     if (unlikely(pthread_cond_init (p_condvar, NULL)))
         abort ();
 }
 
-void vlc_cond_destroy (vlc_cond_t *p_condvar)
+void mxCondDestroy (MxCond *p_condvar)
 {
     int val = pthread_cond_destroy (p_condvar);
     
@@ -198,27 +198,27 @@ void vlc_cond_destroy (vlc_cond_t *p_condvar)
             return;
     }
     
-    VLC_THREAD_ASSERT ("destroying condition");
+    MX_THREAD_ASSERT ("destroying condition");
 }
 
-void vlc_cond_signal (vlc_cond_t *p_condvar)
+void mxCondSignal (MxCond *p_condvar)
 {
     int val = pthread_cond_signal (p_condvar);
-    VLC_THREAD_ASSERT ("signaling condition variable");
+    MX_THREAD_ASSERT ("signaling condition variable");
 }
 
-void vlc_cond_broadcast (vlc_cond_t *p_condvar)
+void mxCondBroadcast (MxCond *p_condvar)
 {
     pthread_cond_broadcast (p_condvar);
 }
 
-void vlc_cond_wait (vlc_cond_t *p_condvar, vlc_mutex_t *p_mutex)
+void mxCondWait (MxCond *p_condvar, MxMutex *p_mutex)
 {
     int val = pthread_cond_wait (p_condvar, p_mutex);
-    VLC_THREAD_ASSERT ("waiting on condition");
+    MX_THREAD_ASSERT ("waiting on condition");
 }
 
-int vlc_cond_timedwait (vlc_cond_t *p_condvar, vlc_mutex_t *p_mutex,
+int mxCondTimedwait (MxCond *p_condvar, MxMutex *p_mutex,
                         mtime_t deadline)
 {
     /* according to POSIX standards, cond_timedwait should be a cancellation point
@@ -237,12 +237,12 @@ int vlc_cond_timedwait (vlc_cond_t *p_condvar, vlc_mutex_t *p_mutex,
     struct timespec ts = mtime_to_ts(deadline);
     int val = pthread_cond_timedwait_relative_np(p_condvar, p_mutex, &ts);
     if (val != ETIMEDOUT)
-        VLC_THREAD_ASSERT ("timed-waiting on condition");
+        MX_THREAD_ASSERT ("timed-waiting on condition");
     return val;
 }
 
 /* variant for vlc_cond_init_daytime */
-int vlc_cond_timedwait_daytime (vlc_cond_t *p_condvar, vlc_mutex_t *p_mutex,
+int mxCondTimedwaitDaytime (MxCond *p_condvar, MxMutex *p_mutex,
                                 time_t deadline)
 {
     /*
@@ -264,19 +264,19 @@ int vlc_cond_timedwait_daytime (vlc_cond_t *p_condvar, vlc_mutex_t *p_mutex,
     int val = pthread_cond_timedwait(p_condvar, p_mutex, &ts);
     
     if (val != ETIMEDOUT)
-        VLC_THREAD_ASSERT ("timed-waiting on condition");
+        MX_THREAD_ASSERT ("timed-waiting on condition");
     return val;
 }
 
 
 /* Initialize a semaphore. */
-void vlc_sem_init (vlc_sem_t *sem, unsigned value)
+void mxSemInit (MxSem *sem, unsigned value)
 {
     if (unlikely(semaphore_create(mach_task_self(), sem, SYNC_POLICY_FIFO, value) != KERN_SUCCESS))
         abort ();
 }
 
-void vlc_sem_destroy (vlc_sem_t *sem)
+void mxSemDestroy (MxSem *sem)
 {
     int val;
     
@@ -285,10 +285,10 @@ void vlc_sem_destroy (vlc_sem_t *sem)
     
     val = EINVAL;
     
-    VLC_THREAD_ASSERT ("destroying semaphore");
+    MX_THREAD_ASSERT ("destroying semaphore");
 }
 
-int vlc_sem_post (vlc_sem_t *sem)
+int mxSemPost (MxSem *sem)
 {
     int val;
     
@@ -298,11 +298,11 @@ int vlc_sem_post (vlc_sem_t *sem)
     val = EINVAL;
     
     if (unlikely(val != EOVERFLOW))
-        VLC_THREAD_ASSERT ("unlocking semaphore");
+        MX_THREAD_ASSERT ("unlocking semaphore");
     return val;
 }
 
-void vlc_sem_wait (vlc_sem_t *sem)
+void mxSemWait (MxSem *sem)
 {
     int val;
     
@@ -311,65 +311,65 @@ void vlc_sem_wait (vlc_sem_t *sem)
     
     val = EINVAL;
     
-    VLC_THREAD_ASSERT ("locking semaphore");
+    MX_THREAD_ASSERT ("locking semaphore");
 }
 
-void vlc_rwlock_init (vlc_rwlock_t *lock)
+void mxRWLockInit (MxRWLock *lock)
 {
     if (unlikely(pthread_rwlock_init (lock, NULL)))
         abort ();
 }
 
-void vlc_rwlock_destroy (vlc_rwlock_t *lock)
+void mxRWLockDestroy (MxRWLock *lock)
 {
     int val = pthread_rwlock_destroy (lock);
-    VLC_THREAD_ASSERT ("destroying R/W lock");
+    MX_THREAD_ASSERT ("destroying R/W lock");
 }
 
-void vlc_rwlock_rdlock (vlc_rwlock_t *lock)
+void mxRWLockRdlock (MxRWLock *lock)
 {
     int val = pthread_rwlock_rdlock (lock);
-    VLC_THREAD_ASSERT ("acquiring R/W lock for reading");
+    MX_THREAD_ASSERT ("acquiring R/W lock for reading");
 }
 
-void vlc_rwlock_wrlock (vlc_rwlock_t *lock)
+void mxRWLockWrlock (MxRWLock *lock)
 {
     int val = pthread_rwlock_wrlock (lock);
-    VLC_THREAD_ASSERT ("acquiring R/W lock for writing");
+    MX_THREAD_ASSERT ("acquiring R/W lock for writing");
 }
 
-void vlc_rwlock_unlock (vlc_rwlock_t *lock)
+void mxRWLockUnlock (MxRWLock *lock)
 {
     int val = pthread_rwlock_unlock (lock);
-    VLC_THREAD_ASSERT ("releasing R/W lock");
+    MX_THREAD_ASSERT ("releasing R/W lock");
 }
 
-int vlc_threadvar_create (vlc_threadvar_t *key, void (*destr) (void *))
+int mxThreadvarCreate (MxThreadvar *key, void (*destr) (void *))
 {
     return pthread_key_create (key, destr);
 }
 
-void vlc_threadvar_delete (vlc_threadvar_t *p_tls)
+void mxThreadvarDelete (MxThreadvar *p_tls)
 {
     pthread_key_delete (*p_tls);
 }
 
-int vlc_threadvar_set (vlc_threadvar_t key, void *value)
+int mxThreadvarSet (MxThreadvar key, void *value)
 {
     return pthread_setspecific (key, value);
 }
 
-void *vlc_threadvar_get (vlc_threadvar_t key)
+void *mxThreadvarGet (MxThreadvar key)
 {
     return pthread_getspecific (key);
 }
 
-void vlc_threads_setup (libvlc_int_t *p_libvlc)
+void mxThreadsSetup(libvlc_int_t *p_libvlc)
 {
     (void) p_libvlc;
 }
 
-static int vlc_clone_attr (vlc_thread_t *th, pthread_attr_t *attr,
+static int mxCloneAttr(MxThread *th, pthread_attr_t *attr,
                            void *(*entry) (void *), void *data, int priority)
 {
     int ret;
@@ -389,10 +389,10 @@ static int vlc_clone_attr (vlc_thread_t *th, pthread_attr_t *attr,
     
     (void) priority;
     
-#define VLC_STACKSIZE (128 * sizeof (void *) * 1024)
+#define MX_STACKSIZE (128 * sizeof (void *) * 1024)
     
-#ifdef VLC_STACKSIZE
-    ret = pthread_attr_setstacksize (attr, VLC_STACKSIZE);
+#ifdef MX_STACKSIZE
+    ret = pthread_attr_setstacksize (attr, MX_STACKSIZE);
     assert (ret == 0); /* fails iif VLC_STACKSIZE is invalid */
 #endif
     
@@ -402,25 +402,25 @@ static int vlc_clone_attr (vlc_thread_t *th, pthread_attr_t *attr,
     return ret;
 }
 
-int vlc_clone (vlc_thread_t *th, void *(*entry) (void *), void *data,
+int mxClone (MxThread *th, void *(*entry) (void *), void *data,
                int priority)
 {
     pthread_attr_t attr;
     
     pthread_attr_init (&attr);
-    return vlc_clone_attr (th, &attr, entry, data, priority);
+    return mxCloneAttr (th, &attr, entry, data, priority);
 }
 
-void vlc_join (vlc_thread_t handle, void **result)
+void mxJoin (MxThread handle, void **result)
 {
     int val = pthread_join (handle, result);
-    VLC_THREAD_ASSERT ("joining thread");
+    MX_THREAD_ASSERT ("joining thread");
 }
 
-int vlc_clone_detach (vlc_thread_t *th, void *(*entry) (void *), void *data,
+int mxCloneDetach (MxThread *th, void *(*entry) (void *), void *data,
                       int priority)
 {
-    vlc_thread_t dummy;
+    MxThread dummy;
     pthread_attr_t attr;
     
     if (th == NULL)
@@ -428,61 +428,61 @@ int vlc_clone_detach (vlc_thread_t *th, void *(*entry) (void *), void *data,
     
     pthread_attr_init (&attr);
     pthread_attr_setdetachstate (&attr, PTHREAD_CREATE_DETACHED);
-    return vlc_clone_attr (th, &attr, entry, data, priority);
+    return mxCloneAttr (th, &attr, entry, data, priority);
 }
 
-vlc_thread_t vlc_thread_self (void)
+MxThread mxThreadSelf (void)
 {
     return pthread_self ();
 }
 
-unsigned long vlc_thread_id (void)
+unsigned long mxThreadId (void)
 {
     return -1;
 }
 
-int vlc_set_priority (vlc_thread_t th, int priority)
+int mxSetPriority (MxThread th, int priority)
 {
     (void) th; (void) priority;
     return MX_SUCCESS;
 }
 
-void vlc_cancel (vlc_thread_t thread_id)
+void mxCancel (MxThread thread_id)
 {
     pthread_cancel (thread_id);
 }
 
-int vlc_savecancel (void)
+int mxSaveCancel (void)
 {
     int state;
     int val = pthread_setcancelstate (PTHREAD_CANCEL_DISABLE, &state);
     
-    VLC_THREAD_ASSERT ("saving cancellation");
+    MX_THREAD_ASSERT ("saving cancellation");
     return state;
 }
 
-void vlc_restorecancel (int state)
+void mxRestoreCancel (int state)
 {
 #ifndef NDEBUG
     int oldstate, val;
     
     val = pthread_setcancelstate (state, &oldstate);
-    VLC_THREAD_ASSERT ("restoring cancellation");
+    MX_THREAD_ASSERT ("restoring cancellation");
     
     if (unlikely(oldstate != PTHREAD_CANCEL_DISABLE))
-        vlc_thread_fatal ("restoring cancellation while not disabled", EINVAL,
+        mx_thread_fatal ("restoring cancellation while not disabled", EINVAL,
                           __func__, __FILE__, __LINE__);
 #else
     pthread_setcancelstate (state, NULL);
 #endif
 }
 
-void vlc_testcancel (void)
+void mxTestCancel (void)
 {
     pthread_testcancel ();
 }
 
-void vlc_control_cancel (int cmd, ...)
+void mxControlCancel (int cmd, ...)
 {
     (void) cmd;
     MX_assert_unreachable ();
@@ -490,17 +490,17 @@ void vlc_control_cancel (int cmd, ...)
 
 mtime_t mdate (void)
 {
-    vlc_clock_setup();
+    mx_clock_setup();
     uint64_t date = mach_absolute_time();
     
     /* denom is uint32_t, switch to 64 bits to prevent overflow. */
-    uint64_t denom = vlc_clock_conversion_factor.denom;
+    uint64_t denom = mx_clock_conversion_factor.denom;
     
     /* Switch to microsecs */
     denom *= 1000LL;
     
     /* Split the division to prevent overflow */
-    lldiv_t d = lldiv (vlc_clock_conversion_factor.numer, denom);
+    lldiv_t d = lldiv (mx_clock_conversion_factor.numer, denom);
     
     return (d.quot * date) + ((d.rem * date) / denom);
 }
@@ -524,7 +524,7 @@ void msleep (mtime_t delay)
         assert (errno == EINTR);
 }
 
-unsigned vlc_GetCPUCount(void)
+unsigned mxGetCPUCount(void)
 {
     return sysconf(_SC_NPROCESSORS_CONF);
 }

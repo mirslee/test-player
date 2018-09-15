@@ -9,27 +9,27 @@
 
 /*** Global locks ***/
 
-void vlc_global_mutex (unsigned n, bool acquire)
+void mxGloablMutex (unsigned n, bool acquire)
 {
-    static vlc_mutex_t locks[] = {
-        VLC_STATIC_MUTEX,
-        VLC_STATIC_MUTEX,
-        VLC_STATIC_MUTEX,
-        VLC_STATIC_MUTEX,
-        VLC_STATIC_MUTEX,
+    static MxMutex locks[] = {
+        MX_STATIC_MUTEX,
+        MX_STATIC_MUTEX,
+        MX_STATIC_MUTEX,
+        MX_STATIC_MUTEX,
+        MX_STATIC_MUTEX,
 #ifdef _WIN32
-        VLC_STATIC_MUTEX, // For MTA holder
+        MX_STATIC_MUTEX, // For MTA holder
 #endif
     };
-    static_assert (VLC_MAX_MUTEX == (sizeof (locks) / sizeof (locks[0])),
+    static_assert (MX_MAX_MUTEX == (sizeof (locks) / sizeof (locks[0])),
                    "Wrong number of global mutexes");
     assert (n < (sizeof (locks) / sizeof (locks[0])));
     
-    vlc_mutex_t *lock = locks + n;
+    MxMutex *lock = locks + n;
     if (acquire)
-        vlc_mutex_lock (lock);
+        mxMutexLock (lock);
     else
-        vlc_mutex_unlock (lock);
+        mxMutexUnlock (lock);
 }
 
 #if defined (_WIN32) && (_WIN32_WINNT < _WIN32_WINNT_WIN8)

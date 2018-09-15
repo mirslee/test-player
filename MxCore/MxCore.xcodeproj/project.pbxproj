@@ -13,6 +13,7 @@
 		5431D1E5214C9D9E0083FAD1 /* MxFixups.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5431D1E3214C9D9E0083FAD1 /* MxFixups.cpp */; };
 		5431D1E9214CA6BC0083FAD1 /* MxThread_mac.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5431D1E8214CA6BC0083FAD1 /* MxThread_mac.cpp */; };
 		5431D1EC214CAA670083FAD1 /* MxNetwork.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5431D1EA214CAA670083FAD1 /* MxNetwork.cpp */; };
+		5431D205214CD7CA0083FAD1 /* MxCpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5431D204214CD7CA0083FAD1 /* MxCpu.cpp */; };
 		5434155F21414004009FBC13 /* CMxString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5434155E21414004009FBC13 /* CMxString.cpp */; };
 		54638AE4212FAD8A004EB5E4 /* MxSynchronize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */; };
 		546DA94B2145FE4800DF99E3 /* MxGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 546DA9482145FE4700DF99E3 /* MxGlobal.cpp */; };
@@ -43,6 +44,7 @@
 		5431D1E3214C9D9E0083FAD1 /* MxFixups.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxFixups.cpp; sourceTree = "<group>"; };
 		5431D1E8214CA6BC0083FAD1 /* MxThread_mac.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxThread_mac.cpp; sourceTree = "<group>"; };
 		5431D1EA214CAA670083FAD1 /* MxNetwork.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxNetwork.cpp; sourceTree = "<group>"; };
+		5431D204214CD7CA0083FAD1 /* MxCpu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxCpu.cpp; sourceTree = "<group>"; };
 		5434155E21414004009FBC13 /* CMxString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMxString.cpp; sourceTree = "<group>"; };
 		54638AE2212FAD8A004EB5E4 /* MxSynchronize.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MxSynchronize.cpp; sourceTree = "<group>"; };
 		546DA9482145FE4700DF99E3 /* MxGlobal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MxGlobal.cpp; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		54C3C598212A5C62009736A1 = {
 			isa = PBXGroup;
 			children = (
+				5431D204214CD7CA0083FAD1 /* MxCpu.cpp */,
 				5431D1EA214CAA670083FAD1 /* MxNetwork.cpp */,
 				5431D1E8214CA6BC0083FAD1 /* MxThread_mac.cpp */,
 				5431D1E3214C9D9E0083FAD1 /* MxFixups.cpp */,
@@ -230,6 +233,7 @@
 				5431D1E5214C9D9E0083FAD1 /* MxFixups.cpp in Sources */,
 				546DA94D2145FE4800DF99E3 /* MxSystem.cpp in Sources */,
 				54C3C5E8212A6D90009736A1 /* stdafx.cpp in Sources */,
+				5431D205214CD7CA0083FAD1 /* MxCpu.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,7 +3,7 @@
 
 #include "MxCommon.h"
 
-MX_API void vlc_testcancel(void);
+MX_API void mxTestCancel(void);
 
 #if defined (_WIN32)
     # include <process.h>
@@ -11,9 +11,9 @@ MX_API void vlc_testcancel(void);
         #  define ETIMEDOUT 10060 /* This is the value in winsock.h. */
     # endif
 
-    typedef struct vlc_thread *vlc_thread_t;
+    typedef struct Mx_Thread *MxThread;
     # define VLC_THREAD_CANCELED NULL
-    # define LIBVLC_NEED_SLEEP
+    # define MX_NEED_SLEEP
     typedef struct
     {
         bool dynamic;
@@ -26,32 +26,32 @@ MX_API void vlc_testcancel(void);
             };
             CRITICAL_SECTION mutex;
         };
-    } vlc_mutex_t;
-    #define VLC_STATIC_MUTEX { false, { { false, 0 } } }
-    #define LIBVLC_NEED_CONDVAR
-    #define LIBVLC_NEED_SEMAPHORE
-    #define LIBVLC_NEED_RWLOCK
-    typedef struct vlc_threadvar *vlc_threadvar_t;
-    typedef struct vlc_timer *vlc_timer_t;
+    } MxMutex;
+    #define MX_STATIC_MUTEX { false, { { false, 0 } } }
+    #define MX_NEED_CONDVAR
+    #define MX_NEED_SEMAPHORE
+    #define MX_NEED_RWLOCK
+    typedef struct Mx_Threadvar *MxThreadvar;
+    typedef struct Mx_Timer *MxTimer;
 
-    # define VLC_THREAD_PRIORITY_LOW      0
-    # define VLC_THREAD_PRIORITY_INPUT    THREAD_PRIORITY_ABOVE_NORMAL
-    # define VLC_THREAD_PRIORITY_AUDIO    THREAD_PRIORITY_HIGHEST
-    # define VLC_THREAD_PRIORITY_VIDEO    0
-    # define VLC_THREAD_PRIORITY_OUTPUT   THREAD_PRIORITY_ABOVE_NORMAL
-    # define VLC_THREAD_PRIORITY_HIGHEST  THREAD_PRIORITY_TIME_CRITICAL
+    # define MX_THREAD_PRIORITY_LOW      0
+    # define MX_THREAD_PRIORITY_INPUT    THREAD_PRIORITY_ABOVE_NORMAL
+    # define MX_THREAD_PRIORITY_AUDIO    THREAD_PRIORITY_HIGHEST
+    # define MX_THREAD_PRIORITY_VIDEO    0
+    # define MX_THREAD_PRIORITY_OUTPUT   THREAD_PRIORITY_ABOVE_NORMAL
+    # define MX_THREAD_PRIORITY_HIGHEST  THREAD_PRIORITY_TIME_CRITICAL
 
-    static inline int vlc_poll(struct pollfd *fds, unsigned nfds, int timeout)
+    static inline int mxPoll(struct pollfd *fds, unsigned nfds, int timeout)
     {
         int val;
         
-        vlc_testcancel();
+        mxTestcancel();
         val = poll(fds, nfds, timeout);
         if (val < 0)
-            vlc_testcancel();
+            mxTestcancel();
         return val;
     }
-    # define poll(u,n,t) vlc_poll(u, n, t)
+    # define poll(u,n,t) mxPoll(u, n, t)
 
 #elif defined (__APPLE__)
     # define _APPLE_C_SOURCE    1 /* Proper pthread semantics on OSX */
@@ -60,27 +60,27 @@ MX_API void vlc_testcancel(void);
     /* Unnamed POSIX semaphores not supported on Mac OS X */
     # include <mach/semaphore.h>
     # include <mach/task.h>
-    # define LIBVLC_USE_PTHREAD           1
-    # define LIBVLC_USE_PTHREAD_CLEANUP   1
+    # define MX_USE_PTHREAD           1
+    # define MX_USE_PTHREAD_CLEANUP   1
 
-    typedef pthread_t       vlc_thread_t;
-    #define VLC_THREAD_CANCELED PTHREAD_CANCELED
-    typedef pthread_mutex_t vlc_mutex_t;
-    #define VLC_STATIC_MUTEX PTHREAD_MUTEX_INITIALIZER
-    typedef pthread_cond_t vlc_cond_t;
+    typedef pthread_t       MxThread;
+    #define MX_THREAD_CANCELED PTHREAD_CANCELED
+    typedef pthread_mutex_t MxMutex;
+    #define MX_STATIC_MUTEX PTHREAD_MUTEX_INITIALIZER
+    typedef pthread_cond_t MxCond;
     #define VLC_STATIC_COND PTHREAD_COND_INITIALIZER
-    typedef semaphore_t     vlc_sem_t;
-    typedef pthread_rwlock_t vlc_rwlock_t;
+    typedef semaphore_t     MxSem;
+    typedef pthread_rwlock_t MxRWLock;
     #define VLC_STATIC_RWLOCK PTHREAD_RWLOCK_INITIALIZER
-    typedef pthread_key_t   vlc_threadvar_t;
-    typedef struct vlc_timer *vlc_timer_t;
+    typedef pthread_key_t   MxThreadvar;
+    typedef struct vlc_timer *MxTimer;
 
-    # define VLC_THREAD_PRIORITY_LOW      0
-    # define VLC_THREAD_PRIORITY_INPUT   22
-    # define VLC_THREAD_PRIORITY_AUDIO   22
-    # define VLC_THREAD_PRIORITY_VIDEO    0
-    # define VLC_THREAD_PRIORITY_OUTPUT  22
-    # define VLC_THREAD_PRIORITY_HIGHEST 22
+    # define MX_THREAD_PRIORITY_LOW      0
+    # define MX_THREAD_PRIORITY_INPUT   22
+    # define MX_THREAD_PRIORITY_AUDIO   22
+    # define MX_THREAD_PRIORITY_VIDEO    0
+    # define MX_THREAD_PRIORITY_OUTPUT  22
+    # define MX_THREAD_PRIORITY_HIGHEST 22
 
 #else /* POSIX threads */
     # include <unistd.h> /* _POSIX_SPIN_LOCKS */
@@ -90,12 +90,12 @@ MX_API void vlc_testcancel(void);
     /**
      * Whether LibVLC threads are based on POSIX threads.
      */
-    # define LIBVLC_USE_PTHREAD           1
+    # define MX_USE_PTHREAD           1
 
     /**
      * Whether LibVLC thread cancellation is based on POSIX threads.
      */
-    # define LIBVLC_USE_PTHREAD_CLEANUP   1
+    # define MX_USE_PTHREAD_CLEANUP   1
 
     /**
      * Thread handle.
@@ -103,31 +103,31 @@ MX_API void vlc_testcancel(void);
     typedef struct
     {
         pthread_t handle;
-    } vlc_thread_t;
+    } MxThread;
 
     /**
      * Return value of a canceled thread.
      */
-    #define VLC_THREAD_CANCELED PTHREAD_CANCELED
+    #define MX_THREAD_CANCELED PTHREAD_CANCELED
 
     /**
      * Mutex.
      *
      * Storage space for a mutual exclusion lock.
      */
-    typedef pthread_mutex_t vlc_mutex_t;
+    typedef pthread_mutex_t MxMutex;
 
     /**
      * Static initializer for (static) mutex.
      */
-    #define VLC_STATIC_MUTEX PTHREAD_MUTEX_INITIALIZER
+    #define MX_STATIC_MUTEX PTHREAD_MUTEX_INITIALIZER
 
     /**
      * Condition variable.
      *
      * Storage space for a thread condition variable.
      */
-    typedef pthread_cond_t  vlc_cond_t;
+    typedef pthread_cond_t  MxCond;
 
     /**
      * Static initializer for (static) condition variable.
@@ -138,161 +138,161 @@ MX_API void vlc_testcancel(void);
      * always be initialized dynamically explicit instead of using this
      * initializer.
      */
-    #define VLC_STATIC_COND  PTHREAD_COND_INITIALIZER
+    #define MX_STATIC_COND  PTHREAD_COND_INITIALIZER
 
     /**
      * Semaphore.
      *
      * Storage space for a thread-safe semaphore.
      */
-    typedef sem_t           vlc_sem_t;
+    typedef sem_t           MxSem;
 
     /**
      * Read/write lock.
      *
      * Storage space for a slim reader/writer lock.
      */
-    typedef pthread_rwlock_t vlc_rwlock_t;
+    typedef pthread_rwlock_t MxRWLock;
 
     /**
      * Static initializer for (static) read/write lock.
      */
-    #define VLC_STATIC_RWLOCK PTHREAD_RWLOCK_INITIALIZER
+    #define MX_STATIC_RWLOCK PTHREAD_RWLOCK_INITIALIZER
 
     /**
      * Thread-local key handle.
      */
-    typedef pthread_key_t   vlc_threadvar_t;
+    typedef pthread_key_t   MxThreadvar;
 
     /**
      * Threaded timer handle.
      */
-    typedef struct vlc_timer *vlc_timer_t;
+    typedef struct vlc_timer *MxTimer;
 
-    # define VLC_THREAD_PRIORITY_LOW      0
-    # define VLC_THREAD_PRIORITY_INPUT   10
-    # define VLC_THREAD_PRIORITY_AUDIO    5
-    # define VLC_THREAD_PRIORITY_VIDEO    0
-    # define VLC_THREAD_PRIORITY_OUTPUT  15
-    # define VLC_THREAD_PRIORITY_HIGHEST 20
+    # define MX_THREAD_PRIORITY_LOW      0
+    # define MX_THREAD_PRIORITY_INPUT   10
+    # define MX_THREAD_PRIORITY_AUDIO    5
+    # define MX_THREAD_PRIORITY_VIDEO    0
+    # define MX_THREAD_PRIORITY_OUTPUT  15
+    # define MX_THREAD_PRIORITY_HIGHEST 20
 
 #endif
 
-#ifdef LIBVLC_NEED_CONDVAR
+#ifdef MX_NEED_CONDVAR
     typedef struct
     {
         unsigned value;
-    } vlc_cond_t;
-    # define VLC_STATIC_COND { 0 }
+    } MxCond;
+    # define MX_STATIC_COND { 0 }
 #endif
 
-#ifdef LIBVLC_NEED_SEMAPHORE
-    typedef struct vlc_sem
+#ifdef MX_NEED_SEMAPHORE
+    typedef struct Mx_sem
     {
-        vlc_mutex_t lock;
-        vlc_cond_t  wait;
+        MxMutex lock;
+        MxCond  wait;
         unsigned    value;
-    } vlc_sem_t;
+    } MxSem;
 #endif
 
-#ifdef LIBVLC_NEED_RWLOCK
-    typedef struct vlc_rwlock
+#ifdef MX_NEED_RWLOCK
+    typedef struct Mx_rwlock
     {
-        vlc_mutex_t   mutex;
-        vlc_cond_t    wait;
+        MxMutex   mutex;
+        MxCond    wait;
         long          state;
-    } vlc_rwlock_t;
+    } MxRWLock;
     # define VLC_STATIC_RWLOCK { VLC_STATIC_MUTEX, VLC_STATIC_COND, 0 }
 #endif
 
-MX_API void vlc_mutex_init(vlc_mutex_t *);
+MX_API void mxMutexInit(MxMutex *);
 
-MX_API void vlc_mutex_init_recursive(vlc_mutex_t *);
+MX_API void mxMutexInitRecursive(MxMutex *);
 
-MX_API void vlc_mutex_destroy(vlc_mutex_t *);
+MX_API void mxMutexDestroy(MxMutex *);
 
-MX_API void vlc_mutex_lock(vlc_mutex_t *);
+MX_API void mxMutexLock(MxMutex *);
 
-MX_API int vlc_mutex_trylock( vlc_mutex_t * ) MX_USED;
+MX_API int mxMutexTrylock( MxMutex * ) MX_USED;
 
-MX_API void vlc_mutex_unlock(vlc_mutex_t *);
+MX_API void mxMutexUnlock(MxMutex *);
 
-MX_API void vlc_cond_init(vlc_cond_t *);
+MX_API void mxCondInit(MxCond *);
 
-void vlc_cond_init_daytime(vlc_cond_t *);
+void mxCondInitDaytime(MxCond *);
 
-MX_API void vlc_cond_destroy(vlc_cond_t *);
+MX_API void mxCondDestroy(MxCond *);
 
-MX_API void vlc_cond_signal(vlc_cond_t *);
+MX_API void mxCondSignal(MxCond *);
 
-MX_API void vlc_cond_broadcast(vlc_cond_t *);
+MX_API void mxCondBroadcast(MxCond *);
 
-MX_API void vlc_cond_wait(vlc_cond_t *cond, vlc_mutex_t *mutex);
+MX_API void mxCondWait(MxCond *cond, MxMutex *mutex);
 
-MX_API int vlc_cond_timedwait(vlc_cond_t *cond, vlc_mutex_t *mutex,
+MX_API int mxCondTimedwait(MxCond *cond, MxMutex *mutex,
                                mtime_t deadline);
 
-int vlc_cond_timedwait_daytime(vlc_cond_t *, vlc_mutex_t *, time_t);
+int mxCondTimedwaitDaytime(MxCond *, MxMutex *, time_t);
 
-MX_API void vlc_sem_init(vlc_sem_t *, unsigned count);
+MX_API void mxSemInit(MxSem *, unsigned count);
 
-MX_API void vlc_sem_destroy(vlc_sem_t *);
+MX_API void mxSemDestroy(MxSem *);
 
-MX_API int vlc_sem_post(vlc_sem_t *);
+MX_API int mxSemPost(MxSem *);
 
-MX_API void vlc_sem_wait(vlc_sem_t *);
+MX_API void mxSemWait(MxSem *);
 
-MX_API void vlc_rwlock_init(vlc_rwlock_t *);
+MX_API void mxRWLockInit(MxRWLock *);
 
-MX_API void vlc_rwlock_destroy(vlc_rwlock_t *);
+MX_API void mxRWLockDestroy(MxRWLock *);
 
-MX_API void vlc_rwlock_rdlock(vlc_rwlock_t *);
+MX_API void mxRWLockRdlock(MxRWLock *);
 
-MX_API void vlc_rwlock_wrlock(vlc_rwlock_t *);
+MX_API void mxRWLockWrlock(MxRWLock *);
 
-MX_API void vlc_rwlock_unlock(vlc_rwlock_t *);
+MX_API void mxRWLockUnlock(MxRWLock *);
 
-MX_API int vlc_threadvar_create(vlc_threadvar_t *key, void (*destr) (void *));
+MX_API int mxThreadvarCreate(MxThreadvar *key, void (*destr) (void *));
 
-MX_API void vlc_threadvar_delete(vlc_threadvar_t *);
+MX_API void mxThreadvarDelete(MxThreadvar *);
 
-MX_API int vlc_threadvar_set(vlc_threadvar_t key, void *value);
+MX_API int mxThreadvarSet(MxThreadvar key, void *value);
 
-MX_API void *vlc_threadvar_get(vlc_threadvar_t);
+MX_API void *mxThreadvarGet(MxThreadvar);
 
-void vlc_addr_wait(void *addr, unsigned val);
+void mxAddrWait(void *addr, unsigned val);
 
-bool vlc_addr_timedwait(void *addr, unsigned val, mtime_t delay);
+bool mxAddrTimedwait(void *addr, unsigned val, mtime_t delay);
 
-void vlc_addr_signal(void *addr);
+void mxAddrSignal(void *addr);
 
-void vlc_addr_broadcast(void *addr);
+void mxAddrBroadcast(void *addr);
 
-MX_API int vlc_clone(vlc_thread_t *th, void *(*entry)(void *), void *data,
+MX_API int mxClone(MxThread *th, void *(*entry)(void *), void *data,
                       int priority) MX_USED;
 
-MX_API void vlc_cancel(vlc_thread_t);
+MX_API void mxCancel(MxThread);
 
-MX_API void vlc_join(vlc_thread_t th, void **result);
+MX_API void mxJoin(MxThread th, void **result);
 
-MX_API int vlc_savecancel(void);
+MX_API int mxSaveCancel(void);
 
-MX_API void vlc_restorecancel(int state);
+MX_API void mxRestoreCancel(int state);
 
-MX_API void vlc_control_cancel(int cmd, ...);
+MX_API void mxControlCancel(int cmd, ...);
 
-MX_API vlc_thread_t vlc_thread_self(void) MX_USED;
+MX_API MxThread mxThreadSelf() MX_USED;
 
-MX_API unsigned long vlc_thread_id(void) MX_USED;
+MX_API unsigned long mxThreadId() MX_USED;
 
-MX_API mtime_t mdate(void);
+MX_API mtime_t mdate();
 
 MX_API void mwait(mtime_t deadline);
 
 MX_API void msleep(mtime_t delay);
 
-#define VLC_HARD_MIN_SLEEP   10000 /* 10 milliseconds = 1 tick at 100Hz */
-#define VLC_SOFT_MIN_SLEEP 9000000 /* 9 seconds */
+#define MX_HARD_MIN_SLEEP   10000 /* 10 milliseconds = 1 tick at 100Hz */
+#define MX_SOFT_MIN_SLEEP 9000000 /* 9 seconds */
 
 #if defined (__GNUC__) && !defined (__clang__)
 
@@ -344,107 +344,107 @@ mtime_t impossible_deadline( mtime_t deadline )
 #define msleep(d) msleep(check_delay(d))
 #define mwait(d) mwait(check_deadline(d))
 
-MX_API int vlc_timer_create(vlc_timer_t *id, void (*func)(void *), void *data)
+MX_API int mxTimerCreate(MxTimer *id, void (*func)(void *), void *data)
 MX_USED;
 
-MX_API void vlc_timer_destroy(vlc_timer_t timer);
+MX_API void mxTimerDestroy(MxTimer timer);
 
-MX_API void vlc_timer_schedule(vlc_timer_t timer, bool absolute,
+MX_API void mxTimerSchedule(MxTimer timer, bool absolute,
                                 mtime_t value, mtime_t interval);
 
-MX_API unsigned vlc_timer_getoverrun(vlc_timer_t) MX_USED;
+MX_API unsigned mxTimerGetoverrun(MxTimer) MX_USED;
 
-MX_API unsigned vlc_GetCPUCount(void);
+MX_API unsigned mxGetCPUCount();
 
 enum
 {
-    VLC_CLEANUP_PUSH,
-    VLC_CLEANUP_POP,
-    VLC_CANCEL_ADDR_SET,
-    VLC_CANCEL_ADDR_CLEAR,
+    MX_CLEANUP_PUSH,
+    MX_CLEANUP_POP,
+    MX_CANCEL_ADDR_SET,
+    MX_CANCEL_ADDR_CLEAR,
 };
 
-#if defined (LIBVLC_USE_PTHREAD_CLEANUP)
+#if defined (MX_USE_PTHREAD_CLEANUP)
 
-# define vlc_cleanup_push( routine, arg ) pthread_cleanup_push (routine, arg)
+# define mxCleanupPush( routine, arg ) pthread_cleanup_push (routine, arg)
 
-# define vlc_cleanup_pop( ) pthread_cleanup_pop (0)
+# define mxCleanupPop( ) pthread_cleanup_pop (0)
 
 #else
-typedef struct vlc_cleanup_t vlc_cleanup_t;
+typedef struct MxCleanup MxCleanup;
 
-struct vlc_cleanup_t
+struct MxCleanup
 {
-    vlc_cleanup_t *next;
+    MxCleanup *next;
     void         (*proc) (void *);
     void          *data;
 };
 
 
-# define vlc_cleanup_push( routine, arg ) \
+# define MxCleanupPush( routine, arg ) \
 do { \
-vlc_cleanup_t vlc_cleanup_data = { NULL, routine, arg, }; \
-vlc_control_cancel (VLC_CLEANUP_PUSH, &vlc_cleanup_data)
+MxCleanup mx_cleanup_data = { NULL, routine, arg, }; \
+mxControlCancel (MX_CLEANUP_PUSH, &mx_cleanup_data)
 
-# define vlc_cleanup_pop( ) \
-vlc_control_cancel (VLC_CLEANUP_POP); \
+# define MxCleanupPop( ) \
+mxControlCancel (VLC_CLEANUP_POP); \
 } while (0)
 
 #endif
 
-static inline void vlc_cleanup_lock (void *lock)
+static inline void mxCleanupLock (void *lock)
 {
-    vlc_mutex_unlock ((vlc_mutex_t *)lock);
+    mxMutexUnlock ((MxMutex *)lock);
 }
-#define mutex_cleanup_push( lock ) vlc_cleanup_push (vlc_cleanup_lock, lock)
+#define mutex_cleanup_push( lock ) MxCleanupPush (mxCleanupLock, lock)
 
-static inline void vlc_cancel_addr_set(void *addr)
+static inline void mxCancelAddrSet(void *addr)
 {
-    vlc_control_cancel(VLC_CANCEL_ADDR_SET, addr);
+    mxControlCancel(MX_CANCEL_ADDR_SET, addr);
 }
 
-static inline void vlc_cancel_addr_clear(void *addr)
+static inline void mxCancelAddrClear(void *addr)
 {
-    vlc_control_cancel(VLC_CANCEL_ADDR_CLEAR, addr);
+    mxControlCancel(MX_CANCEL_ADDR_CLEAR, addr);
 }
 
 #ifdef __cplusplus
 
-class vlc_mutex_locker
+class CMxMutexLocker
 {
 private:
-    vlc_mutex_t *lock;
+    MxMutex *lock;
 public:
-    vlc_mutex_locker (vlc_mutex_t *m) : lock (m)
+    CMxMutexLocker (MxMutex *m) : lock (m)
     {
-        vlc_mutex_lock (lock);
+        mxMutexLock (lock);
     }
     
-    ~vlc_mutex_locker (void)
+    CMxMutexLocker ()
     {
-        vlc_mutex_unlock (lock);
+        mxMutexUnlock (lock);
     }
 };
 #endif
 
 enum
 {
-    VLC_AVCODEC_MUTEX = 0,
-    VLC_GCRYPT_MUTEX,
-    VLC_XLIB_MUTEX,
-    VLC_MOSAIC_MUTEX,
-    VLC_HIGHLIGHT_MUTEX,
+    MX_AVCODEC_MUTEX = 0,
+    MX_GCRYPT_MUTEX,
+    MX_XLIB_MUTEX,
+    MX_MOSAIC_MUTEX,
+    MX_HIGHLIGHT_MUTEX,
 #ifdef _WIN32
-    VLC_MTA_MUTEX,
+    MX_MTA_MUTEX,
 #endif
     /* Insert new entry HERE */
-    VLC_MAX_MUTEX
+    MX_MAX_MUTEX
 };
 
-MX_API void vlc_global_mutex(unsigned, bool);
+MX_API void mxGlobalMutex(unsigned, bool);
 
-#define vlc_global_lock( n ) vlc_global_mutex(n, true)
+#define mxGlobalLock( n ) mxGlobalMutex(n, true)
 
-#define vlc_global_unlock( n ) vlc_global_mutex(n, false)
+#define mxGlobalUnlock( n ) mxGlobalMutex(n, false)
 
 #endif /* MXTHREAD_H */

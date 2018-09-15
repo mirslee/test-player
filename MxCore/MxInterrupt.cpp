@@ -32,7 +32,7 @@ static thread_local vlc_interrupt_t *vlc_interrupt_var;
  */
 void vlc_interrupt_init(vlc_interrupt_t *ctx)
 {
-    vlc_mutex_init(&ctx->lock);
+    mxMutexInit(&ctx->lock);
     ctx->interrupted = false;
     atomic_init(&ctx->killed, false);
     ctx->callback = NULL;
@@ -53,7 +53,7 @@ vlc_interrupt_t *vlc_interrupt_create(void)
 void vlc_interrupt_deinit(vlc_interrupt_t *ctx)
 {
     assert(ctx->callback == NULL);
-    vlc_mutex_destroy(&ctx->lock);
+    mxMutexDestroy(&ctx->lock);
 }
 
 void vlc_interrupt_destroy(vlc_interrupt_t *ctx)
@@ -71,11 +71,11 @@ void vlc_interrupt_raise(vlc_interrupt_t *ctx)
      * reentrant. The lock ensures that all calls to the callback for a given
      * context are serialized. The lock also protects against invalid memory
      * accesses to the callback pointer proper, and the interrupted flag. */
-    vlc_mutex_lock(&ctx->lock);
+    mxMutexLock(&ctx->lock);
     ctx->interrupted = true;
     if (ctx->callback != NULL)
         ctx->callback(ctx->data);
-    vlc_mutex_unlock(&ctx->lock);
+    mxMutexUnlock(&ctx->lock);
 }
 
 vlc_interrupt_t *vlc_interrupt_set(vlc_interrupt_t *newctx)
@@ -99,14 +99,14 @@ static void vlc_interrupt_prepare(vlc_interrupt_t *ctx,
     assert(ctx != NULL);
     assert(ctx == vlc_interrupt_var);
     
-    vlc_mutex_lock(&ctx->lock);
+    mxMutexLock(&ctx->lock);
     assert(ctx->callback == NULL);
     ctx->callback = cb;
     ctx->data = data;
     
     if (unlikely(ctx->interrupted))
         cb(data);
-    vlc_mutex_unlock(&ctx->lock);
+    mxMutexUnlock(&ctx->lock);
 }
 
 /**
@@ -128,14 +128,14 @@ static int vlc_interrupt_finish(vlc_interrupt_t *ctx)
     assert(ctx == vlc_interrupt_var);
     
     /* Wait for pending callbacks to prevent access by other threads. */
-    vlc_mutex_lock(&ctx->lock);
+    mxMutexLock(&ctx->lock);
     ctx->callback = NULL;
     if (ctx->interrupted)
     {
         ret = EINTR;
         ctx->interrupted = false;
     }
-    vlc_mutex_unlock(&ctx->lock);
+    mxMutexUnlock(&ctx->lock);
     return ret;
 }
 
@@ -174,37 +174,37 @@ bool vlc_killed(void)
 
 static void vlc_interrupt_sem(void *opaque)
 {
-    vlc_sem_post((vlc_sem_t*)opaque);
+    mxSemPost((MxSem*)opaque);
 }
 
-int vlc_sem_wait_i11e(vlc_sem_t *sem)
+int vlc_sem_wait_i11e(MxSem *sem)
 {
     vlc_interrupt_t *ctx = vlc_interrupt_var;
     if (ctx == NULL)
-        return vlc_sem_wait(sem), 0;
+        return mxSemWait(sem), 0;
     
     vlc_interrupt_prepare(ctx, vlc_interrupt_sem, sem);
     
-    vlc_cleanup_push(vlc_interrupt_cleanup, ctx);
-    vlc_sem_wait(sem);
-    vlc_cleanup_pop();
+    mxCleanupPush(vlc_interrupt_cleanup, ctx);
+    mxSemWait(sem);
+    mxCleanupPop();
     
     return vlc_interrupt_finish(ctx);
 }
 
 static void vlc_mwait_i11e_wake(void *opaque)
 {
-    vlc_cond_signal((vlc_cond_t*)opaque);
+    mxCondSignal((MxCond*)opaque);
 }
 
 static void vlc_mwait_i11e_cleanup(void *opaque)
 {
     vlc_interrupt_t *ctx = (vlc_interrupt_t*)opaque;
-    vlc_cond_t *cond = (vlc_cond_t*)ctx->data;
+    MxCond *cond = (MxCond*)ctx->data;
     
-    vlc_mutex_unlock(&ctx->lock);
+    mxMutexLock(&ctx->lock);
     vlc_interrupt_finish(ctx);
-    vlc_cond_destroy(cond);
+    mxCondDestroy(cond);
 }
 
 int vlc_mwait_i11e(mtime_t deadline)
@@ -213,20 +213,20 @@ int vlc_mwait_i11e(mtime_t deadline)
     if (ctx == NULL)
         return mwait(deadline), 0;
     
-    vlc_cond_t wait;
-    vlc_cond_init(&wait);
+    MxCond wait;
+    mxCondInit(&wait);
     
     vlc_interrupt_prepare(ctx, vlc_mwait_i11e_wake, &wait);
     
-    vlc_mutex_lock(&ctx->lock);
-    vlc_cleanup_push(vlc_mwait_i11e_cleanup, ctx);
+    mxMutexLock(&ctx->lock);
+    mxCleanupPush(vlc_mwait_i11e_cleanup, ctx);
     while (!ctx->interrupted
-           && vlc_cond_timedwait(&wait, &ctx->lock, deadline) == 0);
-    vlc_cleanup_pop();
-    vlc_mutex_unlock(&ctx->lock);
+           && mxCondTimedwait(&wait, &ctx->lock, deadline) == 0);
+    mxCleanupPop();
+    mxMutexUnlock(&ctx->lock);
     
     int ret = vlc_interrupt_finish(ctx);
-    vlc_cond_destroy(&wait);
+    mxCondDestroy(&wait);
     return ret;
 }
 
@@ -272,9 +272,9 @@ static void vlc_poll_i11e_wake(void *opaque)
     int *fd = (int*)opaque;
     int canc;
     
-    canc = vlc_savecancel();
+    canc = mxSaveCancel();
     write(fd[1], &value, sizeof (value));
-    vlc_restorecancel(canc);
+    mxRestoreCancel(canc);
 }
 
 static void vlc_poll_i11e_cleanup(void *opaque)
@@ -307,7 +307,7 @@ static int vlc_poll_i11e_inner( pollfd */*restrict*/ fds, unsigned nfds,
 # endif
         if (mxPipe(fd))
         {
-            vlc_testcancel();
+            mxTestCancel();
             errno = ENOMEM;
             return -1;
         }
@@ -322,7 +322,7 @@ static int vlc_poll_i11e_inner( pollfd */*restrict*/ fds, unsigned nfds,
     
     vlc_interrupt_prepare(ctx, vlc_poll_i11e_wake, fd);
     
-    vlc_cleanup_push(vlc_poll_i11e_cleanup, ctx);
+    mxCleanupPush(vlc_poll_i11e_cleanup, ctx);
     ret = poll(ufd, nfds + 1, timeout);
     
     for (unsigned i = 0; i < nfds; i++)
@@ -335,7 +335,7 @@ static int vlc_poll_i11e_inner( pollfd */*restrict*/ fds, unsigned nfds,
         read(fd[0], &dummy, sizeof (dummy));
         ret--;
     }
-    vlc_cleanup_pop();
+    mxCleanupPop();
     
     if (vlc_interrupt_finish(ctx))
     {
@@ -343,11 +343,11 @@ static int vlc_poll_i11e_inner( pollfd */*restrict*/ fds, unsigned nfds,
         ret = -1;
     }
     
-    canc = vlc_savecancel();
+    canc = mxSaveCancel();
     if (fd[1] != fd[0])
         mxClose(fd[1]);
     mxClose(fd[0]);
-    vlc_restorecancel(canc);
+    mxRestoreCancel(canc);
     return ret;
 }
 
@@ -371,9 +371,9 @@ int vlc_poll_i11e(struct pollfd *fds, unsigned nfds, int timeout)
         if (unlikely(ufd == NULL))
             return -1; /* ENOMEM */
         
-        vlc_cleanup_push(free, ufd);
+        mxCleanupPush(free, ufd);
         ret = vlc_poll_i11e_inner(fds, nfds, timeout, ctx, ufd);
-        vlc_cleanup_pop();
+        mxCleanupPop();
         free(ufd);
     }
     return ret;
@@ -519,7 +519,7 @@ int vlc_accept_i11e(int fd, struct sockaddr *addr, socklen_t *addrlen,
     if (vlc_poll_i11e(&ufd, 1, -1) < 0)
         return -1;
     
-    return vlc_accept(fd, addr, addrlen, blocking);
+    return mxAccept(fd, addr, addrlen, blocking);
 }
 
 #else /* _WIN32 */

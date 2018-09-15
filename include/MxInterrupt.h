@@ -18,7 +18,7 @@ using namespace std;
 
 struct vlc_interrupt
 {
-    vlc_mutex_t lock;
+    MxMutex lock;
     bool interrupted;
     atomic_bool killed;
     void (*callback)(void *);
@@ -30,7 +30,7 @@ struct iovec;
 struct sockaddr;
 struct msghdr;
 
-MX_API int vlc_sem_wait_i11e(vlc_sem_t *);
+MX_API int vlc_sem_wait_i11e(MxSem *);
 
 MX_API int vlc_mwait_i11e(mtime_t);
 

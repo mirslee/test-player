@@ -5,7 +5,7 @@
 #include <fcntl.h>
 
 
-int vlc_accept (int lfd, struct sockaddr *addr, socklen_t *alen, bool nonblock)
+int mxAccept (int lfd, struct sockaddr *addr, socklen_t *alen, bool nonblock)
 {
     do
     {
