@@ -4,6 +4,7 @@
 #include "MxCommon.h"
 
 MX_API void mxTestCancel(void);
+MX_API void mxThreadsSetup(libvlc_int_t *vlc);
 
 #if defined (_WIN32)
     # include <process.h>
@@ -12,7 +13,7 @@ MX_API void mxTestCancel(void);
     # endif
 
     typedef struct Mx_Thread *MxThread;
-    # define VLC_THREAD_CANCELED NULL
+    # define MX_THREAD_CANCELED NULL
     # define MX_NEED_SLEEP
     typedef struct
     {
@@ -45,10 +46,10 @@ MX_API void mxTestCancel(void);
     {
         int val;
         
-        mxTestcancel();
+        mxTestCancel();
         val = poll(fds, nfds, timeout);
         if (val < 0)
-            mxTestcancel();
+			mxTestCancel();
         return val;
     }
     # define poll(u,n,t) mxPoll(u, n, t)
@@ -381,13 +382,13 @@ struct MxCleanup
 };
 
 
-# define MxCleanupPush( routine, arg ) \
+# define mxCleanupPush( routine, arg ) \
 do { \
 MxCleanup mx_cleanup_data = { NULL, routine, arg, }; \
 mxControlCancel (MX_CLEANUP_PUSH, &mx_cleanup_data)
 
-# define MxCleanupPop( ) \
-mxControlCancel (VLC_CLEANUP_POP); \
+# define mxCleanupPop( ) \
+mxControlCancel (MX_CLEANUP_POP); \
 } while (0)
 
 #endif
@@ -396,7 +397,7 @@ static inline void mxCleanupLock (void *lock)
 {
     mxMutexUnlock ((MxMutex *)lock);
 }
-#define mutex_cleanup_push( lock ) MxCleanupPush (mxCleanupLock, lock)
+#define mutex_cleanup_push( lock ) mxCleanupPush (mxCleanupLock, lock)
 
 static inline void mxCancelAddrSet(void *addr)
 {

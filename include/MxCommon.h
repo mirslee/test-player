@@ -207,6 +207,52 @@ static inline void *vlc_alloc(size_t count, size_t size)
 struct libvlc_int_t
 {
     //VLC_COMMON_MEMBERS
+	libvlc_int_t* obj;
 };
+
+/*****************************************************************************
+* Loosy memory allocation functions. Do not use in new code.
+*****************************************************************************/
+static inline void *xmalloc(size_t len)
+{
+	void *ptr = malloc(len);
+	if (unlikely(ptr == NULL && len > 0))
+		abort();
+	return ptr;
+}
+
+static inline void *xrealloc(void *ptr, size_t len)
+{
+	void *nptr = realloc(ptr, len);
+	if (unlikely(nptr == NULL && len > 0))
+		abort();
+	return nptr;
+}
+
+static inline void *xcalloc(size_t n, size_t size)
+{
+	void *ptr = calloc(n, size);
+	if (unlikely(ptr == NULL && (n > 0 || size > 0)))
+		abort();
+	return ptr;
+}
+
+static inline char *xstrdup(const char *str)
+{
+	char *ptr = strdup(str);
+	if (unlikely(ptr == NULL))
+		abort();
+	return ptr;
+}
+
+#if !defined(__cplusplus)
+# define VLC_OBJECT(x) \
+    _Generic((x)->obj, \
+        struct vlc_common_members: (vlc_object_t *)(&(x)->obj), \
+        const struct vlc_common_members: (const vlc_object_t *)(&(x)->obj) \
+    )
+#else
+# define VLC_OBJECT( x ) ((vlc_object_t *)&(x)->obj)
+#endif
 
 #endif //MXCOMMON_H

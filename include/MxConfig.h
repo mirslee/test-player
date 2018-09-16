@@ -5,6 +5,11 @@
 /* Define to the full name of this package. */
 #define PACKAGE_NAME ""
 
+#ifndef INT64_C
+#define INT64_C(c) (c ## LL)
+#define UINT64_C(c) (c ## ULL)
+#endif
+
 #define CLOCK_FREQ INT64_C(1000000)
 
 /*****************************************************************************

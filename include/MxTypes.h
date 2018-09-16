@@ -3,6 +3,7 @@
 #define __MXTYPES_H__
 
 #ifdef _WIN32
+#include <winsock2.h>
 #include <windows.h>
 #endif
 

@@ -139,46 +139,46 @@ int mxScandir( const char *dirname, char ***namelist,
     return val;
 }
 
-#if defined (_WIN32) || defined (__OS2__)
-# include <vlc_rand.h>
-
-int mxMkstemp( char *template )
-{
-    static const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    static const int i_digits = sizeof(digits)/sizeof(*digits) - 1;
-    
-    /* */
-    assert( template );
-    
-    /* Check template validity */
-    const size_t i_length = strlen( template );
-    char *psz_rand = &template[i_length-6];
-    
-    if( i_length < 6 || strcmp( psz_rand, "XXXXXX" ) )
-    {
-        errno = EINVAL;
-        return -1;
-    }
-    
-    /* */
-    for( int i = 0; i < 256; i++ )
-    {
-        /* Create a pseudo random file name */
-        uint8_t pi_rand[6];
-        
-        vlc_rand_bytes( pi_rand, sizeof(pi_rand) );
-        for( int j = 0; j < 6; j++ )
-            psz_rand[j] = digits[pi_rand[j] % i_digits];
-        
-        /* */
-        int fd = mxOpen( template, O_CREAT | O_EXCL | O_RDWR, 0600 );
-        if( fd >= 0 )
-            return fd;
-        if( errno != EEXIST )
-            return -1;
-    }
-    
-    errno = EEXIST;
-    return -1;
-}
-#endif
+//#if defined (_WIN32) || defined (__OS2__)
+//# include <vlc_rand.h>
+//
+//int mxMkstemp( char *template )
+//{
+//    static const char digits[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//    static const int i_digits = sizeof(digits)/sizeof(*digits) - 1;
+//    
+//    /* */
+//    assert( template );
+//    
+//    /* Check template validity */
+//    const size_t i_length = strlen( template );
+//    char *psz_rand = &template[i_length-6];
+//    
+//    if( i_length < 6 || strcmp( psz_rand, "XXXXXX" ) )
+//    {
+//        errno = EINVAL;
+//        return -1;
+//    }
+//    
+//    /* */
+//    for( int i = 0; i < 256; i++ )
+//    {
+//        /* Create a pseudo random file name */
+//        uint8_t pi_rand[6];
+//        
+//        vlc_rand_bytes( pi_rand, sizeof(pi_rand) );
+//        for( int j = 0; j < 6; j++ )
+//            psz_rand[j] = digits[pi_rand[j] % i_digits];
+//        
+//        /* */
+//        int fd = mxOpen( template, O_CREAT | O_EXCL | O_RDWR, 0600 );
+//        if( fd >= 0 )
+//            return fd;
+//        if( errno != EEXIST )
+//            return -1;
+//    }
+//    
+//    errno = EEXIST;
+//    return -1;
+//}
+//#endif

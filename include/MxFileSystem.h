@@ -9,6 +9,7 @@ struct stat;
 struct iovec;
 
 #ifdef _WIN32
+	typedef int     ssize_t;
     # include <sys/stat.h>
     # ifndef stat
         #  define stat _stati64
@@ -89,7 +90,7 @@ static inline int mxClosedir( DIR *dir )
     return (wdir != NULL) ? _wclosedir( wdir ) : 0;
 }
 # undef closedir
-# define closedir vlc_closedir
+# define closedir mxClosedir
 
 static inline void mxRewinddir( DIR *dir )
 {

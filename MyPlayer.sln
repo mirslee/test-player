@@ -17,19 +17,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "include", "include", "{658D
 		include\CMxList.h = include\CMxList.h
 		include\CMxQueue.h = include\CMxQueue.h
 		include\CMxString.h = include\CMxString.h
+		include\MxAtomic.h = include\MxAtomic.h
+		include\MxCharSet.h = include\MxCharSet.h
 		include\MxCodec.h = include\MxCodec.h
+		include\MxCommon.h = include\MxCommon.h
+		include\MxConfig.h = include\MxConfig.h
 		include\MxCpu.h = include\MxCpu.h
 		include\MxDllexport.h = include\MxDllexport.h
 		include\MxError.h = include\MxError.h
+		include\MxFileSystem.h = include\MxFileSystem.h
+		include\MxFixups.h = include\MxFixups.h
 		include\MxGlobal.h = include\MxGlobal.h
 		include\MxInterface.h = include\MxInterface.h
+		include\MxInterrupt.h = include\MxInterrupt.h
 		include\MxLog.h = include\MxLog.h
 		include\MxMediaDefine.h = include\MxMediaDefine.h
 		include\MxMemory.h = include\MxMemory.h
+		include\MxNetwork.h = include\MxNetwork.h
 		include\MxObject.h = include\MxObject.h
+		include\MxPlayer.h = include\MxPlayer.h
 		include\MxPointer.h = include\MxPointer.h
 		include\MxSynchronize.h = include\MxSynchronize.h
 		include\MxSystem.h = include\MxSystem.h
+		include\MxThread.h = include\MxThread.h
 		include\MxTypes.h = include\MxTypes.h
 	EndProjectSection
 EndProject
@@ -38,6 +48,17 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MxFileSource", "plugin\access\MxFileSource\MxFileSource.vcxproj", "{99F8FD2A-0C8B-4DE5-A689-DC3BCE36368F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MxAvi", "plugin\mux\MxAvi\MxAvi.vcxproj", "{FA0560EC-E487-47CB-B70C-4CD8DF7BF294}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "win", "win", "{01A3977D-C42F-4B6B-BD3F-360E48BE4EB1}"
+	ProjectSection(SolutionItems) = preProject
+		include\win\dirent.h = include\win\dirent.h
+		include\win\inttypes.h = include\win\inttypes.h
+		include\win\pthread.h = include\win\pthread.h
+		include\win\sched.h = include\win\sched.h
+		include\win\semaphore.h = include\win\semaphore.h
+		include\win\stdint.h = include\win\stdint.h
+		include\win\unistd.h = include\win\unistd.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,5 +125,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01A3977D-C42F-4B6B-BD3F-360E48BE4EB1} = {658D97BA-FEE8-4474-8782-ADD7F5CB6628}
 	EndGlobalSection
 EndGlobal

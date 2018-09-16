@@ -2,11 +2,13 @@
 #define MXINTERRUPT_H
 
 #include "MxCommon.h"
+#include "MxInterrupt.h"
 
 # include "MxThread.h"
 # ifndef _WIN32
 #  include <sys/socket.h> /* socklen_t */
 # else
+typedef int     ssize_t;
 #  include <ws2tcpip.h>
 # endif
 

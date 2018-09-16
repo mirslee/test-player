@@ -4,7 +4,7 @@
 #include "MxConfig.h"
 #include <fcntl.h>
 
-
+#ifndef _WIN32
 int mxAccept (int lfd, struct sockaddr *addr, socklen_t *alen, bool nonblock)
 {
     do
@@ -22,3 +22,4 @@ int mxAccept (int lfd, struct sockaddr *addr, socklen_t *alen, bool nonblock)
     
     return -1;
 }
+#endif

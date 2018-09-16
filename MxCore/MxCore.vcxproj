@@ -162,15 +162,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMxString.cpp" />
+    <ClCompile Include="MxCharSet.cpp" />
+    <ClCompile Include="MxCpu.cpp" />
     <ClCompile Include="MxFileHash.cpp" />
+    <ClCompile Include="MxFileSystem.cpp" />
+    <ClCompile Include="MxFileSystem_win.cpp" />
+    <ClCompile Include="MxFixups.cpp" />
     <ClCompile Include="MxGlobal.cpp" />
+    <ClCompile Include="MxInterrupt.cpp" />
     <ClCompile Include="MxLog.cpp" />
     <ClCompile Include="MxMemory.cpp" />
+    <ClCompile Include="MxNetwork.cpp" />
+    <ClCompile Include="MxObject.cpp" />
     <ClCompile Include="MxSynchronize.cpp" />
     <ClCompile Include="MxSystem.cpp" />
     <ClCompile Include="MxThread.cpp" />
     <ClCompile Include="MxThreadCond.cpp" />
     <ClCompile Include="MxThreadMutex.cpp" />
+    <ClCompile Include="MxThread_win.cpp" />
     <ClCompile Include="ncx_mempool\ncx_slab.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>

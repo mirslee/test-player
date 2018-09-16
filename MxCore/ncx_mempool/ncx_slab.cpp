@@ -64,6 +64,7 @@ static ncx_uint_t  ncx_pagesize_shift;
 static ncx_uint_t  ncx_real_pages;
 
 #ifdef _WIN32
+#include <winsock2.h>
 #include <windows.h>
 int getpagesize() {
 	static int pagesize = 0;

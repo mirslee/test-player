@@ -120,6 +120,10 @@ extern "C" {
     //int putchar_unlocked (int);
 #endif
     
+#ifdef _WIN32
+	typedef int     ssize_t;
+#endif
+
 #ifndef HAVE_GETDELIM
     ssize_t getdelim (char **, size_t *, int, FILE *);
     ssize_t getline (char **, size_t *, FILE *);

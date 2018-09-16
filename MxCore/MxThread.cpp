@@ -34,46 +34,46 @@ void mxGloablMutex (unsigned n, bool acquire)
 
 #if defined (_WIN32) && (_WIN32_WINNT < _WIN32_WINNT_WIN8)
 /* Cannot define OS version-dependent stuff in public headers */
-# undef LIBVLC_NEED_SLEEP
-# undef LIBVLC_NEED_SEMAPHORE
+# undef MX_NEED_SLEEP
+# undef MX_NEED_SEMAPHORE
 #endif
 
-#if defined(LIBVLC_NEED_SLEEP) || defined(LIBVLC_NEED_CONDVAR)
-#include <vlc_atomic.h>
+#if defined(MX_NEED_SLEEP) || defined(MX_NEED_CONDVAR)
+#include "MxAtomic.h"
 
-static void vlc_cancel_addr_prepare(void *addr)
+static void mxCancelAddrPrepare(void *addr)
 {
     /* Let thread subsystem on address to broadcast for cancellation */
-    vlc_cancel_addr_set(addr);
-    vlc_cleanup_push(vlc_cancel_addr_clear, addr);
+	mxCancelAddrSet(addr);
+	mxCleanupPush(mxCancelAddrClear, addr);
     /* Check if cancellation was pending before vlc_cancel_addr_set() */
-    vlc_testcancel();
-    vlc_cleanup_pop();
+	mxTestCancel();
+    mxCleanupPop();
 }
 
-static void vlc_cancel_addr_finish(void *addr)
+static void mxCancelAddrFinish(void *addr)
 {
-    vlc_cancel_addr_clear(addr);
+	mxCancelAddrClear(addr);
     /* Act on cancellation as potential wake-up source */
-    vlc_testcancel();
+	mxTestCancel();
 }
 #endif
 
-#ifdef LIBVLC_NEED_SLEEP
+#ifdef MX_NEED_SLEEP
 void (mwait)(mtime_t deadline)
 {
     mtime_t delay;
     atomic_int value = ATOMIC_VAR_INIT(0);
     
-    vlc_cancel_addr_prepare(&value);
+	mxCancelAddrPrepare(&value);
     
     while ((delay = (deadline - mdate())) > 0)
     {
-        vlc_addr_timedwait(&value, 0, delay);
-        vlc_testcancel();
+		mxAddrTimedwait(&value, 0, delay);
+		mxTestCancel();
     }
     
-    vlc_cancel_addr_finish(&value);
+	mxCancelAddrFinish(&value);
 }
 
 void (msleep)(mtime_t delay)
@@ -82,10 +82,10 @@ void (msleep)(mtime_t delay)
 }
 #endif
 
-#ifdef LIBVLC_NEED_CONDVAR
+#ifdef MX_NEED_CONDVAR
 #include <stdalign.h>
 
-static inline atomic_uint *vlc_cond_value(vlc_cond_t *cond)
+static inline atomic_uint *mxCondValue(MxCond *cond)
 {
     /* XXX: ugly but avoids including vlc_atomic.h in vlc_threads.h */
     static_assert (sizeof (cond->value) <= sizeof (atomic_uint),
@@ -95,18 +95,18 @@ static inline atomic_uint *vlc_cond_value(vlc_cond_t *cond)
     return (atomic_uint *)&cond->value;
 }
 
-void vlc_cond_init(vlc_cond_t *cond)
+void mxCondInit(MxCond *cond)
 {
     /* Initial value is irrelevant but set it for happy debuggers */
-    atomic_init(vlc_cond_value(cond), 0);
+    atomic_init(mxCondValue(cond), 0);
 }
 
-void vlc_cond_init_daytime(vlc_cond_t *cond)
+void mxCondInitDaytime(MxCond *cond)
 {
-    vlc_cond_init(cond);
+	mxCondInit(cond);
 }
 
-void vlc_cond_destroy(vlc_cond_t *cond)
+void mxCondDestroy(MxCond *cond)
 {
     /* Tempting sanity check but actually incorrect:
      assert((atomic_load_explicit(vlc_cond_value(cond),
@@ -116,7 +116,7 @@ void vlc_cond_destroy(vlc_cond_t *cond)
     (void) cond;
 }
 
-void vlc_cond_signal(vlc_cond_t *cond)
+void mxCondSignal(MxCond *cond)
 {
     /* Probably the best documented approach is that of Bionic: increment
      * the futex here, and simply load the value in cnd_wait(). This has a bug
@@ -127,72 +127,72 @@ void vlc_cond_signal(vlc_cond_t *cond)
      * - cnd_signal() sets the futex to the equal-or-next odd value, while
      * - cnd_wait() sets the futex to the equal-or-next even value.
      **/
-    atomic_fetch_or_explicit(vlc_cond_value(cond), 1, memory_order_relaxed);
-    vlc_addr_signal(&cond->value);
+    atomic_fetch_or_explicit(mxCondValue(cond), 1, memory_order_relaxed);
+	mxAddrSignal(&cond->value);
 }
 
-void vlc_cond_broadcast(vlc_cond_t *cond)
+void mxCondBroadcast(MxCond *cond)
 {
-    atomic_fetch_or_explicit(vlc_cond_value(cond), 1, memory_order_relaxed);
-    vlc_addr_broadcast(&cond->value);
+    atomic_fetch_or_explicit(mxCondValue(cond), 1, memory_order_relaxed);
+	mxAddrSignal(&cond->value);
 }
 
-void vlc_cond_wait(vlc_cond_t *cond, vlc_mutex_t *mutex)
+void mxCondWait(MxCond *cond, MxMutex *mutex)
 {
-    unsigned value = atomic_load_explicit(vlc_cond_value(cond),
+    unsigned value = atomic_load_explicit(mxCondValue(cond),
                                           memory_order_relaxed);
     while (value & 1)
     {
-        if (atomic_compare_exchange_weak_explicit(vlc_cond_value(cond), &value,
+        if (atomic_compare_exchange_weak_explicit(mxCondValue(cond), &value,
                                                   value + 1,
                                                   memory_order_relaxed,
                                                   memory_order_relaxed))
             value++;
     }
     
-    vlc_cancel_addr_prepare(&cond->value);
-    vlc_mutex_unlock(mutex);
+	mxCancelAddrPrepare(&cond->value);
+	mxMutexUnlock(mutex);
     
-    vlc_addr_wait(&cond->value, value);
+	mxAddrWait(&cond->value, value);
     
-    vlc_mutex_lock(mutex);
-    vlc_cancel_addr_finish(&cond->value);
+	mxMutexLock(mutex);
+	mxCancelAddrFinish(&cond->value);
 }
 
-static int vlc_cond_wait_delay(vlc_cond_t *cond, vlc_mutex_t *mutex,
+static int mxCondWaitDelay(MxCond *cond, MxMutex *mutex,
                                mtime_t delay)
 {
-    unsigned value = atomic_load_explicit(vlc_cond_value(cond),
+    unsigned value = atomic_load_explicit(mxCondValue(cond),
                                           memory_order_relaxed);
     while (value & 1)
     {
-        if (atomic_compare_exchange_weak_explicit(vlc_cond_value(cond), &value,
+        if (atomic_compare_exchange_weak_explicit(mxCondValue(cond), &value,
                                                   value + 1,
                                                   memory_order_relaxed,
                                                   memory_order_relaxed))
             value++;
     }
     
-    vlc_cancel_addr_prepare(&cond->value);
-    vlc_mutex_unlock(mutex);
+	mxCancelAddrPrepare(&cond->value);
+	mxMutexUnlock(mutex);
     
     if (delay > 0)
-        value = vlc_addr_timedwait(&cond->value, value, delay);
+        value = mxAddrTimedwait(&cond->value, value, delay);
     else
         value = 0;
     
-    vlc_mutex_lock(mutex);
-    vlc_cancel_addr_finish(&cond->value);
+	mxMutexLock(mutex);
+	mxCancelAddrFinish(&cond->value);
     
     return value ? 0 : ETIMEDOUT;
 }
 
-int vlc_cond_timedwait(vlc_cond_t *cond, vlc_mutex_t *mutex, mtime_t deadline)
+int mxCondTimedwait(MxCond *cond, MxMutex *mutex, mtime_t deadline)
 {
-    return vlc_cond_wait_delay(cond, mutex, deadline - mdate());
+    return mxCondWaitDelay(cond, mutex, deadline - mdate());
 }
 
-int vlc_cond_timedwait_daytime(vlc_cond_t *cond, vlc_mutex_t *mutex,
+int mxCondTimedwaitDaytime(MxCond *cond, MxMutex *mutex,
                                time_t deadline)
 {
     struct timespec ts;
@@ -201,11 +201,11 @@ int vlc_cond_timedwait_daytime(vlc_cond_t *cond, vlc_mutex_t *mutex,
     deadline -= ts.tv_sec * CLOCK_FREQ;
     deadline -= ts.tv_nsec / (1000000000 / CLOCK_FREQ);
     
-    return vlc_cond_wait_delay(cond, mutex, deadline);
+    return mxCondTimedwait(cond, mutex, deadline);
 }
 #endif
 
-#ifdef LIBVLC_NEED_RWLOCK
+#ifdef MX_NEED_RWLOCK
 /*** Generic read/write locks ***/
 #include <stdlib.h>
 #include <limits.h>
@@ -220,113 +220,113 @@ int vlc_cond_timedwait_daytime(vlc_cond_t *cond, vlc_mutex_t *mutex,
 #define READER_MASK LONG_MAX
 #define WRITER_BIT  LONG_MIN
 
-void vlc_rwlock_init (vlc_rwlock_t *lock)
+void mxRWLockInit(MxRWLock *lock)
 {
-    vlc_mutex_init (&lock->mutex);
-    vlc_cond_init (&lock->wait);
+	mxMutexInit(&lock->mutex);
+	mxCondInit(&lock->wait);
     lock->state = 0;
 }
 
-void vlc_rwlock_destroy (vlc_rwlock_t *lock)
+void mxRWLockDestroy(MxRWLock *lock)
 {
-    vlc_cond_destroy (&lock->wait);
-    vlc_mutex_destroy (&lock->mutex);
+	mxCondDestroy(&lock->wait);
+	mxMutexDestroy(&lock->mutex);
 }
 
-void vlc_rwlock_rdlock (vlc_rwlock_t *lock)
+void mxRWLockRdlock(MxRWLock *lock)
 {
-    vlc_mutex_lock (&lock->mutex);
+	mxMutexLock(&lock->mutex);
     /* Recursive read-locking is allowed.
      * Ensure that there is no active writer. */
     while (lock->state < 0)
     {
         assert (lock->state == WRITER_BIT);
         mutex_cleanup_push (&lock->mutex);
-        vlc_cond_wait (&lock->wait, &lock->mutex);
-        vlc_cleanup_pop ();
+		mxCondWait(&lock->wait, &lock->mutex);
+		mxCleanupPop();
     }
     if (unlikely(lock->state >= READER_MASK))
         abort (); /* An overflow is certainly a recursion bug. */
     lock->state++;
-    vlc_mutex_unlock (&lock->mutex);
+	mxMutexUnlock(&lock->mutex);
 }
 
-void vlc_rwlock_wrlock (vlc_rwlock_t *lock)
+void mxRWLockWrlock(MxRWLock *lock)
 {
-    vlc_mutex_lock (&lock->mutex);
+	mxMutexLock(&lock->mutex);
     /* Wait until nobody owns the lock in any way. */
     while (lock->state != 0)
     {
-        mutex_cleanup_push (&lock->mutex);
-        vlc_cond_wait (&lock->wait, &lock->mutex);
-        vlc_cleanup_pop ();
+		mxCleanupPush(&lock->mutex);
+		mxCondWait(&lock->wait, &lock->mutex);
+		mxCleanupPop();
     }
     lock->state = WRITER_BIT;
-    vlc_mutex_unlock (&lock->mutex);
+	mxMutexUnlock(&lock->mutex);
 }
 
-void vlc_rwlock_unlock (vlc_rwlock_t *lock)
+void mxRWLockUnlock(MxRWLock *lock)
 {
-    vlc_mutex_lock (&lock->mutex);
+	mxMutexLock(&lock->mutex);
     if (lock->state < 0)
     {   /* Write unlock */
         assert (lock->state == WRITER_BIT);
         /* Let reader and writer compete. OS scheduler decides who wins. */
         lock->state = 0;
-        vlc_cond_broadcast (&lock->wait);
+		mxCondBroadcast(&lock->wait);
     }
     else
     {   /* Read unlock */
         assert (lock->state > 0);
         /* If there are no readers left, wake up one pending writer. */
         if (--lock->state == 0)
-            vlc_cond_signal (&lock->wait);
+			mxCondSignal(&lock->wait);
     }
-    vlc_mutex_unlock (&lock->mutex);
+	mxMutexUnlock(&lock->mutex);
 }
 #endif /* LIBVLC_NEED_RWLOCK */
 
-#ifdef LIBVLC_NEED_SEMAPHORE
+#ifdef MX_NEED_SEMAPHORE
 /*** Generic semaphores ***/
 #include <limits.h>
 #include <errno.h>
 
-void vlc_sem_init (vlc_sem_t *sem, unsigned value)
+void mxSemInit(MxSem *sem, unsigned value)
 {
-    vlc_mutex_init (&sem->lock);
-    vlc_cond_init (&sem->wait);
+	mxMutexInit(&sem->lock);
+	mxCondInit(&sem->wait);
     sem->value = value;
 }
 
-void vlc_sem_destroy (vlc_sem_t *sem)
+void mxSemDestroy(MxSem *sem)
 {
-    vlc_cond_destroy (&sem->wait);
-    vlc_mutex_destroy (&sem->lock);
+	mxCondDestroy(&sem->wait);
+	mxMutexDestroy(&sem->lock);
 }
 
-int vlc_sem_post (vlc_sem_t *sem)
+int mxSemPost(MxSem *sem)
 {
     int ret = 0;
     
-    vlc_mutex_lock (&sem->lock);
+	mxMutexLock(&sem->lock);
     if (likely(sem->value != UINT_MAX))
         sem->value++;
     else
         ret = EOVERFLOW;
-    vlc_mutex_unlock (&sem->lock);
-    vlc_cond_signal (&sem->wait);
+	mxMutexUnlock(&sem->lock);
+	mxCondSignal(&sem->wait);
     
     return ret;
 }
 
-void vlc_sem_wait (vlc_sem_t *sem)
+void mxSemWait(MxSem *sem)
 {
-    vlc_mutex_lock (&sem->lock);
+	mxMutexLock(&sem->lock);
     mutex_cleanup_push (&sem->lock);
     while (!sem->value)
-        vlc_cond_wait (&sem->wait, &sem->lock);
+		mxCondWait(&sem->wait, &sem->lock);
     sem->value--;
-    vlc_cleanup_pop ();
-    vlc_mutex_unlock (&sem->lock);
+	mxCleanupPop();
+	mxMutexUnlock(&sem->lock);
 }
 #endif /* LIBVLC_NEED_SEMAPHORE */
